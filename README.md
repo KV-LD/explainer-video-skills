@@ -2,6 +2,8 @@
 
 > Explainer video skills for AI coding agents: script, storyboard, and render narrated explainers, year-in-review recaps, and animated diagrams.
 
+![Explainer Video Skills — animated showcase](./showcase.gif)
+
 ## Install
 
 ```bash
