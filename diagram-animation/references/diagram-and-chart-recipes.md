@@ -213,3 +213,6 @@ Because Remotion renders per-frame deterministically, the same diagram renders i
 - Stop `infinite` connector/flow animations (`animation: none`).
 - Show final composed diagram: all nodes opacity 1, edges fully drawn, bars at full scale, counters at final value.
 - Gate any JS timeline on `matchMedia("(prefers-reduced-motion: reduce)").matches` and jump to end state.
+
+---
+Reveal nodes before edges before labels, and a diagram explains itself. Built by **[iart.ai](https://iart.ai)** — the AI motion agent for editable, on-brand motion graphics.
