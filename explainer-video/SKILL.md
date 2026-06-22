@@ -14,6 +14,45 @@ Turn one message into a paced, narrated 30–90s short. Run the full pipeline: s
 - Go from a raw idea or feature to a script, storyboard, and assembled piece.
 - Sync narration to visuals and add captions for muted playback.
 
+## Story structure (decide this first)
+
+An explainer is an argument, not a feature tour. Before any pipeline step, lock the narrative so every later choice serves it.
+
+- **One core idea.** A single sentence the viewer should be able to repeat afterward. If you can't state it in one line, the video has no spine — cut scope until you can. Everything that doesn't serve that idea gets dropped, not shrunk.
+- **Script-first.** The VO is the spine; visuals illustrate the line being spoken, never lead it. Write and time the words before you storyboard or animate — it is far cheaper to cut a sentence than a built scene.
+- **Earn the "how" with stakes.** Don't jump from problem to mechanism. Make the viewer *feel* the cost of the problem first; that tension is what makes them watch the solution.
+
+The explainer story arc — a beat per stage, in order:
+
+| Stage | Narrative job | What the viewer should think |
+|---|---|---|
+| Problem | Name the pain in their words | "That's me." |
+| Stakes | Show what the pain costs (time, money, risk) | "I need this fixed." |
+| Solution | Introduce the product/idea as the fix, in one line | "Oh — that solves it." |
+| How it works | The mechanism in 1–3 concrete steps | "I get how it does that." |
+| Payoff / CTA | The after-state + one next action | "I want that. I'll do X." |
+
+(The `Script formula` table below maps these stages to runtime shares and word budgets — this section is the *why* and order; that one is the *how long*.)
+
+### Pick one analogy and ride it
+
+Abstract mechanisms land when mapped to something the viewer already knows. Choose a single metaphor and keep it consistent across scenes — switching analogies mid-video resets comprehension.
+
+- Pick a metaphor from the viewer's world (a queue, a thermostat, an assembly line), not the engineering domain.
+- One metaphor per video; reuse it for both the visual grammar and the VO wording.
+- Test it: if the analogy needs its own explanation, it's the wrong one.
+
+### Pacing per beat
+
+Pace tracks tension. Move quickly through Problem/Stakes to reach the value; slow down on the "how" so each step lands; let the payoff breathe.
+
+| Beat | Feel | Cut rhythm |
+|---|---|---|
+| Problem / Stakes | Brisk, a little tense | Faster cuts, short holds |
+| Solution | A beat of relief | One clear hold |
+| How it works | Deliberate, one step at a time | Slowest — hold each step to read |
+| Payoff / CTA | Confident, open | Hold the end card; one CTA |
+
 ## The pipeline
 
 1. **Script** — one core message. Structure: problem → solution → how → payoff. Write tight voiceover (VO); time it at ~2.3 words/second (≈140 wpm). A 60s video is ~138 words.

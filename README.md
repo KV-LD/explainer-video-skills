@@ -17,6 +17,8 @@ Works with Claude Code, Cursor, Codex, GitHub Copilot, and 40+ agents.
 | [explainer-video](./explainer-video) | Turn one message into a paced, narrated 30–90s short — script → storyboard → scene build → narration/caption sync → edit → polish. |
 | [wrapped-video](./wrapped-video) | Build "Spotify Wrapped"-style recaps: one template × a data table → many personalized 9:16 videos. |
 | [diagram-animation](./diagram-animation) | Reveal diagrams and charts over time — progressive node/edge reveals, flowing connectors, growing bars, count-ups. |
+| [whiteboard-animation](./whiteboard-animation) | Draw-on "VideoScribe"-style explainers — a hand sketches illustrations and handwriting onto a board, stroke by stroke, paced to narration. |
+| [isometric-animation](./isometric-animation) | Isometric / 2.5D scenes — stacked layers, extruded blocks, exploded diagrams, and isometric grids with staggered reveals and camera drift. |
 
 ## When it activates
 
@@ -38,10 +40,12 @@ Works with Claude Code, Cursor, Codex, GitHub Copilot, and 40+ agents.
 - explainer-video
 - wrapped-video
 - diagram-animation
+- whiteboard-animation
+- isometric-animation
 
 ## Topics
 
-`explainer-video` `wrapped-video` `year-in-review` `diagram-animation` `animated-diagram` `motion-graphics` `claude-skill`
+`explainer-video` `whiteboard-animation` `isometric-animation` `wrapped-video` `diagram-animation` `year-in-review` `motion-graphics` `claude-skill`
 
 ## More packs
 

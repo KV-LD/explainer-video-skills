@@ -37,6 +37,24 @@ A Wrapped is a fixed sequence of short scene *types*, each ~2.5–4s. Pick 5–7
 
 Order as a crescendo: small context first, biggest/most personal stat as the climax, then the still share card. See `references/scene-grammar.md` for a full 7-scene storyboard with timings.
 
+## The recap story arc
+
+The scene grammar is the skeleton; the *arc* is what makes a Wrapped feel like a gift instead of a dashboard. A recap is a tiny five-beat drama about one viewer — sequence it so each reveal feels bigger and more personal than the last.
+
+| Beat | Job | Maps to |
+|---|---|---|
+| Build-up | Brand the moment, promise it's theirs | Intro: "{name}, your {year}" |
+| Escalating reveals | Stack stats that rise in stakes | Top-X, genres, time patterns |
+| The "big number" | One hero stat, max scale, held longest | Big-number / count-up climax |
+| Personalized superlative | Name *who they are*, not just what they did | Persona/percentile tier |
+| Shareable payoff | A still poster they want to post | Outro share card |
+
+**Sequence stats for rising impact — smallest first, biggest last.** Rank every stat by emotional payload (raw size, rarity, how flattering) and play them in ascending order. Never open on the hero number: there's nowhere to climb after it, and the rest of the film feels like a comedown. Hold the climax stat largest and longest; everything before it is set-up.
+
+**The hook is "this is about YOU."** A Wrapped wins because the viewer is the protagonist. Earn that in the first 2 seconds: lead with their name, use their per-user `accent`, and write every line in second person ("You listened to 412 artists"). Generic copy ("Top genre: Indie") breaks the spell — reframe as "You're an Indie kind of person." If a frame would read identically for two different users, it isn't pulling its weight.
+
+**Design the final share-frame as the destination.** The whole arc exists to deliver a poster worth posting. The outro is not a credits roll — it's the payoff: the headline superlative or hero number restated, name + @handle, logo, one short CTA, holding **completely still ≥2s** so a screenshot or auto-loop lands clean. Decide this frame first and build the crescendo toward it. Copywriting tiers and the full storyboard are in `references/scene-grammar.md`.
+
 ## Data → video shape
 
 Define a typed schema for one record. The whole video is a pure function of it.
