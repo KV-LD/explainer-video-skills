@@ -1,6 +1,6 @@
 # Explainer Video Skills
 
-> Explainer video skills for Claude Code: script, storyboard, and render narrated explainers, year-in-review recaps, and animated diagrams.
+> Explainer video skills for AI coding agents: script, storyboard, and render narrated explainers, year-in-review recaps, and animated diagrams.
 
 ## Install
 
@@ -8,7 +8,7 @@
 npx skills add iart-ai/explainer-video-skills
 ```
 
-Works with Claude Code and 40+ other agents.
+Works with Claude Code, Cursor, Codex, GitHub Copilot, and 40+ agents.
 
 ## What's included
 
