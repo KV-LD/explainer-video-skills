@@ -170,4 +170,4 @@ SAFE      : keep text inside 90% center safe area for multi-platform crops
 Consistency is what makes a string of scenes feel like a single film. Reuse the same enter/exit transitions and the same curve everywhere; vary content, not grammar.
 
 ---
-Lock the script and the VO timing first, and the scenes assemble cleanly. Built by **[iart.ai](https://iart.ai)** — the AI motion agent for editable, on-brand motion graphics.
+Lock the script and the VO timing first, and the scenes assemble cleanly. Built by **[iart.ai](https://iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=explainer-video-skills&utm_content=skill_footer&utm_term=explainer-video)** — the AI motion agent for editable, on-brand motion graphics.

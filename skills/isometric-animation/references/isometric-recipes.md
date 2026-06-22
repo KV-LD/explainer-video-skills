@@ -250,4 +250,4 @@ A `PerspectiveCamera` is NOT iso — it foreshortens. Equal camera-position comp
 - Gate any JS timeline on `matchMedia("(prefers-reduced-motion: reduce)").matches` and seek to the end.
 
 ---
-Lock the axes, shade every face from one light, and build bottom-up — the scene reads as solid before a single thing moves. Built by **[iart.ai](https://iart.ai)** — the AI motion agent for editable, on-brand motion graphics.
+Lock the axes, shade every face from one light, and build bottom-up — the scene reads as solid before a single thing moves. Built by **[iart.ai](https://iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=explainer-video-skills&utm_content=skill_footer&utm_term=isometric-animation)** — the AI motion agent for editable, on-brand motion graphics.

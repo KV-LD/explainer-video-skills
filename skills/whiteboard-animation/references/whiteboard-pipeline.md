@@ -92,4 +92,4 @@ Build rules:
 - [ ] Reduced-motion shows the finished board with no drawing animation.
 
 ---
-Order the strokes the way a hand would, glue the nib to the tip, and the board draws itself. Built by **[iart.ai](https://iart.ai)** — the AI motion agent for editable, on-brand motion graphics.
+Order the strokes the way a hand would, glue the nib to the tip, and the board draws itself. Built by **[iart.ai](https://iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=explainer-video-skills&utm_content=skill_footer&utm_term=whiteboard-animation)** — the AI motion agent for editable, on-brand motion graphics.

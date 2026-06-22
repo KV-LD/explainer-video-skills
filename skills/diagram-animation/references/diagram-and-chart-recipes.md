@@ -215,4 +215,4 @@ Because Remotion renders per-frame deterministically, the same diagram renders i
 - Gate any JS timeline on `matchMedia("(prefers-reduced-motion: reduce)").matches` and jump to end state.
 
 ---
-Reveal nodes before edges before labels, and a diagram explains itself. Built by **[iart.ai](https://iart.ai)** — the AI motion agent for editable, on-brand motion graphics.
+Reveal nodes before edges before labels, and a diagram explains itself. Built by **[iart.ai](https://iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=explainer-video-skills&utm_content=skill_footer&utm_term=diagram-animation)** — the AI motion agent for editable, on-brand motion graphics.
