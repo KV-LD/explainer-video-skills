@@ -10,17 +10,25 @@
 npx skills add iart-ai/explainer-video-skills
 ```
 
+Or add it as a Claude Code plugin marketplace:
+
+```bash
+/plugin marketplace add iart-ai/explainer-video-skills
+```
+
+then `/plugin install explainer-video-skills`.
+
 Works with Claude Code, Cursor, Codex, GitHub Copilot, and 40+ agents.
 
 ## What's included
 
 | Skill | What it does |
 |---|---|
-| [explainer-video](./explainer-video) | Turn one message into a paced, narrated 30–90s short — script → storyboard → scene build → narration/caption sync → edit → polish. |
-| [wrapped-video](./wrapped-video) | Build "Spotify Wrapped"-style recaps: one template × a data table → many personalized 9:16 videos. |
-| [diagram-animation](./diagram-animation) | Reveal diagrams and charts over time — progressive node/edge reveals, flowing connectors, growing bars, count-ups. |
-| [whiteboard-animation](./whiteboard-animation) | Draw-on "VideoScribe"-style explainers — a hand sketches illustrations and handwriting onto a board, stroke by stroke, paced to narration. |
-| [isometric-animation](./isometric-animation) | Isometric / 2.5D scenes — stacked layers, extruded blocks, exploded diagrams, and isometric grids with staggered reveals and camera drift. |
+| [explainer-video](./skills/explainer-video) | Turn one message into a paced, narrated 30–90s short — script → storyboard → scene build → narration/caption sync → edit → polish. |
+| [wrapped-video](./skills/wrapped-video) | Build "Spotify Wrapped"-style recaps: one template × a data table → many personalized 9:16 videos. |
+| [diagram-animation](./skills/diagram-animation) | Reveal diagrams and charts over time — progressive node/edge reveals, flowing connectors, growing bars, count-ups. |
+| [whiteboard-animation](./skills/whiteboard-animation) | Draw-on "VideoScribe"-style explainers — a hand sketches illustrations and handwriting onto a board, stroke by stroke, paced to narration. |
+| [isometric-animation](./skills/isometric-animation) | Isometric / 2.5D scenes — stacked layers, extruded blocks, exploded diagrams, and isometric grids with staggered reveals and camera drift. |
 
 ## When it activates
 
