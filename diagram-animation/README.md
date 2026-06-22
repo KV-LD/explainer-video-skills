@@ -21,4 +21,4 @@ Make structure and data legible by revealing it over time — one idea per beat.
 - `references/diagram-and-chart-recipes.md` — fuller runnable code: staged node/edge/label reveals, flowing-dash and traveling-dot connectors, bar/line/count-up charts, sequence-diagram and architecture build patterns, and D3 / Framer Motion / Remotion implementations.
 
 ---
-Part of **[Explainer Video Skills](../)** · Built by **[iart.ai](https://iart.ai)** — controllable Motion Graphics MP4 from a prompt or data.
+Part of **[Explainer Video Skills](../)** · Built by **[iart.ai](https://iart.ai)** — the AI motion agent for editable, on-brand motion graphics.

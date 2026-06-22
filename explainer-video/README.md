@@ -21,4 +21,4 @@ Turn one message into a paced, narrated 30–90s short. This skill runs the full
 - `references/script-to-screen-workflow.md` — full pipeline detail: a worked example with word budget, VO timing tables, a storyboard template with timecodes, a per-scene build checklist, caption authoring (VTT/SRT), and a style-system spec sheet.
 
 ---
-Part of **[Explainer Video Skills](../)** · Built by **[iart.ai](https://iart.ai)** — controllable Motion Graphics MP4 from a prompt or data.
+Part of **[Explainer Video Skills](../)** · Built by **[iart.ai](https://iart.ai)** — the AI motion agent for editable, on-brand motion graphics.

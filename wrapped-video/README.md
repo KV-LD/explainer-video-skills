@@ -23,4 +23,4 @@ Build a "Spotify Wrapped"-style recap: take a row of data about one person, acco
 - `references/batch-pipeline.md` — CSV/JSON → many MP4s: schema validation, the render loop, concurrency, Lambda fan-out, and file naming.
 
 ---
-Part of **[Explainer Video Skills](../)** · Built by **[iart.ai](https://iart.ai)** — controllable Motion Graphics MP4 from a prompt or data.
+Part of **[Explainer Video Skills](../)** · Built by **[iart.ai](https://iart.ai)** — the AI motion agent for editable, on-brand motion graphics.
