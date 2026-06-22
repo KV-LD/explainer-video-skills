@@ -145,6 +145,41 @@ For thousands of rows, fan out across machines/Lambda and dedupe identical prop 
 - Each scene reads in <2s and looks good frozen (it will be screenshotted).
 - One schema validates every row before render; batch script names files per record.
 
+## Deliver & verify (rendered stills → MP4)
+
+A Wrapped is a Remotion composition rendered per data row — frame-deterministic, so any exact frame renders headlessly with no seek harness. The deliverable is an MP4 (often many) carrying each person's exact numbers; verify one representative row by stills before you batch.
+
+**Output contract:**
+- A Remotion project with the composition registered (`<Composition>` + zod `schema` + `defaultProps`), all motion frame-driven (no timers / `Date.now()` / `Math.random()` — count-ups via `useCurrentFrame` + spring).
+- Deliverable = the rendered `out/wrapped-*.mp4` per row (plus the project, so any row re-renders).
+- Per-user stats baked into props and validated by the schema before render; 9:16 1080×1920.
+- Duration data-dependent? compute it in `calculateMetadata`, not by hand.
+
+**Verify loop — stills of ONE row → inspect → batch.** Render a representative user's frames first (cheap, no encode); catch a layout/data bug once instead of N times.
+
+```bash
+# Frame-exact stills at start / mid / end for ONE representative row — pass that row as props
+npx remotion still Wrapped out/f-start.png --frame=0   --props='{...one user...}'
+npx remotion still Wrapped out/f-mid.png   --frame=N   --props='{...one user...}'
+npx remotion still Wrapped out/f-end.png   --frame=L   --props='{...one user...}'   # L = durationInFrames - 1
+
+# Inspect: every visible string/number comes from that row and is EXACT (big-number reveal lands on the
+# real value, top-X ranks/labels correct); key content inside center 80%, clear of top 12% / bottom 18%.
+
+# Only after the representative stills check out, batch-render every row:
+npx tsx render-all.ts
+```
+
+- `npx remotion compositions` reads `durationInFrames`/`fps` to pick the end frame and the big-number's settle frame.
+- **README demo GIF for free**: `npx remotion render Wrapped out/demo.gif --codec=gif --props='{...}'`.
+
+**Before you finish:**
+1. `npx remotion still` renders cleanly at frame 0, mid, and last for the representative row — no errors, no missing assets/fonts.
+2. Big-number reveal lands on the EXACT prop value at its settle frame; top-X ranks/labels/values match the row.
+3. 9:16: key numbers/type inside center 80%, clear of top 12% / bottom 18%; each checked frame reads frozen.
+4. Frame-driven only — no `Date.now()` / `Math.random()` / timers; schema validates every row before batch.
+5. Representative MP4 encoded and plays; then batch all rows (file per record); (optional) GIF for the README.
+
 ## Reference files
 
 - `references/scene-grammar.md` — full 7-scene storyboard with frame timings, the build/crescendo logic, superlative & percentile copywriting patterns, and the 9:16 safe-area map.

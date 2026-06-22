@@ -99,6 +99,41 @@ Lock one type scale, one color grammar (color = meaning, never reassigned), and 
 - Consistent type/color/motion system across all scenes.
 - End card with one clear CTA.
 
+## Deliver & verify (rendered stills → MP4)
+
+The assembled explainer is a Remotion composition — frame-deterministic, so any exact frame renders headlessly with no seek harness. Use this tier when the deliverable is an MP4/GIF that carries baked narration and burned captions; for a single web scene, deliver standalone HTML instead.
+
+**Output contract:**
+- A Remotion project with the composition registered (`<Composition>` + zod `schema` + `defaultProps`), all motion frame-driven (no timers / `Date.now()` / `Math.random()`).
+- Deliverable = the rendered `out/*.mp4` (plus the project, so VO/script/data can be re-rendered).
+- Narration via `<Audio src={staticFile()}>`; VO/scene timing baked into props (no realtime audio at render). Captions driven from that same timing array so they never drift.
+- Duration data-dependent? compute it in `calculateMetadata`, not by hand.
+
+**Verify loop — render stills → inspect → encode.** Render single frames first (cheap, no encode), inspect them, encode only once the frames are right.
+
+```bash
+# Frame-exact stills at start / mid / end — render with the SHIPPED props, not just defaults
+npx remotion still Explainer out/f-start.png --frame=0   --props='{...}'
+npx remotion still Explainer out/f-mid.png   --frame=N   --props='{...}'
+npx remotion still Explainer out/f-end.png   --frame=L   --props='{...}'   # L = durationInFrames - 1
+
+# Inspect: script→storyboard→scene maps onto frames — sample a frame inside EACH scene's hold,
+# confirm narration line and caption are synced to the visual at that frame, no text overflow / off-canvas.
+
+# Only after the stills check out, encode:
+npx remotion render Explainer out/explainer.mp4 --props='{...}'
+```
+
+- `npx remotion compositions` reads `durationInFrames`/`fps` to pick the end frame and per-scene hold frames.
+- **README demo GIF for free**: `npx remotion render Explainer out/demo.gif --codec=gif`.
+
+**Before you finish:**
+1. `npx remotion still` renders cleanly at frame 0, a frame inside each scene's hold, and last — no errors, no missing assets/fonts.
+2. At every sampled scene frame, the caption and the spoken VO line match the visual on screen (no drift).
+3. Captions are inside safe areas, ≤2 lines, readable; text is exact and not clipped.
+4. Frame-driven only — no `Date.now()` / `Math.random()` / timers; the **shipped** props render correctly (not just `defaultProps`).
+5. Full MP4 encoded and plays with narration; (optional) GIF rendered for the README.
+
 ## Reference files
 
 - `references/script-to-screen-workflow.md` — full pipeline detail: the problem→solution→how→payoff script formula with a worked example and word budget, VO timing tables, a fill-in storyboard template with timecodes, a per-scene build checklist, caption authoring guidance (VTT/SRT), and a style-system spec sheet for cross-scene consistency.

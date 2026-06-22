@@ -120,6 +120,42 @@ function countUp(el, to, dur = 1200) {
 - Active element highlighted, context dimmed.
 - `prefers-reduced-motion` path shows the final composed diagram without looping motion.
 
+## Deliver & verify (standalone HTML)
+
+For a self-contained diagram (reveal, flowing connector, animated chart) the deliverable is **one HTML file that opens directly in a browser** — no build step, no render pipeline. A single file is the right tier for web motion. (If the diagram is part of a rendered video, build it as a Remotion composition instead and verify via `remotion still` — see remotion-video.)
+
+**Output contract:**
+- One `.html` file: SVG inline; Framer Motion / D3 / anime / GSAP from CDN; the animation in one inline `<script>` (one driver).
+- A way to freeze an exact moment for screenshots, matched to how the diagram animates:
+  - GSAP / JS timeline: build one master `tl`, then `?t=N` → `tl.pause(); tl.seek(N)`.
+  - SVG SMIL: `svg.pauseAnimations(); svg.setCurrentTime(N)`.
+  - CSS keyframes: drive reveal order with `animationDelay`; freeze by pausing/seeking the equivalent JS timeline.
+
+```html
+<script>
+  // ... build your master timeline as `tl` ...
+  const t = new URLSearchParams(location.search).get("t");
+  if (t !== null) { tl.pause(); tl.seek(parseFloat(t)); }  // frozen at t seconds
+  window.__ready = true;                                    // ready signal for headless wait
+  console.log("duration", tl.duration());
+</script>
+```
+
+**Verify loop — render → freeze → screenshot → check:**
+1. Open the file at start / mid / end: `…/diagram.html?t=0`, `?t=<dur/2>`, `?t=<dur>` (read `tl.duration()` from the console).
+2. Headless-screenshot each frozen frame:
+   ```bash
+   npx playwright screenshot --wait-for-timeout=500 "file://$PWD/diagram.html?t=1.2" frame-mid.png
+   ```
+3. Check **fidelity** — the step-by-step reveal appears in order (nodes → edges → labels, each step present at its frame), connectors point at the right nodes, count-ups land on the EXACT values — and **artifacts** (clipped labels, off-canvas nodes, FOUC before fonts, jank at seams).
+
+**Before you finish:**
+1. Opens standalone in a browser — no console errors, no missing CDN.
+2. One driver/master timeline; the freeze (`?t=N` / `setCurrentTime`) lands on a deterministic still.
+3. Screenshotted at start / mid / end — reveal order correct, connectors land on the right nodes, numbers exact.
+4. `prefers-reduced-motion` shows the final composed diagram without looping motion.
+5. Color grammar consistent; active element highlighted, context dimmed; nothing dumps in all at once.
+
 ## Reference files
 
 - `references/diagram-and-chart-recipes.md` — fuller runnable code: staged node/edge reveal with labels, flowing-dash + traveling-dot connectors, bar/line/count-up chart recipes, sequence-diagram and architecture build patterns, and D3 / Framer Motion / Remotion implementations with easing notes.
