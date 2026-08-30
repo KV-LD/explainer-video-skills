@@ -1,0 +1,106 @@
+[
+  {
+    "id": "hook",
+    "beat": "problem",
+    "kicker": "Claude Certified Developer · Foundation",
+    "title": "Un portal. Cursos. Luego el examen.",
+    "points": ["No es Udemy", "No es un PDF suelto", "Es Anthropic Academy"],
+    "vo": "Ya sabéis qué tipo de examen es. Ahora la pregunta práctica: ¿dónde se estudia, y dónde os apuntáis, para que cuente? No es Udemy. En clase lo dijeron sin rodeos: no hace falta irse ahí. No es un PDF suelto. Es el campus de Anthropic. Si estudiáis en el sitio equivocado, el día del examen llegáis con lagunas, y además vuestra empresa no ve el progreso."
+  },
+  {
+    "id": "solution",
+    "beat": "solution",
+    "kicker": "Dónde",
+    "title": "anthropic.skilljar.com",
+    "points": ["Self-learning oficial", "El examen se registra ahí", "Misma identidad"],
+    "vo": "La dirección que dieron en clase: anthropic punto skilljar punto com. Eso es Anthropic Academy. Cursos de autoaprendizaje. Contenido para habilitaros con Claude. Y, importante: el examen se registra desde ese mismo portal. Eso evita el error más común: estudiar en un sitio y examinaros en otro, y que vuestra empresa no vea que habéis terminado nada. Un portal. Una identidad. Un rastro."
+  },
+  {
+    "id": "login",
+    "beat": "how",
+    "kicker": "Acceso",
+    "title": "Org ID si tiene que contar",
+    "points": ["Credenciales de empresa, si os las dan", "Personal vale para aprender", "El crédito va con la cuenta"],
+    "vo": "Cómo entrar. Primero, registrad una cuenta. Si vuestra organización os da credenciales, usadlas. Si aún no os las dan, podéis empezar con un identificador personal para aprender. Pero escuchad el matiz: si el objetivo es habilitar a la empresa —que vuestro curso y vuestro certificado cuenten para el programa de partners— tenéis que usar el identificador de la organización. Aprender por vuestra cuenta está bien. Contar para el partner es otra cosa."
+  },
+  {
+    "id": "count",
+    "beat": "how",
+    "kicker": "Por qué importa",
+    "title": "El sistema cuenta vuestra identidad",
+    "points": ["Cursos completados", "Examen con esa cuenta", "La empresa aparece como partner"],
+    "vo": "En clase lo dijeron claro: cuando completáis el self-learning, el sistema cuenta que vosotros lo completasteis. Cuando os examináis, os examináis con esa identidad. Si la empresa quiere figurar como partner serio, esas personas tienen que estar bajo la organización. El portal no adivina que sois de esa compañía si entráis con un correo suelto."
+  },
+  {
+    "id": "name",
+    "beat": "how",
+    "kicker": "Atención",
+    "title": "El nombre tiene que coincidir",
+    "points": ["ID y portal, el mismo nombre", "Lo arregla quien administra la cuenta", "Avisad pronto"],
+    "vo": "Si vuestro nombre en el portal no coincide con vuestra identificación, eso no se arregla en Claude de un clic. En clase salió un caso real: el perfil de empresa acorta o cambia el nombre, y Pearson pide que coincida con el documento. Lo gestiona quien administra la cuenta Anthropic de la empresa. Es un problema de cuenta, no de estudio. No dejéis que os bloquee el día del examen: avisad pronto a quien lleve la cuenta."
+  },
+  {
+    "id": "courses",
+    "beat": "how",
+    "kicker": "Dentro del Academy",
+    "title": "Unos diecinueve cursos. No todos.",
+    "points": ["Cada ruta profundiza un camino", "Tres o cuatro por examen", "Completar, no ojear"],
+    "vo": "Qué hay dentro. Hay muchos cursos. En la sesión hablaron de alrededor de diecinueve. Cada uno profundiza un camino. No tenéis que hacer los diecinueve el primer fin de semana. La regla útil: para un examen, suele bastar completar tres o cuatro cursos de self-learning de esa ruta. Esos cursos son el mapa. El examen sale de ese mapa. Completar significa terminar, no dejarlos a medias."
+  },
+  {
+    "id": "three-certs",
+    "beat": "how",
+    "kicker": "Desde el 13 de julio",
+    "title": "Tres certificaciones, no una",
+    "points": ["Antes solo había una", "Tres caminos, un portal", "Cursos primero, examen después"],
+    "vo": "Desde el trece de julio hay tres certificaciones, no una. Antes solo había una. En la masterclass detallan qué examen es cuál y qué ruta de cursos os encaja. Hoy quedaos con el sistema: tres caminos, un portal, cursos primero, examen después. No os liéis el primer día eligiendo los tres. Elegid el Foundation y cerrad esa ruta."
+  },
+  {
+    "id": "order",
+    "beat": "how",
+    "kicker": "Orden",
+    "title": "Seis pasos, sin inventos",
+    "points": ["Entrar a Skilljar", "Elegir la ruta Foundation", "Registrar el examen ahí mismo"],
+    "vo": "El orden, simple. Uno: entráis a Skilljar, Anthropic Academy. Dos: confirmáis si el acceso es de organización o personal. Tres: elegís la ruta Foundation, Certified Developer, que os corresponde. Cuatro: completáis esos tres o cuatro cursos. No ojear. Completar. Cinco: en el mismo portal, os registráis para el examen. Seis: hacéis el examen. Si aprobáis, el certificado queda atado a esa identidad. No invertáis el orden: el examen al final, no al principio."
+  },
+  {
+    "id": "partner",
+    "beat": "how",
+    "kicker": "Por qué la empresa insiste",
+    "title": "Niveles de partner de Anthropic",
+    "points": ["Diez personas: empiezan a figurar", "Cien: otro salto", "Mil: la meta alta que citaron"],
+    "vo": "¿Por qué a la empresa le importa tanto el identificador de organización? Porque Anthropic tiene niveles de partner. En clase lo resumieron así, a groso modo. Unos diez usuarios completan cursos y empiezan a figurar como registered. Esos diez aprueban certificaciones, más clientes y alguna historia pública, y suben de nivel. Cerca de cien personas certificadas y más clientes: otro salto. La meta alta que mencionaron: del orden de mil personas certificadas en la organización. Vosotros no tenéis que memorizar los números del partner. Tenéis que entender por qué os piden el correo de la empresa: no es capricho. Es el contador."
+  },
+  {
+    "id": "transfer",
+    "beat": "how",
+    "kicker": "Si ya os certificasteis",
+    "title": "A veces se puede asociar después",
+    "points": ["Preguntad al account manager", "No lo asumáis", "Confirmad por escrito"],
+    "vo": "Si ya os certificasteis por vuestra cuenta, en algunos casos se puede asociar después a la organización. Eso lo confirma quien gestiona la cuenta. No lo asumáis. Preguntad. Y si hay lío de nombres, esa misma persona es quien puede editar el perfil o deciros el procedimiento. Lo técnico, en clase, era: lo ideal es examinarse bajo la cuenta de la empresa."
+  },
+  {
+    "id": "errors",
+    "beat": "how",
+    "kicker": "Errores a evitar",
+    "title": "Cinco formas de perder el rastro",
+    "points": ["Estudiar solo la clase", "Nombres distintos", "Dos correos distintos"],
+    "vo": "Errores que este vídeo quiere ahorraros. Estudiar solo los vídeos de clase y no abrir Academy. Las clases ayudan. El portal es la fuente que el examen reconoce. Inscribiros con un nombre que no coincide con vuestro documento. Resolvedlo antes del día del examen. Hacer los cursos con un correo y el examen con otro. Perdéis el rastro. Creer que ya uso Claude en el trabajo sustituye los cursos. El Foundation tiene temario. Los cursos lo cubren. Pensar que hay que hacer los diecinueve cursos para el primer intento. No. Tres o cuatro de la ruta, bien hechos."
+  },
+  {
+    "id": "plan",
+    "beat": "payoff",
+    "kicker": "Plan de cuarenta y ocho horas",
+    "title": "Hoy el portal. Esta semana el primer curso.",
+    "points": ["Verificar el login de empresa", "Marcar tres o cuatro cursos", "Registrar el examen ahí"],
+    "vo": "Cerrad con un plan de cuarenta y ocho horas, no de un mes eterno. Hoy: entrad en anthropic punto skilljar punto com, cread o verificad el acceso, y confirmad con vuestra empresa si debe ser el identificador de la organización. Mañana: abrid la ruta del primer examen y marcad los tres o cuatro cursos. Esta semana: terminad el primero. Notas con vuestras palabras, no copiar diapositivas. Cuando cerréis la ruta: registrad el examen ahí mismo."
+  },
+  {
+    "id": "cta",
+    "beat": "payoff",
+    "kicker": "Frase para llevar",
+    "title": "Un portal. Misma cuenta. Que cuente.",
+    "points": ["Cursos oficiales", "Examen en el mismo sitio", "De preferencia la cuenta de empresa"],
+    "vo": "Frase para llevar: un portal. Cursos oficiales. Luego el examen. Misma cuenta, de preferencia la de la empresa, para que cuente. El vídeo uno fue qué os van a preguntar. Este es dónde os preparáis y dónde os sentáis a examinaros. El siguiente bloque de la masterclass ya entra a Chat, Cowork y Code: las herramientas que luego aparecen en esos escenarios."
+  }
+]
