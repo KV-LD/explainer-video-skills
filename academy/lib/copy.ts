@@ -5,7 +5,7 @@ export const copy = {
     academy: "G.A.Menon Academy",
     hub: "Claude Certification Learning Hub",
     tagline:
-      "Notes and quizzes in English and Spanish. Session recordings are English only — one link per module.",
+      "Notes and quizzes in English and Spanish. Session recordings are English on SharePoint (module 04 has two parts).",
     navNotes: "Notes",
     navQuiz: "Quizzes",
     navVideos: "Videos",
@@ -19,7 +19,7 @@ export const copy = {
     chapters: "Chapters",
     relatedVideos: "English session recording",
     addLink: "No link yet — add the English recording URL in data/videos.json",
-    videoLangBadge: "English recording · one link",
+    videoLangBadge: "English · UST SharePoint",
     quizTitle: "Exam-style quizzes",
     quizLead:
       "100 original practice items weighted like CCDV-F (applications, models, agents, prompting, tools/MCP, security, Claude Code, eval). Each attempt draws a fresh sample. Not official Anthropic or Pearson questions.",
@@ -42,12 +42,13 @@ export const copy = {
     home: "Home",
     videosTitle: "Session videos (English)",
     videosLead:
-      "Masterclass recordings are English only. Notes and quizzes are the bilingual materials. Store one LMS, Stream, or Drive URL per session in academy/data/videos.json (url). Empty url leaves the card waiting. Do not commit MP4s.",
-    videosHowToTitle: "Where to add videos",
+      "Masterclass recordings are English on UST SharePoint. Sign in with your UST account. Notes and quizzes are the bilingual materials. Module 04 is two files from 10 August (part 1 and part 2).",
+    videosHowToTitle: "How to watch",
     videosHowTo:
-      "Edit academy/data/videos.json. Each module (m01–m12) has a single url. Paste the English session link. There is no second Spanish video field. After saving, redeploy (Vercel root directory: academy).",
+      "Each card opens the SharePoint player in a new tab. There is no Spanish recording. Module 04 lists two English parts. If a link expires, replace url in academy/data/videos.json and redeploy.",
     openVideo: "Open English recording",
     missingUrl: "English recording link not added yet",
+    sharePointHint: "Requires UST SharePoint sign-in.",
     footer:
       "G.A.Menon Academy · study aid only · not official Anthropic exam material. Prefer docs.claude.com when recordings age.",
     disclaimer:
@@ -72,7 +73,7 @@ export const copy = {
     academy: "G.A.Menon Academy",
     hub: "Centro de aprendizaje · Certificación Claude",
     tagline:
-      "Apuntes y cuestionarios en inglés y en español. Las grabaciones de sesión están solo en inglés: un enlace por módulo.",
+      "Apuntes y cuestionarios en inglés y en español. Las grabaciones están en inglés en SharePoint (el módulo 04 tiene dos partes).",
     navNotes: "Apuntes",
     navQuiz: "Cuestionarios",
     navVideos: "Vídeos",
@@ -86,7 +87,7 @@ export const copy = {
     chapters: "Capítulos",
     relatedVideos: "Grabación de la sesión (inglés)",
     addLink: "Aún no hay enlace — añadid la URL de la grabación en inglés en data/videos.json",
-    videoLangBadge: "Grabación en inglés · un enlace",
+    videoLangBadge: "Inglés · UST SharePoint",
     quizTitle: "Cuestionarios tipo examen",
     quizLead:
       "100 ítems originales ponderados como CCDV-F (aplicaciones, modelos, agentes, prompting, tools/MCP, seguridad, Claude Code, eval). Cada intento sortea una muestra nueva. No son preguntas oficiales de Anthropic ni de Pearson.",
@@ -109,12 +110,13 @@ export const copy = {
     home: "Inicio",
     videosTitle: "Vídeos de las sesiones (inglés)",
     videosLead:
-      "Las grabaciones del masterclass están solo en inglés. Lo bilingüe son los apuntes y los cuestionarios. Un enlace LMS, Stream o Drive por sesión en academy/data/videos.json (url). Si url está vacío, la tarjeta espera. No subáis MP4.",
-    videosHowToTitle: "Dónde añadir los vídeos",
+      "Las grabaciones del masterclass están en inglés en UST SharePoint. Entrad con la cuenta de UST. Lo bilingüe son los apuntes y los cuestionarios. El módulo 04 son dos ficheros del 10 de agosto (parte 1 y parte 2).",
+    videosHowToTitle: "Cómo verlos",
     videosHowTo:
-      "Editad academy/data/videos.json. Cada módulo (m01–m12) tiene un solo url. Pegad el enlace de la sesión en inglés. No hay un segundo campo para un vídeo en español. Tras guardar, redesplegad (directorio raíz en Vercel: academy).",
+      "Cada tarjeta abre el reproductor de SharePoint en una pestaña nueva. No hay grabación en español. El módulo 04 lista dos partes en inglés. Si un enlace caduca, cambiad url en academy/data/videos.json y redesplegad.",
     openVideo: "Abrir grabación en inglés",
     missingUrl: "Aún no hay enlace de la grabación en inglés",
+    sharePointHint: "Hace falta iniciar sesión en UST SharePoint.",
     footer:
       "G.A.Menon Academy · material de estudio · no es el examen oficial de Anthropic. Primad docs.claude.com si la grabación queda antigua.",
     disclaimer:

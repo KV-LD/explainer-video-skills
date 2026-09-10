@@ -1,89 +1,96 @@
 {
-  "whereToAdd": "One English recording per session. Set url on each module (LMS / Stream / Drive). Leave \"\" until published. Do not commit MP4s. Notes and quizzes stay bilingual; recordings do not.",
+  "whereToAdd": "English SharePoint recordings only. One url per file except module 04 (two parts of 10 August). Notes and quizzes stay bilingual. Do not commit MP4s.",
   "videos": [
     {
       "id": "m01",
       "moduleId": "01",
-      "title": "Module 01 — 3 August (English)",
-      "note": "One link for the live session. Notes and quizzes for this module are separate EN/ES materials.",
-      "url": ""
+      "title": "CCDV-F 1 — 3 August (English)",
+      "note": "UST SharePoint. Notes and quizzes for this module are separate EN/ES materials.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQCAaWnFGpD4SJS38ZYwf5vHASpXbR4USZQlOJEmiidHBgM?e=FG5Hfe"
     },
     {
       "id": "m02",
       "moduleId": "02",
-      "title": "Module 02 — 5 August (English)",
-      "note": "Cowork, Academy, exam format. One recording URL.",
-      "url": ""
+      "title": "CCDV-F 2 — 5 August (English)",
+      "note": "Cowork, Academy, exam format.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQAkmPZC_UJ3TpBio1LYKvTeARPcE3VDwnE30qm_PS1T5C4?e=H4dt97"
     },
     {
       "id": "m03",
       "moduleId": "03",
-      "title": "Module 03 — 6 August (English)",
-      "note": "Certifications and Claude Code. One recording URL.",
-      "url": ""
+      "title": "CCDV-F 3 — 6 August (English)",
+      "note": "Certifications and Claude Code.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQCck3d_xieFSLh8NZOFEPOLAcRB1v-Q1w1sIwjeiuVI11I?e=rPtaLp"
     },
     {
-      "id": "m04",
+      "id": "m04a",
       "moduleId": "04",
-      "title": "Module 04 — 10 August afternoon (English)",
-      "note": "Full afternoon session (not the 11-minute stub). One recording URL.",
-      "url": ""
+      "title": "CCDV-F 4 (1) — 10 August part 1 (English)",
+      "note": "First recording for module 04. Same English session day, two files.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQB8xyzciV2cQqHqJQQL_MmGARFt-t7TIj0ApxGsrE2R7NM?e=zAPl5F"
+    },
+    {
+      "id": "m04b",
+      "moduleId": "04",
+      "title": "CCDV-F 4 (2) — 10 August part 2 (English)",
+      "note": "Second recording for module 04 (afternoon continuation).",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQCtVHFzQf5XQKJnoiCDoSGjAeyJgyRDfVDb2PQrz5EvC9A?e=eY5Tlx"
     },
     {
       "id": "m05",
       "moduleId": "05",
-      "title": "Module 05 — 12 August (English)",
-      "note": "Permissions, models, agents. One recording URL.",
-      "url": ""
+      "title": "CCDV-F 5 — 12 August (English)",
+      "note": "Permissions, models, agents.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQCIvoyTWFzNSKIesk1gDljEAbZbMmxL0IrJnc-APktTDdU?e=AHeb2E"
     },
     {
       "id": "m06",
       "moduleId": "06",
-      "title": "Module 06 — 13 August (English)",
-      "note": "Hooks and tokens. One recording URL.",
-      "url": ""
+      "title": "CCDV-F 6 — 13 August (English)",
+      "note": "Hooks and tokens.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQDtLr6NT5RMS6W_mztAJLE7AQj032EtnLwMSImnzh-7n84?e=nNt0U1"
     },
     {
       "id": "m07",
       "moduleId": "07",
-      "title": "Module 07 — 17 August (English)",
-      "note": "Anthropic SDK. One recording URL.",
-      "url": ""
+      "title": "CCDV-F 7 — 17 August (English)",
+      "note": "Anthropic SDK.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQAycDWERZ6tQal8lbHgh-8XAXAMxsk12GoC_vrkrQl-98I?e=PlPBvI"
     },
     {
       "id": "m08",
       "moduleId": "08",
-      "title": "Module 08 — 19 August (English)",
-      "note": "Prompt engineering. One recording URL.",
-      "url": ""
+      "title": "CCDV-F 8 — 19 August (English)",
+      "note": "Prompt engineering.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQCEvJZ7PmbiQZy_RGK9XKszAbo2KwiMm1L00WPjo0-ldu8?e=BXidfn"
     },
     {
       "id": "m09",
       "moduleId": "09",
-      "title": "Module 09 — 20 August (English)",
-      "note": "Thinking, vision, PDFs, cache. One recording URL.",
-      "url": ""
+      "title": "CCDV-F 9 — 20 August (English)",
+      "note": "Thinking, vision, PDFs, cache.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQDzGfNyk5reRrxxJpK4QdeIAbKI2xZ0wzCHxtJVkfuUzXQ?e=jmAODA"
     },
     {
       "id": "m10",
       "moduleId": "10",
-      "title": "Module 10 — 24 August (English)",
-      "note": "Tools and MCP. One recording URL.",
-      "url": ""
+      "title": "CCDV-F 10 — 24 August (English)",
+      "note": "Tools and MCP.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQBJLa4pY2tqQqcCT117rsWJAU0kfy6gkT8neCskRFwf2-A?e=S1Qpzy"
     },
     {
       "id": "m11",
       "moduleId": "11",
-      "title": "Module 11 — 26 August (English)",
-      "note": "RAG and agents. One recording URL.",
-      "url": ""
+      "title": "CCDV-F 11 — 26 August (English)",
+      "note": "RAG and agents.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQDsalXOZTGOSZDjAw1hbJUSAfXob_KAuG-qAn90F76T1Dc?e=Hyk0ak"
     },
     {
       "id": "m12",
       "moduleId": "12",
-      "title": "Module 12 — 27 August (English)",
-      "note": "Built-in tools, RAI, exam prep. One recording URL.",
-      "url": ""
+      "title": "CCDV-F 12 — 27 August (English)",
+      "note": "Built-in tools, RAI, exam prep.",
+      "url": "https://ustglobal-my.sharepoint.com/:v:/g/personal/305198_ust_com/IQDvuaku7JdwRJB-vh6bbAk8AYZ6MbREDgTVJjSUuCzjBgw?e=9524V7"
     }
   ]
 }

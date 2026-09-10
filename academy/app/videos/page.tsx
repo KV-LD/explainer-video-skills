@@ -14,14 +14,6 @@ export default function VideosPage() {
           {t.videosHowToTitle}
         </div>
         <p className="mt-2 text-sm text-[var(--ust-muted)]">{t.videosHowTo}</p>
-        <pre className="mt-3 overflow-x-auto rounded bg-[var(--ust-off)] p-3 text-xs text-[var(--ust-teal-deep)]">
-{`{
-  "id": "m02",
-  "moduleId": "02",
-  "title": "Module 02 — 5 August (English)",
-  "url": "https://your-lms.example/session-5-aug"
-}`}
-        </pre>
       </div>
       <ul className="mt-8 space-y-3">
         {videosFile.videos.map((v) => (
@@ -37,14 +29,19 @@ export default function VideosPage() {
             </div>
             <p className="mt-1 text-sm text-[var(--ust-muted)]">{v.note}</p>
             {v.url ? (
-              <a
-                className="mt-3 inline-block text-sm"
-                href={v.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {t.openVideo}
-              </a>
+              <>
+                <a
+                  className="mt-3 inline-block text-sm"
+                  href={v.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {t.openVideo}
+                </a>
+                <p className="mt-1 text-xs text-[var(--ust-muted2)]">
+                  {t.sharePointHint}
+                </p>
+              </>
             ) : (
               <p className="mt-3 text-sm text-[var(--ust-coral)]">{t.missingUrl}</p>
             )}

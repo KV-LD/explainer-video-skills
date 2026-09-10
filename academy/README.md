@@ -10,18 +10,9 @@ npm install
 npm run dev
 ```
 
-## Add session videos
+## Session videos
 
-Recordings are **English only** — **one URL per module**. Notes and quizzes stay bilingual.
-
-Do **not** put large MP4s in git. The **Videos** page reads `academy/data/videos.json`.
-
-1. Open `academy/data/videos.json`.
-2. For each module (`m01`–`m12`), set `"url"` to the LMS, Microsoft Stream, or Drive share link for that English session.
-3. There is no Spanish video field. Leave `"url": ""` until the recording is published.
-4. Redeploy (Vercel root directory must be `academy`).
-
-Module note pages show the same single English link under “English session recording”.
+English **UST SharePoint** links live in `academy/data/videos.json` (one recording per CCDV-F session; **module 04 has part 1 and part 2**). Notes and quizzes stay bilingual. Playback needs a UST account. If a share link expires, replace `url` and redeploy.
 
 ## Quizzes
 
