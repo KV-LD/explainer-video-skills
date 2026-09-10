@@ -1,0 +1,3326 @@
+[
+  {
+    "id": "q001",
+    "domain": "applications",
+    "module": "01",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "In Anthropic’s product model as taught for CCDV-F, what is Claude?",
+      "options": [
+        "Only the claude.ai chat website",
+        "Anthropic’s family of models plus the applications that sit on those models",
+        "A vector database bundled with MongoDB Atlas",
+        "A replacement for git and CI that stores session state on the model server"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Classroom definition: Claude is the model family (Haiku, Sonnet, Opus, and related SKUs) plus clients such as Chat, Cowork, Code, and API apps. The website is one client, not the whole product."
+    },
+    "es": {
+      "stem": "En el modelo de producto de Anthropic que se enseña para CCDV-F, ¿qué es Claude?",
+      "options": [
+        "Solo el sitio web de chat claude.ai",
+        "La familia de modelos de Anthropic más las aplicaciones que se apoyan en esos modelos",
+        "Una base de datos vectorial empaquetada con MongoDB Atlas",
+        "Un sustituto de git y CI que guarda el estado de sesión en el servidor del modelo"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Definición de clase: Claude es la familia de modelos (Haiku, Sonnet, Opus y SKU relacionados) más clientes como Chat, Cowork, Code y apps de API. El sitio web es un cliente, no todo el producto."
+    }
+  },
+  {
+    "id": "q002",
+    "domain": "applications",
+    "module": "01",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "A colleague uploads a slide deck to Claude Chat and asks for a summary. They also want month-wise folders created next to the original files on disk. Which client should do the disk reorganisation?",
+      "options": [
+        "Claude Chat, because an upload already grants write access to the local filesystem",
+        "Claude Cowork (or Code/SDK), because Chat answers in the thread and does not tidy folders on disk",
+        "Only the Messages API with stream=true, which writes files as tokens arrive",
+        "Anthropic Academy / Skilljar, because course completion mounts a workspace"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Chat summarises in the conversation. Cowork treats an attached folder as a workspace the agent may create, move, edit, or delete (with consent). Code/SDK can also write files; Chat will not silently reorganise Downloads."
+    },
+    "es": {
+      "stem": "Un compañero sube una presentación a Claude Chat y pide un resumen. También quiere carpetas por mes junto a los ficheros originales en disco. ¿Qué cliente debe hacer la reorganización en disco?",
+      "options": [
+        "Claude Chat, porque una subida ya da acceso de escritura al sistema de ficheros local",
+        "Claude Cowork (o Code/SDK), porque Chat responde en el hilo y no ordena carpetas en disco",
+        "Solo la Messages API con stream=true, que escribe ficheros a medida que llegan tokens",
+        "Anthropic Academy / Skilljar, porque completar el curso monta un espacio de trabajo"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Chat resume en la conversación. Cowork trata una carpeta adjunta como espacio de trabajo donde el agente puede crear, mover, editar o borrar (con consentimiento). Code/SDK también puede escribir ficheros; Chat no reorganiza Downloads en silencio."
+    }
+  },
+  {
+    "id": "q003",
+    "domain": "applications",
+    "module": "02",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Which statement best matches how you reach the three GUI clients in class?",
+      "options": [
+        "Cowork is the primary web app; Code exists only as a Chrome extension; Chat is CLI-only",
+        "Chat is primary on the web; Cowork was taught as a desktop client; Code uniquely has CLI and IDE integration",
+        "All three are identical tiles on claude.ai and in every IDE side panel",
+        "Code is web-only; Cowork is the only product with a CLI"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Access map: Chat is the everyday web (and desktop Chat pane) client. Cowork was taught as desktop-only in class, not an IDE surface. Code is the agentic coding client with CLI and IDE plugins."
+    },
+    "es": {
+      "stem": "¿Qué afirmación encaja mejor con cómo se accede a los tres clientes GUI en clase?",
+      "options": [
+        "Cowork es la app web principal; Code existe solo como extensión de Chrome; Chat es solo CLI",
+        "Chat es principal en la web; Cowork se enseñó como cliente de escritorio; Code es el único con CLI e integración IDE",
+        "Los tres son baldosas idénticas en claude.ai y en cada panel lateral de IDE",
+        "Code es solo web; Cowork es el único producto con CLI"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Mapa de acceso: Chat es el cliente cotidiano en la web (y el panel Chat de escritorio). Cowork se enseñó en clase como solo escritorio, no como superficie de IDE. Code es el cliente de programación agentic con CLI e plugins de IDE."
+    }
+  },
+  {
+    "id": "q004",
+    "domain": "applications",
+    "module": "02",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "A developer logs into Claude Chat successfully but cannot call the Anthropic SDK from a notebook. What is the most likely explanation taught in the masterclass?",
+      "options": [
+        "Chat login and the console API key are the same credential, so the SDK must be broken",
+        "The Messages API requires a console API key; that plane is separate from Chat login, billing, and rate limits",
+        "The SDK only works inside Claude Cowork’s sandbox folder",
+        "They must complete Percipio before any API key will authenticate"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "An API key from the console is not Chat SSO. Org policy can allow Chat and deny keys. API billing and rate limits are a third plane from the Chat/Cowork usage bar."
+    },
+    "es": {
+      "stem": "Un desarrollador entra en Claude Chat con éxito pero no puede llamar al Anthropic SDK desde un notebook. ¿Cuál es la explicación más probable que se enseñó en el masterclass?",
+      "options": [
+        "El inicio de sesión de Chat y la clave de API de consola son la misma credencial, así que el SDK debe estar roto",
+        "La Messages API exige una clave de API de consola; ese plano es distinto del login de Chat, la facturación y los límites de tasa",
+        "El SDK solo funciona dentro de la carpeta sandbox de Claude Cowork",
+        "Deben completar Percipio antes de que cualquier clave de API autentique"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Una clave de API de la consola no es el SSO de Chat. La política de la organización puede permitir Chat y denegar claves. Facturación y rate limits de API son un tercer plano respecto a la barra de uso de Chat/Cowork."
+    }
+  },
+  {
+    "id": "q005",
+    "domain": "applications",
+    "module": "03",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Which credential is this UST masterclass preparing you to sit?",
+      "options": [
+        "Claude Certified Developer, Foundation (CCDV-F)",
+        "Architect Professional only, because developers must skip Foundation",
+        "Percipio completion badge, which Anthropic treats as the proctored exam",
+        "Associate / business Foundation, because prompting is 100% of CCDV-F"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "After 13 July 2026 Anthropic split tracks. This course is Developer Foundation (APIs, Code, MCP, prompting, a taste of Agent SDK), not Architect Professional and not Percipio-as-exam."
+    },
+    "es": {
+      "stem": "¿Qué credencial prepara este masterclass de UST?",
+      "options": [
+        "Claude Certified Developer, Foundation (CCDV-F)",
+        "Solo Architect Professional, porque los desarrolladores deben saltarse Foundation",
+        "La insignia de Percipio, que Anthropic trata como el examen con supervisión",
+        "Associate / business Foundation, porque el prompting es el 100 % de CCDV-F"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Tras el 13 de julio de 2026 Anthropic partió las rutas. Este curso es Developer Foundation (APIs, Code, MCP, prompting, una cata de Agent SDK), no Architect Professional ni Percipio-como-examen."
+    }
+  },
+  {
+    "id": "q006",
+    "domain": "applications",
+    "module": "02",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "A product manager must pick clients for two jobs: (1) draft an email from an uploaded PDF in the same window, and (2) rename and sort invoice files in a local folder. Which two statements are correct?",
+      "options": [
+        "Job (1) can stay in Claude Chat if a summary or draft in the thread is enough",
+        "Job (2) is Cowork’s job (agentic local workspace), not Chat’s",
+        "Claude Chat will silently move files on disk whenever a PDF is uploaded",
+        "Cowork can only run inside VS Code, so job (2) requires an IDE"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Chat is enough when the output stays in the thread. Folder mutation needs Cowork (or Code/SDK). Chat does not reorganise disk; Cowork is not an IDE plugin in the access map taught in class."
+    },
+    "es": {
+      "stem": "Un product manager debe elegir clientes para dos trabajos: (1) redactar un correo a partir de un PDF subido en la misma ventana, y (2) renombrar y ordenar facturas en una carpeta local. ¿Cuáles dos afirmaciones son correctas?",
+      "options": [
+        "El trabajo (1) puede quedarse en Claude Chat si basta un resumen o borrador en el hilo",
+        "El trabajo (2) es de Cowork (espacio de trabajo local agentic), no de Chat",
+        "Claude Chat moverá ficheros en disco en silencio siempre que se suba un PDF",
+        "Cowork solo puede ejecutarse dentro de VS Code, así que el trabajo (2) exige un IDE"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Chat basta cuando la salida se queda en el hilo. Mutar carpetas necesita Cowork (o Code/SDK). Chat no reorganiza el disco; Cowork no es un plugin de IDE en el mapa de acceso de clase."
+    }
+  },
+  {
+    "id": "q007",
+    "domain": "applications",
+    "module": "03",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Classroom sketch of Developer Foundation sitting (confirm live numbers on Skilljar): which shape did the trainer quote?",
+      "options": [
+        "60 questions, 120 minutes, MCQ plus written scenarios — you do not sit and code the production app in the exam IDE",
+        "A 48-hour take-home where you must ship a public MCP marketplace listing",
+        "Only a live pair-programming interview with Opus",
+        "Unlimited time, 10 items, all fill-in-the-blank regex"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Foundation was taught as a timed multiple-choice plus scenario paper (about 60×120). You explain designs; you are not graded on typing a full app during the sitting. Prices and exact counts move — Skilljar wins on booking day."
+    },
+    "es": {
+      "stem": "Esbozo de clase del examen Developer Foundation (confirmad cifras en vivo en Skilljar): ¿qué forma citó el formador?",
+      "options": [
+        "60 preguntas, 120 minutos, tipo test más escenarios escritos — no os sentáis a programar la app de producción en el IDE del examen",
+        "Un trabajo para casa de 48 horas en el que debéis publicar un listado en el marketplace MCP",
+        "Solo una entrevista de programación en pareja en directo con Opus",
+        "Tiempo ilimitado, 10 ítems, todo rellenar regex"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Foundation se enseñó como un examen cronometrado de opción múltiple más escenarios (unos 60×120). Explicáis diseños; no os puntúan por teclear una app completa durante la sesión. Precios y recuentos se mueven: Skilljar gana el día de la reserva."
+    }
+  },
+  {
+    "id": "q008",
+    "domain": "applications",
+    "module": "03",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "You must process 10,000 overnight document summaries. Cost matters more than finishing in the next ten minutes. Which API pattern did class recommend first?",
+      "options": [
+        "Fire 10,000 synchronous Messages.create calls in a tight parallel loop “to finish ASAP”",
+        "Message Batches (async, classroom stem: up to a ~24-hour window) instead of a burst of interactive calls",
+        "Put all 10,000 PDFs in one user message and stream the combined answer",
+        "Switch Claude Chat to Cowork so the desktop usage bar becomes unlimited"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Batches are the cost-first, not-urgent path. Interactive Messages in a stampede burns rate limits and price. Confirm current Batches docs; the idea is async bulk versus chat-latency calls."
+    },
+    "es": {
+      "stem": "Debéis procesar 10.000 resúmenes de documentos por la noche. El coste importa más que terminar en diez minutos. ¿Qué patrón de API recomendó primero la clase?",
+      "options": [
+        "Lanzar 10.000 llamadas síncronas Messages.create en un bucle paralelo apretado «para acabar ya»",
+        "Message Batches (asíncrono; en clase: ventana de hasta ~24 horas) en lugar de una ráfaga de llamadas interactivas",
+        "Meter los 10.000 PDF en un solo mensaje de usuario y hacer stream de la respuesta combinada",
+        "Pasar Claude Chat a Cowork para que la barra de uso de escritorio sea ilimitada"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Batches es la vía de coste primero y sin urgencia. Messages interactivos en estampida queman rate limits y precio. Confirmad la documentación actual de Batches; la idea es volumen asíncrono frente a llamadas con latencia de chat."
+    }
+  },
+  {
+    "id": "q009",
+    "domain": "applications",
+    "module": "07",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "After a notebook call to messages.create returns, a follow-up cell sends only “What is my name?” with no prior turns. Why can Claude not recall the name said in the previous cell?",
+      "options": [
+        "The model server stores every API conversation for 90 days by default",
+        "The Messages API is stateless; the application must resend the history it wants the model to see",
+        "Names are stripped unless temperature is 0",
+        "You must enable Cowork connectors before the API can remember names"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Chat and Code feel stateful because those products resubmit history. Your SDK app owns the messages array. A new create with only the latest user line has no name in context."
+    },
+    "es": {
+      "stem": "Tras una llamada del notebook a messages.create, una celda siguiente envía solo «¿Cómo me llamo?» sin turnos previos. ¿Por qué Claude no puede recordar el nombre dicho en la celda anterior?",
+      "options": [
+        "El servidor del modelo guarda cada conversación de API 90 días por defecto",
+        "La Messages API es sin estado; la aplicación debe reenviar el historial que quiere que el modelo vea",
+        "Los nombres se eliminan salvo que temperature sea 0",
+        "Debéis activar conectores de Cowork antes de que la API recuerde nombres"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Chat y Code parecen con estado porque esos productos reenvían el historial. Vuestra app SDK es dueña del array messages. Un create nuevo solo con la última línea de usuario no tiene el nombre en contexto."
+    }
+  },
+  {
+    "id": "q010",
+    "domain": "applications",
+    "module": "07",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Where does the standing system prompt go in the Messages pattern Vijay coded for Foundation?",
+      "options": [
+        "As a third role named system inside the messages array, mixed with user and assistant",
+        "As a separate system parameter on create; user and assistant turns live in messages[]",
+        "Only inside CLAUDE.md, which the API reads from GitHub automatically",
+        "As a tool named system_prompt that Claude must call first"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Exam wording: system is not a messages[] role in the pattern taught. It is the system field on create. Messages hold the dialogue. You pass system on every request because the server is stateless."
+    },
+    "es": {
+      "stem": "¿Dónde va el system prompt permanente en el patrón de Messages que Vijay programó para Foundation?",
+      "options": [
+        "Como un tercer rol llamado system dentro del array messages, mezclado con user y assistant",
+        "Como un parámetro system aparte en create; los turnos user y assistant viven en messages[]",
+        "Solo dentro de CLAUDE.md, que la API lee de GitHub automáticamente",
+        "Como una herramienta llamada system_prompt que Claude debe llamar primero"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Redacción de examen: system no es un rol de messages[] en el patrón enseñado. Es el campo system de create. Messages guarda el diálogo. Pasáis system en cada petición porque el servidor es sin estado."
+    }
+  },
+  {
+    "id": "q011",
+    "domain": "applications",
+    "module": "07",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Why stream Messages instead of waiting for a finished Message object?",
+      "options": [
+        "Streaming makes the model smarter and halves output token prices",
+        "You show tokens as they arrive (perceived latency) via server-sent events; you still pay for output tokens and handle events",
+        "stream=true is required before any tool_use block can appear",
+        "Non-streaming create is deprecated and rejected by the console"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Streaming is delivery, not intelligence. Chat-like UIs feel fast because they paint partial text. Batch jobs and simple evals can keep blocking create."
+    },
+    "es": {
+      "stem": "¿Por qué hacer stream de Messages en lugar de esperar un objeto Message terminado?",
+      "options": [
+        "El streaming hace el modelo más listo y reduce a la mitad el precio de tokens de salida",
+        "Mostráis tokens según llegan (latencia percibida) vía server-sent events; seguís pagando tokens de salida y gestionando eventos",
+        "stream=true es obligatorio antes de que pueda aparecer un bloque tool_use",
+        "El create sin streaming está obsoleto y la consola lo rechaza"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "El streaming es entrega, no inteligencia. Las UI tipo Chat se sienten rápidas porque pintan texto parcial. Trabajos por lotes y evals simples pueden seguir con create bloqueante."
+    }
+  },
+  {
+    "id": "q012",
+    "domain": "applications",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "You need Claude to return a machine-parseable JSON object for a backend. Which combination is most aligned with class?",
+      "options": [
+        "Ask in prose only, then regex the essay; never constrain decoding",
+        "Use structured-output / JSON guidance (schema or prefill+stop as taught) so the consumer gets a tight envelope",
+        "Set temperature to 2.0 so the JSON is more creative",
+        "Put the JSON schema in a Cowork folder named /json and hope Chat finds it"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Foundation emphasises forcing structured output (JSON) with API controls and prompting (prefill, stop sequences, schemas). Do not rely on scraping free prose. Check current structured-outputs docs for the exact parameter names."
+    },
+    "es": {
+      "stem": "Necesitáis que Claude devuelva un objeto JSON parseable por máquina para un backend. ¿Qué combinación encaja más con la clase?",
+      "options": [
+        "Pedirlo en prosa y luego aplicar regex al ensayo; nunca constreñir la decodificación",
+        "Usar salida estructurada / guía JSON (esquema o prefill+stop como se enseñó) para que el consumidor reciba un sobre cerrado",
+        "Poner temperature a 2.0 para que el JSON sea más creativo",
+        "Poner el esquema JSON en una carpeta Cowork llamada /json y esperar que Chat la encuentre"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Foundation insiste en forzar salida estructurada (JSON) con controles de API y prompting (prefill, stop sequences, esquemas). No os apoyéis en recortar prosa libre. Consultad la documentación actual de structured outputs para los nombres exactos de parámetros."
+    }
+  },
+  {
+    "id": "q013",
+    "domain": "applications",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "A user asks for one author email buried in a 1,000-page PDF. Stuffing the whole book into a single Messages call is a poor first design because:",
+      "options": [
+        "PDFs are illegal to send to Claude",
+        "You waste tokens (and may exceed the context window); RAG retrieves only useful chunks then augments the prompt",
+        "Claude can only read images, never document text",
+        "You must use Cowork Design instead of any API"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "RAG is retrieve → augment → generate so you pay for relevant slices, not 10,000 silent pages. Direct PDF support still exists for smaller docs; size and cost drive the pattern choice."
+    },
+    "es": {
+      "stem": "Un usuario pide un correo de autor enterrado en un PDF de 1.000 páginas. Meter el libro entero en una sola llamada Messages es un mal primer diseño porque:",
+      "options": [
+        "Es ilegal enviar PDF a Claude",
+        "Malgastáis tokens (y podéis superar la ventana de contexto); RAG recupera solo trozos útiles y luego aumenta el prompt",
+        "Claude solo puede leer imágenes, nunca texto de documento",
+        "Debéis usar Cowork Design en lugar de cualquier API"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "RAG es recuperar → aumentar → generar para pagar por rebanadas relevantes, no por 10.000 páginas silenciosas. El soporte directo de PDF sigue existiendo para documentos más pequeños; el tamaño y el coste marcan el patrón."
+    }
+  },
+  {
+    "id": "q014",
+    "domain": "applications",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "What is prompt caching for in the Chat-with-PDF story?",
+      "options": [
+        "A permanent customer RAG database Anthropic hosts forever",
+        "Marking a large invariant prefix (document + stable instructions) with cache_control so later questions pay cache-hit prices for a short TTL",
+        "Replacing the need to send the new user question at all",
+        "A Claude Code permission mode that auto-approves bash"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Cache is ephemeral prefix reuse (class: ~5 minutes or 1 hour TTL), not RAG and not Chat product memory. Put the huge stable blob behind cache_control; leave the per-turn question after the breakpoint."
+    },
+    "es": {
+      "stem": "¿Para qué sirve el prompt caching en la historia de Chat-with-PDF?",
+      "options": [
+        "Una base RAG permanente de cliente que Anthropic aloja para siempre",
+        "Marcar un prefijo invariante grande (documento + instrucciones estables) con cache_control para que las preguntas posteriores paguen precio de cache-hit durante un TTL corto",
+        "Sustituir la necesidad de enviar la nueva pregunta del usuario",
+        "Un modo de permiso de Claude Code que aprueba bash automáticamente"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "La caché es reutilización efímera de prefijo (en clase: TTL de ~5 minutos o 1 hora), no RAG ni memoria de producto de Chat. Poned el blob estable enorme tras cache_control; dejad la pregunta de cada turno después del punto de corte."
+    }
+  },
+  {
+    "id": "q015",
+    "domain": "applications",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "When should you enable vision (images in the Messages content) rather than pasting OCR text you do not have?",
+      "options": [
+        "Never; Claude cannot accept images on the API",
+        "When the user provides screenshots, photos, or diagrams the model should inspect as image blocks",
+        "Only after Message Batches has failed three times",
+        "Only inside Percipio quizzes"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Vision is sending image content to Claude. It is still context tokens. Prefer native image blocks over a brittle homemade OCR pipeline when the artefact is visual."
+    },
+    "es": {
+      "stem": "¿Cuándo debéis activar visión (imágenes en el contenido de Messages) en lugar de pegar texto OCR que no tenéis?",
+      "options": [
+        "Nunca; Claude no puede aceptar imágenes en la API",
+        "Cuando el usuario aporta capturas, fotos o diagramas que el modelo debe inspeccionar como bloques de imagen",
+        "Solo después de que Message Batches haya fallado tres veces",
+        "Solo dentro de los cuestionarios de Percipio"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Visión es enviar contenido de imagen a Claude. Siguen siendo tokens de contexto. Preferid bloques de imagen nativos frente a un OCR casero frágil cuando el artefacto es visual."
+    }
+  },
+  {
+    "id": "q016",
+    "domain": "applications",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Citations (grounded document answers) are most useful when:",
+      "options": [
+        "You want the model to invent legal footnotes that look official",
+        "The application must show which retrieved or attached passage supports a claim",
+        "You need to disable the context window",
+        "You are choosing Haiku versus Opus in the desktop model picker only"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Citations help users verify grounded answers from PDF/document context. They are not a licence to fabricate sources. Confirm current citations API behaviour in docs."
+    },
+    "es": {
+      "stem": "Las citas (respuestas documentales fundamentadas) son más útiles cuando:",
+      "options": [
+        "Queréis que el modelo invente notas legales que parezcan oficiales",
+        "La aplicación debe mostrar qué pasaje recuperado o adjunto sostiene una afirmación",
+        "Necesitáis desactivar la ventana de contexto",
+        "Solo estáis eligiendo Haiku frente a Opus en el selector de modelo de escritorio"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Las citas ayudan a verificar respuestas fundamentadas a partir de contexto PDF/documento. No son una licencia para fabricar fuentes. Confirmad el comportamiento actual de la API de citations en la documentación."
+    }
+  },
+  {
+    "id": "q017",
+    "domain": "applications",
+    "module": "11",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "In the RAG lab, what does the embedding model do compared with Claude?",
+      "options": [
+        "It is the same as Claude: text in, long essay out",
+        "Text in, vector out — used to index chunks and to embed the query for similarity search; Claude still generates the answer",
+        "It replaces Messages.create entirely",
+        "It stores API keys in the vector so you can skip the console"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Embeddings are not LLMs. Offline: load → split → embed → store vectors and original chunk text. Online: embed the prompt, search, augment, then Claude generates."
+    },
+    "es": {
+      "stem": "En el laboratorio RAG, ¿qué hace el modelo de embeddings comparado con Claude?",
+      "options": [
+        "Es lo mismo que Claude: texto entra, ensayo largo sale",
+        "Texto entra, vector sale — sirve para indexar trozos y para embeber la consulta en la búsqueda por similitud; Claude sigue generando la respuesta",
+        "Sustituye por completo a Messages.create",
+        "Guarda claves de API en el vector para que podáis saltaros la consola"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Los embeddings no son LLM. Fuera de línea: cargar → partir → embeber → guardar vectores y el texto original del trozo. En línea: embeber el prompt, buscar, aumentar y entonces Claude genera."
+    }
+  },
+  {
+    "id": "q018",
+    "domain": "applications",
+    "module": "11",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "Which two statements correctly describe retrieval-augmented generation as taught?",
+      "options": [
+        "Retrieve finds a few matching chunks; augment appends them to the prompt; generate is still Claude",
+        "RAG replaces Claude so you never call an LLM",
+        "You typically embed the corpus once (prep), not on every question",
+        "Chunk size is a universal constant (always 512 characters) for every corpus"
+      ],
+      "correct": [
+        0,
+        2
+      ],
+      "why": "RAG changes which tokens you pay for on the way in; the LLM still generates. Prep is offline. Chunking is a product decision (headings, overlap, size), not one magic length."
+    },
+    "es": {
+      "stem": "¿Cuáles dos afirmaciones describen correctamente la generación aumentada por recuperación tal como se enseñó?",
+      "options": [
+        "Retrieve encuentra unos pocos trozos coincidentes; augment los añade al prompt; generate sigue siendo Claude",
+        "RAG sustituye a Claude para que nunca llaméis a un LLM",
+        "Normalmente embebéis el corpus una vez (preparación), no en cada pregunta",
+        "El tamaño de trozo es una constante universal (siempre 512 caracteres) para todo corpus"
+      ],
+      "correct": [
+        0,
+        2
+      ],
+      "why": "RAG cambia qué tokens pagáis a la entrada; el LLM sigue generando. La preparación es fuera de línea. El troceado es una decisión de producto (encabezados, solape, tamaño), no una longitud mágica."
+    }
+  },
+  {
+    "id": "q019",
+    "domain": "applications",
+    "module": "11",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Why store original chunk text alongside vectors in the vector store?",
+      "options": [
+        "Similarity search returns numbers only; you need the prose to augment the prompt",
+        "Anthropic requires vectors to be stored as PNG screenshots",
+        "Text is illegal to store next to embeddings",
+        "Claude reads vectors directly as thinking blocks"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Search finds nearest vectors; generation needs the matching sentences. Metadata filters (doc id, heading) further cut the pool."
+    },
+    "es": {
+      "stem": "¿Por qué guardar el texto original del trozo junto a los vectores en el almacén vectorial?",
+      "options": [
+        "La búsqueda por similitud solo devuelve números; necesitáis la prosa para aumentar el prompt",
+        "Anthropic exige que los vectores se guarden como capturas PNG",
+        "Es ilegal almacenar texto junto a embeddings",
+        "Claude lee vectores directamente como bloques thinking"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "La búsqueda encuentra los vectores más cercanos; la generación necesita las frases coincidentes. Filtros de metadatos (id de documento, encabezado) recortan aún más el conjunto."
+    }
+  },
+  {
+    "id": "q020",
+    "domain": "applications",
+    "module": "07",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "How did class distinguish the Anthropic SDK from the Agent SDK?",
+      "options": [
+        "They are the same package; Agent SDK is only a Percipio quiz name",
+        "Anthropic SDK is conversations / Messages API; Agent SDK is orchestration (loops, tools, memory) around those calls",
+        "Agent SDK is required before you can set temperature",
+        "Anthropic SDK only runs inside Claude Cowork"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Foundation week on APIs is client.messages.create, not LangChain. Agent SDK returns later for agentic loops. Do not mix the two on exam items about a single chat turn."
+    },
+    "es": {
+      "stem": "¿Cómo distinguió la clase el Anthropic SDK del Agent SDK?",
+      "options": [
+        "Son el mismo paquete; Agent SDK es solo un nombre de cuestionario Percipio",
+        "Anthropic SDK es conversaciones / Messages API; Agent SDK es orquestación (bucles, herramientas, memoria) alrededor de esas llamadas",
+        "El Agent SDK es obligatorio antes de poder fijar temperature",
+        "El Anthropic SDK solo se ejecuta dentro de Claude Cowork"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "La semana Foundation de APIs es client.messages.create, no LangChain. El Agent SDK vuelve más tarde para bucles agentic. No mezcléis ambos en ítems de examen sobre un solo turno de chat."
+    }
+  },
+  {
+    "id": "q021",
+    "domain": "applications",
+    "module": "04",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "To seed a frontend, the trainer attached an OpenAPI YAML to Cowork Design instead of the whole backend folder. Why?",
+      "options": [
+        "YAML files cannot consume tokens",
+        "Attach the high-value spec (and maybe a logo), not the entire tree, to save context tokens",
+        "Cowork cannot read YAML; the attachment was decorative",
+        "OpenAPI files disable MCP for the rest of the session"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Token budgeting: send the contract the model needs. A full backend dump burns the window. Clarify-phase questions (desktop vs responsive) should be answered narrowly if you are metering usage."
+    },
+    "es": {
+      "stem": "Para sembrar un frontend, el formador adjuntó un YAML OpenAPI a Cowork Design en lugar de toda la carpeta backend. ¿Por qué?",
+      "options": [
+        "Los ficheros YAML no consumen tokens",
+        "Adjuntad la especificación de alto valor (y quizá un logo), no el árbol entero, para ahorrar tokens de contexto",
+        "Cowork no puede leer YAML; el adjunto era decorativo",
+        "Los ficheros OpenAPI desactivan MCP el resto de la sesión"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Presupuesto de tokens: enviad el contrato que el modelo necesita. Un volcado backend completo quema la ventana. Las preguntas de la fase clarify (escritorio frente a responsive) deben responderse con estrechez si estáis midiendo el uso."
+    }
+  },
+  {
+    "id": "q022",
+    "domain": "applications",
+    "module": "04",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "For a substantial Cowork or Code task (for example, organise Downloads by file type), which five-step pattern did the trainer describe?",
+      "options": [
+        "Deploy → bill → fine-tune → delete → forget",
+        "Clarify → plan → execute → verify → deliver",
+        "Stream → batch → cache → jailbreak → compact",
+        "Haiku → Sonnet → Opus → Fable → Chat"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Ambiguity produces clarify questions (keep names? duplicates?), then a plan, file operations, a check nothing was lost, then a summary. Same family as plan-versus-execute later in Code."
+    },
+    "es": {
+      "stem": "Para una tarea sustancial de Cowork o Code (por ejemplo, organizar Downloads por tipo de fichero), ¿qué patrón de cinco pasos describió el formador?",
+      "options": [
+        "Desplegar → facturar → afinar → borrar → olvidar",
+        "Aclarar → planificar → ejecutar → verificar → entregar",
+        "Stream → batch → cache → jailbreak → compact",
+        "Haiku → Sonnet → Opus → Fable → Chat"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "La ambigüedad produce preguntas de aclaración (¿conservar nombres? ¿duplicados?), luego un plan, operaciones de ficheros, una comprobación de que no se perdió nada y un resumen. Misma familia que planificar-frente-a-ejecutar más adelante en Code."
+    }
+  },
+  {
+    "id": "q023",
+    "domain": "applications",
+    "module": "02",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Chrome, Excel, PowerPoint, Microsoft 365, or Slack integrations named in week 1 are:",
+      "options": [
+        "Replacements that make Chat, Cowork, and Code obsolete",
+        "Additional clients on the same models, not a fourth core GUI tile you should confuse with the three",
+        "The only way to obtain an API key",
+        "Required MCP servers before messages.create will return"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Keep the three GUI clients plus API/SDK as the map. Extra integrations are more surfaces, not a reason to forget Cowork versus Code."
+    },
+    "es": {
+      "stem": "Las integraciones de Chrome, Excel, PowerPoint, Microsoft 365 o Slack nombradas en la semana 1 son:",
+      "options": [
+        "Sustitutos que dejan obsoletos Chat, Cowork y Code",
+        "Clientes adicionales sobre los mismos modelos, no una cuarta baldosa GUI central que debáis confundir con las tres",
+        "La única forma de obtener una clave de API",
+        "Servidores MCP obligatorios antes de que messages.create devuelva"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Mantened el mapa de tres clientes GUI más API/SDK. Las integraciones extra son más superficies, no una razón para olvidar Cowork frente a Code."
+    }
+  },
+  {
+    "id": "q024",
+    "domain": "applications",
+    "module": "10",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Why do tools exist if you can paste extra text into the user prompt?",
+      "options": [
+        "Tools let the application supply live or private context (clock, DB, APIs) the weights do not contain, via a model-initiated handshake",
+        "Tools delete the need for a system prompt",
+        "Tools are only for generating images inside Cowork Design",
+        "Pasting is always cheaper than any tool_result"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Claude does not know wall-clock time or your employee table. The app executes; the model decides to ask. Mixing “model decides” with “app executes” fails exam tool items."
+    },
+    "es": {
+      "stem": "¿Por qué existen las herramientas si podéis pegar texto extra en el prompt de usuario?",
+      "options": [
+        "Las herramientas permiten que la aplicación aporte contexto vivo o privado (reloj, BD, APIs) que los pesos no contienen, mediante un apretón de manos iniciado por el modelo",
+        "Las herramientas eliminan la necesidad de un system prompt",
+        "Las herramientas solo sirven para generar imágenes dentro de Cowork Design",
+        "Pegar es siempre más barato que cualquier tool_result"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Claude no conoce la hora del reloj ni vuestra tabla de empleados. La app ejecuta; el modelo decide pedir. Mezclar «el modelo decide» con «la app ejecuta» suspende los ítems de herramientas."
+    }
+  },
+  {
+    "id": "q025",
+    "domain": "applications",
+    "module": "07",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "You are designing a multi-turn console chatbot with the Anthropic SDK. Which two practices match class?",
+      "options": [
+        "Append each user line and each assistant reply to a messages list you own, then pass that list on the next create",
+        "Assume the HTTP server remembers the notebook kernel between process restarts without storage",
+        "Keep standing instructions in the system parameter on every request (or cache that prefix)",
+        "Store conversation memory by fine-tuning a new Claude checkpoint after every user sentence"
+      ],
+      "correct": [
+        0,
+        2
+      ],
+      "why": "Helpers like add_user_message / add_assistant_message / chat() were pedagogy for an app-owned array. System must be resent (cache if stable). You do not fine-tune a frontier model per turn."
+    },
+    "es": {
+      "stem": "Estáis diseñando un chatbot de consola de varios turnos con el Anthropic SDK. ¿Cuáles dos prácticas coinciden con la clase?",
+      "options": [
+        "Añadir cada línea de usuario y cada respuesta del asistente a una lista messages de la que sois dueños, y pasar esa lista en el siguiente create",
+        "Suponer que el servidor HTTP recuerda el kernel del notebook entre reinicios de proceso sin almacenamiento",
+        "Mantener instrucciones permanentes en el parámetro system en cada petición (o cachear ese prefijo)",
+        "Guardar la memoria de conversación afinando un nuevo checkpoint de Claude tras cada frase del usuario"
+      ],
+      "correct": [
+        0,
+        2
+      ],
+      "why": "Ayudantes como add_user_message / add_assistant_message / chat() eran pedagogía para un array de la app. System debe reenviarse (caché si es estable). No afináis un modelo frontera por turno."
+    }
+  },
+  {
+    "id": "q026",
+    "domain": "applications",
+    "module": "02",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Claude Code install in class required which kind of Claude plan (not a leftover free consumer login)?",
+      "options": [
+        "Pro, Max, Team, or Enterprise — UST is on Team/Enterprise; still download builds from the company portal when policy says so",
+        "Any anonymous HTTP client with no account",
+        "Architect Professional certification must be held first",
+        "Only a Percipio learner seat"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Code needs a paid/org plan. API keys may still be denied by policy when Chat works. Vijay’s curl/npm demo is upstream, not a bypass of UST software pinning."
+    },
+    "es": {
+      "stem": "La instalación de Claude Code en clase exigía qué tipo de plan de Claude (no un login gratuito de consumidor sobrante)?",
+      "options": [
+        "Pro, Max, Team o Enterprise — UST está en Team/Enterprise; igual descargad builds del portal de empresa cuando lo diga la política",
+        "Cualquier cliente HTTP anónimo sin cuenta",
+        "Hay que tener primero la certificación Architect Professional",
+        "Solo un asiento de aprendiz Percipio"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Code necesita un plan de pago/organización. Las claves de API aún pueden denegarse por política cuando Chat funciona. La demo curl/npm de Vijay es la vía upstream, no un bypass del pin de software de UST."
+    }
+  },
+  {
+    "id": "q027",
+    "domain": "applications",
+    "module": "12",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Where should production API keys live, according to the UST delivery checklist?",
+      "options": [
+        "Committed in .env on the default branch so teammates can npm install",
+        "Workspaces and secret stores, not in git",
+        "Inside CLAUDE.md so the model can rotate them",
+        "Pasted into Cowork chat with the client corpus"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Classroom rule: no confidential client corpora in Chat/Cowork/Atlas demos; keys in workspaces/secret stores. Prompt cache and RAG are not key vaults."
+    },
+    "es": {
+      "stem": "¿Dónde deben vivir las claves de API de producción, según la lista de entrega UST?",
+      "options": [
+        "Confirmadas en .env de la rama por defecto para que el equipo pueda hacer npm install",
+        "Workspaces y almacenes de secretos, no en git",
+        "Dentro de CLAUDE.md para que el modelo pueda rotarlas",
+        "Pegadas en el chat de Cowork junto al corpus del cliente"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Norma de aula: no corpus confidenciales de cliente en demos de Chat/Cowork/Atlas; claves en workspaces/almacenes de secretos. Prompt cache y RAG no son bóvedas de claves."
+    }
+  },
+  {
+    "id": "q028",
+    "domain": "applications",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Stop sequences are used primarily to:",
+      "options": [
+        "Increase the context window to 1M for every model",
+        "Halt generation when a chosen delimiter appears so the client receives a bounded payload (for example closing a fence)",
+        "Bill thinking tokens at cache-hit prices",
+        "Authenticate MCP OAuth"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Together with prefill, stop sequences control the envelope of generation. They do not change model family or MCP auth."
+    },
+    "es": {
+      "stem": "Las stop sequences se usan principalmente para:",
+      "options": [
+        "Aumentar la ventana de contexto a 1M para todos los modelos",
+        "Detener la generación cuando aparece un delimitador elegido para que el cliente reciba una carga acotada (por ejemplo al cerrar un fence)",
+        "Facturar tokens de pensamiento a precio de cache-hit",
+        "Autenticar OAuth de MCP"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Junto con prefill, las stop sequences controlan el sobre de la generación. No cambian la familia de modelo ni la autenticación MCP."
+    }
+  },
+  {
+    "id": "q029",
+    "domain": "applications",
+    "module": "07",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "A FastAPI or Streamlit UI in front of Claude means:",
+      "options": [
+        "The model now knows about your buttons and CSS",
+        "The model still only sees the messages (and tools/system) you send; the UI is your application",
+        "You no longer need max_tokens",
+        "Skilljar injects the UI into the context window automatically"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Same helpers can sit behind any web stack. Do not expect Claude to “see” the frontend unless you put that state in the prompt or tools."
+    },
+    "es": {
+      "stem": "Una UI FastAPI o Streamlit delante de Claude significa:",
+      "options": [
+        "El modelo ahora conoce vuestros botones y CSS",
+        "El modelo sigue viendo solo los messages (y tools/system) que enviáis; la UI es vuestra aplicación",
+        "Ya no necesitáis max_tokens",
+        "Skilljar inyecta la UI en la ventana de contexto automáticamente"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Los mismos ayudantes pueden vivir detrás de cualquier stack web. No esperéis que Claude «vea» el frontend salvo que pongáis ese estado en el prompt o en las herramientas."
+    }
+  },
+  {
+    "id": "q030",
+    "domain": "applications",
+    "module": "10",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Academy courses on Skilljar versus the proctored exam:",
+      "options": [
+        "Completing Academy jargon courses is identical to being Anthropic certified",
+        "Academy teaches vocabulary; the booked, proctored sitting is the credential — Percipio completion is not the Anthropic exam",
+        "You cannot book Pearson until Percipio shows 100%",
+        "CCDV-F is awarded automatically after four UST Zoom attendance ticks"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "No cohort exam date — you book a slot. Partner course completion is not the same gate as the certification paper."
+    },
+    "es": {
+      "stem": "Cursos de Academy en Skilljar frente al examen con supervisión:",
+      "options": [
+        "Completar cursos de jerga de Academy es idéntico a estar certificado por Anthropic",
+        "Academy enseña vocabulario; la sesión reservada y supervisada es la credencial — completar Percipio no es el examen de Anthropic",
+        "No podéis reservar Pearson hasta que Percipio muestre 100 %",
+        "CCDV-F se concede automáticamente tras cuatro ticks de asistencia a Zoom de UST"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "No hay fecha de examen de cohorte: reserváis un hueco. Completar cursos de partner no es la misma puerta que el examen de certificación."
+    }
+  },
+  {
+    "id": "q031",
+    "domain": "applications",
+    "module": "11",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Semantic search in the RAG lab finds chunks by:",
+      "options": [
+        "Exact string equality with the user’s full sentence",
+        "Embedding neighbourhood (e.g. cosine similarity); the user’s wording need not appear verbatim",
+        "Sorting PDF filenames alphabetically",
+        "Always using BM25 only, never vectors"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Related meanings sit nearby in embedding space. Thresholds are vendor defaults you tune. MMR and BM25 were named as other families depending on the database."
+    },
+    "es": {
+      "stem": "La búsqueda semántica en el laboratorio RAG encuentra trozos por:",
+      "options": [
+        "Igualdad exacta de cadena con la frase completa del usuario",
+        "Vecindad de embeddings (p. ej. similitud coseno); el wording del usuario no tiene que aparecer literalmente",
+        "Ordenar nombres de PDF alfabéticamente",
+        "Usar siempre solo BM25, nunca vectores"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Los significados relacionados quedan cerca en el espacio de embeddings. Los umbrales son valores por defecto del proveedor que afináis. MMR y BM25 se nombraron como otras familias según la base de datos."
+    }
+  },
+  {
+    "id": "q032",
+    "domain": "applications",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Combining a huge uncached PDF with extended thinking on every follow-up question is wasteful because:",
+      "options": [
+        "Thinking cannot run unless Cowork is open",
+        "You re-pay input for the document and you re-pay thinking tokens; cache the stable prefix and keep thinking targeted",
+        "Extended thinking refunds all input tokens automatically",
+        "PDFs disable thinking in the API contract"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Class: cache the document and stable instructions; subsequent user questions are small. Uncached re-read plus re-think is double waste."
+    },
+    "es": {
+      "stem": "Combinar un PDF enorme sin caché con pensamiento extendido en cada pregunta de seguimiento es un despilfarro porque:",
+      "options": [
+        "El pensamiento no puede ejecutarse salvo que Cowork esté abierto",
+        "Volvéis a pagar entrada por el documento y volvéis a pagar tokens de pensamiento; cachead el prefijo estable y mantened el pensamiento acotado",
+        "El pensamiento extendido reembolsa automáticamente todos los tokens de entrada",
+        "Los PDF desactivan el pensamiento en el contrato de la API"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "En clase: cachead el documento y las instrucciones estables; las preguntas posteriores son pequeñas. Releer sin caché más volver a pensar es un doble desperdicio."
+    }
+  },
+  {
+    "id": "q033",
+    "domain": "applications",
+    "module": "01",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "If Claude Chat “remembers” yesterday’s thread, where does that memory actually live in the client–server split?",
+      "options": [
+        "In the stateless model server, which keeps a session id forever",
+        "In the client (history, project, product memory toggles) that resends needed context on the next turn",
+        "Only in MongoDB Atlas, which Chat queries automatically",
+        "In the five-hour usage bar"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "The LLM takes a request and returns a response. Horizontal scaling and zero-data-retention postures talk about the model server. Product memory is a client feature."
+    },
+    "es": {
+      "stem": "Si Claude Chat «recuerda» el hilo de ayer, ¿dónde vive realmente esa memoria en la división cliente–servidor?",
+      "options": [
+        "En el servidor de modelo sin estado, que guarda un id de sesión para siempre",
+        "En el cliente (historial, project, conmutadores de memoria de producto) que reenvía el contexto necesario en el siguiente turno",
+        "Solo en MongoDB Atlas, que Chat consulta automáticamente",
+        "En la barra de uso de cinco horas"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "El LLM toma una petición y devuelve una respuesta. El escalado horizontal y las posturas de retención cero de datos hablan del servidor del modelo. La memoria de producto es una función del cliente."
+    }
+  },
+  {
+    "id": "q034",
+    "domain": "models",
+    "module": "01",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "How should you talk about Haiku, Sonnet, and Opus for Foundation model selection?",
+      "options": [
+        "They are permission modes in Claude Code, not models",
+        "They are capability/cost/latency tiers in the Claude family; pick the smallest model that meets quality, and confirm live SKUs on the models page",
+        "Opus is always free; Haiku is always the most expensive",
+        "Only Cowork can use Opus; the API is Haiku-only"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Classroom family names illustrate tiers. Exact IDs, context sizes, and which SKUs your org enables move — docs.claude.com models page wins. Do not treat August 2026 picker nicknames as exam constants."
+    },
+    "es": {
+      "stem": "¿Cómo debéis hablar de Haiku, Sonnet y Opus para la selección de modelo en Foundation?",
+      "options": [
+        "Son modos de permiso en Claude Code, no modelos",
+        "Son niveles de capacidad/coste/latencia en la familia Claude; elegid el modelo más pequeño que cumpla la calidad y confirmad los SKU en vivo en la página de modelos",
+        "Opus es siempre gratis; Haiku es siempre el más caro",
+        "Solo Cowork puede usar Opus; la API es solo Haiku"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Los nombres de familia de clase ilustran niveles. Los ID exactos, tamaños de contexto y qué SKU habilita vuestra organización se mueven: gana la página de modelos de docs.claude.com. No tratéis los apodos del selector de agosto de 2026 como constantes de examen."
+    }
+  },
+  {
+    "id": "q035",
+    "domain": "models",
+    "module": "01",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Claude-class models were placed on which architecture, and what kind of model are they?",
+      "options": [
+        "2017 transformer architecture; generative models that produce content, not only a true/false label",
+        "A 1990s expert system of handwritten rules",
+        "Discriminative-only logistic regression with no text output",
+        "A SQL stored-procedure engine"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Trainer: Google Brain 2017 transformers; generative. You will not fine-tune a full frontier LLM on a UST sprint the way you train a small classifier."
+    },
+    "es": {
+      "stem": "Los modelos de clase Claude se situaron en qué arquitectura, y ¿qué tipo de modelo son?",
+      "options": [
+        "Arquitectura transformer de 2017; modelos generativos que producen contenido, no solo una etiqueta verdadero/falso",
+        "Un sistema experto de los 90 con reglas escritas a mano",
+        "Regresión logística solo discriminativa sin salida de texto",
+        "Un motor de procedimientos almacenados SQL"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Formador: transformers de Google Brain 2017; generativos. No vais a afinar un LLM frontera completo en un sprint UST como entrenáis un clasificador pequeño."
+    }
+  },
+  {
+    "id": "q036",
+    "domain": "models",
+    "module": "03",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "The context window is the cap on:",
+      "options": [
+        "How many dollars your Team plan can spend per calendar year",
+        "How many tokens one turn’s payload may carry (system, tools, skills, history, new message)",
+        "The five-hour Chat usage reset only",
+        "The number of MCP servers in the marketplace"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Class defaults sat on a ~200k-class window; some Sonnet SKUs offered 1M via /model. A 100 MB dump will not all fit. Recheck live model cards before quoting sizes."
+    },
+    "es": {
+      "stem": "La ventana de contexto es el tope de:",
+      "options": [
+        "Cuántos dólares puede gastar vuestro plan Team por año natural",
+        "Cuántos tokens puede llevar la carga de un turno (system, tools, skills, historial, mensaje nuevo)",
+        "Solo el reinicio de uso de Chat de cinco horas",
+        "El número de servidores MCP en el marketplace"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Los valores por defecto de clase estaban en una ventana de clase ~200k; algunos SKU de Sonnet ofrecían 1M vía /model. Un volcado de 100 MB no cabe entero. Volved a comprobar las fichas de modelo en vivo antes de citar tamaños."
+    }
+  },
+  {
+    "id": "q037",
+    "domain": "models",
+    "module": "03",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "A learner adds the Chat usage-percentage chip to the free space shown by /context and panics when the numbers do not sum. Which two statements are correct?",
+      "options": [
+        "Context window answers “can this turn’s payload fit?”",
+        "The product usage bar answers “have I exhausted my plan’s rolling allowance?” — a different meter",
+        "/context refills the Team usage bar when it hits 100%",
+        "API rate limits / billing are the same counter as /context free space"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Three planes: context fit, product quota (e.g. five-hour/weekly), API rate limits. Auto-compact is a context strategy; it does not refill usage."
+    },
+    "es": {
+      "stem": "Un alumno suma el chip de porcentaje de uso de Chat al espacio libre de /context y se asusta cuando los números no cuadran. ¿Cuáles dos afirmaciones son correctas?",
+      "options": [
+        "La ventana de contexto responde «¿cabe la carga de este turno?»",
+        "La barra de uso de producto responde «¿he agotado la asignación móvil de mi plan?» — otro medidor",
+        "/context rellena la barra de uso de Team cuando llega al 100 %",
+        "Los rate limits / facturación de API son el mismo contador que el espacio libre de /context"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Tres planos: encaje de contexto, cuota de producto (p. ej. cinco horas/semanal), rate limits de API. Auto-compact es una estrategia de contexto; no rellena el uso."
+    }
+  },
+  {
+    "id": "q038",
+    "domain": "models",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Temperature guidance from the prompting lecture:",
+      "options": [
+        "Low temperature when extracting structured facts; higher when drafting creative prose",
+        "Always 2.0 for JSON schemas",
+        "Temperature is ignored unless streaming is on",
+        "Haiku requires temperature 0; Opus requires 1"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Extraction wants stability; brainstorming can tolerate diversity. Temperature is not a substitute for a JSON schema or stop sequences."
+    },
+    "es": {
+      "stem": "Guía de temperature de la lección de prompting:",
+      "options": [
+        "Temperature baja al extraer hechos estructurados; más alta al redactar prosa creativa",
+        "Siempre 2.0 para esquemas JSON",
+        "Temperature se ignora salvo que el streaming esté activo",
+        "Haiku exige temperature 0; Opus exige 1"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "La extracción quiere estabilidad; el brainstorming puede tolerar diversidad. Temperature no sustituye un esquema JSON ni las stop sequences."
+    }
+  },
+  {
+    "id": "q039",
+    "domain": "models",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Extended thinking (class: deep thinking) is enabled by:",
+      "options": [
+        "Few-shotting a fake chain of thought in the user prompt only — there is no API parameter",
+        "A thinking object on the request (type enabled plus a token budget; class minimum 1024) so Claude allocates internal reasoning before the visible answer",
+        "Turning Cowork to plan mode",
+        "Setting stream=false"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "You do not have to few-shot CoT. Budget thinking tokens; quality can rise on hard tasks; cost and latency rise. Follow current extended-thinking docs if class code and docs disagree."
+    },
+    "es": {
+      "stem": "El pensamiento extendido (en clase: deep thinking) se activa con:",
+      "options": [
+        "Solo few-shot de una cadena de pensamiento falsa en el prompt de usuario — no hay parámetro de API",
+        "Un objeto thinking en la petición (type enabled más un presupuesto de tokens; mínimo de clase 1024) para que Claude asigne razonamiento interno antes de la respuesta visible",
+        "Poner Cowork en modo plan",
+        "Poner stream=false"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "No tenéis que hacer few-shot de CoT. Presupuestad tokens de pensamiento; la calidad puede subir en tareas duras; suben coste y latencia. Seguid la documentación actual de extended thinking si el código de clase y los docs discrepan."
+    }
+  },
+  {
+    "id": "q040",
+    "domain": "models",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "How were thinking tokens described relative to billing?",
+      "options": [
+        "Always free and never counted in max_tokens",
+        "Generated content billed like output — leaving thinking on for every trivial ask is expensive",
+        "Billed only as cache writes",
+        "Refunded if the user does not read the thinking block"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Thinking is not a cache hit. Official docs require max_tokens large enough for budget plus visible answer. Do not set thinking budget above max_tokens."
+    },
+    "es": {
+      "stem": "¿Cómo se describieron los tokens de pensamiento respecto a la facturación?",
+      "options": [
+        "Siempre gratis y nunca cuentan en max_tokens",
+        "Contenido generado facturado como salida — dejar el pensamiento encendido para cada pregunta trivial es caro",
+        "Facturados solo como escrituras de caché",
+        "Reembolsados si el usuario no lee el bloque thinking"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "El pensamiento no es un cache-hit. Los docs oficiales exigen que max_tokens baste para el presupuesto más la respuesta visible. No pongáis el presupuesto de thinking por encima de max_tokens."
+    }
+  },
+  {
+    "id": "q041",
+    "domain": "models",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "If extended thinking is on, max_tokens should:",
+      "options": [
+        "Be smaller than the thinking budget so the model is forced to skip the answer",
+        "Cover the thinking budget plus the user-visible answer",
+        "Be ignored; only temperature matters",
+        "Equal the Team weekly usage cap"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Docs: max_tokens must fit thinking plus text. Classroom notebooks that contradict docs lose."
+    },
+    "es": {
+      "stem": "Si el pensamiento extendido está activo, max_tokens debe:",
+      "options": [
+        "Ser menor que el presupuesto de pensamiento para forzar al modelo a saltarse la respuesta",
+        "Cubrir el presupuesto de pensamiento más la respuesta visible para el usuario",
+        "Ignorarse; solo importa temperature",
+        "Igualar el tope semanal de uso de Team"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Docs: max_tokens debe caber thinking más texto. Los notebooks de clase que contradigan los docs pierden."
+    }
+  },
+  {
+    "id": "q042",
+    "domain": "models",
+    "module": "05",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "In Claude Code, /model (or the model picker) is for:",
+      "options": [
+        "Switching SKU / window (e.g. a 1M Sonnet option when offered) — it is not a permission mode and not /compact",
+        "Approving bash without hooks",
+        "Installing MCP servers",
+        "Resetting the five-hour usage bar to zero"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Permission modes (ask, accept edits, plan, bypass-style) are a different control. Model choice changes capability, cost, and context size."
+    },
+    "es": {
+      "stem": "En Claude Code, /model (o el selector de modelo) sirve para:",
+      "options": [
+        "Cambiar SKU / ventana (p. ej. una opción Sonnet 1M cuando se ofrece) — no es un modo de permiso ni /compact",
+        "Aprobar bash sin hooks",
+        "Instalar servidores MCP",
+        "Poner a cero la barra de uso de cinco horas"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Los modos de permiso (ask, accept edits, plan, estilo bypass) son otro control. La elección de modelo cambia capacidad, coste y tamaño de contexto."
+    }
+  },
+  {
+    "id": "q043",
+    "domain": "models",
+    "module": "01",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "The public training mix (web, GitHub, Wikipedia, …) implies that for last week’s unpublished internal wiki you should:",
+      "options": [
+        "Assume the weights already contain it",
+        "Bring it in via tools, MCP, RAG, or (expensively) custom training — not hope the model memorised UST’s directory",
+        "Only raise temperature",
+        "Disable the system prompt"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Models saw a huge public corpus. Private or fresh facts need retrieval or tools. Fine-tuning a full LLM is not a sprint default."
+    },
+    "es": {
+      "stem": "La mezcla pública de entrenamiento (web, GitHub, Wikipedia, …) implica que para la wiki interna inédita de la semana pasada debéis:",
+      "options": [
+        "Asumir que los pesos ya la contienen",
+        "Traerla vía herramientas, MCP, RAG o (carísimo) entrenamiento a medida — no esperar que el modelo memorice el directorio de UST",
+        "Solo subir temperature",
+        "Desactivar el system prompt"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Los modelos vieron un corpus público enorme. Los hechos privados o frescos necesitan recuperación o herramientas. Afinar un LLM completo no es el valor por defecto de un sprint."
+    }
+  },
+  {
+    "id": "q044",
+    "domain": "models",
+    "module": "07",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "You are choosing a model for two jobs: (A) classify thousands of short support tags with a tight schema; (B) a rare, high-stakes architecture review. Which two choices match Foundation cost/quality judgement?",
+      "options": [
+        "Prefer a small, cheap, low-latency model (Haiku-class) for (A) if evals pass",
+        "Prefer a more capable model (Opus-class or current flagship) for (B) where mistakes are expensive",
+        "Always use the largest model for (A) because batch jobs should maximise spend",
+        "Model choice cannot be made in the API; only Chat can pick models"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Pick the cheapest model that meets the eval bar. Escalate capability when the task is hard or costly to get wrong. Confirm current names on the models page."
+    },
+    "es": {
+      "stem": "Estáis eligiendo modelo para dos trabajos: (A) clasificar miles de etiquetas cortas de soporte con un esquema estricto; (B) una revisión de arquitectura rara y de alto riesgo. ¿Cuáles dos elecciones encajan con el juicio de coste/calidad de Foundation?",
+      "options": [
+        "Preferid un modelo pequeño, barato y de baja latencia (clase Haiku) para (A) si los evals pasan",
+        "Preferid un modelo más capaz (clase Opus o el flagship actual) para (B) donde equivocarse es caro",
+        "Usad siempre el modelo más grande para (A) porque los lotes deben maximizar el gasto",
+        "La elección de modelo no puede hacerse en la API; solo Chat puede elegir modelos"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Elegid el modelo más barato que cumpla el listón de eval. Subid capacidad cuando la tarea es dura o cara de fallar. Confirmad los nombres actuales en la página de modelos."
+    }
+  },
+  {
+    "id": "q045",
+    "domain": "models",
+    "module": "03",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Auto-compact in Claude Code:",
+      "options": [
+        "Summarises history so later turns fit the context window; it does not refill the Team usage bar",
+        "Pays your API invoice",
+        "Is the same as prompt caching TTL on the Messages API",
+        "Disables all tools"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "/compact can no-op if there is not enough dialogue. Auto-compact is observability-adjacent context management, not a quota governor."
+    },
+    "es": {
+      "stem": "Auto-compact en Claude Code:",
+      "options": [
+        "Resume el historial para que los turnos posteriores quepan en la ventana de contexto; no rellena la barra de uso de Team",
+        "Paga vuestra factura de API",
+        "Es lo mismo que el TTL de prompt caching en la Messages API",
+        "Desactiva todas las herramientas"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "/compact puede no hacer nada si no hay diálogo suficiente. Auto-compact es gestión de contexto junto a la observabilidad, no un gobernador de cuota."
+    }
+  },
+  {
+    "id": "q046",
+    "domain": "models",
+    "module": "03",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Why do pinned skills and a long thread shrink /context free space?",
+      "options": [
+        "Because they are billed only after output starts",
+        "Every user/assistant pair and pinned skill is resent; they occupy the window every turn unless you compact or drop them",
+        "Skills run only on the local GPU and never enter the payload",
+        "Free space is a UI bug and can be ignored"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Stateless server: the client resends the session. Five slash commands already occupied space in the demo. Open a new chat when the thread is junk."
+    },
+    "es": {
+      "stem": "¿Por qué las skills ancladas y un hilo largo reducen el espacio libre de /context?",
+      "options": [
+        "Porque solo se facturan cuando empieza la salida",
+        "Cada par user/assistant y cada skill anclada se reenvían; ocupan la ventana en cada turno salvo que compactéis o las quitéis",
+        "Las skills solo corren en la GPU local y nunca entran en la carga",
+        "El espacio libre es un bug de UI y puede ignorarse"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Servidor sin estado: el cliente reenvía la sesión. Cinco comandos slash ya ocupaban espacio en la demo. Abrid un chat nuevo cuando el hilo sea basura."
+    }
+  },
+  {
+    "id": "q047",
+    "domain": "models",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Prompt-cache economics as taught (dollars on the slide were illustrative, not exam constants):",
+      "options": [
+        "Cache write is typically dearer than a later cache hit; output and thinking still bill if they occur",
+        "Cache hits are more expensive than first writes by design",
+        "Cache deletes max_tokens",
+        "Cache is billed as Cowork folder storage on disk"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Structure: write costs more, hit is cheap, output is still output. Check live pricing. Container/replica stickiness was a classroom story — official docs win if they describe automatic prefix matching."
+    },
+    "es": {
+      "stem": "Economía de prompt cache según se enseñó (los dólares de la diapositiva eran ilustrativos, no constantes de examen):",
+      "options": [
+        "La escritura de caché suele ser más cara que un cache-hit posterior; la salida y el pensamiento siguen facturándose si ocurren",
+        "Los cache-hits son más caros que las primeras escrituras por diseño",
+        "La caché elimina max_tokens",
+        "La caché se factura como almacenamiento de carpeta Cowork en disco"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Estructura: escribir cuesta más, el hit es barato, la salida sigue siendo salida. Consultad precios en vivo. La pegajosidad de contenedor/réplica fue una historia de aula: ganan los docs oficiales si describen coincidencia automática de prefijo."
+    }
+  },
+  {
+    "id": "q048",
+    "domain": "models",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "A thinking block versus a redacted_thinking block:",
+      "options": [
+        "thinking is the user-visible final essay; redacted_thinking is the JSON schema",
+        "thinking may show a plain-language plan; redacted_thinking is an opaque safety payload you cannot decode; text is the user-visible answer",
+        "They are identical and always both empty",
+        "redacted_thinking means the API key was revoked"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Inspect or replay thinking when not redacted. Do not show raw thinking in a customer UI unless product policy allows it."
+    },
+    "es": {
+      "stem": "Un bloque thinking frente a un bloque redacted_thinking:",
+      "options": [
+        "thinking es el ensayo final visible; redacted_thinking es el esquema JSON",
+        "thinking puede mostrar un plan en lenguaje claro; redacted_thinking es una carga opaca de seguridad que no podéis decodificar; text es la respuesta visible",
+        "Son idénticos y siempre ambos vacíos",
+        "redacted_thinking significa que se revocó la clave de API"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Inspeccionad o rejugad thinking cuando no esté redactado. No mostréis el pensamiento crudo en una UI de cliente salvo que la política de producto lo permita."
+    }
+  },
+  {
+    "id": "q049",
+    "domain": "models",
+    "module": "07",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "You cannot set a hard “only spend 2k tokens per turn” via /config in Code as a usage governor. What can you do instead?",
+      "options": [
+        "Steer with prompting, smaller attachments, and by not stuffing CLAUDE.md with encyclopedias; /context is observability",
+        "Add the usage chip to free space until it equals 2k",
+        "Disable the transformer architecture",
+        "Set temperature to −1"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "API max_tokens caps output (and must fit thinking). It is not the Chat five-hour bar. Do not confuse the three meters."
+    },
+    "es": {
+      "stem": "No podéis fijar un «gasta solo 2k tokens por turno» duro vía /config en Code como gobernador de uso. ¿Qué podéis hacer en su lugar?",
+      "options": [
+        "Dirigir con prompting, adjuntos más pequeños y no atiborrar CLAUDE.md de enciclopedias; /context es observabilidad",
+        "Sumar el chip de uso al espacio libre hasta que iguale 2k",
+        "Desactivar la arquitectura transformer",
+        "Poner temperature a −1"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "max_tokens de la API limita la salida (y debe caber el pensamiento). No es la barra de cinco horas de Chat. No confundáis los tres medidores."
+    }
+  },
+  {
+    "id": "q050",
+    "domain": "models",
+    "module": "04",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Chat, Cowork, and Code in the recap sit on:",
+      "options": [
+        "Three unrelated model vendors with no shared family",
+        "The same Claude model family; the clients differ in workspace, tools, and how history is held",
+        "Only local Llama weights with no network",
+        "Message Batches exclusively"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Products versus models: clients present UI and tools; Haiku/Sonnet/Opus (or current names) are the servers. Picking Cowork does not magically pick a different research lab."
+    },
+    "es": {
+      "stem": "Chat, Cowork y Code en el repaso se apoyan en:",
+      "options": [
+        "Tres proveedores de modelo sin relación y sin familia compartida",
+        "La misma familia de modelos Claude; los clientes diferencian espacio de trabajo, herramientas y cómo se guarda el historial",
+        "Solo pesos Llama locales sin red",
+        "Exclusivamente Message Batches"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Productos frente a modelos: los clientes presentan UI y herramientas; Haiku/Sonnet/Opus (o los nombres actuales) son los servidores. Elegir Cowork no elige mágicamente otro laboratorio de investigación."
+    }
+  },
+  {
+    "id": "q051",
+    "domain": "agents",
+    "module": "05",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "In this course, an agent is best described as:",
+      "options": [
+        "Any Messages.create call with temperature 0",
+        "A model plus tools plus a loop that can plan, call tools, observe results, and continue until a stop condition",
+        "A vector embedding with cosine similarity",
+        "The Skilljar course player"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "A single-turn chatbot without tools is not the agent pattern. The loop is what lets Code run tests, Cowork move files, or an Agent SDK session keep going."
+    },
+    "es": {
+      "stem": "En este curso, un agente se describe mejor como:",
+      "options": [
+        "Cualquier llamada Messages.create con temperature 0",
+        "Un modelo más herramientas más un bucle que puede planificar, llamar herramientas, observar resultados y continuar hasta una condición de parada",
+        "Un embedding vectorial con similitud coseno",
+        "El reproductor de cursos de Skilljar"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Un chatbot de un turno sin herramientas no es el patrón agente. El bucle es lo que permite a Code ejecutar pruebas, a Cowork mover ficheros o a una sesión Agent SDK seguir."
+    }
+  },
+  {
+    "id": "q052",
+    "domain": "agents",
+    "module": "05",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "How does an IDE line-completion assistant differ from Claude Code as taught?",
+      "options": [
+        "There is no difference",
+        "Assistants complete a line; Code can plan a repo, run tests, open PRs, and talk to Jira/Figma via tools",
+        "Line completion requires Architect Professional",
+        "Claude Code cannot edit files"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "CCDV-F centre of gravity is the coding agent, not autocomplete. That is why permissions, hooks, and MCP show up."
+    },
+    "es": {
+      "stem": "¿En qué se diferencia un asistente de completar líneas del IDE de Claude Code según se enseñó?",
+      "options": [
+        "No hay diferencia",
+        "Los asistentes completan una línea; Code puede planificar un repo, ejecutar pruebas, abrir PR y hablar con Jira/Figma vía herramientas",
+        "Completar líneas exige Architect Professional",
+        "Claude Code no puede editar ficheros"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "El centro de gravedad de CCDV-F es el agente de programación, no el autocompletado. Por eso aparecen permisos, hooks y MCP."
+    }
+  },
+  {
+    "id": "q053",
+    "domain": "agents",
+    "module": "05",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Plan mode versus direct execution:",
+      "options": [
+        "Plan mode produces a reviewable to-do list you can edit before execution; direct execution skips that board and goes",
+        "Plan mode is a different LLM vendor",
+        "Direct execution is the only mode that can call MCP",
+        "Plan mode refills usage limits"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Human-in-the-loop is front-loaded into planning. After execute starts, you watch, skip, or stop — you do not quietly rewrite the frozen plan (as taught)."
+    },
+    "es": {
+      "stem": "Modo plan frente a ejecución directa:",
+      "options": [
+        "El modo plan produce una lista de tareas revisable que podéis editar antes de ejecutar; la ejecución directa se salta ese tablero y sigue",
+        "El modo plan es otro proveedor de LLM",
+        "La ejecución directa es el único modo que puede llamar MCP",
+        "El modo plan rellena los límites de uso"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "El humano en el bucle se carga al frente en la planificación. Cuando arranca la ejecución, observáis, saltáis o paráis: no reescribís en silencio el plan congelado (según se enseñó)."
+    }
+  },
+  {
+    "id": "q054",
+    "domain": "agents",
+    "module": "11",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "Which two ingredients are required for the agentic implementation story (Agent SDK / tool loop)?",
+      "options": [
+        "A way to expose tools (schemas or MCP) so the model can request actions",
+        "An application loop that executes tool_use, returns tool_result, and calls the model again until it stops",
+        "Fine-tuning a new Claude checkpoint on every tool_result",
+        "Deleting the system prompt so the agent has no policy"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Orchestration is your (or Agent SDK’s) job. The model decides; the host executes. Fine-tuning per tool call is not Foundation."
+    },
+    "es": {
+      "stem": "¿Cuáles dos ingredientes hace falta para la historia de implementación agentic (Agent SDK / bucle de herramientas)?",
+      "options": [
+        "Una forma de exponer herramientas (esquemas o MCP) para que el modelo pueda pedir acciones",
+        "Un bucle de aplicación que ejecute tool_use, devuelva tool_result y vuelva a llamar al modelo hasta que pare",
+        "Afinar un nuevo checkpoint de Claude en cada tool_result",
+        "Borrar el system prompt para que el agente no tenga política"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "La orquestación es vuestro trabajo (o del Agent SDK). El modelo decide; el anfitrión ejecuta. Afinar por cada llamada a herramienta no es Foundation."
+    }
+  },
+  {
+    "id": "q055",
+    "domain": "agents",
+    "module": "11",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Agent SDK in Foundation is a taste of:",
+      "options": [
+        "Replacing the Messages API with CSV files",
+        "Orchestration helpers (memory, tool loops) above raw messages.create — not a reason to skip learning Messages",
+        "The Pearson proctoring client",
+        "A Cowork-only desktop theme"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Architect tracks go deeper on production agentic architecture. CCDV-F expects you to recognise the loop, not write a governance thesis."
+    },
+    "es": {
+      "stem": "El Agent SDK en Foundation es una cata de:",
+      "options": [
+        "Sustituir la Messages API por ficheros CSV",
+        "Ayudantes de orquestación (memoria, bucles de herramientas) por encima de messages.create crudo — no una razón para saltaros Messages",
+        "El cliente de supervisión de Pearson",
+        "Un tema de escritorio solo de Cowork"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Las rutas de arquitecto profundizan en arquitectura agentic de producción. CCDV-F espera que reconozcáis el bucle, no que escribáis una tesis de gobierno."
+    }
+  },
+  {
+    "id": "q056",
+    "domain": "agents",
+    "module": "05",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Sub-agents can carry their own permission mode (for example bypass so a code-reviewer is not blocked on every grep). Where is that configured in the class story?",
+      "options": [
+        "Only by changing Haiku to Opus",
+        "On the agent markdown / agent config, not solely in the global permission picker",
+        "In Percipio",
+        "By setting temperature to 0"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Global mode and per-agent mode are different knobs. Reviewer sub-agents that must grep freely are a classic example."
+    },
+    "es": {
+      "stem": "Los subagentes pueden llevar su propio modo de permiso (por ejemplo bypass para que un revisor de código no se bloquee en cada grep). ¿Dónde se configura eso en la historia de clase?",
+      "options": [
+        "Solo cambiando Haiku por Opus",
+        "En el markdown / config del agente, no únicamente en el selector global de permisos",
+        "En Percipio",
+        "Poniendo temperature a 0"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "El modo global y el modo por agente son mandos distintos. Los subagentes revisores que deben hacer grep con libertad son un ejemplo clásico."
+    }
+  },
+  {
+    "id": "q057",
+    "domain": "agents",
+    "module": "12",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "AskUserQuestion in an agent is for:",
+      "options": [
+        "Bypassing Anthropic’s usage policy",
+        "Pausing when the goal needs a human choice (format, multi-select vs single); a callback collects the answer and the loop continues",
+        "Replacing all tools with a single bash",
+        "Compacting the context window"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Same family as permission prompts, but for product questions rather than “may I run rm?” Enable it with a can_use_tool-style callback when the notebook stored questions as JSON."
+    },
+    "es": {
+      "stem": "AskUserQuestion en un agente sirve para:",
+      "options": [
+        "Saltarse la política de uso de Anthropic",
+        "Pausar cuando el objetivo necesita una elección humana (formato, multi-select frente a single); un callback recoge la respuesta y el bucle continúa",
+        "Sustituir todas las herramientas por un solo bash",
+        "Compactar la ventana de contexto"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Misma familia que los prompts de permiso, pero para preguntas de producto en lugar de «¿puedo ejecutar rm?». Activadlo con un callback estilo can_use_tool cuando el notebook guardaba preguntas como JSON."
+    }
+  },
+  {
+    "id": "q058",
+    "domain": "agents",
+    "module": "12",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Built-in tools inside agents (web fetch, code execution, computer-use-style, etc. — names move) exist so that:",
+      "options": [
+        "You never need custom tools or MCP for proprietary data",
+        "Common host capabilities are available without rewriting a clock function; you still add custom/MCP tools for your systems",
+        "The model server becomes stateful",
+        "Eval graders are disabled"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Layer built-in tools with allow/deny. A report agent may need DB+email and must not get unconstrained Bash. Confirm current built-in tool catalogue in docs."
+    },
+    "es": {
+      "stem": "Las herramientas integradas dentro de los agentes (web fetch, ejecución de código, estilo computer-use, etc. — los nombres se mueven) existen para que:",
+      "options": [
+        "Nunca necesitéis herramientas a medida ni MCP para datos propietarios",
+        "Capacidades comunes del anfitrión estén disponibles sin reescribir una función reloj; igual añadís tools custom/MCP para vuestros sistemas",
+        "El servidor del modelo pase a tener estado",
+        "Se desactiven los evaluadores de eval"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Combinad herramientas integradas con allow/deny. Un agente de informes puede necesitar BD+email y no debe tener Bash sin restricciones. Confirmad el catálogo actual en la documentación."
+    }
+  },
+  {
+    "id": "q059",
+    "domain": "agents",
+    "module": "12",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "A can_use_tool callback is closest to:",
+      "options": [
+        "A prompt-cache TTL",
+        "A permission / policy hook: the host decides whether a proposed tool call may run before execution",
+        "An embedding model",
+        "The Pearson lock-down browser"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Pair with pre-tool hooks and AskUserQuestion. Auto/bypass modes without these checks are how agents wipe files."
+    },
+    "es": {
+      "stem": "Un callback can_use_tool se parece más a:",
+      "options": [
+        "Un TTL de prompt-cache",
+        "Un hook de permiso / política: el anfitrión decide si una llamada a herramienta propuesta puede ejecutarse",
+        "Un modelo de embeddings",
+        "El navegador de bloqueo de Pearson"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Emparejadlo con hooks previos a la herramienta y AskUserQuestion. Los modos auto/bypass sin estas comprobaciones son cómo los agentes borran ficheros."
+    }
+  },
+  {
+    "id": "q060",
+    "domain": "agents",
+    "module": "02",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Cowork’s scheduled jobs and “trigger from the phone” were taught as:",
+      "options": [
+        "Proof that Cowork is the Messages API",
+        "Agentic client features: the workspace agent can continue multi-step local work without you sitting in Chat",
+        "The only way to use Haiku",
+        "Replacements for git hooks"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Cowork is the knowledge-worker agentic folder client. Scheduling does not make it Claude Code; it still is not the IDE."
+    },
+    "es": {
+      "stem": "Los trabajos programados de Cowork y el «disparar desde el teléfono» se enseñaron como:",
+      "options": [
+        "Prueba de que Cowork es la Messages API",
+        "Funciones de cliente agentic: el agente del espacio de trabajo puede continuar trabajo local de varios pasos sin que estéis sentados en Chat",
+        "La única forma de usar Haiku",
+        "Sustitutos de los hooks de git"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Cowork es el cliente agentic de carpetas para knowledge workers. Programar no lo convierte en Claude Code; sigue sin ser el IDE."
+    }
+  },
+  {
+    "id": "q061",
+    "domain": "agents",
+    "module": "05",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "If Playwright is on the plan and you want Selenium instead, when do you change that in plan mode?",
+      "options": [
+        "After execution has started, by editing the frozen to-do invisibly",
+        "While still in plan mode, before you accept execution",
+        "Never; plans cannot include test runners",
+        "Only by switching to Chat"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Edit the orchestrator plan (scaffold Vite, shared types, pages, tests…) first. Sub-agents then run. Intervening mid-flight is stop/skip, not a silent rewrite (classroom rule)."
+    },
+    "es": {
+      "stem": "Si Playwright está en el plan y queréis Selenium, ¿cuándo lo cambiáis en modo plan?",
+      "options": [
+        "Cuando la ejecución ya ha empezado, editando la lista congelada en invisibilidad",
+        "Mientras seguís en modo plan, antes de aceptar la ejecución",
+        "Nunca; los planes no pueden incluir runners de pruebas",
+        "Solo pasando a Chat"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Editad primero el plan del orquestador (andamiaje Vite, tipos compartidos, páginas, pruebas…). Luego corren los subagentes. Intervenir a mitad de vuelo es parar/saltar, no una reescritura silenciosa (norma de aula)."
+    }
+  },
+  {
+    "id": "q062",
+    "domain": "agents",
+    "module": "05",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "Which two statements about Claude Code permission modes are accurate?",
+      "options": [
+        "Modes are a policy for how often the tool loop pauses for consent; they are not a different model",
+        "Auto / bypass-style still leaves enterprise responsibility with you; hooks become mandatory rather than nice-to-have",
+        "Opus in auto mode is a safer model family than Haiku in ask mode",
+        "Accept-edits mode is a substitute for CLAUDE.md"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Ask is slow but cautious; accept edits auto-applies file writes; plan front-loads review; auto does not wait. Modes ≠ models ≠ CLAUDE.md."
+    },
+    "es": {
+      "stem": "¿Cuáles dos afirmaciones sobre los modos de permiso de Claude Code son precisas?",
+      "options": [
+        "Los modos son una política de con qué frecuencia el bucle de herramientas pausa para consentimiento; no son un modelo distinto",
+        "Auto / estilo bypass sigue dejando la responsabilidad empresarial en vosotros; los hooks pasan a ser obligatorios más que deseables",
+        "Opus en modo auto es una familia de modelo más segura que Haiku en modo ask",
+        "El modo accept-edits sustituye a CLAUDE.md"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Ask es lento pero cauto; accept edits aplica escrituras; plan carga la revisión al frente; auto no espera. Modos ≠ modelos ≠ CLAUDE.md."
+    }
+  },
+  {
+    "id": "q063",
+    "domain": "agents",
+    "module": "07",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Conversation “memory” for an agentic app is:",
+      "options": [
+        "Whatever your app persisted and put back into the context window (or a dedicated memory store) — not magically inside the stateless model",
+        "Automatically equal to prompt cache TTL",
+        "The same as cosine similarity in Atlas",
+        "Disabled whenever tools are bound"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Context window = this request. Memory = your persistence. RAG = retrieve from a corpus. Do not mix the three."
+    },
+    "es": {
+      "stem": "La «memoria» de conversación de una app agentic es:",
+      "options": [
+        "Lo que vuestra app persistió y volvió a poner en la ventana de contexto (o en un almacén de memoria dedicado) — no está mágicamente dentro del modelo sin estado",
+        "Automáticamente igual al TTL de prompt cache",
+        "Lo mismo que la similitud coseno en Atlas",
+        "Se desactiva cuando se vinculan herramientas"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Ventana de contexto = esta petición. Memoria = vuestra persistencia. RAG = recuperar de un corpus. No mezcléis los tres."
+    }
+  },
+  {
+    "id": "q064",
+    "domain": "agents",
+    "module": "10",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "The agentic handshake stops with stop reason tool_use. What should the host do next?",
+      "options": [
+        "Show the incomplete essay to the user as the final answer and exit",
+        "Map tool name → function, run it, append a user tool_result bound to the tool id, then call Messages again",
+        "Fine-tune Opus on the tool schema",
+        "Switch to Cowork automatically"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Claude has not finished the user-facing answer. The follow-up generate step produces “The exact time is 7:29:31.”"
+    },
+    "es": {
+      "stem": "El apretón agentic para con stop reason tool_use. ¿Qué debe hacer el anfitrión después?",
+      "options": [
+        "Mostrar el ensayo incompleto al usuario como respuesta final y salir",
+        "Mapear nombre de herramienta → función, ejecutarla, añadir un tool_result de usuario ligado al id, y volver a llamar a Messages",
+        "Afinar Opus con el esquema de la herramienta",
+        "Pasar a Cowork automáticamente"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Claude no ha terminado la respuesta para el usuario. El paso generate de seguimiento produce «The exact time is 7:29:31.»"
+    }
+  },
+  {
+    "id": "q065",
+    "domain": "agents",
+    "module": "04",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Enabling the Figma MCP server so Claude Code can generate UI from a file URL is an example of:",
+      "options": [
+        "Fine-tuning Claude on Figma pixels",
+        "An agent planning over third-party tools: you consent, the model chooses get-design-context-style tools, results land for generation",
+        "Replacing CLAUDE.md with OAuth",
+        "A required step for every Hello World Messages call"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Skills and CLAUDE.md cannot log into Figma. MCP exposes operations; the host brokers auth and sandboxing. Pass a specific file URL to avoid scanning an entire account."
+    },
+    "es": {
+      "stem": "Activar el servidor MCP de Figma para que Claude Code genere UI desde la URL de un fichero es un ejemplo de:",
+      "options": [
+        "Afinar Claude con píxeles de Figma",
+        "Un agente que planifica sobre herramientas de terceros: dais consentimiento, el modelo elige tools estilo get-design-context, los resultados llegan para la generación",
+        "Sustituir CLAUDE.md por OAuth",
+        "Un paso obligatorio para cada Hello World de Messages"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Las skills y CLAUDE.md no pueden iniciar sesión en Figma. MCP expone operaciones; el anfitrión media auth y sandbox. Pasad la URL concreta del fichero para no escanear toda una cuenta."
+    }
+  },
+  {
+    "id": "q066",
+    "domain": "prompt",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Which rewrite matches “clear beats long” from the prompting lecture?",
+      "options": [
+        "Keep a rambling story about solar panels sounding neat and hope Claude infers the task",
+        "Lead with the task and action verbs: “Write three paragraphs about how solar panels work.”",
+        "Repeat the same vague paragraph twelve times to use the context window",
+        "Remove all verbs so the model invents the assignment"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Prefer instructions over rambling questions. Verbs: write, generate, produce, identify, create, plan. More words are not more precision."
+    },
+    "es": {
+      "stem": "¿Qué reescritura encaja con «claro gana a largo» de la lección de prompting?",
+      "options": [
+        "Mantener un relato vago sobre paneles solares que suena bien y esperar que Claude infiera la tarea",
+        "Empezar por la tarea y verbos de acción: «Write three paragraphs about how solar panels work.»",
+        "Repetir el mismo párrafo vago doce veces para usar la ventana de contexto",
+        "Quitar todos los verbos para que el modelo invente el encargo"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Preferid instrucciones a preguntas divagantes. Verbos: write, generate, produce, identify, create, plan. Más palabras no son más precisión."
+    }
+  },
+  {
+    "id": "q067",
+    "domain": "prompt",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "XML-style tags in Claude prompting are used to:",
+      "options": [
+        "Compile the prompt into Java",
+        "Label documents, rules, and untrusted user input so instructions and data stay distinct",
+        "Increase temperature automatically",
+        "Create MCP servers"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Tags are user-invented labels, not a W3C requirement. They help the model not treat injected data as new system rules."
+    },
+    "es": {
+      "stem": "Las etiquetas estilo XML en el prompting de Claude se usan para:",
+      "options": [
+        "Compilar el prompt a Java",
+        "Etiquetar documentos, reglas y entrada de usuario no confiable para que instrucciones y datos sigan distintos",
+        "Subir temperature automáticamente",
+        "Crear servidores MCP"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Las etiquetas son rótulos inventados por vosotros, no un requisito W3C. Ayudan a que el modelo no trate datos inyectados como nuevas reglas de sistema."
+    }
+  },
+  {
+    "id": "q068",
+    "domain": "prompt",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "When is few-shot prompting most justified?",
+      "options": [
+        "When the output format is brittle and examples teach the shape better than adjectives",
+        "Always, even for “what is 2+2”, because more tokens always help",
+        "Never, because Claude cannot read examples",
+        "Only inside thinking budgets"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Zero-shot is fine for many tasks. Few-shot shines for formats (Python vs JSON vs regex in the AWS internal-tool story). Pair with evals."
+    },
+    "es": {
+      "stem": "¿Cuándo está más justificado el prompting few-shot?",
+      "options": [
+        "Cuando el formato de salida es frágil y los ejemplos enseñan la forma mejor que los adjetivos",
+        "Siempre, incluso para «what is 2+2», porque más tokens siempre ayudan",
+        "Nunca, porque Claude no puede leer ejemplos",
+        "Solo dentro de presupuestos de thinking"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Zero-shot vale para muchas tareas. Few-shot brilla en formatos (Python frente a JSON frente a regex en la historia de la herramienta interna de AWS). Emparejadlo con evals."
+    }
+  },
+  {
+    "id": "q069",
+    "domain": "prompt",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "A short-story prompt without length, character, or plot constraints is weak because:",
+      "options": [
+        "Claude refuses all stories",
+        "Constraints are the spec — under 1000 words, a revealing action, a supporting character make an exam-ready version",
+        "Stories require Cowork",
+        "max_tokens cannot apply to prose"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Guidelines for length and constraints are not optional flavour. Vague prompts produce vague answers."
+    },
+    "es": {
+      "stem": "Un prompt de relato corto sin restricciones de longitud, personaje o trama es débil porque:",
+      "options": [
+        "Claude rechaza todos los relatos",
+        "Las restricciones son la especificación — menos de 1000 palabras, una acción reveladora, un personaje de apoyo hacen la versión lista para examen",
+        "Los relatos exigen Cowork",
+        "max_tokens no puede aplicarse a la prosa"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Las pautas de longitud y restricciones no son adorno opcional. Los prompts vagos producen respuestas vagas."
+    }
+  },
+  {
+    "id": "q070",
+    "domain": "prompt",
+    "module": "08",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "Which two techniques are Claude-flavoured structure from class?",
+      "options": [
+        "XML tags around untrusted input and source documents",
+        "Prefill plus stop sequences when the consumer needs a tight JSON or fenced envelope",
+        "Putting standing role instructions only in a random user message and never in system",
+        "Raising temperature to maximise JSON schema obedience"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "System parameter holds standing role / anti-hallucination. Low temperature for extraction. Prefill seeds the assistant message (e.g. a markdown fence)."
+    },
+    "es": {
+      "stem": "¿Cuáles dos técnicas son estructura de sabor Claude de la clase?",
+      "options": [
+        "Etiquetas XML alrededor de entrada no confiable y documentos fuente",
+        "Prefill más stop sequences cuando el consumidor necesita un sobre JSON o con fences ajustado",
+        "Poner el rol permanente solo en un mensaje de usuario aleatorio y nunca en system",
+        "Subir temperature para maximizar la obediencia al esquema JSON"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "El parámetro system guarda el rol permanente / anti-alucinación. Temperature baja para extracción. Prefill siembra el mensaje assistant (p. ej. un fence markdown)."
+    }
+  },
+  {
+    "id": "q071",
+    "domain": "prompt",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Prefer “Identify three countries that use geothermal energy; include generation stats for each” over a story about something sounding neat because:",
+      "options": [
+        "The exam forbids the word geothermal",
+        "Specific, measurable instructions beat rambling curiosity",
+        "Stats require vision even when they are text",
+        "Three is the only legal number of countries"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Action verbs plus success criteria. Then evaluate the template; do not ship the first draft."
+    },
+    "es": {
+      "stem": "Preferid «Identify three countries that use geothermal energy; include generation stats for each» frente a un relato sobre algo que suena interesante porque:",
+      "options": [
+        "El examen prohíbe la palabra geothermal",
+        "Las instrucciones específicas y medibles ganan a la curiosidad divagante",
+        "Las estadísticas exigen visión aunque sean texto",
+        "Tres es el único número legal de países"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Verbos de acción más criterios de éxito. Luego evaluad la plantilla; no entreguéis el primer borrador."
+    }
+  },
+  {
+    "id": "q072",
+    "domain": "prompt",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Standing role and anti-hallucination rules belong primarily in:",
+      "options": [
+        "The system parameter (or CLAUDE.md analogue in Code), not mixed into every noisy user paste",
+        "The tool_result of get_current_date_time",
+        "The Pearson NDA",
+        "A BM25 index"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "User content is the instance. System is how to behave. Repeating a huge system prompt costs input tokens — cache the stable prefix (module 09)."
+    },
+    "es": {
+      "stem": "El rol permanente y las reglas anti-alucinación pertenecen principalmente a:",
+      "options": [
+        "El parámetro system (o el análogo CLAUDE.md en Code), no mezclados en cada pegado ruidoso de usuario",
+        "El tool_result de get_current_date_time",
+        "El NDA de Pearson",
+        "Un índice BM25"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "El contenido de usuario es la instancia. System es cómo comportarse. Repetir un system prompt enorme cuesta tokens de entrada: cachead el prefijo estable (módulo 09)."
+    }
+  },
+  {
+    "id": "q073",
+    "domain": "prompt",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Prefill means:",
+      "options": [
+        "You place an assistant message (for example a markdown fence) so generation continues from that seed",
+        "You delete the user role",
+        "You must use Cowork Design",
+        "You disable stop sequences forever"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Assistant role is both history you replay and a partial answer you want completed. Pair with stop sequences for a tight envelope."
+    },
+    "es": {
+      "stem": "Prefill significa:",
+      "options": [
+        "Colocáis un mensaje assistant (por ejemplo un fence markdown) para que la generación continúe desde esa semilla",
+        "Elimináis el rol user",
+        "Debéis usar Cowork Design",
+        "Desactiváis las stop sequences para siempre"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "El rol assistant es tanto historial que rejugáis como una respuesta parcial que queréis completar. Emparejadlo con stop sequences para un sobre ajustado."
+    }
+  },
+  {
+    "id": "q074",
+    "domain": "prompt",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "After you draft a prompt template, Foundation expects you to:",
+      "options": [
+        "Ship it to production with no samples",
+        "Build an eval set, run it, grade (not only boolean), and revise — scores can go down",
+        "Fine-tune a new judge model from scratch before any eval",
+        "Ask Percipio to grade it"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Five-step loop: draft → eval set (on- and off-distribution) → run → grade → revise. Evaluation is an AI developer’s job."
+    },
+    "es": {
+      "stem": "Después de redactar una plantilla de prompt, Foundation espera que:",
+      "options": [
+        "La llevéis a producción sin muestras",
+        "Construyáis un conjunto de eval, lo ejecutéis, puntuéis (no solo booleano) y reviséis — las puntuaciones pueden bajar",
+        "Afinéis un modelo juez nuevo desde cero antes de cualquier eval",
+        "Pidáis a Percipio que lo puntúe"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Bucle de cinco pasos: borrador → conjunto de eval (dentro y fuera de distribución) → ejecutar → puntuar → revisar. La evaluación es trabajo de desarrollador de IA."
+    }
+  },
+  {
+    "id": "q075",
+    "domain": "prompt",
+    "module": "03",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Zero-shot versus few-shot versus chain-of-thought: exam items still use Claude product names. What should you learn?",
+      "options": [
+        "Only the generic pattern, never Claude controls",
+        "Both the general technique and the Claude control (stop sequences, structured output, extended thinking parameter)",
+        "Only Percipio multiple choice about GPT",
+        "Only Cowork folder names"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Prompting is ~18–20% of items across certs in the trainer’s quote. Patterns plus Claude knobs."
+    },
+    "es": {
+      "stem": "Zero-shot frente a few-shot frente a chain-of-thought: los ítems de examen siguen usando nombres de producto Claude. ¿Qué debéis aprender?",
+      "options": [
+        "Solo el patrón genérico, nunca los controles de Claude",
+        "Tanto la técnica general como el control de Claude (stop sequences, salida estructurada, parámetro de pensamiento extendido)",
+        "Solo tipo test de Percipio sobre GPT",
+        "Solo nombres de carpetas de Cowork"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "El prompting es ~18–20 % de los ítems en todas las certs según la cita del formador. Patrones más mandos de Claude."
+    }
+  },
+  {
+    "id": "q076",
+    "domain": "prompt",
+    "module": "09",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "If you already enable extended thinking with a budget, stuffing a long “think step by step” few-shot into the user prompt is often:",
+      "options": [
+        "Required or thinking will not run",
+        "Redundant cost: you already allocated a thinking block — keep the user prompt as the task spec",
+        "The only way to get redacted_thinking",
+        "How prompt cache TTLs are set"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Use the API thinking parameter for internal CoT. User prompt should stay clear and specific. You can still ask for a visible outline if the product needs it."
+    },
+    "es": {
+      "stem": "Si ya activáis el pensamiento extendido con un presupuesto, meter un few-shot largo de «think step by step» en el prompt de usuario suele ser:",
+      "options": [
+        "Obligatorio o el pensamiento no se ejecutará",
+        "Coste redundante: ya asignasteis un bloque thinking — dejad el prompt de usuario como especificación de la tarea",
+        "La única forma de obtener redacted_thinking",
+        "Cómo se fijan los TTL de prompt cache"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Usad el parámetro thinking de la API para el CoT interno. El prompt de usuario debe seguir claro y específico. Aún podéis pedir un esquema visible si el producto lo necesita."
+    }
+  },
+  {
+    "id": "q077",
+    "domain": "tools",
+    "module": "10",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "The two artefacts you always write for API tool use are:",
+      "options": [
+        "A host-language function and a schema (name, description, input schema) passed in the tools array",
+        "Only a CLAUDE.md paragraph with no schema",
+        "A Pearson voucher and a Percipio badge",
+        "A vector index and a BM25 index, nothing else"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Name identifies the method; description teaches when to invoke; input_schema is JSON Schema (even if empty). Binding is per request."
+    },
+    "es": {
+      "stem": "Los dos artefactos que siempre escribís para el uso de herramientas en la API son:",
+      "options": [
+        "Una función en el lenguaje anfitrión y un esquema (name, description, input schema) pasado en el array tools",
+        "Solo un párrafo de CLAUDE.md sin esquema",
+        "Un vale Pearson y una insignia Percipio",
+        "Un índice vectorial y un índice BM25, nada más"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Name identifica el método; description enseña cuándo invocarlo; input_schema es JSON Schema (aunque esté vacío). El vinculaje es por petición."
+    }
+  },
+  {
+    "id": "q078",
+    "domain": "tools",
+    "module": "10",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "A vague tool description such as “gets data” is dangerous because:",
+      "options": [
+        "JSON Schema forbids the word data",
+        "The model chooses among tools using names and descriptions; a vague blurb causes wrong or extra calls",
+        "Tools cannot run if the description is under 500 words",
+        "Cowork deletes vague tools"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "You do not write a router on the first request. Educate the model. Put error-handoff policy in the system prompt and/or the next tool’s description."
+    },
+    "es": {
+      "stem": "Una description vaga como «gets data» es peligrosa porque:",
+      "options": [
+        "JSON Schema prohíbe la palabra data",
+        "El modelo elige entre herramientas usando names y descriptions; un texto vago provoca llamadas incorrectas o de más",
+        "Las herramientas no pueden ejecutarse si la description tiene menos de 500 palabras",
+        "Cowork borra las herramientas vagas"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "No escribís un router en la primera petición. Educad al modelo. Poned la política de traspaso de errores en el system prompt y/o en la description de la siguiente herramienta."
+    }
+  },
+  {
+    "id": "q079",
+    "domain": "tools",
+    "module": "10",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "In the get-current-date-time notebook handshake, which two statements are true?",
+      "options": [
+        "Claude stops with tool_use and emits a tool_use block (id, name, model-chosen input); it has not finished the user-facing sentence",
+        "Your code runs the function and returns a tool_result as user content bound to the same tool id",
+        "Tool results must be sent with role assistant so the model thinks it already executed bash",
+        "The model executes Python inside Anthropic’s GPU on your laptop filesystem"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "The application environment owns the clock. Roles stay system/user/assistant; tool_result is specialised user content. Confirm current block type names in docs."
+    },
+    "es": {
+      "stem": "En el apretón del notebook get-current-date-time, ¿cuáles dos afirmaciones son verdaderas?",
+      "options": [
+        "Claude para con tool_use y emite un bloque tool_use (id, name, input elegido por el modelo); no ha terminado la frase para el usuario",
+        "Vuestro código ejecuta la función y devuelve un tool_result como contenido de usuario ligado al mismo id",
+        "Los resultados de herramienta deben enviarse con rol assistant para que el modelo crea que ya ejecutó bash",
+        "El modelo ejecuta Python dentro de la GPU de Anthropic sobre el sistema de ficheros de vuestro portátil"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "El entorno de la aplicación es dueño del reloj. Los roles siguen system/user/assistant; tool_result es contenido de usuario especializado. Confirmad los nombres actuales de tipos de bloque en los docs."
+    }
+  },
+  {
+    "id": "q080",
+    "domain": "tools",
+    "module": "10",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "If three tools sit in the array, who picks which one to call on the first model response?",
+      "options": [
+        "You must hard-code a router in that first HTTP request",
+        "The model, using names, descriptions, and the user text",
+        "Pearson VUE",
+        "MongoDB Atlas always"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Improve descriptions. If Tool A errors should trigger Tool B, encode that in system/description so the next turn can continue."
+    },
+    "es": {
+      "stem": "Si hay tres herramientas en el array, ¿quién elige cuál llamar en la primera respuesta del modelo?",
+      "options": [
+        "Debéis programar a la fuerza un router en esa primera petición HTTP",
+        "El modelo, usando names, descriptions y el texto del usuario",
+        "Pearson VUE",
+        "Siempre MongoDB Atlas"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Mejorad las descriptions. Si los errores de la herramienta A deben disparar la B, codificadlo en system/description para que el siguiente turno pueda continuar."
+    }
+  },
+  {
+    "id": "q081",
+    "domain": "tools",
+    "module": "10",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "MCP exists to solve which integration shape?",
+      "options": [
+        "N sources × M AI apps becoming N×M point-to-point SDKs; instead, servers expose tools once and clients consume the protocol",
+        "Replacing HTTPS with FTP",
+        "Making the Messages API stateful",
+        "Training Haiku on Figma only"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "When a database column changes, you update the MCP server. Clients keep the same connection configuration. Isolation is the point, not a new kind of LLM."
+    },
+    "es": {
+      "stem": "MCP existe para resolver qué forma de integración?",
+      "options": [
+        "N fuentes × M apps de IA convirtiéndose en SDKs punto a punto N×M; en su lugar, los servidores exponen herramientas una vez y los clientes consumen el protocolo",
+        "Sustituir HTTPS por FTP",
+        "Hacer que la Messages API tenga estado",
+        "Entrenar Haiku solo con Figma"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Cuando cambia una columna de la base de datos, actualizáis el servidor MCP. Los clientes mantienen la misma configuración de conexión. El punto es el aislamiento, no un tipo nuevo de LLM."
+    }
+  },
+  {
+    "id": "q082",
+    "domain": "tools",
+    "module": "10",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "In the MCP split, the server versus the client:",
+      "options": [
+        "Server connects to the data source and exposes tools; client lives in the AI app, lists tools, and lets Claude choose",
+        "Client stores the database; server is only Pearson",
+        "They are the same process as prompt cache",
+        "Server is always Claude Chat; client is always Cowork"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "In Claude Code / Anthropic stacks the MCP client is built in — you configure servers. Platform teams usually build or host servers for proprietary data. MCP is an open protocol, not Claude-only magic."
+    },
+    "es": {
+      "stem": "En la división MCP, el servidor frente al cliente:",
+      "options": [
+        "El servidor se conecta a la fuente de datos y expone herramientas; el cliente vive en la app de IA, lista tools y deja que Claude elija",
+        "El cliente almacena la base de datos; el servidor es solo Pearson",
+        "Son el mismo proceso que prompt cache",
+        "El servidor es siempre Claude Chat; el cliente es siempre Cowork"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "En los stacks de Claude Code / Anthropic el cliente MCP va integrado: configuráis servidores. Los equipos de plataforma suelen construir o alojar servidores para datos propietarios. MCP es un protocolo abierto, no magia solo de Claude."
+    }
+  },
+  {
+    "id": "q083",
+    "domain": "tools",
+    "module": "10",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Ad-hoc notebook tools versus MCP servers:",
+      "options": [
+        "Ad-hoc tools live inside one app; MCP moves the same idea to a server other clients (Code, Cowork, even other IDEs) can share",
+        "MCP cannot expose tools, only CSS",
+        "Ad-hoc tools are illegal on the Messages API",
+        "MCP requires Architect Professional"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Write methods once. Cowork “connectors” in this course are MCP-shaped. Default in-process functions in a notebook are not MCP until you wrap them."
+    },
+    "es": {
+      "stem": "Herramientas ad hoc de notebook frente a servidores MCP:",
+      "options": [
+        "Las tools ad hoc viven dentro de una app; MCP mueve la misma idea a un servidor que otros clientes (Code, Cowork, incluso otros IDE) pueden compartir",
+        "MCP no puede exponer herramientas, solo CSS",
+        "Las tools ad hoc son ilegales en la Messages API",
+        "MCP exige Architect Professional"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Escribíd los métodos una vez. Los «connectors» de Cowork en este curso tienen forma MCP. Las funciones in-process por defecto de un notebook no son MCP hasta que las envolváis."
+    }
+  },
+  {
+    "id": "q084",
+    "domain": "tools",
+    "module": "04",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "A disconnected Figma MCP server will:",
+      "options": [
+        "Still appear in every plan with full OAuth",
+        "Not appear among callable tools until you connect, authenticate, and confirm status",
+        "Automatically fine-tune Opus",
+        "Resize the context window to 1M"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Special permissions: MCP tools must be enabled. Use the Figma profile that owns the file. You do not memorise the tool list; the model plans which to call."
+    },
+    "es": {
+      "stem": "Un servidor MCP de Figma desconectado:",
+      "options": [
+        "Seguirá apareciendo en cada plan con OAuth completo",
+        "No aparecerá entre las herramientas invocables hasta que conectéis, autenticéis y confirméis el estado",
+        "Afinará Opus automáticamente",
+        "Redimensionará la ventana de contexto a 1M"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Permisos especiales: las tools MCP deben estar activadas. Usad el perfil de Figma que posee el fichero. No memoricéis la lista de tools; el modelo planifica cuáles llamar."
+    }
+  },
+  {
+    "id": "q085",
+    "domain": "tools",
+    "module": "10",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "Which two MCP server shapes were named in class?",
+      "options": [
+        "A local proprietary server (e.g. stdio on the same host as the client)",
+        "A vendor-provided server (Figma, Playwright, …) or your server wrapping third-party HTTP",
+        "A Pearson exam server that grades CCDV-F automatically",
+        "A prompt-cache replica that stores vectors forever"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Three shapes: local proprietary, your wrapper around HTTP APIs (todos, energy prices), vendor servers. Marketplace UIs move; the roles do not."
+    },
+    "es": {
+      "stem": "¿Cuáles dos formas de servidor MCP se nombraron en clase?",
+      "options": [
+        "Un servidor propietario local (p. ej. stdio en el mismo host que el cliente)",
+        "Un servidor de proveedor (Figma, Playwright, …) o vuestro servidor envolviendo HTTP de terceros",
+        "Un servidor de examen Pearson que puntúa CCDV-F automáticamente",
+        "Una réplica de prompt-cache que guarda vectores para siempre"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Tres formas: propietario local, vuestro envoltorio de APIs HTTP (todos, precios de energía), servidores de proveedor. Las UI de marketplace se mueven; los roles no."
+    }
+  },
+  {
+    "id": "q086",
+    "domain": "tools",
+    "module": "12",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Built-in agent tools versus custom tools: a customer-report agent that emails PII should:",
+      "options": [
+        "Get unconstrained Bash plus a public “help” MCP that sees plaintext addresses",
+        "Receive the smallest tool set that can read the DB and send mail; keep debug/search tools off the plaintext path",
+        "Disable all tools and paste the CRM into Chat",
+        "Put SMTP passwords in CLAUDE.md"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Encryption in transit does not stop an agent echoing an address into Slack MCP. Responsible design is where plaintext is allowed to exist."
+    },
+    "es": {
+      "stem": "Herramientas integradas de agente frente a tools a medida: un agente de informes de cliente que envía correo con PII debería:",
+      "options": [
+        "Tener Bash sin restricciones más un MCP público de «help» que vea direcciones en claro",
+        "Recibir el conjunto mínimo de tools que pueda leer la BD y enviar correo; mantener tools de debug/búsqueda fuera de la ruta en claro",
+        "Desactivar todas las tools y pegar el CRM en Chat",
+        "Poner contraseñas SMTP en CLAUDE.md"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "El cifrado en tránsito no impide que un agente copie una dirección a un MCP de Slack. El diseño responsable es dónde se permite que exista el texto en claro."
+    }
+  },
+  {
+    "id": "q087",
+    "domain": "tools",
+    "module": "10",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Tool schemas on a Messages call are:",
+      "options": [
+        "Bound per request — you may attach one tool this turn and five the next",
+        "Permanent server state for 90 days after first use",
+        "Ignored unless Cowork is running",
+        "Stored inside the embedding model"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "You can shrink the tool surface per turn for safety and tokens. Overloaded duplicate names confuse the model."
+    },
+    "es": {
+      "stem": "Los esquemas de herramientas en una llamada Messages son:",
+      "options": [
+        "Vinculados por petición — podéis adjuntar una tool este turno y cinco el siguiente",
+        "Estado permanente del servidor durante 90 días tras el primer uso",
+        "Ignorados salvo que Cowork esté en marcha",
+        "Almacenados dentro del modelo de embeddings"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Podéis reducir la superficie de tools por turno por seguridad y tokens. Los names duplicados sobrecargados confunden al modelo."
+    }
+  },
+  {
+    "id": "q088",
+    "domain": "security",
+    "module": "12",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Committed API keys in git are a failure because:",
+      "options": [
+        "Git cannot store text files",
+        "Anyone with the repo can spend your quota and reach customer data; use workspaces and secret stores",
+        "Claude automatically rotates keys committed to main",
+        "Skilljar scans and encrypts all GitHub remotes"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "UST checklist: no client corpora in classroom Chat/Cowork; keys out of .env on the default branch."
+    },
+    "es": {
+      "stem": "Las claves de API confirmadas en git son un fallo porque:",
+      "options": [
+        "Git no puede guardar ficheros de texto",
+        "Cualquiera con el repo puede gastar vuestra cuota y alcanzar datos de cliente; usad workspaces y almacenes de secretos",
+        "Claude rota automáticamente las claves confirmadas en main",
+        "Skilljar escanea y cifra todos los remotos de GitHub"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Lista UST: no corpus de cliente en Chat/Cowork de aula; claves fuera de .env en la rama por defecto."
+    }
+  },
+  {
+    "id": "q089",
+    "domain": "security",
+    "module": "06",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "A pre-tool-use hook that denies rm -rf or writes to /etc is valuable because:",
+      "options": [
+        "It runs locally in the Claude Code lifecycle and can block dangerous tool arguments before they execute",
+        "It fine-tunes Opus to hate bash",
+        "It increases the context window",
+        "It is the same as prompt caching"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Mechanical safety belongs in hooks, not a paragraph of CLAUDE.md the model might ignore. Auto mode without proven hooks is how test files get deleted."
+    },
+    "es": {
+      "stem": "Un hook previo a la herramienta que deniega rm -rf o escrituras en /etc es valioso porque:",
+      "options": [
+        "Se ejecuta en local en el ciclo de vida de Claude Code y puede bloquear argumentos peligrosos antes de que se ejecuten",
+        "Afina Opus para que odie bash",
+        "Aumenta la ventana de contexto",
+        "Es lo mismo que prompt caching"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "La seguridad mecánica pertenece a los hooks, no a un párrafo de CLAUDE.md que el modelo podría ignorar. El modo auto sin hooks demostrados es cómo se borran ficheros de prueba."
+    }
+  },
+  {
+    "id": "q090",
+    "domain": "security",
+    "module": "12",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "A report-and-email agent handles customer addresses. Which two controls match responsible AI as taught?",
+      "options": [
+        "Data minimisation: do not retrieve full customer rows to answer “how many open tickets?”",
+        "Allow/deny: the agent may have DB + email tools but not unconstrained Bash; mask PII in logs and third-party MCP",
+        "Paste the full CRM into a public Slack MCP for easier debugging",
+        "Hooks can make a disallowed usage-policy use case allowed if the regex is clever"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Layer policy, minimisation, tool allowlists, pre-tool hooks, human-in-the-loop, input/output guardrails, and evals on abuse cases. Usage policy still binds you."
+    },
+    "es": {
+      "stem": "Un agente de informes y correo maneja direcciones de clientes. ¿Cuáles dos controles encajan con la IA responsable enseñada?",
+      "options": [
+        "Minimización de datos: no recuperéis filas completas de cliente para responder «¿cuántos tickets abiertos?»",
+        "Allow/deny: el agente puede tener tools de BD + email pero no Bash sin restricciones; enmascarad PII en logs y MCP de terceros",
+        "Pegad el CRM entero en un MCP público de Slack para depurar más fácil",
+        "Los hooks pueden hacer permitido un caso prohibido por la política de uso si la regex es lista"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Apilad política, minimización, listas de tools, hooks previos, humano en el bucle, guardrails de entrada/salida y evals de abuso. La política de uso sigue vinculándoos."
+    }
+  },
+  {
+    "id": "q091",
+    "domain": "security",
+    "module": "12",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Input validators that catch “ignore all previous instructions” / “reveal your system prompt” should:",
+      "options": [
+        "Run after you have already paid for a full Opus refusal",
+        "Short-circuit before query so you do not pay for a refusal you could make locally; they complement Claude’s safety training",
+        "Replace Anthropic’s usage policy",
+        "Be pasted unaudited from a random GitHub into a bank agent"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Guardrail code is yours (or a reviewed package), not a built-in that also caps tokens. Token accounting still happens at the API."
+    },
+    "es": {
+      "stem": "Los validadores de entrada que cazan «ignore all previous instructions» / «reveal your system prompt» deben:",
+      "options": [
+        "Ejecutarse después de haber pagado ya un rechazo completo de Opus",
+        "Cortar antes de query para no pagar un rechazo que podríais hacer en local; complementan el entrenamiento de seguridad de Claude",
+        "Sustituir la política de uso de Anthropic",
+        "Pegarse sin auditar desde un GitHub aleatorio en un agente de un banco"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "El código de guardrail es vuestro (o un paquete revisado), no una función integrada que además tope tokens. La contabilidad de tokens sigue ocurriendo en la API."
+    }
+  },
+  {
+    "id": "q092",
+    "domain": "security",
+    "module": "12",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Human-in-the-loop (AskUserQuestion or default permission mode) is most justified when:",
+      "options": [
+        "The action is irreversible (send offer letter, delete production data)",
+        "You are printing “hello world” in a scratch file already gitignored",
+        "You want to disable all evals",
+        "You are only computing cosine similarity"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Plan-mode or observe-only agents in CI until a human promotes accept-edits. Consent still belongs to the end user even in auto mode."
+    },
+    "es": {
+      "stem": "El humano en el bucle (AskUserQuestion o modo de permiso por defecto) se justifica más cuando:",
+      "options": [
+        "La acción es irreversible (enviar una carta de oferta, borrar datos de producción)",
+        "Estáis imprimiendo «hello world» en un fichero temporal ya en gitignore",
+        "Queréis desactivar todos los evals",
+        "Solo estáis calculando similitud coseno"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Agentes en modo plan u observe-only en CI hasta que un humano promueva accept-edits. El consentimiento sigue siendo del usuario final incluso en modo auto."
+    }
+  },
+  {
+    "id": "q093",
+    "domain": "security",
+    "module": "12",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Output guardrails (secret scanning, PII redaction) belong:",
+      "options": [
+        "Only in CLAUDE.md as a suggestion the model may skip",
+        "Before logs, tickets, or MCP servers see the text — after generation, before exfiltration paths",
+        "Inside the Pearson exam NDA",
+        "Only on Haiku, never on Sonnet"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Input guardrails reject injection; output guardrails stop leaks. Layer both."
+    },
+    "es": {
+      "stem": "Los guardrails de salida (escaneo de secretos, redacción de PII) pertenecen:",
+      "options": [
+        "Solo en CLAUDE.md como sugerencia que el modelo puede saltarse",
+        "Antes de que logs, tickets o servidores MCP vean el texto — después de generar, antes de las vías de exfiltración",
+        "Dentro del NDA del examen Pearson",
+        "Solo en Haiku, nunca en Sonnet"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Los guardrails de entrada rechazan inyección; los de salida detienen fugas. Apilad ambos."
+    }
+  },
+  {
+    "id": "q094",
+    "domain": "security",
+    "module": "06",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Protecting .env from Edit/Write via hooks rather than hoping CLAUDE.md is obeyed is preferred because:",
+      "options": [
+        "Hooks are deterministic local policy; the model can still narrate a secret if you put it in context, but disk writes can be blocked",
+        ".env files cannot be hooked",
+        "CLAUDE.md runs in the kernel",
+        "Hooks bill more tokens than a second LLM format pass"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Do not put secrets in the prompt. Hooks block paths; they do not make leaking a pasted secret safe. Combine with .gitignore and secret stores."
+    },
+    "es": {
+      "stem": "Proteger .env de Edit/Write vía hooks en lugar de esperar que se obedezca CLAUDE.md se prefiere porque:",
+      "options": [
+        "Los hooks son política local determinista; el modelo aún puede narrar un secreto si lo ponéis en contexto, pero las escrituras a disco pueden bloquearse",
+        "Los ficheros .env no admiten hooks",
+        "CLAUDE.md se ejecuta en el kernel",
+        "Los hooks facturan más tokens que un segundo pase de formato del LLM"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "No pongáis secretos en el prompt. Los hooks bloquean rutas; no hacen seguro filtrar un secreto pegado. Combinad con .gitignore y almacenes de secretos."
+    }
+  },
+  {
+    "id": "q095",
+    "domain": "security",
+    "module": "12",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Evaluate agents on abuse cases, not only the happy path, because:",
+      "options": [
+        "Anthropic’s strengthen-guardrails guidance and classroom RAI expect jailbreak, PII, and destructive-tool tests",
+        "Evals are illegal for Foundation developers",
+        "Abuse cases refill usage bars",
+        "Pearson only scores happy-path items"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Recruitment-with-WhatsApp is a different risk than a read-only policy Q&A bot. Purpose and threat model first."
+    },
+    "es": {
+      "stem": "Evaluad agentes en casos de abuso, no solo en el camino feliz, porque:",
+      "options": [
+        "La guía de strengthen-guardrails de Anthropic y la RAI de aula esperan pruebas de jailbreak, PII y tools destructivas",
+        "Los evals son ilegales para desarrolladores Foundation",
+        "Los casos de abuso rellenan las barras de uso",
+        "Pearson solo puntúa ítems de camino feliz"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Reclutamiento-con-WhatsApp es un riesgo distinto que un bot de Q&A de políticas de solo lectura. Primero el propósito y el modelo de amenaza."
+    }
+  },
+  {
+    "id": "q096",
+    "domain": "claude-code",
+    "module": "05",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "Claude Code permission modes (ask, accept edits, plan, auto/bypass-style) control:",
+      "options": [
+        "Which transformer architecture is used",
+        "What is auto-approved versus when the loop pauses; start from current Code docs because UI strings change",
+        "Whether Haiku can see images",
+        "Your Skilljar completion percentage"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "They are not a different model and not a substitute for CLAUDE.md. Exact labels (default, accept edits, plan, bypass permissions) drift — describe behaviour."
+    },
+    "es": {
+      "stem": "Los modos de permiso de Claude Code (ask, accept edits, plan, auto/estilo bypass) controlan:",
+      "options": [
+        "Qué arquitectura transformer se usa",
+        "Qué se aprueba automáticamente frente a cuándo pausa el bucle; partíd de los docs actuales de Code porque las cadenas de UI cambian",
+        "Si Haiku puede ver imágenes",
+        "Vuestro porcentaje de compleción de Skilljar"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "No son un modelo distinto ni un sustituto de CLAUDE.md. Las etiquetas exactas (default, accept edits, plan, bypass permissions) se mueven: describid el comportamiento."
+    }
+  },
+  {
+    "id": "q097",
+    "domain": "claude-code",
+    "module": "06",
+    "type": "multi",
+    "select": 2,
+    "en": {
+      "stem": "Company formatting: Prettier after every Edit/Write. Which two statements match class?",
+      "options": [
+        "A post-tool-use hook running npx prettier on disk does not consume generation tokens the way a second LLM rewrite does",
+        "CLAUDE.md is still the right place for architecture, stack choice, and “never invent OpenAPI fields” — things Prettier cannot know",
+        "Put Prettier indent rules only in CLAUDE.md so the model rewrites the file in a billed pass as the ideal design",
+        "Hooks are skills you slash; they do not fire on Edit/Write unless you type /prettier every time"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Ideal: do not ask the LLM to pretty-print. Hooks are lifecycle events in settings.json with matchers (Edit, Write, Bash). CLAUDE.md is for choices the model must understand."
+    },
+    "es": {
+      "stem": "Formato de empresa: Prettier después de cada Edit/Write. ¿Cuáles dos afirmaciones coinciden con la clase?",
+      "options": [
+        "Un hook post-tool-use que ejecuta npx prettier en disco no consume tokens de generación como una segunda reescritura del LLM",
+        "CLAUDE.md sigue siendo el sitio para arquitectura, elección de stack y «nunca inventéis campos OpenAPI» — cosas que Prettier no puede saber",
+        "Poned las reglas de indentación de Prettier solo en CLAUDE.md para que el modelo reescriba el fichero en un pase facturado como diseño ideal",
+        "Los hooks son skills que se invocan con slash; no disparan en Edit/Write salvo que escribáis /prettier cada vez"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "why": "Ideal: no pidáis al LLM que haga pretty-print. Los hooks son eventos de ciclo de vida en settings.json con matchers (Edit, Write, Bash). CLAUDE.md es para decisiones que el modelo debe entender."
+    }
+  },
+  {
+    "id": "q098",
+    "domain": "claude-code",
+    "module": "03",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "/context in Claude Code is primarily:",
+      "options": [
+        "A budget governor that hard-caps spend at 2k tokens",
+        "Observability of how the window is eaten (system, tools, skills, messages, auto-compact buffer) so you can compact, start a new session, or pick a larger SKU",
+        "The Cowork usage bar",
+        "An MCP marketplace search"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Free space is what you can still push. Do not add it to the usage-percentage chip. Compact is a context strategy."
+    },
+    "es": {
+      "stem": "/context en Claude Code es principalmente:",
+      "options": [
+        "Un gobernador de presupuesto que limita el gasto a 2k tokens",
+        "Observabilidad de cómo se come la ventana (system, tools, skills, messages, búfer de auto-compact) para compactar, abrir sesión nueva o elegir un SKU mayor",
+        "La barra de uso de Cowork",
+        "Una búsqueda del marketplace MCP"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "El espacio libre es lo que aún podéis empujar. No lo suméis al chip de porcentaje de uso. Compact es una estrategia de contexto."
+    }
+  },
+  {
+    "id": "q099",
+    "domain": "eval",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "The five-step Claude-oriented evaluation loop taught in class is:",
+      "options": [
+        "Book Pearson → pay → screenshot → forget → recertify",
+        "Draft a prompt → build an eval set → run → grade with a score → revise (repeat)",
+        "Fine-tune → deploy → skip metrics → celebrate → delete logs",
+        "Only LLM-as-judge nested three deep with no code graders"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Include on-distribution tasks and off-distribution junk if you need refusal/tool-scope behaviour. Scores can go down; that is information."
+    },
+    "es": {
+      "stem": "El bucle de evaluación de cinco pasos orientado a Claude que se enseñó en clase es:",
+      "options": [
+        "Reservar Pearson → pagar → captura → olvidar → recertificar",
+        "Redactar un prompt → construir un conjunto de eval → ejecutar → puntuar con una nota → revisar (repetir)",
+        "Afinar → desplegar → saltarse métricas → celebrar → borrar logs",
+        "Solo LLM-as-judge anidado tres veces sin evaluadores de código"
+      ],
+      "correct": [
+        1
+      ],
+      "why": "Incluid tareas dentro de distribución y basura fuera de distribución si necesitáis ver rechazos o alcance de tools. Las puntuaciones pueden bajar: eso es información."
+    }
+  },
+  {
+    "id": "q100",
+    "domain": "eval",
+    "module": "08",
+    "type": "single",
+    "select": 1,
+    "en": {
+      "stem": "When should you prefer a code grader (schema, regex, tests) over LLM-as-judge?",
+      "options": [
+        "For shape, types, and “exactly one sentence” — cheap and repeatable; it will not know if facts are true",
+        "For brand voice in literary translation where no metric exists — code graders are always better",
+        "Never; Foundation forbids regex",
+        "Only when temperature is 2.0"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Human/SME for voice; code for structure; LLM-as-judge for rubrics at scale (capable model, do not substitute its world knowledge). Implement code graders first so the bill does not explode. You do not train a new model for Foundation judges — you tune the judge prompt."
+    },
+    "es": {
+      "stem": "¿Cuándo debéis preferir un evaluador de código (esquema, regex, pruebas) frente a LLM-as-judge?",
+      "options": [
+        "Para forma, tipos y «exactamente una frase» — barato y repetible; no sabrá si los hechos son verdaderos",
+        "Para la voz de marca en traducción literaria donde no hay métrica — los evaluadores de código son siempre mejores",
+        "Nunca; Foundation prohíbe regex",
+        "Solo cuando temperature es 2.0"
+      ],
+      "correct": [
+        0
+      ],
+      "why": "Humano/SME para la voz; código para la estructura; LLM-as-judge para rúbricas a escala (modelo capaz, que no sustituya su conocimiento del mundo). Implementad primero evaluadores de código para que la factura no explote. No entrenáis un modelo nuevo para jueces Foundation: afináis el prompt del juez."
+    }
+  }
+]
