@@ -1,0 +1,284 @@
+[
+  {
+    "lang": "en",
+    "module_id": "01",
+    "chapter_id": "02",
+    "eyebrow": "Module 01 · Chapter 02 · 3 August 2026",
+    "chapter_title": "What Claude is: models, products, and where it sits versus other LLMs",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 1 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M01 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Vijay’s core definition: <strong>Claude is Anthropic’s family of AI models plus the applications that sit on those models</strong>. Anthropic is an AI research and technology company founded in 2021 (the trainer framed it as coming out of OpenAI-era research). The products you click are clients. The models (Haiku, Sonnet, Opus, and others named in class) are the servers. Almost every later feature—Cowork, Code, tools, RAG—only makes sense if you keep that split."
+      },
+      {
+        "type": "h2",
+        "text": "Client–server: products versus models"
+      },
+      {
+        "type": "p",
+        "html": "Chat, Cowork, Claude Code, and apps that call the API are <strong>clients</strong>. They present UI, hold chat history, attach folders, and decide when to call a tool. The LLM is a <strong>stateless server</strong>: it takes a request, returns a response, and does not keep a session on the server. That is why horizontal scaling works and why vendors can put a <em>zero data retention</em> posture in the SLA for the model itself."
+      },
+      {
+        "type": "p",
+        "html": "If Claude Chat “remembers” yesterday’s thread, that memory lives in the <em>client</em> (history, project, Cowork memory toggle). On the next turn the client re-sends the context the model needs. Confusing client memory with model memory is a common exam-trap in conversation design."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Names in the August 2026 classroom",
+        "html": "Vijay listed Haiku, Sonnet, Opus, and additional family names that appeared in the live picker (including “Fable” / similar ASR). Treat those as <em>illustrative of the family</em>. Confirm IDs, context sizes, and which SKUs your org enables on the live <a href=\"https://docs.claude.com/en/docs/about-claude/models\">models page</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Transformers, generative models, and training cost"
+      },
+      {
+        "type": "p",
+        "html": "The trainer placed all modern Claude-class models on the <strong>transformer</strong> architecture introduced by Google Brain in 2017. They are <strong>generative</strong> models: they produce content (a blog post, a function, a plan), not just a true/false discriminative label. Training is not a weekend notebook job. Vijay’s teaching analogy: training a frontier LLM can cost more in compute than “sending a rocket to the moon”; his GPT-4o-era example was on the order of 100+ million USD plus petabytes of data and large GPU clusters. You will not fine-tune a full LLM on the fly for a UST sprint."
+      },
+      {
+        "type": "h3",
+        "text": "What the weights actually saw"
+      },
+      {
+        "type": "p",
+        "html": "To make “the model already knows programming” concrete, he walked a public Llama-13B-style mix: Common Crawl / CCNet (web pages archived over many years), C4-style consented web text, GitHub (open-source including Kubernetes, Java, Python, .NET), Wikipedia, books, arXiv, Stack Exchange. The point for developers: the model has seen a huge public corpus. It has <em>not</em> seen UST’s employee directory or last week’s unpublished LangChain release unless you bring that in via tools, MCP, RAG, or (expensively) custom training."
+      },
+      {
+        "type": "h2",
+        "text": "Cutoff dates, multimodal, and tool calling"
+      },
+      {
+        "type": "p",
+        "html": "After a long training run (he quoted 6–8 months as typical for a frontier cycle), a model is published with a <strong>knowledge cutoff</strong>. In the live Chat demo on 3 August 2026, Claude answered that it had been trained through about January 2026—a six-month gap the model itself flagged. Anything after the cutoff is not “in the weights.” Weather, stock ticks, and last Tuesday’s Confluence page require <strong>tool calling</strong> (function calling): the model plans a call to a REST API, Lambda, Azure Function, web search, or connector; the client executes it; JSON comes back; the model writes the user-facing answer."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Multimodal:</strong> Vijay stated that Claude models in this course are multimodal—they can take text, images, and (as discussed in Q&amp;A) other media—not text-only “language models.” Open-source stacks may still ship text-only SLMs/LLMs.",
+          "<strong>Tool calling on all Claude models in class:</strong> that is the feature that makes Chat, Cowork, and Code <em>agentic</em> rather than single-shot completion.",
+          "<strong>Do not dump all docs into CLAUDE.md:</strong> a long Q&amp;A warned that stuffing full vendor documentation into markdown is a token killer. Prefer MCP, RAG, or targeted docs search."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "How you get data the weights never saw"
+      },
+      {
+        "type": "p",
+        "html": "When SDKs and libraries move faster than the cutoff (the LangChain 0.46 versus 1.2 example), Vijay listed options in order of realism for enterprise:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Do not retrain the LLM daily</strong> for weather or stock data. That is the wrong lever.",
+          "<strong>Web search / docs search as a tool</strong> — works, burns tokens, still the default for “what is the current API.”",
+          "<strong>MCP (Model Context Protocol)</strong> — the standard way to plug third-party and latest vendor data into the client; preferred when you may swap Figma for Adobe XD without rewriting the app.",
+          "<strong>RAG</strong> — your own indexed corpus (version-pinned docs). Pre-populated, not a live query. Good org-wide if the version is standardised after vulnerability review.",
+          "<strong>Custom / continued training</strong> — expensive; he reserved “train on the fly” language for <em>small</em> language models (SageMaker-style), not frontier LLMs."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Inference, tokens, and hallucination (preview)"
+      },
+      {
+        "type": "p",
+        "html": "Because the server is stateless, <strong>inference</strong> means: you send the whole context the model needs, every time, up to a <strong>context window</strong> (classroom numbers: on the order of 200k-class windows, with a 1M option on some Sonnet SKUs—verify live). Tokens are model-specific (he demonstrated a tokenizer; “hi” versus a paragraph is not a fixed character count). Billing is typically input tokens + output tokens; some stacks also bill cached tokens. Claude Chat in the enterprise demo was framed as input/output; prompt cache appears later in the syllabus."
+      },
+      {
+        "type": "p",
+        "html": "Hallucination in his teaching story: the word “bank” can mean HSBC, a riverbank, or a blood bank if the prompt is underspecified. Fix it with role, task, constraints, and <strong>skills / system instructions</strong> (slash-invoked in Claude)—knowing that those extra lines <em>also</em> consume tokens every turn. Chapter 04 returns to study habits; modules 8–9 return to prompting technique."
+      },
+      {
+        "type": "h2",
+        "text": "Where Claude sits versus “other LLMs”"
+      },
+      {
+        "type": "p",
+        "html": "Vijay compared the family to ChatGPT-style chat and to GitHub Copilot as it evolved from inline assistant to agent. The teaching contrast is not brand loyalty; it is architecture: Claude’s products are clients over Anthropic models with first-class tool use, Cowork as a local agentic workspace, and Claude Code as an agent that can run commands—not a single-file autocomplete. Copilot credit systems and model mix were described as changing rapidly (he mentioned a July 2026 Copilot billing change). Again: exam answers should use Anthropic’s current product language, not a vendor rant."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Trust docs over classroom model IDs",
+        "html": "Context sizes (272K vs 1M), effort sliders, and “thinking” / extended-thinking SKUs were demonstrated live. They will not match the exam booklet if Anthropic renamed them. Use <a href=\"https://docs.claude.com/en/docs/about-claude/models\">models</a> and <a href=\"https://docs.claude.com/en/docs/build-with-claude/extended-thinking\">extended thinking</a>."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Models overview",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Families, context windows, and which capabilities (vision, thinking) attach to which ID."
+          },
+          {
+            "title": "API overview",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "How applications consume the same models the GUI clients use."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Function calling: the mechanism behind web search, connectors, and agents."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Standard connector pattern Vijay contrasted with ad-hoc tools and RAG."
+          },
+          {
+            "title": "Usage policy",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "Enterprise conversations about retention and acceptable use start here."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "01",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 01 · Capítulo 02 · 3 de agosto de 2026",
+    "chapter_title": "Qué es Claude: modelos, productos y su lugar frente a otros LLM",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 1 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M01 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Definición central de Vijay: <strong>Claude es la familia de modelos de IA de Anthropic más las aplicaciones que se apoyan en esos modelos</strong>. Anthropic es una empresa de investigación y tecnología de IA fundada en 2021 (el formador la situó en la estela de la investigación de la era OpenAI). Los productos en los que hacéis clic son clientes. Los modelos (Haiku, Sonnet, Opus y otros nombrados en clase) son los servidores. Casi toda característica posterior—Cowork, Code, herramientas, RAG—solo encaja si mantenéis esa separación."
+      },
+      {
+        "type": "h2",
+        "text": "Cliente–servidor: productos frente a modelos"
+      },
+      {
+        "type": "p",
+        "html": "Chat, Cowork, Claude Code y las apps que llaman a la API son <strong>clientes</strong>. Presentan la UI, guardan el historial, adjuntan carpetas y deciden cuándo llamar a una herramienta. El LLM es un <strong>servidor sin estado</strong>: recibe una petición, devuelve una respuesta y no guarda sesión en el servidor. Por eso funciona el escalado horizontal y los proveedores pueden poner una postura de <em>retención cero de datos</em> en el SLA del modelo."
+      },
+      {
+        "type": "p",
+        "html": "Si Claude Chat «recuerda» el hilo de ayer, esa memoria vive en el <em>cliente</em> (historial, proyecto, interruptor de memoria de Cowork). En el turno siguiente el cliente reenvía el contexto que el modelo necesita. Confundir memoria del cliente con memoria del modelo es una trampa habitual en el diseño de conversaciones."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Nombres en el aula de agosto de 2026",
+        "html": "Vijay enumeró Haiku, Sonnet, Opus y nombres adicionales que salieron en el selector en vivo (incluido «Fable» / similar por ASR). Tratadlos como <em>ilustrativos de la familia</em>. Confirmad IDs, tamaños de contexto y qué SKU habilita vuestra organización en la <a href=\"https://docs.claude.com/en/docs/about-claude/models\">página de modelos</a> vigente."
+      },
+      {
+        "type": "h2",
+        "text": "Transformers, modelos generativos y coste de entrenamiento"
+      },
+      {
+        "type": "p",
+        "html": "El formador situó todos los modelos de clase Claude en la arquitectura <strong>transformer</strong> introducida por Google Brain en 2017. Son modelos <strong>generativos</strong>: producen contenido (un artículo, una función, un plan), no solo una etiqueta discriminativa verdadero/falso. Entrenar no es un cuaderno de fin de semana. Analogía de Vijay: entrenar un LLM de frontera puede costar más en cómputo que «enviar un cohete a la luna»; su ejemplo de la era GPT-4o era del orden de más de 100 millones de USD, petabytes de datos y grandes clústeres GPU. No vais a ajustar un LLM completo al vuelo en un sprint de UST."
+      },
+      {
+        "type": "h3",
+        "text": "Qué vieron realmente los pesos"
+      },
+      {
+        "type": "p",
+        "html": "Para concretar «el modelo ya sabe programar», recorrió una mezcla estilo Llama-13B pública: Common Crawl / CCNet (páginas web archivadas durante años), texto web con consentimiento tipo C4, GitHub (código abierto, Kubernetes, Java, Python, .NET), Wikipedia, libros, arXiv, Stack Exchange. El punto para desarrolladores: el modelo ha visto un corpus público enorme. <em>No</em> ha visto el directorio de empleados de UST ni la versión inédita de LangChain de la semana pasada, salvo que lo aportéis con herramientas, MCP, RAG o (caro) entrenamiento a medida."
+      },
+      {
+        "type": "h2",
+        "text": "Fecha de corte, multimodal y tool calling"
+      },
+      {
+        "type": "p",
+        "html": "Tras una tanda larga de entrenamiento (citó 6–8 meses como ciclo típico de frontera), el modelo se publica con una <strong>fecha de corte de conocimiento</strong>. En la demo de Chat del 3 de agosto de 2026, Claude respondió que había sido entrenado hasta hacia enero de 2026—un hueco de seis meses que el propio modelo señaló. Lo posterior al corte no está «en los pesos». El tiempo, la bolsa y la página de Confluence del martes exigen <strong>tool calling</strong> (llamada a funciones): el modelo planifica una llamada a una API REST, Lambda, Azure Function, búsqueda web o conector; el cliente la ejecuta; vuelve JSON; el modelo escribe la respuesta para el usuario."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Multimodal:</strong> Vijay afirmó que los modelos Claude de este curso son multimodales—pueden tomar texto, imágenes y (en el debate) otros medios—no «modelos de lenguaje» solo texto. Las pilas open source aún pueden ofrecer SLM/LLM solo texto.",
+          "<strong>Tool calling en todos los Claude de clase:</strong> es la característica que hace que Chat, Cowork y Code sean <em>agentic</em> y no una compleción de un solo disparo.",
+          "<strong>No volquéis toda la documentación en CLAUDE.md:</strong> un debate largo advirtió que meter la documentación completa del fabricante en markdown mata tokens. Preferid MCP, RAG o búsqueda de docs puntual."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Cómo obtenéis datos que los pesos nunca vieron"
+      },
+      {
+        "type": "p",
+        "html": "Cuando los SDK y las bibliotecas se mueven más rápido que el corte (el ejemplo LangChain 0.46 frente a 1.2), Vijay enumeró opciones por realismo empresarial:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>No reentrenéis el LLM a diario</strong> por el tiempo o la bolsa. Esa palanca es la incorrecta.",
+          "<strong>Búsqueda web / de documentación como herramienta</strong> — funciona, gasta tokens, sigue siendo el valor por defecto para «cuál es la API actual».",
+          "<strong>MCP (Model Context Protocol)</strong> — la forma estándar de enchufar datos de terceros y del fabricante al cliente; preferible si mañana cambiáis Figma por Adobe XD sin reescribir la app.",
+          "<strong>RAG</strong> — vuestro propio corpus indexado (docs fijados a una versión). Pre-poblado, no es una consulta en vivo. Útil a escala de organización si la versión está estandarizada tras la revisión de vulnerabilidades.",
+          "<strong>Entrenamiento a medida / continuado</strong> — caro; reservó el lenguaje de «entrenar al vuelo» para modelos de lenguaje <em>pequeños</em> (estilo SageMaker), no para LLM de frontera."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Inferencia, tokens y alucinación (avance)"
+      },
+      {
+        "type": "p",
+        "html": "Como el servidor no tiene estado, <strong>inferencia</strong> significa: enviáis todo el contexto que el modelo necesita, cada vez, hasta una <strong>ventana de contexto</strong> (cifras de aula: ventanas de clase ~200k, con opción de 1M en algunos SKU de Sonnet—verificad en vivo). Los tokens son específicos del modelo (demostró un tokenizador; «hi» frente a un párrafo no es un recuento fijo de caracteres). La facturación suele ser tokens de entrada + tokens de salida; algunas pilas también facturan tokens en caché. Claude Chat en la demo empresarial se planteó como entrada/salida; la caché de prompts aparece más adelante en el temario."
+      },
+      {
+        "type": "p",
+        "html": "Alucinación en su historia didáctica: la palabra «bank» puede ser un banco, la orilla de un río o un banco de sangre si el prompt es impreciso. Se corrige con rol, tarea, restricciones y <strong>skills / instrucciones de sistema</strong> (invocadas con barra en Claude)—sabiendo que esas líneas extra <em>también</em> consumen tokens en cada turno. El capítulo 04 vuelve a los hábitos de estudio; los módulos 8–9 vuelven a la técnica de prompting."
+      },
+      {
+        "type": "h2",
+        "text": "Dónde se sitúa Claude frente a «otros LLM»"
+      },
+      {
+        "type": "p",
+        "html": "Vijay comparó la familia con el chat estilo ChatGPT y con GitHub Copilot en su evolución de asistente en línea a agente. El contraste no es de marca; es de arquitectura: los productos Claude son clientes sobre modelos Anthropic con uso de herramientas de primer nivel, Cowork como espacio agentic local y Claude Code como agente que puede ejecutar comandos—no un autocompletado de un solo archivo. Los créditos de Copilot y la mezcla de modelos se describieron como muy cambiantes (mencionó un cambio de facturación de Copilot en julio de 2026). De nuevo: las respuestas del examen deben usar el lenguaje de producto vigente de Anthropic, no una queja de proveedor."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Priman los docs sobre los IDs de modelo del aula",
+        "html": "Tamaños de contexto (272K frente a 1M), deslizadores de esfuerzo y SKU de «thinking» / pensamiento extendido se demostraron en vivo. No coincidirán con el cuadernillo del examen si Anthropic los ha renombrado. Usad <a href=\"https://docs.claude.com/en/docs/about-claude/models\">modelos</a> y <a href=\"https://docs.claude.com/en/docs/build-with-claude/extended-thinking\">pensamiento extendido</a>."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Resumen de modelos",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Familias, ventanas de contexto y qué capacidades (visión, thinking) van con cada ID."
+          },
+          {
+            "title": "Resumen de la API",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Cómo consumen las aplicaciones los mismos modelos que los clientes con interfaz."
+          },
+          {
+            "title": "Uso de herramientas",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Llamada a funciones: el mecanismo detrás de búsqueda web, conectores y agentes."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Patrón estándar de conectores que Vijay contrastó con herramientas ad hoc y RAG."
+          },
+          {
+            "title": "Política de uso",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "Las conversaciones empresariales sobre retención y uso aceptable empiezan aquí."
+          }
+        ]
+      }
+    ]
+  }
+]
