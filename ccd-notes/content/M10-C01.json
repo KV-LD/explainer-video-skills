@@ -1,0 +1,282 @@
+[
+  {
+    "lang": "en",
+    "module_id": "10",
+    "chapter_id": "01",
+    "eyebrow": "Module 10 · Chapter 01 · 24 August 2026",
+    "chapter_title": "Why tools exist: context beyond the prompt",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 10 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M10 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 10 (24 August 2026) opened with a recap of <strong>context management</strong>. Vijay’s framing: every GenAI or agentic app has to prepare a context channel, send it to the LLM, and consume the response. Prompt engineering is one way to shape that channel. <strong>Tool use</strong> is another: the model can request live or proprietary data that was never in the training set."
+      },
+      {
+        "type": "h2",
+        "text": "What this chapter is for"
+      },
+      {
+        "type": "p",
+        "html": "Before the Messages API schema, you need the product reason tools exist. Claude does not magically know Bangalore’s weather, a live share price, or an employee record in a UST system. Those facts live outside the model. A tool is a function your application owns; Claude decides <em>when</em> to call it and with which arguments; your code actually runs it."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Classroom UI versus docs",
+        "html": "Notebooks, SDK class names, and model IDs in the August 2026 recording can drift. Treat <a href=\"https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview\">tool use</a> on docs.claude.com as the exam source of truth."
+      },
+      {
+        "type": "h2",
+        "text": "Five ways to enhance context"
+      },
+      {
+        "type": "p",
+        "html": "The trainer listed a stack of techniques that all serve the same job: make the request the model sees richer and more accurate than a raw user sentence."
+      },
+      {
+        "type": "table",
+        "headers": ["Technique", "What it adds to context", "Typical exam angle"],
+        "rows": [
+          ["Prompt engineering", "Structured instructions, examples, roles", "How you write the message, not how you fetch data"],
+          ["Tool use", "Real-time or proprietary function results", "Model requests a named tool; the app executes it"],
+          ["RAG", "Retrieved chunks from a corpus", "Do not dump a 10,000-page PDF into one prompt"],
+          ["MCP", "Standardised access to third-party tools and data", "Write the integration once; reuse across clients"],
+          ["Memory", "Prior turns or longer-lived state", "Conversational apps need an explicit memory design"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "These are complementary, not rivals. A hiring agent might use prompts for tone, tools for HR APIs, RAG for policy PDFs, MCP for a vendor ATS, and memory so a week-long recruitment goal does not reset every turn."
+      },
+      {
+        "type": "h2",
+        "text": "What a tool is (and is not)"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "A tool is a <strong>function definition</strong> plus a <strong>schema</strong> that teaches Claude the name, when to call it (description), and which JSON arguments to pass.",
+          "The function runs in <em>your</em> process: wherever the Anthropic client or Claude Code session is running. The LLM never executes Python on Anthropic’s side.",
+          "Typical payloads: current date/time, weather, stock quotes, employee lookups, database reads — anything the weights cannot know.",
+          "A tool is not the same as stuffing the answer into the system prompt. Prompts are static for that turn; tools are invoked when the model judges them relevant."
+        ]
+      },
+      {
+        "type": "h3",
+        "text": "Trainer vocabulary: “Claude Code” versus Claude"
+      },
+      {
+        "type": "p",
+        "html": "In this session Vijay repeatedly used <strong>Claude Code</strong> to mean the <em>AI application</em> (the client that holds functions, builds messages, and talks to the API) and <strong>Claude</strong> to mean the LLM. That is classroom shorthand. In product docs, Claude Code is the terminal/IDE agent; the Messages API client is the Anthropic SDK. For the exam, keep the loop clear: <em>client executes tools; model only decides</em>."
+      },
+      {
+        "type": "h2",
+        "text": "Two SDKs, one loop"
+      },
+      {
+        "type": "p",
+        "html": "The cohort had been using <code>pip install anthropic</code> (Messages API). The trainer flagged a second stack: the <strong>Claude Agent SDK</strong> (formerly spoken of as Claude Code SDK). Manual tool use makes every handshake visible — stop reason, tool_use block, your if/else, tool_result. The Agent SDK still does that handshake; it just hides the boilerplate so you configure tools and a goal instead of writing the loop."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "User prompt plus the list of tool schemas goes to Claude.",
+          "Claude either answers in text or returns a <strong>tool_use</strong> request (stop reason <code>tool_use</code>).",
+          "The application runs the matching function with the model-supplied arguments.",
+          "The result is sent back as a <strong>user</strong> message containing a <strong>tool_result</strong> block.",
+          "Claude produces the final natural-language answer (or asks for another tool)."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Why not attach every tool to every call"
+      },
+      {
+        "type": "p",
+        "html": "You <em>can</em> register many tools; schemas are relatively small. The risk is not token volume so much as <strong>collision</strong>. If two descriptions overlap, Claude may pick the wrong function — a form of tool-level hallucination. If you already know this turn only needs a browser tool, attach that tool. Distinct names and specific descriptions are the control surface the model actually reads."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Client data",
+        "html": "Do not wire production UST client systems into classroom notebooks. Demo functions (clock, public APIs) are enough to learn the handshake."
+      },
+      {
+        "type": "h2",
+        "text": "How this maps to later chapters"
+      },
+      {
+        "type": "p",
+        "html": "Chapter 02 walks the Messages API handshake in code terms. Chapter 03 treats MCP as the reusable, third-party version of the same idea. Module 11 wraps retrieval as another context technique. Module 12 shows <em>built-in</em> Agent SDK tools (Bash, Read, Glob) that you enable rather than write."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Canonical loop: schemas, tool_use, tool_result."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Where tools are attached to a request."
+          },
+          {
+            "title": "Claude Code documentation",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Product surface the trainer analogised to “the AI app”."
+          },
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Index if a recorded notebook path is stale."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "10",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 10 · Capítulo 01 · 24 de agosto de 2026",
+    "chapter_title": "Por qué existen las herramientas: contexto más allá del prompt",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 10 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M10 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 10 (24 de agosto de 2026) arrancó con un recuento de la <strong>gestión de contexto</strong>. El planteamiento de Vijay: toda aplicación GenAI o agentic tiene que preparar un canal de contexto, enviarlo al LLM y consumir la respuesta. La ingeniería de prompts es una vía. El <strong>uso de herramientas</strong> es otra: el modelo puede pedir datos en vivo o propietarios que nunca estuvieron en el entrenamiento."
+      },
+      {
+        "type": "h2",
+        "text": "Para qué sirve este capítulo"
+      },
+      {
+        "type": "p",
+        "html": "Antes del esquema de la API Messages, hace falta el motivo de producto. Claude no conoce por magia el tiempo en Bangalore, un precio de acción en vivo o un registro de empleado en un sistema UST. Esos hechos viven fuera del modelo. Una herramienta es una función que posee vuestra aplicación; Claude decide <em>cuándo</em> llamarla y con qué argumentos; vuestro código la ejecuta."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Interfaz de aula frente a la documentación",
+        "html": "Los cuadernos, nombres de clases del SDK e IDs de modelo de agosto de 2026 pueden haber cambiado. Tomad <a href=\"https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview\">tool use</a> en docs.claude.com como fuente de verdad para el examen."
+      },
+      {
+        "type": "h2",
+        "text": "Cinco formas de enriquecer el contexto"
+      },
+      {
+        "type": "p",
+        "html": "El formador enumeró técnicas que sirven al mismo trabajo: que la petición que ve el modelo sea más rica y precisa que una frase cruda del usuario."
+      },
+      {
+        "type": "table",
+        "headers": ["Técnica", "Qué aporta al contexto", "Ángulo típico de examen"],
+        "rows": [
+          ["Ingeniería de prompts", "Instrucciones estructuradas, ejemplos, roles", "Cómo escribís el mensaje, no cómo traéis datos"],
+          ["Uso de herramientas", "Resultados de funciones en tiempo real o propietarias", "El modelo pide una herramienta; la app la ejecuta"],
+          ["RAG", "Fragmentos recuperados de un corpus", "No volquéis un PDF de 10.000 páginas en un prompt"],
+          ["MCP", "Acceso normalizado a herramientas y datos de terceros", "Integráis una vez; reutilizáis en varios clientes"],
+          ["Memoria", "Turnos previos o estado más duradero", "Un chat conversacional necesita diseño explícito de memoria"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Son complementarias, no rivales. Un agente de contratación puede usar prompts para el tono, herramientas para APIs de RR. HH., RAG para PDFs de política, MCP para un ATS de proveedor y memoria para que un objetivo de reclutamiento de una semana no se reinicie en cada turno."
+      },
+      {
+        "type": "h2",
+        "text": "Qué es una herramienta (y qué no es)"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Una herramienta es una <strong>definición de función</strong> más un <strong>esquema</strong> que enseña a Claude el nombre, cuándo llamarla (descripción) y qué argumentos JSON pasar.",
+          "La función corre en <em>vuestro</em> proceso: donde esté el cliente Anthropic o la sesión de Claude Code. El LLM no ejecuta Python en el lado de Anthropic.",
+          "Cargas típicas: fecha/hora actual, meteorología, cotizaciones, búsquedas de empleados, lecturas de base de datos — lo que los pesos no pueden saber.",
+          "No es lo mismo que meter la respuesta en el prompt de sistema. Los prompts son estáticos en ese turno; las herramientas se invocan cuando el modelo las juzga pertinentes."
+        ]
+      },
+      {
+        "type": "h3",
+        "text": "Vocabulario del formador: «Claude Code» frente a Claude"
+      },
+      {
+        "type": "p",
+        "html": "En esta sesión Vijay usó <strong>Claude Code</strong> para la <em>aplicación de IA</em> (el cliente que guarda funciones, construye mensajes y habla con la API) y <strong>Claude</strong> para el LLM. Es taquigrafía de aula. En la documentación de producto, Claude Code es el agente de terminal/IDE; el cliente de Messages es el SDK de Anthropic. Para el examen, tened claro el bucle: <em>el cliente ejecuta; el modelo solo decide</em>."
+      },
+      {
+        "type": "h2",
+        "text": "Dos SDK, un mismo bucle"
+      },
+      {
+        "type": "p",
+        "html": "El grupo había usado <code>pip install anthropic</code> (API Messages). El formador señaló un segundo stack: el <strong>Claude Agent SDK</strong> (antes citado como Claude Code SDK). El uso manual de herramientas deja visible cada apretón de manos. El Agent SDK sigue haciendo ese apretón; oculta el código repetitivo para que configuréis herramientas y un objetivo en lugar de escribir el bucle."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "El prompt del usuario más la lista de esquemas va a Claude.",
+          "Claude responde en texto o devuelve una petición <strong>tool_use</strong> (motivo de parada <code>tool_use</code>).",
+          "La aplicación ejecuta la función coincidente con los argumentos que dio el modelo.",
+          "El resultado vuelve como mensaje de <strong>usuario</strong> con un bloque <strong>tool_result</strong>.",
+          "Claude produce la respuesta final (o pide otra herramienta)."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Por qué no adjuntar todas las herramientas en cada llamada"
+      },
+      {
+        "type": "p",
+        "html": "Podéis registrar muchas; los esquemas son relativamente pequeños. El riesgo no es tanto el volumen de tokens como la <strong>colisión</strong>. Si dos descripciones se solapan, Claude puede elegir la función equivocada. Si ya sabéis que este turno solo necesita una herramienta de navegador, adjuntad esa. Nombres distintos y descripciones específicas son la superficie de control que el modelo lee de verdad."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Datos de cliente",
+        "html": "No conectéis sistemas de producción de clientes UST a los cuadernos de aula. Funciones de demostración (reloj, APIs públicas) bastan para aprender el apretón de manos."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo encaja con los capítulos siguientes"
+      },
+      {
+        "type": "p",
+        "html": "El capítulo 02 recorre el apretón de manos de la API Messages. El 03 trata MCP como la versión reutilizable y de terceros de la misma idea. El módulo 11 envuelve la recuperación como otra técnica de contexto. El módulo 12 muestra herramientas <em>integradas</em> del Agent SDK (Bash, Read, Glob) que habilitáis en lugar de escribirlas."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Bucle canónico: esquemas, tool_use, tool_result."
+          },
+          {
+            "title": "API Messages",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Dónde se adjuntan las herramientas a una petición."
+          },
+          {
+            "title": "Documentación de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Superficie de producto que el formador comparó con «la app de IA»."
+          },
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Índice si una ruta de cuaderno grabada está obsoleta."
+          }
+        ]
+      }
+    ]
+  }
+]
