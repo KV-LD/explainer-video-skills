@@ -1,0 +1,25 @@
+# Anthropic documentation — prefer these URLs in notes
+
+- Home: https://docs.claude.com/en/home
+- API overview: https://docs.claude.com/en/api/overview
+- Messages API: https://docs.claude.com/en/api/messages
+- Models: https://docs.claude.com/en/docs/about-claude/models
+- Prompting: https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview
+- Extended thinking: https://docs.claude.com/en/docs/build-with-claude/extended-thinking
+- Vision: https://docs.claude.com/en/docs/build-with-claude/vision
+- PDFs / files: https://docs.claude.com/en/docs/build-with-claude/pdf-support
+- Citations: https://docs.claude.com/en/docs/build-with-claude/citations
+- Prompt caching: https://docs.claude.com/en/docs/build-with-claude/prompt-caching
+- Streaming: https://docs.claude.com/en/docs/build-with-claude/streaming
+- Structured outputs / JSON: https://docs.claude.com/en/docs/build-with-claude/structured-outputs
+- Tool use: https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview
+- MCP: https://docs.claude.com/en/docs/agents-and-tools/mcp
+- Claude Code: https://code.claude.com/docs/en/overview
+- Cowork / Claude desktop: https://support.claude.com/
+- Academy / Skilljar: https://anthropic.skilljar.com
+- Safety / usage policy: https://www.anthropic.com/legal/usage-policy
+- Guardrails / eval: https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails
+- Rate limits: https://docs.claude.com/en/api/rate-limits
+- Workspaces: https://docs.claude.com/en/docs/build-with-claude/workspaces
+- Help: where is API docs: https://support.claude.com/en/articles/8114490-where-can-i-find-your-api-documentation
+- Managed Agents: https://platform.claude.com/docs/en/managed-agents/quickstart

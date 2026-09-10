@@ -1,0 +1,161 @@
+{
+  "course": "Claude Certified Developer, Foundation (CCDV-F)",
+  "org": "UST",
+  "skip": ["session_20260810_06.txt"],
+  "modules": [
+    {
+      "id": "01",
+      "date": "2026-08-03",
+      "raw": "session_20260803_00.txt",
+      "title_en": "What Claude is and how the Foundation programme works",
+      "title_es": "Qué es Claude y cómo funciona el programa Foundation",
+      "chapters": [
+        {"id": "01", "title_en": "Programme, trainer, and how the four weeks are structured", "title_es": "Programa, formador y estructura de las cuatro semanas"},
+        {"id": "02", "title_en": "What Claude is: models, products, and where it sits versus other LLMs", "title_es": "Qué es Claude: modelos, productos y su lugar frente a otros LLM"},
+        {"id": "03", "title_en": "Claude Chat on the web: first product surface", "title_es": "Claude Chat en la web: la primera superficie de producto"},
+        {"id": "04", "title_en": "Study posture for the Foundation exam from day one", "title_es": "Cómo estudiar el examen Foundation desde el primer día"}
+      ]
+    },
+    {
+      "id": "02",
+      "date": "2026-08-05",
+      "raw": "session_20260805_04.txt",
+      "title_en": "Exam format, Anthropic Academy, and Claude Cowork",
+      "title_es": "Formato del examen, Anthropic Academy y Claude Cowork",
+      "chapters": [
+        {"id": "01", "title_en": "Exam format: MCQ plus written scenarios, not application coding", "title_es": "Formato del examen: tipo test y escenarios escritos, no programar la app"},
+        {"id": "02", "title_en": "Anthropic Academy, Skilljar, and partner counting", "title_es": "Anthropic Academy, Skilljar y el recuento de partners"},
+        {"id": "03", "title_en": "Three clients: Chat, Cowork, and Code — and how you reach them", "title_es": "Tres clientes: Chat, Cowork y Code, y cómo se accede"},
+        {"id": "04", "title_en": "Cowork in practice: folders, connectors, sandbox, and usage meters", "title_es": "Cowork en la práctica: carpetas, conectores, sandbox y medidores de uso"},
+        {"id": "05", "title_en": "Agentic clients: plan versus execute, MCP, and the Chrome extension", "title_es": "Clientes agentic: planificar frente a ejecutar, MCP y la extensión de Chrome"}
+      ]
+    },
+    {
+      "id": "03",
+      "date": "2026-08-06",
+      "raw": "session_20260806_05.txt",
+      "title_en": "Certification tracks and Claude Code",
+      "title_es": "Itinerarios de certificación y Claude Code",
+      "chapters": [
+        {"id": "01", "title_en": "Four Anthropic certifications after 13 July and who each is for", "title_es": "Las cuatro certificaciones de Anthropic desde el 13 de julio y a quién van"},
+        {"id": "02", "title_en": "Claude Code: agentic coding versus Chat and Cowork", "title_es": "Claude Code: programación agentic frente a Chat y Cowork"},
+        {"id": "03", "title_en": "Context window, sessions, and why they are not the same as usage limits", "title_es": "Ventana de contexto, sesiones y por qué no son el límite de uso"},
+        {"id": "04", "title_en": "Permissions, models, and building with Claude Code", "title_es": "Permisos, modelos y construir con Claude Code"}
+      ]
+    },
+    {
+      "id": "04",
+      "date": "2026-08-10",
+      "raw": "session_20260810_07.txt",
+      "title_en": "Recap of the three products and moving toward APIs and MCP",
+      "title_es": "Repaso de los tres productos y paso a APIs y MCP",
+      "chapters": [
+        {"id": "01", "title_en": "Recap: Chat, Cowork, Code and the models behind them", "title_es": "Repaso: Chat, Cowork, Code y los modelos que hay detrás"},
+        {"id": "02", "title_en": "From GUI products to Claude APIs", "title_es": "De los productos con interfaz a las APIs de Claude"},
+        {"id": "03", "title_en": "MCP as the connector pattern", "title_es": "MCP como patrón de conectores"}
+      ]
+    },
+    {
+      "id": "05",
+      "date": "2026-08-12",
+      "raw": "session_20260812_08.txt",
+      "title_en": "Claude Code in depth: permissions, models, and agents",
+      "title_es": "Claude Code en profundidad: permisos, modelos y agentes",
+      "chapters": [
+        {"id": "01", "title_en": "Permission modes in Claude Code", "title_es": "Modos de permiso en Claude Code"},
+        {"id": "02", "title_en": "Slash commands and model selection", "title_es": "Comandos slash y selección de modelo"},
+        {"id": "03", "title_en": "What an agent is in this course", "title_es": "Qué es un agente en este curso"},
+        {"id": "04", "title_en": "End-to-end generation without writing the app by hand", "title_es": "Generación de extremo a extremo sin escribir la app a mano"}
+      ]
+    },
+    {
+      "id": "06",
+      "date": "2026-08-13",
+      "raw": "session_20260813_09.txt",
+      "title_en": "Hooks, local tools, and token-aware Claude Code",
+      "title_es": "Hooks, herramientas locales y Claude Code consciente de tokens",
+      "chapters": [
+        {"id": "01", "title_en": "CLAUDE.md versus hooks for formatting and company rules", "title_es": "CLAUDE.md frente a hooks para formato y normas de empresa"},
+        {"id": "02", "title_en": "Local execution, sandbox, and why hooks can save tokens", "title_es": "Ejecución local, sandbox y por qué los hooks ahorran tokens"},
+        {"id": "03", "title_en": "Pre-tool hooks and extending the workspace", "title_es": "Hooks previos a la herramienta y ampliar el espacio de trabajo"}
+      ]
+    },
+    {
+      "id": "07",
+      "date": "2026-08-17",
+      "raw": "session_20260817_10.txt",
+      "title_en": "Anthropic SDK: invoking Claude from code",
+      "title_es": "SDK de Anthropic: invocar a Claude desde código",
+      "chapters": [
+        {"id": "01", "title_en": "Installing the Anthropic SDK and API keys", "title_es": "Instalar el SDK de Anthropic y las claves de API"},
+        {"id": "02", "title_en": "Messages, roles, and multi-turn context", "title_es": "Mensajes, roles y contexto en varios turnos"},
+        {"id": "03", "title_en": "Streaming versus non-streaming calls", "title_es": "Llamadas con streaming y sin streaming"},
+        {"id": "04", "title_en": "Model choice, context window, and cost awareness from the API", "title_es": "Elección de modelo, ventana de contexto y coste desde la API"}
+      ]
+    },
+    {
+      "id": "08",
+      "date": "2026-08-19",
+      "raw": "session_20260819_11.txt",
+      "title_en": "Prompt engineering for Claude",
+      "title_es": "Ingeniería de prompts para Claude",
+      "chapters": [
+        {"id": "01", "title_en": "Stop sequences and controlling generation", "title_es": "Secuencias de parada y control de la generación"},
+        {"id": "02", "title_en": "Forcing structured output such as JSON", "title_es": "Forzar una salida estructurada, por ejemplo JSON"},
+        {"id": "03", "title_en": "Prompt templates and reusable patterns", "title_es": "Plantillas de prompt y patrones reutilizables"},
+        {"id": "04", "title_en": "What good Claude prompting looks like for the exam", "title_es": "Cómo se ve un buen prompting de Claude de cara al examen"}
+      ]
+    },
+    {
+      "id": "09",
+      "date": "2026-08-20",
+      "raw": "session_20260820_12.txt",
+      "title_en": "Extended thinking, vision, PDFs, citations, and prompt cache",
+      "title_es": "Pensamiento extendido, visión, PDF, citas y caché de prompts",
+      "chapters": [
+        {"id": "01", "title_en": "Extended / deep thinking", "title_es": "Pensamiento extendido o profundo"},
+        {"id": "02", "title_en": "Vision: sending images to Claude", "title_es": "Visión: enviar imágenes a Claude"},
+        {"id": "03", "title_en": "PDFs, document context, and citations", "title_es": "PDF, contexto documental y citas"},
+        {"id": "04", "title_en": "Prompt caching", "title_es": "Caché de prompts"}
+      ]
+    },
+    {
+      "id": "10",
+      "date": "2026-08-24",
+      "raw": "session_20260824_01.txt",
+      "title_en": "Tool use, MCP, and exam-attempt guidance",
+      "title_es": "Uso de herramientas, MCP y orientación para el examen",
+      "chapters": [
+        {"id": "01", "title_en": "Why tools exist: context beyond the prompt", "title_es": "Por qué existen las herramientas: contexto más allá del prompt"},
+        {"id": "02", "title_en": "Defining and calling tools in the API", "title_es": "Definir y llamar herramientas en la API"},
+        {"id": "03", "title_en": "MCP servers versus ad-hoc tools", "title_es": "Servidores MCP frente a herramientas ad hoc"},
+        {"id": "04", "title_en": "How the trainer framed sitting the certification exam", "title_es": "Cómo planteó el formador presentarse al examen"}
+      ]
+    },
+    {
+      "id": "11",
+      "date": "2026-08-26",
+      "raw": "session_20260826_03.txt",
+      "title_en": "RAG with Claude and building agents",
+      "title_es": "RAG con Claude y construcción de agentes",
+      "chapters": [
+        {"id": "01", "title_en": "RAG recap: retrieve, augment, generate", "title_es": "Repaso de RAG: recuperar, aumentar, generar"},
+        {"id": "02", "title_en": "Vector stores in the lab: MongoDB Atlas / Voyage-style embeddings", "title_es": "Almacenes vectoriales en el laboratorio: MongoDB Atlas y embeddings"},
+        {"id": "03", "title_en": "Agent SDK / agentic implementation steps", "title_es": "Pasos de implementación agentic y el Agent SDK"}
+      ]
+    },
+    {
+      "id": "12",
+      "date": "2026-08-27",
+      "raw": "session_20260827_02.txt",
+      "title_en": "Built-in tools, responsible AI, and exam prep",
+      "title_es": "Herramientas integradas, IA responsable y preparación del examen",
+      "chapters": [
+        {"id": "01", "title_en": "Built-in tools inside agents", "title_es": "Herramientas integradas dentro de los agentes"},
+        {"id": "02", "title_en": "Permissions, safety, and guardrails", "title_es": "Permisos, seguridad y guardrails"},
+        {"id": "03", "title_en": "Responsible AI for enterprise Claude apps", "title_es": "IA responsable para aplicaciones Claude en empresa"},
+        {"id": "04", "title_en": "Exam prep guide and mock practice", "title_es": "Guía de preparación y simulacros"}
+      ]
+    }
+  ]
+}
