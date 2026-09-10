@@ -1,0 +1,256 @@
+[
+  {
+    "lang": "en",
+    "module_id": "06",
+    "chapter_id": "03",
+    "eyebrow": "Module 06 · Chapter 03 · 13 August 2026",
+    "chapter_title": "Pre-tool hooks and extending the workspace",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 6 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M06 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Pre-tool hooks run <em>before</em> Edit, Write, or Bash land. Session 6 used them to exclude protected paths and to deny dangerous commands — especially when permission mode is auto. The same hour showed how to <strong>extend the workspace</strong> beyond one repo’s markdown: install marketplace plugins (Playwright and similar), or bundle your own agents, hooks, and skills as a Claude Code plugin (<code>plugin.json</code> + marketplace manifest) so other projects inherit the toolkit."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Plugin folder names will move",
+        "html": "The demo used <code>.claude-plugin</code> / marketplace.json / plugin.json schemas, user vs project vs local-repo install, and a “To Do Toolkit” package. Syntax errors (wrong source path, circular references, needing a reload) ate a lot of live time. Copy structure from current <a href=\"https://code.claude.com/docs/en/overview\">Claude Code</a> docs, not from the recording’s trial-and-error."
+      },
+      {
+        "type": "h2",
+        "text": "Pre-tool use: deny before damage"
+      },
+      {
+        "type": "p",
+        "html": "Rajesh’s clarification: blocking <code>rm</code> is a <strong>pre</strong> hook, not post. After the file is gone, prettier will not help. The trainer’s <code>settings.json</code> had <em>multiple matchers</em> under pre-tool-use: one path to <code>protect-files.sh</code>, another to <code>block-dangerous-commands.sh</code>. Matchers select which tool (Write vs Bash) runs which script."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Protect-files: skip <code>.env</code>, <code>package-lock.json</code>, <code>.git</code>, ORM secret files (Prisma was the example), anything else you add.",
+          "Dangerous commands: patterns you refuse to let the shell run. Lalit noted that <code>git restore</code> / revert can delete content without the token <code>rm</code> — extend the denylist, do not assume one binary name is enough.",
+          "Auto mode: “Claude will not ask whether to update a file or execute a command.” Hooks are the remaining brake.",
+          "Sub-agents inherit the same need: unattended reviewers with Write still must not touch secrets."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "When the hook “does not fire”"
+      },
+      {
+        "type": "p",
+        "html": "The live <code>rm test.txt</code> demo failed until: reload VS Code, reload webviews (Claude is a web component in the IDE), fix the filename, and try from the <strong>terminal</strong> client. A non-blocking hook error status still appeared. A preview feature (“chat is the Claude hook”) had to be enabled so the chat window honoured repo settings. Exam takeaway: configuration is not complete until the same surface you use in anger has executed the matcher. Python/anything-in-shell is allowed; timing is determined by the event, not by the language."
+      },
+      {
+        "type": "h2",
+        "text": "Marketplace plugins as instant workspace extension"
+      },
+      {
+        "type": "p",
+        "html": "Plugins install a set of hooks, skills, and agents into the Claude working space. Scope: user, this project, or local repo. Example: an official Playwright Claude plugin — after install, settings listed it; skills/commands may need a terminal reload to show. Front-end-design plugins similarly inject prompt/skill packs. If a plugin has no skills of its own, you still get whatever agents/hooks it shipped. This is how a team standardises “what hooks should exist” without copying shell files into every greenfield repo by hand."
+      },
+      {
+        "type": "h2",
+        "text": "Rolling your own plugin (To Do Toolkit)"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Gather existing custom agents, hooks, and skills under a toolkit folder.",
+          "Add the plugin manifest (name, display name, version, description, keywords, author) following the Claude Code plugin schema.",
+          "Add a marketplace.json (or the current equivalent) that points at the plugin source path without circular references.",
+          "Place files under the required dot-folder the docs name that week.",
+          "In Claude Code: manage plugins → add marketplace or import the folder URL → install at project or user scope.",
+          "Confirm in settings.json that the plugin is referenced; slash commands such as a toolkit backend skill appear without new files in your app tree."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Mritunjay: a plugin is a library you pass to others; they cannot change it unless they have access (GitHub collaborator/contributor). Installed artefacts live in the sandbox (user vs project). That is “extending the workspace” in the Foundation sense: the empty repo plus a plugin is already an opinionated Claude Code environment."
+      },
+      {
+        "type": "h2",
+        "text": "Why this shows up in exam scenarios"
+      },
+      {
+        "type": "p",
+        "html": "Scenario 2 in the trainer’s later list is literally Claude Code for software development: CLAUDE.md, custom slash commands, plan mode vs direct execution. Pre-tool hooks and plugins are the configuration-layer answers when the scenario adds “auto mode,” “do not commit secrets,” or “roll this out to 50 repos.” Other scenarios (support agent, multi-agent research, CI/CD, structured extraction) still assume you know tool allow/deny — pre-tool hooks are the Claude Code-native version of that idea."
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "One chain to remember",
+        "html": "Ask/plan while learning → auto only after pre-tool denylists work on your actual client → format with post-tool local commands → distribute the lot as a plugin. CLAUDE.md stays for meaning; hooks stay for mechanics."
+      },
+      {
+        "type": "h2",
+        "text": "Classroom logistics (not product, but asked in-session)"
+      },
+      {
+        "type": "p",
+        "html": "Before Vijay started, facilitation repeated: no screen share of confidential data; UST laptops might still block Pearson VUE — exam on a personal computer or at a test centre. That is delivery constraint, not a Claude Code setting."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Hooks matchers, plugins, marketplaces, user vs project install."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Plugins are not MCP servers; they ship skills/agents/hooks. MCP remains for third-party tools."
+          },
+          {
+            "title": "Guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Pre-tool deny scripts are guardrails on the coding client."
+          },
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Confirm domain weights and the six production scenarios before exam day."
+          },
+          {
+            "title": "Managed Agents quickstart",
+            "url": "https://platform.claude.com/docs/en/managed-agents/quickstart",
+            "note": "Workspace extension on the platform side once you leave the IDE plugin model."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "06",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 06 · Capítulo 03 · 13 de agosto de 2026",
+    "chapter_title": "Hooks previos a la herramienta y ampliar el espacio de trabajo",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 6 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M06 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Los hooks previos a la tool corren <em>antes</em> de que Edit, Write o Bash aterrizen. La sesión 6 los usó para excluir rutas protegidas y denegar comandos peligrosos — sobre todo con el modo de permiso en auto. La misma hora mostró cómo <strong>ampliar el espacio de trabajo</strong> más allá del markdown de un repo: instalar plugins del marketplace (Playwright y similares), o empaquetar vuestros agentes, hooks y skills como plugin de Claude Code (<code>plugin.json</code> + manifiesto de marketplace) para que otros proyectos hereden el toolkit."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Los nombres de carpeta del plugin se moverán",
+        "html": "El demo usó esquemas <code>.claude-plugin</code> / marketplace.json / plugin.json, instalación usuario frente a proyecto frente a repo local, y un paquete «To Do Toolkit». Los errores de sintaxis (ruta source incorrecta, referencias circulares, necesidad de recargar) comieron mucho tiempo en directo. Copiad la estructura de los docs vigentes de <a href=\"https://code.claude.com/docs/en/overview\">Claude Code</a>, no del ensayo y error de la grabación."
+      },
+      {
+        "type": "h2",
+        "text": "Pre-tool use: denegar antes del daño"
+      },
+      {
+        "type": "p",
+        "html": "Aclaración de Rajesh: bloquear <code>rm</code> es un hook <strong>pre</strong>, no post. Cuando el fichero ya no está, Prettier no ayuda. El <code>settings.json</code> del formador tenía <em>varios matchers</em> bajo pre-tool-use: uno hacia <code>protect-files.sh</code>, otro hacia <code>block-dangerous-commands.sh</code>. Los matchers eligen qué tool (Write frente a Bash) lanza qué script."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Protect-files: no tocar <code>.env</code>, <code>package-lock.json</code>, <code>.git</code>, ficheros secretos de ORM (Prisma fue el ejemplo), y lo que añadáis.",
+          "Comandos peligrosos: patrones que no dejáis correr al shell. Lalit señaló que <code>git restore</code> / revert pueden borrar contenido sin el token <code>rm</code>: ampliád la lista negra, no asumáis que basta un nombre de binario.",
+          "Modo auto: «Claude no preguntará si actualizar un fichero o ejecutar un comando». Los hooks son el freno que queda.",
+          "Los subagentes heredan la misma necesidad: un revisor desatendido con Write sigue sin poder tocar secretos."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Cuando el hook «no dispara»"
+      },
+      {
+        "type": "p",
+        "html": "El demo en directo de <code>rm test.txt</code> falló hasta: recargar VS Code, recargar webviews (Claude es un componente web en el IDE), corregir el nombre de fichero y probar desde el cliente de <strong>terminal</strong>. Aun así apareció un error de hook no bloqueante. Hubo que activar una función preview («chat is the Claude hook») para que la ventana de chat respetara los ajustes del repo. Conclusión de examen: la configuración no está completa hasta que la misma superficie que usáis de verdad haya ejecutado el matcher. Python o cualquier cosa en shell está permitido; el momento lo marca el evento, no el lenguaje."
+      },
+      {
+        "type": "h2",
+        "text": "Plugins de marketplace como extensión instantánea del espacio de trabajo"
+      },
+      {
+        "type": "p",
+        "html": "Los plugins instalan un conjunto de hooks, skills y agentes en el espacio de trabajo de Claude. Ámbito: usuario, este proyecto o repo local. Ejemplo: un plugin oficial de Playwright — tras instalar, settings lo listaba; las skills/comandos pueden exigir recargar el terminal para verse. Los plugins de diseño frontend inyectan paquetes de prompt/skill de forma parecida. Si un plugin no trae skills propias, seguís teniendo los agentes/hooks que embarcó. Así un equipo normaliza «qué hooks debe haber» sin copiar ficheros de shell a mano en cada repo greenfield."
+      },
+      {
+        "type": "h2",
+        "text": "Montar vuestro propio plugin (To Do Toolkit)"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Reunid agentes, hooks y skills personalizados bajo una carpeta toolkit.",
+          "Añadid el manifiesto del plugin (name, display name, version, description, keywords, author) según el esquema de plugin de Claude Code.",
+          "Añadid un marketplace.json (o el equivalente vigente) que apunte a la ruta source del plugin sin referencias circulares.",
+          "Colocad los ficheros bajo la carpeta punto que los docs nombren esa semana.",
+          "En Claude Code: manage plugins → añadir marketplace o importar la URL de la carpeta → instalar a nivel de proyecto o de usuario.",
+          "Confirmad en settings.json que el plugin está referenciado; los slash (p. ej. una skill backend del toolkit) aparecen sin ficheros nuevos en el árbol de la app."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Mritunjay: un plugin es una biblioteca que pasáis a otros; no pueden cambiarla salvo que tengan acceso (colaborador/contributor de GitHub). Los artefactos instalados viven en el sandbox (usuario frente a proyecto). Eso es «ampliar el espacio de trabajo» en el sentido Foundation: el repo vacío más un plugin ya es un entorno Claude Code con opinión."
+      },
+      {
+        "type": "h2",
+        "text": "Por qué sale en los escenarios de examen"
+      },
+      {
+        "type": "p",
+        "html": "El escenario 2 de la lista posterior del formador es literalmente Claude Code para desarrollo de software: CLAUDE.md, slash personalizados, plan mode frente a ejecución directa. Los hooks previos y los plugins son las respuestas de capa de configuración cuando el escenario añade «modo auto», «no subáis secretos» o «desplegad esto en 50 repos». Otros escenarios (agente de soporte, investigación multiagente, CI/CD, extracción estructurada) siguen asumiendo que conocéis allow/deny de tools: los hooks previos son la versión nativa de Claude Code de esa idea."
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Una cadena para recordar",
+        "html": "Ask/plan mientras aprendéis → auto solo cuando las listas de denegación pre-tool funcionan en vuestro cliente real → formato con comandos locales post-tool → distribuir el conjunto como plugin. CLAUDE.md se queda para el significado; los hooks, para la mecánica."
+      },
+      {
+        "type": "h2",
+        "text": "Logística de aula (no es producto, pero se preguntó en la sesión)"
+      },
+      {
+        "type": "p",
+        "html": "Antes de que Vijay empezara, facilitación repitió: no compartáis pantalla con datos confidenciales; los portátiles UST pueden seguir bloqueando Pearson VUE — examen en un ordenador personal o en un centro. Es una restricción de entrega, no un ajuste de Claude Code."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Matchers de hooks, plugins, marketplaces, instalación usuario frente a proyecto."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Los plugins no son servidores MCP; embarcan skills/agentes/hooks. MCP sigue siendo para tools de terceros."
+          },
+          {
+            "title": "Guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Los scripts de denegación pre-tool son guardrails en el cliente de código."
+          },
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Confirmad pesos de dominio y los seis escenarios de producción antes del examen."
+          },
+          {
+            "title": "Inicio rápido de Managed Agents",
+            "url": "https://platform.claude.com/docs/en/managed-agents/quickstart",
+            "note": "Extensión del espacio de trabajo en plataforma cuando dejáis el modelo de plugin del IDE."
+          }
+        ]
+      }
+    ]
+  }
+]

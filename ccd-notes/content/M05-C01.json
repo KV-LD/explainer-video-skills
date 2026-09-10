@@ -1,0 +1,234 @@
+[
+  {
+    "lang": "en",
+    "module_id": "05",
+    "chapter_id": "01",
+    "eyebrow": "Module 05 · Chapter 01 · 12 August 2026",
+    "chapter_title": "Permission modes in Claude Code",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 5 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M05 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 5 (12 August 2026) resumed the interrupted frontend generation and opened with a recap of <strong>permission modes</strong>: how much Claude Code may do without stopping to ask you. The trainer listed four behaviours you should be able to contrast in writing: ask for every activity, accept edits automatically, plan-then-execute, and auto / “no stop” execution. Exact UI strings change; the control surface does not."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Trust current Claude Code docs for labels",
+        "html": "The recording says “ask,” “edit automatically,” “plan,” and “auto decide / no stop.” Current product docs may use names such as default, accept edits, plan, and bypass permissions. For the exam, describe <em>what is auto-approved</em> and <em>when you can still edit the to-do list</em>. Start at <a href=\"https://code.claude.com/docs/en/overview\">Claude Code overview</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Why modes exist"
+      },
+      {
+        "type": "p",
+        "html": "Claude Code is an agent that can edit files, run bash, call MCP tools, and delete paths. Each of those is a <em>tool use</em> that in default mode wants consent. Modes are a policy for that consent: how often the loop pauses. They are not a different model and they are not a substitute for CLAUDE.md. They also are not “unsafe vs safe models” — Opus in auto mode is still auto mode."
+      },
+      {
+        "type": "h2",
+        "text": "The four behaviours from class"
+      },
+      {
+        "type": "table",
+        "headers": ["Classroom name", "What Claude may do without asking", "When to use it", "Main risk"],
+        "rows": [
+          ["Ask (all activities)", "Little: each edit, shell command, and MCP call can prompt.", "Learning the tool; unfamiliar repos; production secrets nearby.", "Slow; you become the bottleneck."],
+          ["Edit automatically (accept edits)", "File writes/edits; still likely to ask for risky shell or network.", "You trust the plan and want fewer Save/Apply clicks.", "Silent bad edits if you are not watching git diff."],
+          ["Plan", "Produce a to-do / plan first; you review and edit the plan; execution starts only after you accept.", "Multi-step generation, Docker vs Playwright choices, anything you might want to rewrite.", "Once execution has started, the trainer said you cannot edit that plan in-flight."],
+          ["Auto / no stop (bypass-style)", "Permission prompts handled automatically; the loop does not wait.", "Long unattended generation after hooks and allow/deny lists exist.", "Destructive bash (rm, git restore, etc.) unless pre-tool hooks block them (Module 06)."]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Plan mode is the one that intersects agents"
+      },
+      {
+        "type": "p",
+        "html": "A learner asked whether you can still intervene if agents run without interruption. The trainer split two ideas: the <strong>orchestrator plan</strong> (the to-do list: scaffold Vite, shared types matching OpenAPI, pages, tests…) is editable <em>while you are in plan mode, before execute</em>. If Playwright is on the list and you want Selenium, change the plan, then let agents run. After execute starts, you watch, skip, or stop — you do not quietly rewrite the frozen plan. Human-in-the-loop is therefore front-loaded into planning, not sprinkled through every sub-agent turn."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Plan mode is also an exam phrase in later scenario lists (“plan mode and direct execution”). Direct execution is the opposite: skip the reviewable to-do board and just go.",
+          "Sub-agents can carry their own permission mode (e.g. bypass so a code-reviewer is not blocked on every grep). That is configured on the agent markdown, not only in the global picker (see M05-C03).",
+          "Auto mode is exactly when Module 06 hooks (block dangerous commands, protect <code>.env</code>) become mandatory rather than nice-to-have."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Consent still belongs to you"
+      },
+      {
+        "type": "p",
+        "html": "Even in ask mode, session 4’s disclaimer stands: executed commands run with the end user’s consent. Switching to auto does not move legal or enterprise responsibility onto Anthropic. UST classroom rules still forbid pasting client secrets; auto mode will happily write whatever the model proposes into the working tree if you have not blocked those paths."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Auto without hooks",
+        "html": "The 13 August session showed <code>rm</code> of a test file while auto was on; a pre-tool hook was supposed to deny it. Until that hook is proven in the <em>same</em> surface (terminal vs IDE chat), do not leave auto on a machine that can reach production credentials. Reload VS Code / webviews after changing <code>settings.json</code>."
+      },
+      {
+        "type": "h2",
+        "text": "How this showed up while finishing the app"
+      },
+      {
+        "type": "p",
+        "html": "Continuing code generation from the previous chat worked because the session still held the to-do list (context + plan), not because a single giant prompt was replayed. Permission mode decides whether each remaining to-do pauses. If generation is taking “a very long time,” that is usually agentic looping and verification, not a stuck permission dialog — unless you are in ask mode and missed a prompt in another panel."
+      },
+      {
+        "type": "h2",
+        "text": "Study check"
+      },
+      {
+        "type": "p",
+        "html": "Be ready to map a scenario: “developer wants to review architecture steps but not every file write” → plan then accept-edits, not full auto. “CI-like unattended refactor on a throwaway branch with protect-files hooks” → auto. “First day on Claude Code” → ask. Write the behaviour, then mention that the live toggle name should be checked in docs."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Permission modes, plan mode, and how the coding agent asks for tools."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Every permission prompt is a tool call under the hood."
+          },
+          {
+            "title": "Safety / usage policy",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "Enterprise use still sits under Anthropic policy regardless of auto mode."
+          },
+          {
+            "title": "Guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Hooks and allow/deny lists are the practical guardrail when bypass is on."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "05",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 05 · Capítulo 01 · 12 de agosto de 2026",
+    "chapter_title": "Modos de permiso en Claude Code",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 5 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M05 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 5 (12 de agosto de 2026) reanudó la generación frontend interrumpida y abrió con un repaso de los <strong>modos de permiso</strong>: cuánto puede hacer Claude Code sin parar a preguntaros. El formador enumeró cuatro comportamientos que debéis contrastar por escrito: pedir permiso para cada actividad, aceptar ediciones automáticamente, planificar y luego ejecutar, y auto / ejecución «sin parar». Las cadenas exactas de la UI cambian; la superficie de control no."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Fiaros de la documentación vigente para las etiquetas",
+        "html": "La grabación dice «ask», «edit automatically», «plan» y «auto decide / no stop». Los docs actuales pueden usar default, accept edits, plan y bypass permissions. Para el examen, describid <em>qué se autoaprueba</em> y <em>cuándo aún podéis editar la lista de to-dos</em>. Empezad por la <a href=\"https://code.claude.com/docs/en/overview\">visión general de Claude Code</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Por qué existen los modos"
+      },
+      {
+        "type": "p",
+        "html": "Claude Code es un agente que puede editar ficheros, lanzar bash, llamar tools MCP y borrar rutas. Cada una es un <em>tool use</em> que en modo por defecto quiere consentimiento. Los modos son la política de ese consentimiento: con qué frecuencia el bucle se detiene. No son otro modelo ni sustituyen a CLAUDE.md. Tampoco son «modelos inseguros frente a seguros»: Opus en auto sigue siendo auto."
+      },
+      {
+        "type": "h2",
+        "text": "Los cuatro comportamientos de clase"
+      },
+      {
+        "type": "table",
+        "headers": ["Nombre en el aula", "Qué puede hacer Claude sin preguntar", "Cuándo usarlo", "Riesgo principal"],
+        "rows": [
+          ["Ask (todas las actividades)", "Poco: cada edición, comando de shell y llamada MCP puede pedir confirmación.", "Aprender la herramienta; repos desconocidos; secretos de producción cerca.", "Lento; vosotros sois el cuello de botella."],
+          ["Edit automatically (accept edits)", "Escrituras/ediciones de ficheros; probablemente seguirá preguntando por shell o red arriesgados.", "Os fiáis del plan y queréis menos clics de Save/Apply.", "Ediciones malas silenciosas si no miráis el git diff."],
+          ["Plan", "Produce un to-do / plan primero; lo revisáis y editáis; la ejecución empieza solo al aceptar.", "Generación en varios pasos, elegir Docker frente a Playwright, cualquier cosa que queráis reescribir.", "Una vez arranca la ejecución, el formador dijo que no podéis editar ese plan en vuelo."],
+          ["Auto / no stop (estilo bypass)", "Los prompts de permiso se resuelven solos; el bucle no espera.", "Generación larga desatendida cuando ya hay hooks y listas allow/deny.", "Bash destructivo (rm, git restore, etc.) salvo que hooks previos a la tool lo bloqueen (módulo 06)."]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "El modo plan es el que se cruza con los agentes"
+      },
+      {
+        "type": "p",
+        "html": "Un alumno preguntó si aún se puede intervenir si los agentes corren sin interrupción. El formador separó dos ideas: el <strong>plan del orquestador</strong> (la lista de to-dos: andamiaje Vite, tipos compartidos según OpenAPI, páginas, tests…) es editable <em>en modo plan, antes de execute</em>. Si Playwright está en la lista y queréis Selenium, cambiad el plan y luego dejad correr a los agentes. Cuando execute ha empezado, observáis, omitís o paráis: no reescribís en silencio el plan congelado. El humano en el bucle se concentra al principio, en la planificación, no en cada turno de subagente."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Plan mode también aparece en escenarios de examen posteriores («plan mode and direct execution»). Direct execution es lo contrario: saltarse el tablero de to-dos revisable y seguir.",
+          "Los subagentes pueden llevar su propio modo de permiso (p. ej. bypass para que un revisor de código no se bloquee en cada grep). Eso se configura en el markdown del agente, no solo en el selector global (véase M05-C03).",
+          "El modo auto es exactamente cuando los hooks del módulo 06 (bloquear comandos peligrosos, proteger <code>.env</code>) dejan de ser opcionales."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "El consentimiento sigue siendo vuestro"
+      },
+      {
+        "type": "p",
+        "html": "Incluso en ask, vale el descargo de la sesión 4: los comandos se ejecutan con el consentimiento del usuario final. Pasar a auto no mueve la responsabilidad legal o de empresa a Anthropic. Las normas de aula UST siguen prohibiendo pegar secretos de cliente; el modo auto escribirá lo que el modelo proponga en el árbol de trabajo si no habéis bloqueado esas rutas."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Auto sin hooks",
+        "html": "La sesión del 13 de agosto mostró un <code>rm</code> de un fichero de prueba con auto activo; un hook previo debía denegarlo. Hasta que ese hook esté probado en la <em>misma</em> superficie (terminal frente a chat del IDE), no dejéis auto en un ordenador que alcance credenciales de producción. Recargad VS Code / webviews tras cambiar <code>settings.json</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo se vio al terminar la app"
+      },
+      {
+        "type": "p",
+        "html": "Continuar la generación desde el chat anterior funcionó porque la sesión aún tenía la lista de to-dos (contexto + plan), no porque se reenviara un prompt gigante. El modo de permiso decide si cada to-do restante se detiene. Si la generación «tarda muchísimo», suele ser el bucle agentic y la verificación, no un diálogo de permiso atascado — salvo que estéis en ask y se os haya pasado un prompt en otro panel."
+      },
+      {
+        "type": "h2",
+        "text": "Comprobación de estudio"
+      },
+      {
+        "type": "p",
+        "html": "Estad preparados para mapear un escenario: «el desarrollador quiere revisar pasos de arquitectura pero no cada escritura de fichero» → plan y luego accept-edits, no auto total. «Refactor desatendido tipo CI en una rama desechable con hooks de protect-files» → auto. «Primer día con Claude Code» → ask. Escribid el comportamiento y mencionad que el nombre del interruptor hay que comprobarlo en los docs."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Modos de permiso, plan mode y cómo el agente pide tools."
+          },
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Cada prompt de permiso es una llamada a tool por debajo."
+          },
+          {
+            "title": "Política de uso",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "El uso empresarial sigue bajo la política de Anthropic, sea cual sea el modo."
+          },
+          {
+            "title": "Guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Hooks y listas allow/deny son el guardrail práctico cuando bypass está activo."
+          }
+        ]
+      }
+    ]
+  }
+]

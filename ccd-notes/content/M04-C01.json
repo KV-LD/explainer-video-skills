@@ -1,0 +1,308 @@
+[
+  {
+    "lang": "en",
+    "module_id": "04",
+    "chapter_id": "01",
+    "eyebrow": "Module 04 · Chapter 01 · 10 August 2026",
+    "chapter_title": "Recap: Chat, Cowork, Code and the models behind them",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 4 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M04 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 4 (10 August 2026) opened with a recap of the three client surfaces already in play: <strong>Claude Chat</strong> (claude.ai), <strong>Claude Cowork</strong> (desktop), and <strong>Claude Code</strong> (terminal / IDE agent). The trainer, Vijay, then used that map to continue end-to-end generation of a task-management app — still without writing application code by hand."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Classroom UI versus current docs",
+        "html": "Labels, model names (Haiku / Sonnet / Opus families), and Claude Code slash menus in the August 2026 recording will drift. For the exam and for delivery work, treat <a href=\"https://docs.claude.com/en/home\">docs.claude.com</a> and <a href=\"https://code.claude.com/docs/en/overview\">Claude Code docs</a> as the source of truth."
+      },
+      {
+        "type": "h2",
+        "text": "The three products in one sentence each"
+      },
+      {
+        "type": "p",
+        "html": "The recap is not three unrelated apps. They share the same model families and many of the same memory patterns (<code>CLAUDE.md</code>, skills). They differ in <em>where the work happens</em> and how much the client is allowed to act on your machine."
+      },
+      {
+        "type": "table",
+        "headers": ["Product", "What the trainer emphasised", "Typical use in this cohort"],
+        "rows": [
+          ["Claude Chat (claude.ai)", "Chat-style Q&amp;A; pick Haiku, Sonnet, or Opus (or the live equivalent) and get a response.", "Exploration, drafting, questions that do not need a repo."],
+          ["Claude Cowork", "Desktop client: folders, repetitive tasks, templates, and (in this session) Design / wireframes.", "Organising working folders; generating artefacts that later feed Code."],
+          ["Claude Code", "Agentic coding: plan, tools, sandbox, production-shaped apps from prompts, skills, and memory files.", "Full-stack generation, OpenAPI-first backends, MCP-backed front ends."]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Cowork is not “Chat with a nicer window.” It is closer to an agent that can work on local folders. Claude Code is the same idea aimed at a software repo: an agent loop that can read, write, run commands, and verify. Chat remains the lightest surface: you ask, the model answers, and it does not own your project tree."
+      },
+      {
+        "type": "h2",
+        "text": "Models: Haiku, Sonnet, Opus — and why the names are not the exam"
+      },
+      {
+        "type": "p",
+        "html": "In the recap the trainer named the three families as HiQ/Haiku, Sonnet, and Opus. The teaching point is the <em>ladder</em>, not a frozen SKU list: a cheaper/faster model for routine edits, a mid-tier default for most coding, and a heavier model when planning or architecture needs more reasoning. In Claude Code you switch with <code>/model</code> (covered in Module 05). Org availability still wins: you only see models your workspace is entitled to."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Same families can sit behind Chat, Cowork, and Code; the <em>client</em> changes tool access and persistence, not the idea of “which brain.”",
+          "A live session may show a default such as “Sonnet 5”; do not memorise that string. Memorise: pick the smallest model that still does the job, and check the live model page before the exam.",
+          "Token cost follows model choice <em>and</em> how much you attach (whole folders versus a single OpenAPI YAML)."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Memory that is universal: CLAUDE.md versus skills"
+      },
+      {
+        "type": "p",
+        "html": "The trainer treated <code>CLAUDE.md</code> and skills as <em>universal</em> patterns: they apply across Cowork, Code, and (where the product supports project memory) Chat-adjacent workflows. A learner asked the difference in this session; the answer is the one to keep for the exam."
+      },
+      {
+        "type": "table",
+        "headers": ["Mechanism", "When it is applied", "How you invoke it"],
+        "rows": [
+          ["CLAUDE.md (memory)", "Appended by default on requests the client makes to the model.", "You do not slash it. Put it at repo root; optional extra files in frontend/backend folders."],
+          ["Skill (SKILL.md in a named skill folder)", "Only when the skill is in play.", "Slash command (e.g. /business-analyst, /architect), unless auto-invocation is left on."]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "<code>CLAUDE.md</code> is standing system instruction: production-ready code, language best practices, single responsibility, “for all diagrams use Mermaid,” and so on. Nested files let backend and frontend carry different house rules. Skills encode a <em>role</em> (business analyst, architect, OpenAPI designer, frontend engineer). The file name the trainer used for the skill body is <code>SKILL.md</code> (capitalised) inside a skill folder; once defined, Claude Code exposes a matching slash command."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Auto-invocation of skills",
+        "html": "By default Claude may pick a skill when your wording matches it (SRS, “business analyst,” and so on). To force slash-only use, set the skill property that disables model invocation (the trainer’s phrase: <em>disable model invocation</em> true). When an agentic loop is running, skills can also be pulled in without you typing the slash — that is intentional, not a bug."
+      },
+      {
+        "type": "h2",
+        "text": "SDLC roles as skills, not as extra models"
+      },
+      {
+        "type": "p",
+        "html": "The live demo continued the task-management app as if a real SDLC were staffed by Claude roles: sales/stakeholders produce a BRD/SRS via a business-analyst skill; architects produce HLD, component and sequence diagrams, OpenAPI; developers consume those artefacts. You still review and publish (PDF, Confluence). Claude drafts; humans own the document."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Requirements skill: in/out of scope, login vs register, dashboard, CRUD on tasks.",
+          "Architect skill: think like a principal solution architect; HLD, deployment, data flow, NFRs (performance, security, availability).",
+          "Prefer Mermaid (or similar text diagrams) over JPEG/SVG generation: fewer tokens, editable as code, GitHub and Confluence render it.",
+          "Same slash commands work in the VS Code Claude UI and in the terminal <code>claude</code> session; Mermaid preview in the IDE needs an extension, GitHub does not."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "The five-phase agent loop (Chat, Cowork, and Code)"
+      },
+      {
+        "type": "p",
+        "html": "Whenever you give a substantial task to Cowork or Code, the trainer described a five-step pattern he also called a chain-of-thought style execution: <strong>clarify → plan → execute → verify → deliver</strong>. Example: “organise my Downloads folder by file type.” Ambiguity produces questions (keep original names? duplicates?). Then a plan (scan, categorise images/docs/archives), then file moves, then a check that nothing was lost, then a summary."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Verification (clean-code review, full test regen) is expensive. Many teams put “do not auto-verify generated code” in memory and test locally instead.",
+          "Sequence can be constrained in CLAUDE.md (“finish controllers before services”).",
+          "Always read destructive commands. Consent is yours; Anthropic will not own a delete you approved.",
+          "Prompt engineering named “chain of thought” is deferred to later modules; here it is the <em>behaviour</em> of the agent loop, not an API flag."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "What to carry into the next chapters"
+      },
+      {
+        "type": "p",
+        "html": "Module 04 then leaves the GUI recap and spends the rest of the recording on design-first APIs and MCP. If you only remember three facts from this chapter: (1) Chat / Cowork / Code are one product family with different agency; (2) CLAUDE.md is always-on memory, skills are role packets; (3) the agent loop is clarify–plan–execute–verify–deliver, and verification is a token tax you can turn down."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Start here when a classroom label no longer matches the product."
+          },
+          {
+            "title": "Models",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Live Haiku / Sonnet / Opus (and successor) names and context windows."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Terminal and IDE agent used throughout this module."
+          },
+          {
+            "title": "Cowork / Claude desktop support",
+            "url": "https://support.claude.com/",
+            "note": "Desktop client, Design, and account access issues."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "04",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 04 · Capítulo 01 · 10 de agosto de 2026",
+    "chapter_title": "Repaso: Chat, Cowork, Code y los modelos que hay detrás",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 4 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M04 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 4 (10 de agosto de 2026) arrancó con un repaso de las tres superficies de cliente: <strong>Claude Chat</strong> (claude.ai), <strong>Claude Cowork</strong> (escritorio) y <strong>Claude Code</strong> (agente de terminal / IDE). El formador, Vijay, usó ese mapa para seguir generando de extremo a extremo una app de gestión de tareas, todavía sin escribir el código de la aplicación a mano."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Interfaz de aula frente a la documentación vigente",
+        "html": "Las etiquetas, los nombres de modelo (familias Haiku / Sonnet / Opus) y los menús slash de Claude Code de la grabación de agosto de 2026 cambiarán. Para el examen y para entrega, priman <a href=\"https://docs.claude.com/en/home\">docs.claude.com</a> y la <a href=\"https://code.claude.com/docs/en/overview\">documentación de Claude Code</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Los tres productos en una frase cada uno"
+      },
+      {
+        "type": "p",
+        "html": "El repaso no son tres apps sueltas. Comparten familias de modelo y muchos patrones de memoria (<code>CLAUDE.md</code>, skills). Difieren en <em>dónde ocurre el trabajo</em> y cuánta agencia tiene el cliente sobre vuestro ordenador."
+      },
+      {
+        "type": "table",
+        "headers": ["Producto", "Énfasis del formador", "Uso típico en esta cohorte"],
+        "rows": [
+          ["Claude Chat (claude.ai)", "Pregunta–respuesta; elegís Haiku, Sonnet u Opus (o el equivalente vigente) y obtenéis respuesta.", "Exploración, borradores, preguntas que no necesitan un repositorio."],
+          ["Claude Cowork", "Cliente de escritorio: carpetas, tareas repetitivas, plantillas y (en esta sesión) Design / wireframes.", "Organizar carpetas de trabajo; generar artefactos que luego alimentan Code."],
+          ["Claude Code", "Programación agentic: plan, herramientas, sandbox, apps con forma de producción a partir de prompts, skills y memoria.", "Generación full-stack, backends OpenAPI-first, frontales con MCP."]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Cowork no es «Chat con una ventana más bonita». Se parece más a un agente que puede trabajar sobre carpetas locales. Claude Code es la misma idea apuntada a un repositorio: un bucle de agente que lee, escribe, ejecuta comandos y verifica. Chat sigue siendo la superficie más ligera: preguntáis, el modelo responde, y no posee el árbol del proyecto."
+      },
+      {
+        "type": "h2",
+        "text": "Modelos: Haiku, Sonnet, Opus — y por qué el nombre no es el examen"
+      },
+      {
+        "type": "p",
+        "html": "En el repaso el formador nombró las tres familias (Haiku, Sonnet y Opus). El punto didáctico es la <em>escalera</em>, no un SKU congelado: modelo más barato/rápido para ediciones rutinarias, un intermedio por defecto para la mayor parte del código, y uno más pesado cuando el plan o la arquitectura piden más razonamiento. En Claude Code se cambia con <code>/model</code> (módulo 05). Gana la disponibilidad de la organización: solo veis los modelos a los que el espacio de trabajo tiene derecho."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Las mismas familias pueden estar detrás de Chat, Cowork y Code; el <em>cliente</em> cambia el acceso a herramientas y la persistencia, no la idea de «qué cerebro».",
+          "Una sesión en directo puede mostrar un valor por defecto del tipo «Sonnet 5»; no memoricéis esa cadena. Memorizad: el modelo más pequeño que aún haga el trabajo, y comprobad la página de modelos antes del examen.",
+          "El coste en tokens sigue la elección de modelo <em>y</em> cuánto adjuntáis (carpetas enteras frente a un solo YAML OpenAPI)."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Memoria universal: CLAUDE.md frente a skills"
+      },
+      {
+        "type": "p",
+        "html": "El formador trató <code>CLAUDE.md</code> y las skills como patrones <em>universales</em>: valen para Cowork, Code y, donde el producto lo permita, flujos cercanos a Chat. Un alumno preguntó la diferencia; la respuesta es la que hay que llevar al examen."
+      },
+      {
+        "type": "table",
+        "headers": ["Mecanismo", "Cuándo se aplica", "Cómo se invoca"],
+        "rows": [
+          ["CLAUDE.md (memoria)", "Se añade por defecto a las peticiones que el cliente hace al modelo.", "No se llama con slash. Va en la raíz del repo; ficheros extra opcionales en frontend/backend."],
+          ["Skill (SKILL.md en una carpeta con nombre)", "Solo cuando esa skill está en juego.", "Comando slash (p. ej. /business-analyst, /architect), salvo que la invocación automática siga activa."]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "<code>CLAUDE.md</code> es instrucción de sistema permanente: código listo para producción, buenas prácticas del lenguaje, responsabilidad única, «para todos los diagramas usad Mermaid», etc. Ficheros anidados permiten normas distintas de backend y frontend. Las skills codifican un <em>rol</em> (analista de negocio, arquitecto, diseñador OpenAPI, ingeniero frontend). El cuerpo de la skill se escribe en <code>SKILL.md</code> (en mayúsculas) dentro de su carpeta; una vez definida, Claude Code expone el slash correspondiente."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Invocación automática de skills",
+        "html": "Por defecto Claude puede elegir una skill si vuestro texto encaja (SRS, «business analyst», etc.). Para forzar el uso solo con slash, activad la propiedad que desactiva la invocación por el modelo (<em>disable model invocation</em> a true, en la formulación del formador). En un bucle agentic las skills también pueden entrar sin que escribáis el slash: es intencionado, no un fallo."
+      },
+      {
+        "type": "h2",
+        "text": "Roles de SDLC como skills, no como modelos extra"
+      },
+      {
+        "type": "p",
+        "html": "La demo siguió la app de tareas como si un SDLC real estuviera cubierto por roles de Claude: ventas/stakeholders producen BRD/SRS con una skill de analista; los arquitectos producen HLD, diagramas de componentes y secuencia, OpenAPI; los desarrolladores consumen esos artefactos. Vosotros seguís revisando y publicando (PDF, Confluence). Claude redacta; las personas son dueñas del documento."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Skill de requisitos: dentro/fuera de alcance, login frente a registro, dashboard, CRUD de tareas.",
+          "Skill de arquitecto: pensar como arquitecto de solución; HLD, despliegue, flujo de datos, requisitos no funcionales.",
+          "Preferid Mermaid (u otro diagrama en texto) frente a JPEG/SVG: menos tokens, se edita como código, GitHub y Confluence lo renderizan.",
+          "Los mismos slash funcionan en la UI de Claude en VS Code y en la sesión de terminal <code>claude</code>; la vista previa Mermaid en el IDE necesita una extensión, GitHub no."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "El bucle de cinco fases (Chat, Cowork y Code)"
+      },
+      {
+        "type": "p",
+        "html": "Ante una tarea sustancial en Cowork o Code, el formador describió un patrón de cinco pasos que también llamó ejecución al estilo chain-of-thought: <strong>aclarar → planificar → ejecutar → verificar → entregar</strong>. Ejemplo: «organiza mi carpeta Descargas por tipo de fichero». La ambigüedad genera preguntas (¿conservar nombres? ¿duplicados?). Luego un plan (escanear, clasificar imágenes/documentos/archivos), los movimientos, una comprobación de que no se ha perdido nada, y un resumen."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "La verificación (revisión de código limpio, regenerar tests) es cara. Muchos equipos ponen en la memoria «no verifiques automáticamente el código generado» y prueban en local.",
+          "La secuencia se puede acotar en CLAUDE.md («terminad los controladores antes que los servicios»).",
+          "Leed siempre los comandos destructivos. El consentimiento es vuestro; Anthropic no asume un borrado que hayáis aprobado.",
+          "La técnica de prompting llamada chain of thought se deja para módulos posteriores; aquí es el <em>comportamiento</em> del bucle del agente, no un flag de API."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Qué llevar a los capítulos siguientes"
+      },
+      {
+        "type": "p",
+        "html": "El resto del módulo 04 deja el repaso de GUI y se centra en APIs design-first y MCP. Si solo retenéis tres hechos: (1) Chat / Cowork / Code son una familia con distinta agencia; (2) CLAUDE.md es memoria siempre activa, las skills son paquetes de rol; (3) el bucle es aclarar–planificar–ejecutar–verificar–entregar, y la verificación es un impuesto de tokens que podéis bajar."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Cuando una etiqueta del aula ya no coincida con el producto."
+          },
+          {
+            "title": "Modelos",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Nombres vigentes de Haiku / Sonnet / Opus y ventanas de contexto."
+          },
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Agente de terminal e IDE de este módulo."
+          },
+          {
+            "title": "Soporte de Cowork / escritorio",
+            "url": "https://support.claude.com/",
+            "note": "Cliente de escritorio, Design y acceso a la cuenta."
+          }
+        ]
+      }
+    ]
+  }
+]

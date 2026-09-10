@@ -1,0 +1,222 @@
+[
+  {
+    "lang": "en",
+    "module_id": "06",
+    "chapter_id": "01",
+    "eyebrow": "Module 06 · Chapter 01 · 13 August 2026",
+    "chapter_title": "CLAUDE.md versus hooks for formatting and company rules",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 6 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M06 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 6 (13 August 2026) made the contrast that Foundation answers keep mixing up: <strong>CLAUDE.md</strong> (and skills) tell the <em>model</em> how to write code; <strong>hooks</strong> run <em>locally</em> in the Claude Code lifecycle and do not consume generation tokens. The live example was Prettier via a post-tool-use hook after an Edit/Write, versus putting “format as Prettier / company style” in memory so the LLM rewrites the file in a second billed pass."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Hook event names in docs may differ",
+        "html": "The trainer listed pre-tool use, post-tool use, user prompt submit, session start/end, stop, sub-agent stop, notification, and pre-compact. Confirm the live event catalogue in <a href=\"https://code.claude.com/docs/en/overview\">Claude Code docs</a>. Quote escaping in <code>settings.json</code> and whether the IDE chat versus terminal actually fires hooks also drifted during the demo (a preview “Claude hook” setting had to be enabled)."
+      },
+      {
+        "type": "h2",
+        "text": "Two ways to get “company format”"
+      },
+      {
+        "type": "table",
+        "headers": ["Approach", "Where it lives", "Who runs it", "Tokens", "Best for"],
+        "rows": [
+          ["CLAUDE.md / skills", "Markdown in the repo (always-on or slash)", "The model, as extra instructions every request", "Yes — format rules are re-read and often re-applied as generation", "Architecture, stack choice, SRP, “use Mermaid,” domain rules the model must understand"],
+          ["Hook (command in settings.json)", "Claude Code settings + scripts in the project", "Sandbox/local shell after or before a tool", "No — NPX Prettier on disk is not an LLM turn", "Mechanical format, lint --fix, block rm, protect .env"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "The trainer’s “ideal situation”: do <em>not</em> ask the LLM to pretty-print. Use hooks as an extended plugin on the workspace. Lalit’s question — “hooks won’t be counted as token usage, right?” — answer: yes, because NPX (or any shell) runs on the local system / sandbox, not as model output."
+      },
+      {
+        "type": "h2",
+        "text": "What a post-tool-use formatter actually did"
+      },
+      {
+        "type": "p",
+        "html": "Prompt: add a hello message on the frontend login page. Claude invoked Edit/Write (IO tools). After the write, the <strong>post-tool-use</strong> hook ran: <code>echo</code> status (visible in the terminal-based Claude session — the GUI had no dedicated hook log) and <code>npx prettier</code> on the touched file. Diff: single quotes to double quotes, long JSX broken across lines — clean-code mechanics, not new product behaviour. Prettier options (semicolons, trailing commas, indent) belong in Prettier config consumed by the hook, not in a paragraph of CLAUDE.md."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Hook bodies are Linux/macOS commands (and whatever the sandbox shell can run). Double quotes in JSON must be escaped; bad quoting was why the previous day’s hook never fired.",
+          "Status strings you embed show up in tool execution UI; they are not a special JSON protocol unless you choose to emit JSON.",
+          "Verify hooks from <strong>terminal</strong> Claude if the VS Code chat surface is silent — classmates saw terminal-only firing until a preview setting was flipped."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Keep CLAUDE.md for things Prettier cannot know"
+      },
+      {
+        "type": "p",
+        "html": "Memory still wins for: production-ready defaults, which framework, “controllers before services,” Mermaid-not-JPEG, OpenAPI path, never invent fields. Those require the model to <em>choose</em> differently. Formatting, secret-file exclusion, and “never run this bash” are better as hooks because they are deterministic and cheap. Putting both in CLAUDE.md causes the model to narrate format passes you could have got for free."
+      },
+      {
+        "type": "h2",
+        "text": "Lifecycle: hooks are events, not skills"
+      },
+      {
+        "type": "p",
+        "html": "Skills still inject roles when slashed. Hooks fire on Claude’s activity stream regardless of which skill was used. Session start/end, prompt submit, compact, sub-agent stop — each can run a command. That is how you “manage the lifecycle of Claude’s interaction with LLMs” in the trainer’s phrase. You configure them in <code>settings.json</code> with matchers (which tool: Edit, Write, Bash, …)."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "CLAUDE.md cannot stop auto-mode bash",
+        "html": "In auto/bypass permission mode the model will not ask before <code>rm</code>. A sentence in CLAUDE.md (“never delete files”) is a suggestion. A <strong>pre-tool-use</strong> matcher that runs <code>block-dangerous-commands.sh</code> can deny the tool. That pairing is the next chapter; this chapter’s exam line is: format and policy enforcement that must always happen belong in hooks, not in memory prose."
+      },
+      {
+        "type": "h2",
+        "text": "Study check"
+      },
+      {
+        "type": "p",
+        "html": "Written scenario: “team style guide is 2-space indent and double quotes; they also must use repository pattern.” Split the answer: indent/quotes → post-tool Prettier hook; repository pattern → backend CLAUDE.md or a backend skill. Mixing them into one CLAUDE.md blob is the distractor."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Hooks, settings.json, and how they relate to CLAUDE.md."
+          },
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "If hook event names were renamed after August 2026."
+          },
+          {
+            "title": "Guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Deterministic checks belong outside the model when possible."
+          },
+          {
+            "title": "Prompting overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Why extra format instructions in the prompt are the expensive duplicate of a hook."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "06",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 06 · Capítulo 01 · 13 de agosto de 2026",
+    "chapter_title": "CLAUDE.md frente a hooks para formato y normas de empresa",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 6 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M06 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 6 (13 de agosto de 2026) dejó el contraste que las respuestas de Foundation siguen mezclando: <strong>CLAUDE.md</strong> (y las skills) dicen al <em>modelo</em> cómo escribir código; los <strong>hooks</strong> corren <em>en local</em> en el ciclo de vida de Claude Code y no consumen tokens de generación. El ejemplo en directo fue Prettier vía un hook post-tool-use tras un Edit/Write, frente a meter «formatea como Prettier / estilo de empresa» en la memoria para que el LLM reescriba el fichero en un segundo pase de pago."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Los nombres de eventos de hook en los docs pueden diferir",
+        "html": "El formador listó pre-tool use, post-tool use, user prompt submit, session start/end, stop, sub-agent stop, notification y pre-compact. Confirmad el catálogo vigente en la <a href=\"https://code.claude.com/docs/en/overview\">documentación de Claude Code</a>. El escape de comillas en <code>settings.json</code> y si el chat del IDE frente al terminal dispara de verdad los hooks también bailó en el demo (hubo que activar un ajuste preview «Claude hook»)."
+      },
+      {
+        "type": "h2",
+        "text": "Dos formas de obtener el «formato de empresa»"
+      },
+      {
+        "type": "table",
+        "headers": ["Enfoque", "Dónde vive", "Quién lo ejecuta", "Tokens", "Mejor para"],
+        "rows": [
+          ["CLAUDE.md / skills", "Markdown en el repo (siempre activo o slash)", "El modelo, como instrucciones extra en cada petición", "Sí — las reglas de formato se releeen y a menudo se reaplican como generación", "Arquitectura, elección de stack, SRP, «usad Mermaid», reglas de dominio que el modelo debe entender"],
+          ["Hook (comando en settings.json)", "Ajustes de Claude Code + scripts en el proyecto", "Shell local/sandbox antes o después de una tool", "No — NPX Prettier en disco no es un turno de LLM", "Formato mecánico, lint --fix, bloquear rm, proteger .env"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "La «situación ideal» del formador: <em>no</em> pidáis al LLM que haga pretty-print. Usad hooks como plugin extendido del espacio de trabajo. Pregunta de Lalit — «los hooks no cuentan como uso de tokens, ¿verdad?» — respuesta: sí, porque NPX (o cualquier shell) corre en el sistema local / sandbox, no como salida del modelo."
+      },
+      {
+        "type": "h2",
+        "text": "Qué hizo de verdad un formateador post-tool-use"
+      },
+      {
+        "type": "p",
+        "html": "Prompt: añade un mensaje hello en la página de login del frontend. Claude invocó Edit/Write (tools de IO). Tras la escritura, corrió el hook <strong>post-tool-use</strong>: <code>echo</code> de estado (visible en la sesión Claude de terminal — la GUI no tenía un log dedicado de hooks) y <code>npx prettier</code> sobre el fichero tocado. Diff: comillas simples a dobles, JSX largo partido en varias líneas — mecánica de código limpio, no comportamiento nuevo de producto. Las opciones de Prettier (puntos y coma, trailing commas, indentación) van en la config de Prettier que consume el hook, no en un párrafo de CLAUDE.md."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "El cuerpo del hook son comandos Linux/macOS (y lo que el shell del sandbox pueda ejecutar). Las comillas dobles en JSON hay que escaparlas; un mal quoting fue por lo que el hook del día anterior no disparó.",
+          "Las cadenas de estado que incrustáis aparecen en la UI de ejecución de tools; no son un protocolo JSON especial salvo que emitáis JSON a propósito.",
+          "Verificad los hooks desde Claude en <strong>terminal</strong> si la superficie de chat de VS Code calla: los compañeros vieron disparo solo en terminal hasta activar un ajuste preview."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Dejad CLAUDE.md para lo que Prettier no puede saber"
+      },
+      {
+        "type": "p",
+        "html": "La memoria sigue ganando para: valores por defecto listos para producción, qué framework, «controladores antes que servicios», Mermaid y no JPEG, ruta OpenAPI, no inventar campos. Eso exige que el modelo <em>elija</em> distinto. El formato, excluir ficheros secretos y «nunca ejecutes este bash» van mejor como hooks porque son deterministas y baratos. Meter ambas cosas en CLAUDE.md hace que el modelo narre pases de formato que podríais haber tenido gratis."
+      },
+      {
+        "type": "h2",
+        "text": "Ciclo de vida: los hooks son eventos, no skills"
+      },
+      {
+        "type": "p",
+        "html": "Las skills siguen inyectando roles al hacer slash. Los hooks disparan en el flujo de actividad de Claude da igual qué skill se usó. Session start/end, prompt submit, compact, sub-agent stop: cada uno puede lanzar un comando. Así se «gestiona el ciclo de vida de la interacción de Claude con los LLM», en la frase del formador. Se configuran en <code>settings.json</code> con matchers (qué tool: Edit, Write, Bash, …)."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "CLAUDE.md no puede detener el bash en modo auto",
+        "html": "En modo auto/bypass el modelo no preguntará antes de un <code>rm</code>. Una frase en CLAUDE.md («nunca borréis ficheros») es una sugerencia. Un matcher <strong>pre-tool-use</strong> que ejecute <code>block-dangerous-commands.sh</code> puede denegar la tool. Ese emparejamiento es el capítulo siguiente; la frase de examen de este es: el formato y la política que deben ocurrir siempre van en hooks, no en prosa de memoria."
+      },
+      {
+        "type": "h2",
+        "text": "Comprobación de estudio"
+      },
+      {
+        "type": "p",
+        "html": "Escenario escrito: «la guía de estilo del equipo es indentación de 2 espacios y comillas dobles; además deben usar el patrón repositorio». Partid la respuesta: indentación/comillas → hook post-tool de Prettier; patrón repositorio → CLAUDE.md de backend o una skill de backend. Mezclarlo todo en un solo CLAUDE.md es el distractor."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Hooks, settings.json y su relación con CLAUDE.md."
+          },
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Si los nombres de eventos de hook se renombraron tras agosto de 2026."
+          },
+          {
+            "title": "Guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Las comprobaciones deterministas van fuera del modelo cuando sea posible."
+          },
+          {
+            "title": "Visión general de prompting",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Por qué las instrucciones extra de formato en el prompt duplican de forma cara un hook."
+          }
+        ]
+      }
+    ]
+  }
+]
