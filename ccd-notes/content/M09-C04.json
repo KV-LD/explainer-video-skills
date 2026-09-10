@@ -1,0 +1,268 @@
+[
+  {
+    "lang": "en",
+    "module_id": "09",
+    "chapter_id": "04",
+    "eyebrow": "Module 09 · Chapter 04 · 20 August 2026",
+    "chapter_title": "Prompt caching",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 9 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M09 · C04 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Without cache, every Messages call is <strong>stateless</strong>: the PDF, the huge system prompt, the thinking over that PDF — all discarded after the response. The next click pays input (and thinking) again. <strong>Prompt caching</strong> stores a prefix on Anthropic’s side for a short TTL (class: <strong>5 minutes</strong> or <strong>1 hour</strong>) so later requests reuse it at cache-hit prices. Vijay also talked about <strong>container ids</strong> so follow-ups stick to the replica that holds the cache."
+      },
+      {
+        "type": "h2",
+        "text": "Why it exists"
+      },
+      {
+        "type": "p",
+        "html": "Chat-with-PDF is the motivating story: converting a million-token document and sending it on every question is an input invoice each time. Cache the document (and stable instructions). Subsequent user questions are small; you pay a write once, then hits. Combining cache with extended thinking without cache was described as double waste: re-read + re-think."
+      },
+      {
+        "type": "h2",
+        "text": "How the lab enabled it"
+      },
+      {
+        "type": "p",
+        "html": "On the <code>system</code> content (or other cacheable blocks in current APIs), set <code>cache_control</code> with <code>type: ephemeral</code>. That flag marks “please cache this prefix.” Ephemeral means the server remembers only for the agreed duration, then discards — Vijay tied that to SLA language: not a permanent store, not your RAG database."
+      },
+      {
+        "type": "p",
+        "html": "The demo mixed a large “code prompt” / HTML-ish blob as system content (and briefly tangled with tool calling when the notebook went sideways). Conceptually: put the <strong>large invariant</strong> behind cache_control; leave the per-turn user question after the breakpoint."
+      },
+      {
+        "type": "h2",
+        "text": "Write, hit, read — and money"
+      },
+      {
+        "type": "table",
+        "headers": ["Operation (class)", "Meaning", "Price talk on the slide (illustrative)"],
+        "rows": [
+          ["Cache write", "First time that prefix is stored", "Higher than raw input; 5-minute vs 1-hour TTLs priced differently (e.g. ~$12.50 vs ~$20 / MTok on that deck)"],
+          ["Cache hit", "Later request reuses the prefix", "Much cheaper (on the order of ~$1 / MTok on that deck)"],
+          ["Cache read", "Reading cached tokens as part of processing", "May be bundled or billed depending on model — check live pricing"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Exact dollars from 17–20 August 2026 are <strong>not</strong> exam constants. The structure is: write is dear, hit is cheap, output is still output, thinking tokens still exist if enabled. See current prompt-caching and pricing pages."
+      },
+      {
+        "type": "h2",
+        "text": "Container id and sticky routing"
+      },
+      {
+        "type": "p",
+        "html": "Class architecture: horizontally scaled LLM containers. A cache lives on the instance that wrote it. The Message response can include a <strong>container</strong> identifier (already glimpsed on 17 August). Send it back on the next request so you land on the same cache. If you spray traffic across random replicas, you pay writes again. Official docs may describe automatic prefix matching instead of manual container pinning — if they disagree with the notebook, <strong>docs win</strong>, but be ready to explain Vijay’s replica story."
+      },
+      {
+        "type": "h2",
+        "text": "What cache is not"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Not Chat session memory in the product sense — it expires.",
+          "Not RAG / a SQL database you query (17 August Q&amp;A).",
+          "Not a substitute for resending the <em>changing</em> user turn.",
+          "Not Claude Pro’s five-hour usage refresh."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Design rules"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Stable, large prefix first (system, tools, documents).",
+          "Mark cache_control at the breakpoint.",
+          "Variable question last.",
+          "Reuse the same model id; changing model usually misses the cache.",
+          "Watch usage fields: cache_creation vs cache_read tokens in the response."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Minimum tokens and TTL names change",
+        "html": "Today’s APIs document minimum prefix sizes and TTL enums. The classroom word was “ephemeral” plus 5 minutes / 1 hour. Align with <a href=\"https://docs.claude.com/en/docs/build-with-claude/prompt-caching\">prompt caching</a> before you sit the exam."
+      },
+      {
+        "type": "h2",
+        "text": "Handoff to tools and MCP"
+      },
+      {
+        "type": "p",
+        "html": "The rest of 20 August introduced tools/MCP as the way to inject <strong>real-time and proprietary</strong> data — another context-enhancement path, examined in module 10. Cache keeps <em>static</em> context cheap; tools fetch <em>fresh</em> context."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Prompt caching",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "cache_control, TTLs, breakpoints, usage fields."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Where cache_control sits on system and content blocks."
+          },
+          {
+            "title": "Extended thinking",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/extended-thinking",
+            "note": "Do not casually re-think a cached PDF every turn."
+          },
+          {
+            "title": "PDF support",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "Documents are the usual large prefix to cache."
+          },
+          {
+            "title": "Rate limits",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Throughput still applies on cache hits."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "09",
+    "chapter_id": "04",
+    "eyebrow": "Módulo 09 · Capítulo 04 · 20 de agosto de 2026",
+    "chapter_title": "Caché de prompts",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 9 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M09 · C04 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Sin caché, cada llamada Messages es <strong>sin estado</strong>: el PDF, el system prompt enorme, el thinking sobre ese PDF — todo se tira tras la respuesta. El siguiente clic vuelve a pagar entrada (y thinking). La <strong>caché de prompts</strong> guarda un prefijo en lado Anthropic durante un TTL corto (en clase: <strong>5 minutos</strong> o <strong>1 hora</strong>) para que las peticiones siguientes lo reutilicen a precio de acierto. Vijay habló también de <strong>container id</strong> para que los seguimientos se queden en la réplica que tiene la caché."
+      },
+      {
+        "type": "h2",
+        "text": "Por qué existe"
+      },
+      {
+        "type": "p",
+        "html": "El relato motivador es chatear con un PDF: convertir un documento de un millón de tokens y enviarlo en cada pregunta es una factura de entrada cada vez. Cachead el documento (y las instrucciones estables). Las preguntas de usuario siguientes son pequeñas; pagáis una escritura y luego aciertos. Combinar thinking extendido sin caché se describió como desperdicio doble: releer + repensar."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo lo activó el laboratorio"
+      },
+      {
+        "type": "p",
+        "html": "En el contenido <code>system</code> (u otros bloques cacheables en las APIs actuales), poned <code>cache_control</code> con <code>type: ephemeral</code>. Esa bandera marca «cachead este prefijo». Ephemeral significa que el servidor solo recuerda durante la duración acordada y luego descarta — Vijay lo ligó a lenguaje de SLA: no es un almacén permanente ni vuestra base RAG."
+      },
+      {
+        "type": "p",
+        "html": "El demo mezcló un «code prompt» / blob tipo HTML enorme como system (y se enredó un momento con tool calling cuando el notebook se torció). En concepto: poned lo <strong>grande e invariante</strong> detrás de cache_control; dejad la pregunta de cada turno después del punto de ruptura."
+      },
+      {
+        "type": "h2",
+        "text": "Write, hit, read — y dinero"
+      },
+      {
+        "type": "table",
+        "headers": ["Operación (clase)", "Significado", "Charla de precio en la diapositiva (ilustrativa)"],
+        "rows": [
+          ["Cache write", "La primera vez que se guarda ese prefijo", "Más cara que la entrada cruda; TTL de 5 minutos frente a 1 hora con precios distintos (p. ej. ~12,50 $ frente a ~20 $ / MTok en esa baraja)"],
+          ["Cache hit", "Una petición posterior reutiliza el prefijo", "Mucho más barata (del orden de ~1 $ / MTok en esa baraja)"],
+          ["Cache read", "Leer tokens cacheados al procesar", "Puede ir incluido o facturarse según el modelo — mirad el precio vivo"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Los dólares exactos del 17–20 de agosto de 2026 <strong>no</strong> son constantes de examen. La estructura es: escribir es caro, acertar es barato, la salida sigue siendo salida, los tokens de thinking existen si está activado. Ved las páginas vigentes de caché y precios."
+      },
+      {
+        "type": "h2",
+        "text": "Container id y enrutado pegajoso"
+      },
+      {
+        "type": "p",
+        "html": "Arquitectura de clase: contenedores LLM con escala horizontal. Una caché vive en la instancia que la escribió. La respuesta Message puede incluir un identificador de <strong>container</strong> (ya vislumbrado el 17 de agosto). Reenviadlo en la siguiente petición para caer en la misma caché. Si esparcís el tráfico por réplicas al azar, volvéis a pagar escrituras. Las docs oficiales pueden describir coincidencia automática de prefijos en vez de pin manual de contenedor — si discrepan del notebook, <strong>ganan las docs</strong>, pero estad listos para explicar el relato de réplicas de Vijay."
+      },
+      {
+        "type": "h2",
+        "text": "Qué no es la caché"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "No es la memoria de sesión de Chat en sentido de producto — caduca.",
+          "No es RAG / una base SQL que consultáis (preguntas del 17 de agosto).",
+          "No sustituye reenviar el turno de usuario que <em>cambia</em>.",
+          "No es el refresco de uso de cinco horas de Claude Pro."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Reglas de diseño"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Prefijo estable y grande primero (system, tools, documentos).",
+          "Marcad cache_control en el punto de ruptura.",
+          "La pregunta variable, al final.",
+          "Reutilizad el mismo id de modelo; cambiar de modelo suele fallar la caché.",
+          "Mirad los campos usage: tokens de cache_creation frente a cache_read en la respuesta."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Los mínimos de tokens y los nombres de TTL cambian",
+        "html": "Las APIs de hoy documentan tamaños mínimos de prefijo y enums de TTL. En el aula la palabra era «ephemeral» más 5 minutos / 1 hora. Alinead con <a href=\"https://docs.claude.com/en/docs/build-with-claude/prompt-caching\">prompt caching</a> antes del examen."
+      },
+      {
+        "type": "h2",
+        "text": "Puente a tools y MCP"
+      },
+      {
+        "type": "p",
+        "html": "El resto del 20 de agosto introdujo tools/MCP como vía para inyectar datos <strong>en tiempo real y propietarios</strong> — otro camino de mejora de contexto, examinado en el módulo 10. La caché abarata el contexto <em>estático</em>; las tools traen contexto <em>fresco</em>."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Caché de prompts",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "cache_control, TTL, puntos de ruptura, campos usage."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Dónde vive cache_control en system y en bloques de contenido."
+          },
+          {
+            "title": "Pensamiento extendido",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/extended-thinking",
+            "note": "No volváis a pensar un PDF cacheado en cada turno sin necesidad."
+          },
+          {
+            "title": "Soporte PDF",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "Los documentos son el prefijo grande habitual a cachear."
+          },
+          {
+            "title": "Límites de tasa",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "El caudal sigue aplicando en los aciertos de caché."
+          }
+        ]
+      }
+    ]
+  }
+]

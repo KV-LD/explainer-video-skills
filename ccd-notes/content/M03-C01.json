@@ -1,0 +1,234 @@
+[
+  {
+    "lang": "en",
+    "module_id": "03",
+    "chapter_id": "01",
+    "eyebrow": "Module 03 · Chapter 01 · 6 August 2026",
+    "chapter_title": "Four Anthropic certifications after 13 July and who each is for",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 3 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M03 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "On 6 August 2026 Vijay opened with the certification map. Before <strong>13 July 2026</strong> Anthropic had essentially one credential (he remembered it as a solutions-architect sitting). After that date the programme split into <strong>four</strong> named tracks. This masterclass is the second: <strong>Claude Certified Developer, Foundation (CCDV-F)</strong>. Do not study Architect Professional by accident, and do not treat Percipio as the exam."
+      },
+      {
+        "type": "h2",
+        "text": "The four names (classroom expansions)"
+      },
+      {
+        "type": "p",
+        "html": "ASR in the transcript mangled acronyms (CCAOF, “CCDB”). Use Anthropic’s live names on Skilljar. Pedagogically Vijay grouped them as: business-oriented Associate Foundation, developer Foundation, Architect Foundation, Architect Professional."
+      },
+      {
+        "type": "table",
+        "headers": ["Track (as taught)", "Who it is for", "Skills he listed", "Exam sketch (classroom)"],
+        "rows": [
+          ["<strong>Associate / business Foundation</strong>", "Consultants, sales engineers, customer success, delivery managers, business analysts — <em>non-developers</em>", "Prompting, Claude projects, choosing models, responsible AI, knowledge management, output evaluation — mainly Chat and Cowork", "60 questions, 120 minutes, ~USD 99, 12-month validity"],
+          ["<strong>Developer Foundation (this course)</strong>", "Software developers, AI engineers, backend, full-stack", "Claude APIs, prompting, structured outputs, <strong>Claude Code</strong>, MCP, light Agent SDK and error handling", "60 questions, 120 minutes, ~USD 125, 12-month validity"],
+          ["<strong>Architect Foundation</strong>", "Solution / AI architects, technical leads, platform engineers — needs enterprise build judgement", "Agentic architecture, Claude Code, MCP, prompting, context management, system design, production reliability", "Same family of sitting; confirm current price/length on Skilljar"],
+          ["<strong>Architect Professional</strong>", "Enterprise / principal architects, technical directors, AI platform leads", "Enterprise AI architecture, governance, security, compliance, scalability, operational excellence", "Highest bar; same 13 July programme family"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Prices and codes move",
+        "html": "USD 99 / 125, 60×120, 12-month validity, and 750/1000 pass came from Vijay’s slides and a ~14-page July 2026 programme PDF. Trust <a href=\"https://anthropic.skilljar.com\">anthropic.skilljar.com</a> on booking day."
+      },
+      {
+        "type": "h2",
+        "text": "Recommended learning spine for developers"
+      },
+      {
+        "type": "p",
+        "html": "Regardless of track, he wanted everyone fluent in: how Chat, Cowork, and Code sit on the models; <strong>prompt engineering (~18–20% of items on all certs)</strong>; Claude projects (local, git, remote); Claude API (knowledge, tools); Claude Code as the coding agent; MCP; Agent SDK (memory, tool loops); then architecture for those who sit the architect papers. Official sample: overnight 10,000 documents, cost-first, not urgent → prefer <strong>Message Batches</strong> (async, up to a 24-hour window in the stem) over firing synchronous Messages in parallel “to finish ASAP.”"
+      },
+      {
+        "type": "h2",
+        "text": "How you sit it"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "No cohort exam date — you book a slot (Pearson in the stories; org may add a vendor).",
+          "Academy courses teach jargon; they are not the proctored exam (and, if UST is already a partner, course completion is no longer the only gate he described).",
+          "Percipio completion ≠ Anthropic certified.",
+          "He promised to push the programme PDF and samples to a GitHub repo for the class—use whatever facilitation actually shares, plus docs.claude.com."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "What this four-week class will and will not finish"
+      },
+      {
+        "type": "p",
+        "html": "Coverage is developer Foundation: APIs, Code, MCP, prompting, a taste of Agent SDK. Agentic architecture and production reliability appear so you can see the architect tracks, not because CCDV-F requires professional-level governance essays. Associate-only Cowork fluency is already behind you if you followed modules 01–02; do not skip Code because “I am a BA on this call.”"
+      },
+      {
+        "type": "h2",
+        "text": "Prompting resources he endorsed"
+      },
+      {
+        "type": "p",
+        "html": "For prompt-engineering technique (zero-shot, few-shot, chain of thought) he pointed at a general (not Claude-only) techniques site in chat, plus Anthropic’s own docs. Exam items still use Claude product names. Learn both: the pattern, then the Claude control (stop sequences, structured output) that later modules teach."
+      },
+      {
+        "type": "h2",
+        "text": "Capstone reminder"
+      },
+      {
+        "type": "p",
+        "html": "Team capstone may exist; it is not Pearson. Do not upload client code to a shared demo repo. The certification tests judgement on Anthropic’s stack."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Live track names, booking, and course lists."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Named in the sample batches-versus-parallel item."
+          },
+          {
+            "title": "Prompt engineering overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Largest shared slice across the four papers."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Centre of the developer Foundation skill list."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "On both developer and architect skill lists."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "03",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 03 · Capítulo 01 · 6 de agosto de 2026",
+    "chapter_title": "Las cuatro certificaciones de Anthropic desde el 13 de julio y a quién van",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 3 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M03 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El 6 de agosto de 2026 Vijay abrió con el mapa de certificaciones. Antes del <strong>13 de julio de 2026</strong> Anthropic tenía esencialmente una credencial (la recordaba como un examen de arquitecto de soluciones). Después de esa fecha el programa se partió en <strong>cuatro</strong> rutas con nombre. Este masterclass es la segunda: <strong>Claude Certified Developer, Foundation (CCDV-F)</strong>. No estudiéis Architect Professional por accidente, y no trates Percipio como el examen."
+      },
+      {
+        "type": "h2",
+        "text": "Los cuatro nombres (expansiones de aula)"
+      },
+      {
+        "type": "p",
+        "html": "El ASR de la transcripción aplastó acrónimos (CCAOF, «CCDB»). Usad los nombres vigentes de Anthropic en Skilljar. Pedagógicamente Vijay los agrupó así: Associate Foundation orientado a negocio, Foundation de desarrollador, Architect Foundation, Architect Professional."
+      },
+      {
+        "type": "table",
+        "headers": ["Ruta (según se enseñó)", "A quién va", "Competencias que enumeró", "Esquema de examen (aula)"],
+        "rows": [
+          ["<strong>Associate / Foundation de negocio</strong>", "Consultores, ingenieros de ventas, customer success, delivery managers, analistas de negocio — <em>no desarrolladores</em>", "Prompting, proyectos Claude, elección de modelos, IA responsable, gestión del conocimiento, evaluación de salida — sobre todo Chat y Cowork", "60 preguntas, 120 minutos, ~99 USD, validez 12 meses"],
+          ["<strong>Developer Foundation (este curso)</strong>", "Desarrolladores de software, ingenieros de IA, backend, full-stack", "APIs de Claude, prompting, salidas estructuradas, <strong>Claude Code</strong>, MCP, Agent SDK y manejo de errores a nivel básico", "60 preguntas, 120 minutos, ~125 USD, validez 12 meses"],
+          ["<strong>Architect Foundation</strong>", "Arquitectos de solución / IA, technical leads, ingenieros de plataforma — hace falta juicio de construcción empresarial", "Arquitectura agentic, Claude Code, MCP, prompting, gestión de contexto, diseño de sistemas, fiabilidad en producción", "Misma familia de convocatoria; confirmad precio/duración vigentes en Skilljar"],
+          ["<strong>Architect Professional</strong>", "Arquitectos enterprise / principales, directores técnicos, responsables de plataforma de IA", "Arquitectura de IA empresarial, gobierno, seguridad, cumplimiento, escalabilidad, excelencia operativa", "Listón más alto; misma familia de programa del 13 de julio"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Precios y códigos se mueven",
+        "html": "99 / 125 USD, 60×120, validez 12 meses y el 750/1000 de aprobado salieron de las diapositivas de Vijay y de un PDF de programa de ~14 páginas de julio de 2026. El día de la reserva primad <a href=\"https://anthropic.skilljar.com\">anthropic.skilljar.com</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Columna vertebral de aprendizaje recomendada para desarrolladores"
+      },
+      {
+        "type": "p",
+        "html": "Fuera cual fuera la ruta, quería a todo el mundo fluido en: cómo Chat, Cowork y Code se apoyan en los modelos; <strong>ingeniería de prompts (~18–20 % de los ítems en todas las certs)</strong>; proyectos Claude (local, git, remoto); API de Claude (conocimiento, herramientas); Claude Code como agente de programación; MCP; Agent SDK (memoria, bucles de herramientas); luego arquitectura para quienes se presenten a los papeles de arquitecto. Ejemplo oficial: 10.000 documentos nocturnos, coste primero, no urgente → preferid <strong>Message Batches</strong> (asíncrono, ventana de hasta 24 horas en el enunciado) frente a disparar Messages síncronos en paralelo «para acabar ya»."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo os presentáis"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "No hay fecha de examen de cohorte — reserváis hueco (Pearson en las historias; la org puede añadir un proveedor).",
+          "Los cursos de Academy enseñan jerga; no son el examen supervisado (y, si UST ya es partner, completar cursos ya no es la única puerta que describió).",
+          "Completar Percipio ≠ certificado Anthropic.",
+          "Prometió subir el PDF del programa y ejemplos a un repo GitHub del curso—usad lo que la facilitación comparta de verdad, más docs.claude.com."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Qué terminará y qué no este curso de cuatro semanas"
+      },
+      {
+        "type": "p",
+        "html": "La cobertura es Foundation de desarrollador: APIs, Code, MCP, prompting, una cata de Agent SDK. La arquitectura agentic y la fiabilidad en producción aparecen para que veáis las rutas de arquitecto, no porque CCDV-F exija ensayos de gobierno a nivel professional. La fluidez Associate solo-Cowork ya la tenéis si seguisteis los módulos 01–02; no os saltéis Code porque «soy BA en esta llamada»."
+      },
+      {
+        "type": "h2",
+        "text": "Recursos de prompting que respaldó"
+      },
+      {
+        "type": "p",
+        "html": "Para técnica de ingeniería de prompts (zero-shot, few-shot, chain of thought) señaló en el chat un sitio de técnicas general (no solo Claude), más los docs propios de Anthropic. Los ítems del examen igual usan nombres de producto Claude. Aprended ambas: el patrón y luego el control Claude (secuencias de parada, salida estructurada) que enseñan módulos posteriores."
+      },
+      {
+        "type": "h2",
+        "text": "Recordatorio del capstone"
+      },
+      {
+        "type": "p",
+        "html": "Puede haber capstone de equipo; no es Pearson. No subáis código de cliente a un repo de demo compartido. La certificación examina el juicio sobre la pila de Anthropic."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Nombres vigentes de rutas, reserva y listas de cursos."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Nombrada en el ítem de ejemplo batches frente a paralelo."
+          },
+          {
+            "title": "Resumen de ingeniería de prompts",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "El trozo compartido más grande de los cuatro papeles."
+          },
+          {
+            "title": "Resumen de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Centro de la lista de competencias de Developer Foundation."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "En las listas de developer y de arquitecto."
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "name": "ccd-day1-es",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "render:v1": "remotion render Video01 out/video-01-examen.mp4",
+    "render:v2": "remotion render Video02 out/video-02-academy.mp4",
+    "still:v1": "remotion still Video01 out/v1-preview.png --frame=30",
+    "still:v2": "remotion still Video02 out/v2-preview.png --frame=30"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.347",
+    "@remotion/google-fonts": "^4.0.347",
+    "@remotion/media-utils": "^4.0.347",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.347",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "durationSec": 454.667,
+  "durationInFrames": 13640,
+  "scenes": [
+    {
+      "id": "hook",
+      "beat": "problem",
+      "kicker": "Claude Certified Developer · Foundation",
+      "title": "El examen no pide código",
+      "points": [
+        "No vas a programar una app",
+        "Sí vas a explicar qué harías",
+        "Opción múltiple + escenarios"
+      ],
+      "vo": "Si os estáis preparando para Claude Certified Developer, Foundation, la primera pregunta suele ser: ¿tengo que llegar al examen y escribir código? No. Ese es el miedo. Y ese miedo hace que se estudie mal. La gente se pone a practicar frameworks, pantallas y repositorios… y el examen pide otra cosa. En la masterclass lo dejaron claro desde el primer minuto: no vais a implementar la aplicación. Vais a describir el camino.",
+      "src": "audio/video01/00-hook.mp3",
+      "startSec": 0.0,
+      "endSec": 32.822,
+      "durationSec": 32.822,
+      "fromFrame": 0,
+      "durationInFrames": 985
+    },
+    {
+      "id": "stakes",
+      "beat": "stakes",
+      "kicker": "El riesgo",
+      "title": "Estudiar mal cuesta el intento",
+      "points": [
+        "Confundir chat con arquitectura",
+        "Memorizar en vez de decidir",
+        "Llegar sin criterio"
+      ],
+      "vo": "El examen es, sobre todo, pensar en voz alta. Hay preguntas de opción múltiple, sí. Pero también hay preguntas descriptivas. Os dan un escenario. Una empresa. Un problema. Y preguntan: ¿qué haríais? No piden el archivo de código. Piden el enfoque. Si llegáis habiendo memorizado atajos de chat y no habéis practicado decisiones, el intento se va en preguntas que parecen fáciles y no lo son.",
+      "src": "audio/video01/01-stakes.mp3",
+      "startSec": 32.822,
+      "endSec": 66.868,
+      "durationSec": 34.046,
+      "fromFrame": 985,
+      "durationInFrames": 1021
+    },
+    {
+      "id": "solution",
+      "beat": "solution",
+      "kicker": "La idea central",
+      "title": "Defiendes el enfoque, no el commit",
+      "points": [
+        "Qué le pides al modelo",
+        "Si hace falta un agente",
+        "Qué límites pones"
+      ],
+      "vo": "Imaginad que os dicen: hay que construir este tipo de aplicación con Claude. ¿Por dónde empezáis? ¿Qué le pedís al modelo? ¿Eso cambia el flujo de trabajo? ¿Hace falta un agente? ¿Qué límites ponéis para que no se vaya de las manos? Si no podéis explicarlo con palabras claras, el código no os va a salvar. Esa es la idea de este vídeo: el Foundation mide criterio, no un repositorio.",
+      "src": "audio/video01/02-solution.mp3",
+      "startSec": 66.868,
+      "endSec": 98.058,
+      "durationSec": 31.19,
+      "fromFrame": 2006,
+      "durationInFrames": 936
+    },
+    {
+      "id": "six",
+      "beat": "how",
+      "kicker": "Temario",
+      "title": "Seis casos de uso, de verdad",
+      "points": [
+        "No memorices una lista",
+        "Entiende la situación",
+        "El examen te pone dentro"
+      ],
+      "vo": "En la masterclass lo dijeron así: hay seis casos de uso que tenéis que entender bien. No memorizar una lista. Entender. Porque el examen os va a poner en una de esas situaciones y va a esperar vuestro criterio. Usad las definiciones de la documentación de Anthropic. Las palabras oficiales importan en las de opción múltiple. Los seis casos son el tablero. El examen es la partida.",
+      "src": "audio/video01/03-six.mp3",
+      "startSec": 98.058,
+      "endSec": 128.408,
+      "durationSec": 30.35,
+      "fromFrame": 2942,
+      "durationInFrames": 910
+    },
+    {
+      "id": "prompting",
+      "beat": "how",
+      "kicker": "Criterio 1",
+      "title": "Prompting que cambia una decisión",
+      "points": [
+        "No es un texto bonito",
+        "Decide el flujo",
+        "Una pregunta o varios pasos"
+      ],
+      "vo": "Primer criterio: prompting. No el truco de escribir un prompt bonito. El prompting que cambia una decisión. El que decide si el flujo es una sola pregunta… o un flujo agentic, con varios pasos, herramientas, y una persona que aprueba. En clase lo ligaron al flujo de trabajo: un prompt mal planteado no es un detalle estético. Es una decisión de diseño que afecta a todo lo que viene después.",
+      "src": "audio/video01/04-prompting.mp3",
+      "startSec": 128.408,
+      "endSec": 157.846,
+      "durationSec": 29.438,
+      "fromFrame": 3852,
+      "durationInFrames": 883
+    },
+    {
+      "id": "agents",
+      "beat": "how",
+      "kicker": "Criterio 2",
+      "title": "Agentes en una organización",
+      "points": [
+        "Quién lo enciende",
+        "Con qué datos",
+        "Quién lo para si falla"
+      ],
+      "vo": "Segundo: agentes en una organización. No un agente en vuestro portátil. El examen piensa en empresa: quién lo enciende, para qué caso de uso, con qué datos, con quién habla, y quién lo apaga si falla. La pregunta no es ¿puedo hacerlo en el chat? La pregunta es ¿cuál es la mejor forma de habilitar este agente en este org, para este problema?",
+      "src": "audio/video01/05-agents.mp3",
+      "startSec": 157.846,
+      "endSec": 182.82,
+      "durationSec": 24.974,
+      "fromFrame": 4735,
+      "durationInFrames": 749
+    },
+    {
+      "id": "rai",
+      "beat": "how",
+      "kicker": "Criterio 3",
+      "title": "IA responsable y guardrails",
+      "points": [
+        "Qué está permitido",
+        "Seguridad y gobierno",
+        "No solo qué puede hacer Claude"
+      ],
+      "vo": "Tercero: IA responsable. Guardrails. Seguridad. Gobierno. No solo qué puede hacer Claude, sino qué está permitido en esa organización. Eso es el corazón del Foundation. En entorno empresarial aparecen cumplimiento, permisos y límites. Si en vuestra respuesta no aparece ningún freno, el escenario está incompleto.",
+      "src": "audio/video01/06-rai.mp3",
+      "startSec": 182.82,
+      "endSec": 210.554,
+      "durationSec": 27.734,
+      "fromFrame": 5485,
+      "durationInFrames": 832
+    },
+    {
+      "id": "format",
+      "beat": "how",
+      "kicker": "Formato",
+      "title": "Opción múltiple y texto corto",
+      "points": [
+        "MCQ: definiciones oficiales",
+        "Descriptiva: juicio",
+        "Pasos, no jerga"
+      ],
+      "vo": "Lo repito más despacio, porque aquí se aprueba o se pierde el tiempo. No es un examen de desarrollo de aplicaciones. No vais a implementar la app. Vais a describir cómo la implementaríais con Claude: el camino, no el commit. Las de opción múltiple cubren definiciones. Usad las de la documentación de Anthropic, no un resumen de YouTube. Si el documento dice una palabra, esa palabra importa. Las descriptivas cubren juicio: qué haríais, en qué orden, y por qué. Escribid pasos. No rellenéis con jerga.",
+      "src": "audio/video01/07-format.mp3",
+      "startSec": 210.554,
+      "endSec": 250.792,
+      "durationSec": 40.238,
+      "fromFrame": 6317,
+      "durationInFrames": 1207
+    },
+    {
+      "id": "scene-docs",
+      "beat": "how",
+      "kicker": "Escenario",
+      "title": "Documentos internos y un agente",
+      "points": [
+        "¿Todas las carpetas?",
+        "¿Confirmar antes de enviar?",
+        "¿Quién revisa?"
+      ],
+      "vo": "Un ejemplo mental, no de la hoja oficial. Una compañía quiere que un agente lea documentos internos y ayude a un equipo. ¿Lo soltáis contra todos los archivos? ¿O limitáis carpetas? ¿Pedís confirmación antes de borrar o enviar un correo? ¿Quién revisa el resultado? Eso es el examen. Escenario. Decisión. Consecuencia. Una buena respuesta nombra el acceso, el humano en el bucle, y qué no haríais nunca.",
+      "src": "audio/video01/08-scene-docs.mp3",
+      "startSec": 250.792,
+      "endSec": 286.854,
+      "durationSec": 36.062,
+      "fromFrame": 7524,
+      "durationInFrames": 1082
+    },
+    {
+      "id": "scene-prompt",
+      "beat": "how",
+      "kicker": "Escenario",
+      "title": "Un prompt vago rompe el flujo",
+      "points": [
+        "La vaguedad no es un detalle",
+        "Detectar el fallo",
+        "Arquitectura, no estilo"
+      ],
+      "vo": "Otra escena: prompting. Alguien pregunta algo vago y el modelo improvisa. En un flujo agentic, esa vaguedad no es un detalle: rompe el flujo. El examen quiere ver si lo detectáis. Si sabéis cuándo un prompt malo no es un texto feo, sino una mala arquitectura. La corrección no es más adornos. Es acotar objetivo, datos, herramientas y cuándo parar.",
+      "src": "audio/video01/09-scene-prompt.mp3",
+      "startSec": 286.854,
+      "endSec": 315.38,
+      "durationSec": 28.526,
+      "fromFrame": 8606,
+      "durationInFrames": 856
+    },
+    {
+      "id": "scene-org",
+      "beat": "how",
+      "kicker": "Escenario",
+      "title": "El mejor enfoque no es instalarlo todo",
+      "points": [
+        "Caso de uso claro",
+        "Datos permitidos",
+        "Conectores mínimos y medida"
+      ],
+      "vo": "Otra escena: habilitar agentes en un org. El mejor enfoque no es instalar todo lo que brilla. Es: caso de uso claro, datos permitidos, conectores mínimos, guardrails, y una forma de medir si funciona. Si estudiáis solo trucos de prompt, os falta la mitad. Si estudiáis solo código, os falta la otra mitad. El Foundation está en el medio: diseño del flujo con cabeza de empresa.",
+      "src": "audio/video01/10-scene-org.mp3",
+      "startSec": 315.38,
+      "endSec": 344.194,
+      "durationSec": 28.814,
+      "fromFrame": 9461,
+      "durationInFrames": 864
+    },
+    {
+      "id": "how-study",
+      "beat": "how",
+      "kicker": "Cómo estudiar",
+      "title": "Cinco hábitos para este formato",
+      "points": [
+        "Explicar en dos minutos",
+        "Problema, Claude, riesgo",
+        "Pasos en voz alta"
+      ],
+      "vo": "¿Y Udemy? En esta sesión dijeron que no hace falta irse a un curso cualquiera. El contenido oficial está en Anthropic. Eso lo vemos en el siguiente vídeo. Hoy quedaos con el mapa del examen. Cómo estudiar, en la práctica. Uno: leed los seis casos de uso hasta poder explicarlos a un compañero en dos minutos, sin diapositiva. Dos: por cada caso, tres frases: el problema, lo que haría Claude, y el riesgo si no hay guardrails. Tres: practicad en voz alta. El examen descriptivo premia claridad, no jerga. Cuatro: cuando veáis qué haríais, responded en pasos: primero esto, luego esto, y esto no lo haría nunca. Cinco: no confundáis sé usar el chat con sé diseñar un flujo. El Foundation mira lo segundo.",
+      "src": "audio/video01/11-how-study.mp3",
+      "startSec": 344.194,
+      "endSec": 400.728,
+      "durationSec": 56.534,
+      "fromFrame": 10326,
+      "durationInFrames": 1696
+    },
+    {
+      "id": "payoff",
+      "beat": "payoff",
+      "kicker": "Frase para llevar",
+      "title": "No programáis la solución. La defendéis.",
+      "points": [
+        "MCQ para conceptos",
+        "Texto corto para escenarios",
+        "Prompting, agentes, IA responsable"
+      ],
+      "vo": "Al final, la frase que os tenéis que llevar: no vais a programar la solución. Vais a defenderla. Opción múltiple para los conceptos. Texto corto para los escenarios. Prompting, agentes e IA responsable como el hilo de todo. Mañana y los otros días entran Chat, Cowork, Code y el SDK. Eso alimenta los escenarios. Pero el día uno ya avisó el tipo de batalla: criterio, no un repositorio. Cuando abráis un simulacro o un curso oficial, preguntaos: ¿esto me ayuda a explicar un escenario… o solo a escribir código? Si es lo segundo, dejadlo para después. Eso es el vídeo uno. En el dos: dónde estudiáis y cómo os inscribís, sin perder el crédito para vuestra empresa.",
+      "src": "audio/video01/12-payoff.mp3",
+      "startSec": 400.728,
+      "endSec": 454.646,
+      "durationSec": 53.918,
+      "fromFrame": 12022,
+      "durationInFrames": 1618
+    }
+  ]
+}

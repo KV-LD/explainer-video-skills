@@ -1,0 +1,254 @@
+[
+  {
+    "lang": "en",
+    "module_id": "08",
+    "chapter_id": "01",
+    "eyebrow": "Module 08 · Chapter 01 · 19 August 2026",
+    "chapter_title": "Stop sequences and controlling generation",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 8 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M08 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 8 (19 August 2026) opened by finishing a control the 17 August lab had already named: <strong>stop sequences</strong>. You pass one or more strings on the Messages request. When the model emits a string that matches, generation <strong>halts</strong>. The tokenizer still bills the tokens that were actually produced — including punctuation that pushed the count to 14 in the 1,2,3,4 demo."
+      },
+      {
+        "type": "h2",
+        "text": "What stop sequences do — and do not do"
+      },
+      {
+        "type": "p",
+        "html": "Vijay’s slogan: the feature <strong>ends content generation</strong>; it does <strong>not filter</strong> a longer answer after the fact. The model is not writing 1–100 internally and then cropping to 5–10 for the client. Combined with <strong>prefill</strong> (assistant message that already contains the start of the answer), you are steering <em>where generation begins and ends</em>, not post-processing a hidden full essay."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "“Claude-only” in class",
+        "html": "The trainer presented stop sequences as a Claude-specific control versus “write a prompt that says start at 5 and stop at 10.” Other vendors also have stop parameters. For the exam, know Claude’s <code>stop_sequences</code> field and <code>stop_reason</code>; do not wage a vendor war in the written paper. Confirm the live field name in the Messages API."
+      },
+      {
+        "type": "h2",
+        "text": "Prefill plus stop: the counting example"
+      },
+      {
+        "type": "p",
+        "html": "Mritunjay worried that the model “knows” 1–100 and that output tokens would still count the unused numbers. Vijay’s correction: if you prefill so continuation starts at 5 and you stop at 10 (or at the token <code>,5</code> in the printed 1,2,3,4 example), the client only receives that span. Output tokens billed are that span, not a secret 1–100. Prefill + stop is a <strong>prompting / decoding control</strong>, not a second LLM pass that truncates."
+      },
+      {
+        "type": "p",
+        "html": "He also limited the technique: it shines on <strong>sequential / delimited</strong> content (lists, fenced code, JSON braces). For messy reasoning or “do all the maths then give a short answer,” stop sequences are the wrong tool — use clearer instructions, interpolation, or (later) structured outputs / tools."
+      },
+      {
+        "type": "h2",
+        "text": "stop_reason you must recognise"
+      },
+      {
+        "type": "table",
+        "headers": ["Class language", "Typical meaning", "What you should do"],
+        "rows": [
+          ["Stop sequence", "A configured string appeared in the output", "Parse up to (usually excluding) the stop string; you got a controlled cut"],
+          ["EOS / end of content / end turn", "Model finished naturally", "Treat as complete unless the text is still semantically unfinished"],
+          ["Max tokens / token limit", "Hit <code>max_tokens</code>", "Retry with a larger cap, or design a shorter target format"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "In the notebook, printing the full Message showed <code>stop_reason</code> tied to the sequence <code>,5</code> after emitting 1, 2, 3, 4. Remove the stop sequence and you instead see a natural end (or max_tokens if you asked for 1 to 10,000 with a tiny cap)."
+      },
+      {
+        "type": "h2",
+        "text": "Delimiters you invent"
+      },
+      {
+        "type": "p",
+        "html": "Stops can be markdown fences (<code>```</code>), a custom marker such as <code>END</code>, even a name — as long as the <strong>same</strong> string is in the prompt instructions and in <code>stop_sequences</code>. Agents often need this so one agent’s file dump does not trail into chit-chat. If you instruct “after the JSON block output the marker END,” the stop list must include <code>END</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Where it sits among other controls"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>max_tokens</strong> — hard budget; blunt.",
+          "<strong>stop_sequences</strong> — halt on a marker you chose.",
+          "<strong>prefill</strong> — start generation mid-answer (assistant partial).",
+          "<strong>temperature</strong> — distribution shape, not a stop.",
+          "<strong>Structured outputs</strong> (docs) — schema-constrained JSON; prefer this in 2026 apps over fence tricks when the API supports it for your model."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Exam traps"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Stop ≠ content filter / safety classifier.",
+          "Output token count is the generated continuation, not a hidden full answer.",
+          "Always inspect <code>stop_reason</code> before assuming the JSON is closed.",
+          "Streaming still emits the same stop; you may see the last delta end at the sequence."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Docs versus notebook",
+        "html": "Parameter names (<code>stop_sequences</code>) and enumerated <code>stop_reason</code> values must match <a href=\"https://docs.claude.com/en/api/messages\">Messages API</a>, not a blurry screenshot."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "stop_sequences, stop_reason, assistant prefill."
+          },
+          {
+            "title": "Prompt engineering overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "How Claude is steered with roles and delimiters."
+          },
+          {
+            "title": "Structured outputs",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+            "note": "When schema constraints beat stop-sequence JSON hacks."
+          },
+          {
+            "title": "Streaming",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/streaming",
+            "note": "How stops appear when tokens arrive as deltas."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "08",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 08 · Capítulo 01 · 19 de agosto de 2026",
+    "chapter_title": "Secuencias de parada y control de la generación",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 8 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M08 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 8 (19 de agosto de 2026) arrancó cerrando un control que el laboratorio del 17 de agosto ya había nombrado: las <strong>secuencias de parada</strong>. Pasáis una o más cadenas en la petición Messages. Cuando el modelo emite una cadena que coincide, la generación <strong>se detiene</strong>. El tokenizador sigue facturando los tokens realmente producidos — incluida la puntuación que subió el recuento a 14 en el demo 1,2,3,4."
+      },
+      {
+        "type": "h2",
+        "text": "Qué hacen — y qué no hacen — las secuencias de parada"
+      },
+      {
+        "type": "p",
+        "html": "Eslogan de Vijay: la función <strong>termina la generación de contenido</strong>; <strong>no filtra</strong> una respuesta más larga a posteriori. El modelo no escribe 1–100 por dentro y luego recorta a 5–10 para el cliente. Combinado con <strong>prefill</strong> (mensaje assistant que ya contiene el arranque de la respuesta), dirigís <em>dónde empieza y acaba la generación</em>, no un post-proceso de un ensayo oculto."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "«Solo Claude» en clase",
+        "html": "El formador presentó las secuencias de parada como un control específico de Claude frente a «escribe un prompt que diga empieza en 5 y para en 10». Otros proveedores también tienen parámetros stop. Para el examen, conoced el campo <code>stop_sequences</code> y <code>stop_reason</code>; no montéis una guerra de vendors en el escrito. Confirmad el nombre vigente en la Messages API."
+      },
+      {
+        "type": "h2",
+        "text": "Prefill más stop: el ejemplo de contar"
+      },
+      {
+        "type": "p",
+        "html": "Mritunjay temía que el modelo «sepa» 1–100 y que los tokens de salida cuenten igual los números no usados. Corrección de Vijay: si el prefill hace que la continuación empiece en 5 y paráis en 10 (o en el token <code>,5</code> del ejemplo 1,2,3,4), el cliente solo recibe ese tramo. Los tokens de salida facturados son ese tramo, no un 1–100 secreto. Prefill + stop es un <strong>control de prompting / decodificación</strong>, no un segundo paso de LLM que trunca."
+      },
+      {
+        "type": "p",
+        "html": "También limitó la técnica: brilla en contenido <strong>secuencial / delimitado</strong> (listas, código vallado, llaves JSON). Para razonamiento enmarañado o «haz todas las cuentas y dame una respuesta corta», las secuencias de parada son la herramienta equivocada — usad instrucciones más claras, interpolación o (luego) structured outputs / tools."
+      },
+      {
+        "type": "h2",
+        "text": "stop_reason que debéis reconocer"
+      },
+      {
+        "type": "table",
+        "headers": ["Lenguaje de clase", "Significado típico", "Qué hacer"],
+        "rows": [
+          ["Stop sequence", "Apareció en la salida una cadena configurada", "Parsead hasta (normalmente sin incluir) la cadena; es un corte controlado"],
+          ["EOS / fin de contenido / fin de turno", "El modelo terminó de forma natural", "Tratadlo como completo salvo que el texto siga semánticamente inacabado"],
+          ["Max tokens / límite de tokens", "Se alcanzó <code>max_tokens</code>", "Reintentad con un techo mayor o diseñad un formato más corto"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "En el notebook, imprimir el Message entero mostraba <code>stop_reason</code> ligado a la secuencia <code>,5</code> tras emitir 1, 2, 3, 4. Quitad la secuencia de parada y veréis un final natural (o max_tokens si pedís del 1 al 10 000 con un techo diminuto)."
+      },
+      {
+        "type": "h2",
+        "text": "Delimitadores que inventáis"
+      },
+      {
+        "type": "p",
+        "html": "Las paradas pueden ser vallas markdown (<code>```</code>), un marcador como <code>END</code>, incluso un nombre — siempre que la <strong>misma</strong> cadena esté en las instrucciones del prompt y en <code>stop_sequences</code>. Los agentes lo necesitan para que el volcado de un archivo no se alargue en charla. Si instruís «después del bloque JSON escribid el marcador END», la lista de stop debe incluir <code>END</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Dónde encaja entre otros controles"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>max_tokens</strong> — presupuesto duro; tosco.",
+          "<strong>stop_sequences</strong> — halt en un marcador que elegisteis.",
+          "<strong>prefill</strong> — empezar la generación a mitad de respuesta (assistant parcial).",
+          "<strong>temperature</strong> — forma de la distribución, no una parada.",
+          "<strong>Structured outputs</strong> (docs) — JSON acotado por esquema; en apps de 2026 preferid esto a trucos de valla cuando la API lo soporte para vuestro modelo."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Trampas de examen"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Stop ≠ filtro de contenido / clasificador de seguridad.",
+          "El recuento de tokens de salida es la continuación generada, no una respuesta oculta completa.",
+          "Inspeccionad siempre <code>stop_reason</code> antes de asumir que el JSON está cerrado.",
+          "El streaming emite la misma parada; el último delta puede acabar en la secuencia."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Documentación frente al notebook",
+        "html": "Los nombres de parámetro (<code>stop_sequences</code>) y los valores de <code>stop_reason</code> deben coincidir con la <a href=\"https://docs.claude.com/en/api/messages\">Messages API</a>, no con una captura borrosa."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "stop_sequences, stop_reason, prefill de assistant."
+          },
+          {
+            "title": "Visión general de prompting",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Cómo se dirige a Claude con roles y delimitadores."
+          },
+          {
+            "title": "Salidas estructuradas",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+            "note": "Cuándo las restricciones de esquema ganan a los hacks JSON con stop."
+          },
+          {
+            "title": "Streaming",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/streaming",
+            "note": "Cómo se ven las paradas cuando los tokens llegan como deltas."
+          }
+        ]
+      }
+    ]
+  }
+]

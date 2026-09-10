@@ -1,0 +1,678 @@
+[
+  {
+    "lang": "en",
+    "module_id": "00",
+    "chapter_id": "00",
+    "eyebrow": "Course index · Claude Certified Developer, Foundation",
+    "chapter_title": "UST CCD Foundation masterclass — bilingual chapter notes",
+    "subtitle": "12 modules from the August 2026 recordings. English and Spanish PDFs are stored in separate folders.",
+    "meta": "Index · English",
+    "running_header": "UST CCD Foundation · Index · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "These notes turn the CCDV-F live transcripts into <strong>one PDF per chapter</strong>, in English and in Spain Spanish (es-ES). Layout uses UST brand tokens (dark teal, Source Sans 3 / Source Serif 4). They are study notes, not official Anthropic or Pearson material."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "How to read",
+        "html": "Open the module folder for your language. Start with this index, then M01. When a recording and the live docs disagree, follow <a href='https://docs.claude.com/en/home'>docs.claude.com</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Modules"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "Module",
+          "Date",
+          "Title",
+          "Chapters"
+        ],
+        "rows": [
+          [
+            "M01",
+            "2026-08-03",
+            "What Claude is and how the Foundation programme works",
+            "4"
+          ],
+          [
+            "M02",
+            "2026-08-05",
+            "Exam format, Anthropic Academy, and Claude Cowork",
+            "5"
+          ],
+          [
+            "M03",
+            "2026-08-06",
+            "Certification tracks and Claude Code",
+            "4"
+          ],
+          [
+            "M04",
+            "2026-08-10",
+            "Recap of the three products and moving toward APIs and MCP",
+            "3"
+          ],
+          [
+            "M05",
+            "2026-08-12",
+            "Claude Code in depth: permissions, models, and agents",
+            "4"
+          ],
+          [
+            "M06",
+            "2026-08-13",
+            "Hooks, local tools, and token-aware Claude Code",
+            "3"
+          ],
+          [
+            "M07",
+            "2026-08-17",
+            "Anthropic SDK: invoking Claude from code",
+            "4"
+          ],
+          [
+            "M08",
+            "2026-08-19",
+            "Prompt engineering for Claude",
+            "4"
+          ],
+          [
+            "M09",
+            "2026-08-20",
+            "Extended thinking, vision, PDFs, citations, and prompt cache",
+            "4"
+          ],
+          [
+            "M10",
+            "2026-08-24",
+            "Tool use, MCP, and exam-attempt guidance",
+            "4"
+          ],
+          [
+            "M11",
+            "2026-08-26",
+            "RAG with Claude and building agents",
+            "3"
+          ],
+          [
+            "M12",
+            "2026-08-27",
+            "Built-in tools, responsible AI, and exam prep",
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Skipped recording",
+        "html": "A second 10 August file is an 11-minute stub with no teaching content. Module 04 uses the full 10 August afternoon session only."
+      },
+      {
+        "type": "h2",
+        "text": "Module 01: What Claude is and how the Foundation programme works"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-03</strong>. English PDFs in <em>pdf/module-01-en/</em>; Spanish in <em>pdf/module-01-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Programme, trainer, and how the four weeks are structured",
+          "What Claude is: models, products, and where it sits versus other LLMs",
+          "Claude Chat on the web: first product surface",
+          "Study posture for the Foundation exam from day one"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 02: Exam format, Anthropic Academy, and Claude Cowork"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-05</strong>. English PDFs in <em>pdf/module-02-en/</em>; Spanish in <em>pdf/module-02-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Exam format: MCQ plus written scenarios, not application coding",
+          "Anthropic Academy, Skilljar, and partner counting",
+          "Three clients: Chat, Cowork, and Code — and how you reach them",
+          "Cowork in practice: folders, connectors, sandbox, and usage meters",
+          "Agentic clients: plan versus execute, MCP, and the Chrome extension"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 03: Certification tracks and Claude Code"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-06</strong>. English PDFs in <em>pdf/module-03-en/</em>; Spanish in <em>pdf/module-03-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Four Anthropic certifications after 13 July and who each is for",
+          "Claude Code: agentic coding versus Chat and Cowork",
+          "Context window, sessions, and why they are not the same as usage limits",
+          "Permissions, models, and building with Claude Code"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 04: Recap of the three products and moving toward APIs and MCP"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-10</strong>. English PDFs in <em>pdf/module-04-en/</em>; Spanish in <em>pdf/module-04-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Recap: Chat, Cowork, Code and the models behind them",
+          "From GUI products to Claude APIs",
+          "MCP as the connector pattern"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 05: Claude Code in depth: permissions, models, and agents"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-12</strong>. English PDFs in <em>pdf/module-05-en/</em>; Spanish in <em>pdf/module-05-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Permission modes in Claude Code",
+          "Slash commands and model selection",
+          "What an agent is in this course",
+          "End-to-end generation without writing the app by hand"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 06: Hooks, local tools, and token-aware Claude Code"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-13</strong>. English PDFs in <em>pdf/module-06-en/</em>; Spanish in <em>pdf/module-06-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "CLAUDE.md versus hooks for formatting and company rules",
+          "Local execution, sandbox, and why hooks can save tokens",
+          "Pre-tool hooks and extending the workspace"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 07: Anthropic SDK: invoking Claude from code"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-17</strong>. English PDFs in <em>pdf/module-07-en/</em>; Spanish in <em>pdf/module-07-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Installing the Anthropic SDK and API keys",
+          "Messages, roles, and multi-turn context",
+          "Streaming versus non-streaming calls",
+          "Model choice, context window, and cost awareness from the API"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 08: Prompt engineering for Claude"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-19</strong>. English PDFs in <em>pdf/module-08-en/</em>; Spanish in <em>pdf/module-08-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Stop sequences and controlling generation",
+          "Forcing structured output such as JSON",
+          "Prompt templates and reusable patterns",
+          "What good Claude prompting looks like for the exam"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 09: Extended thinking, vision, PDFs, citations, and prompt cache"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-20</strong>. English PDFs in <em>pdf/module-09-en/</em>; Spanish in <em>pdf/module-09-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Extended / deep thinking",
+          "Vision: sending images to Claude",
+          "PDFs, document context, and citations",
+          "Prompt caching"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 10: Tool use, MCP, and exam-attempt guidance"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-24</strong>. English PDFs in <em>pdf/module-10-en/</em>; Spanish in <em>pdf/module-10-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Why tools exist: context beyond the prompt",
+          "Defining and calling tools in the API",
+          "MCP servers versus ad-hoc tools",
+          "How the trainer framed sitting the certification exam"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 11: RAG with Claude and building agents"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-26</strong>. English PDFs in <em>pdf/module-11-en/</em>; Spanish in <em>pdf/module-11-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "RAG recap: retrieve, augment, generate",
+          "Vector stores in the lab: MongoDB Atlas / Voyage-style embeddings",
+          "Agent SDK / agentic implementation steps"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Module 12: Built-in tools, responsible AI, and exam prep"
+      },
+      {
+        "type": "p",
+        "html": "Session date: <strong>2026-08-27</strong>. English PDFs in <em>pdf/module-12-en/</em>; Spanish in <em>pdf/module-12-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Built-in tools inside agents",
+          "Permissions, safety, and guardrails",
+          "Responsible AI for enterprise Claude apps",
+          "Exam prep guide and mock practice"
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Canonical product and API reference."
+          },
+          {
+            "title": "Anthropic Academy",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Courses and exam registration."
+          },
+          {
+            "title": "Claude Code docs",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "CLI and IDE agent."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "00",
+    "chapter_id": "00",
+    "eyebrow": "Índice del curso · Claude Certified Developer, Foundation",
+    "chapter_title": "Masterclass UST CCD Foundation — notas por capítulo, bilingües",
+    "subtitle": "12 módulos a partir de las grabaciones de agosto de 2026. Los PDF en inglés y en español van en carpetas distintas.",
+    "meta": "Índice · Español (es-ES)",
+    "running_header": "UST CCD Foundation · Índice · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Estas notas convierten las transcripciones de CCDV-F en <strong>un PDF por capítulo</strong>, en inglés y en español de España (es-ES). El diseño usa los tokens de marca UST (verde azulado, Source Sans 3 / Source Serif 4). Son apuntes de estudio, no material oficial de Anthropic ni de Pearson."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Cómo leerlas",
+        "html": "Abrid la carpeta del módulo en vuestro idioma. Empezad por este índice y seguid por M01. Si la grabación y la documentación vigente no coinciden, primad <a href='https://docs.claude.com/en/home'>docs.claude.com</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Módulos"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "Módulo",
+          "Fecha",
+          "Título",
+          "Capítulos"
+        ],
+        "rows": [
+          [
+            "M01",
+            "2026-08-03",
+            "Qué es Claude y cómo funciona el programa Foundation",
+            "4"
+          ],
+          [
+            "M02",
+            "2026-08-05",
+            "Formato del examen, Anthropic Academy y Claude Cowork",
+            "5"
+          ],
+          [
+            "M03",
+            "2026-08-06",
+            "Itinerarios de certificación y Claude Code",
+            "4"
+          ],
+          [
+            "M04",
+            "2026-08-10",
+            "Repaso de los tres productos y paso a APIs y MCP",
+            "3"
+          ],
+          [
+            "M05",
+            "2026-08-12",
+            "Claude Code en profundidad: permisos, modelos y agentes",
+            "4"
+          ],
+          [
+            "M06",
+            "2026-08-13",
+            "Hooks, herramientas locales y Claude Code consciente de tokens",
+            "3"
+          ],
+          [
+            "M07",
+            "2026-08-17",
+            "SDK de Anthropic: invocar a Claude desde código",
+            "4"
+          ],
+          [
+            "M08",
+            "2026-08-19",
+            "Ingeniería de prompts para Claude",
+            "4"
+          ],
+          [
+            "M09",
+            "2026-08-20",
+            "Pensamiento extendido, visión, PDF, citas y caché de prompts",
+            "4"
+          ],
+          [
+            "M10",
+            "2026-08-24",
+            "Uso de herramientas, MCP y orientación para el examen",
+            "4"
+          ],
+          [
+            "M11",
+            "2026-08-26",
+            "RAG con Claude y construcción de agentes",
+            "3"
+          ],
+          [
+            "M12",
+            "2026-08-27",
+            "Herramientas integradas, IA responsable y preparación del examen",
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Grabación omitida",
+        "html": "Hay un segundo archivo del 10 de agosto de 11 minutos, sin contenido lectivo. El módulo 04 usa solo la sesión completa de esa tarde."
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 01: Qué es Claude y cómo funciona el programa Foundation"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-03</strong>. PDF en inglés en <em>pdf/module-01-en/</em>; en español en <em>pdf/module-01-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Programa, formador y estructura de las cuatro semanas",
+          "Qué es Claude: modelos, productos y su lugar frente a otros LLM",
+          "Claude Chat en la web: la primera superficie de producto",
+          "Cómo estudiar el examen Foundation desde el primer día"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 02: Formato del examen, Anthropic Academy y Claude Cowork"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-05</strong>. PDF en inglés en <em>pdf/module-02-en/</em>; en español en <em>pdf/module-02-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Formato del examen: tipo test y escenarios escritos, no programar la app",
+          "Anthropic Academy, Skilljar y el recuento de partners",
+          "Tres clientes: Chat, Cowork y Code, y cómo se accede",
+          "Cowork en la práctica: carpetas, conectores, sandbox y medidores de uso",
+          "Clientes agentic: planificar frente a ejecutar, MCP y la extensión de Chrome"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 03: Itinerarios de certificación y Claude Code"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-06</strong>. PDF en inglés en <em>pdf/module-03-en/</em>; en español en <em>pdf/module-03-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Las cuatro certificaciones de Anthropic desde el 13 de julio y a quién van",
+          "Claude Code: programación agentic frente a Chat y Cowork",
+          "Ventana de contexto, sesiones y por qué no son el límite de uso",
+          "Permisos, modelos y construir con Claude Code"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 04: Repaso de los tres productos y paso a APIs y MCP"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-10</strong>. PDF en inglés en <em>pdf/module-04-en/</em>; en español en <em>pdf/module-04-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Repaso: Chat, Cowork, Code y los modelos que hay detrás",
+          "De los productos con interfaz a las APIs de Claude",
+          "MCP como patrón de conectores"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 05: Claude Code en profundidad: permisos, modelos y agentes"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-12</strong>. PDF en inglés en <em>pdf/module-05-en/</em>; en español en <em>pdf/module-05-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Modos de permiso en Claude Code",
+          "Comandos slash y selección de modelo",
+          "Qué es un agente en este curso",
+          "Generación de extremo a extremo sin escribir la app a mano"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 06: Hooks, herramientas locales y Claude Code consciente de tokens"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-13</strong>. PDF en inglés en <em>pdf/module-06-en/</em>; en español en <em>pdf/module-06-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "CLAUDE.md frente a hooks para formato y normas de empresa",
+          "Ejecución local, sandbox y por qué los hooks ahorran tokens",
+          "Hooks previos a la herramienta y ampliar el espacio de trabajo"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 07: SDK de Anthropic: invocar a Claude desde código"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-17</strong>. PDF en inglés en <em>pdf/module-07-en/</em>; en español en <em>pdf/module-07-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Instalar el SDK de Anthropic y las claves de API",
+          "Mensajes, roles y contexto en varios turnos",
+          "Llamadas con streaming y sin streaming",
+          "Elección de modelo, ventana de contexto y coste desde la API"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 08: Ingeniería de prompts para Claude"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-19</strong>. PDF en inglés en <em>pdf/module-08-en/</em>; en español en <em>pdf/module-08-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Secuencias de parada y control de la generación",
+          "Forzar una salida estructurada, por ejemplo JSON",
+          "Plantillas de prompt y patrones reutilizables",
+          "Cómo se ve un buen prompting de Claude de cara al examen"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 09: Pensamiento extendido, visión, PDF, citas y caché de prompts"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-20</strong>. PDF en inglés en <em>pdf/module-09-en/</em>; en español en <em>pdf/module-09-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Pensamiento extendido o profundo",
+          "Visión: enviar imágenes a Claude",
+          "PDF, contexto documental y citas",
+          "Caché de prompts"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 10: Uso de herramientas, MCP y orientación para el examen"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-24</strong>. PDF en inglés en <em>pdf/module-10-en/</em>; en español en <em>pdf/module-10-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Por qué existen las herramientas: contexto más allá del prompt",
+          "Definir y llamar herramientas en la API",
+          "Servidores MCP frente a herramientas ad hoc",
+          "Cómo planteó el formador presentarse al examen"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 11: RAG con Claude y construcción de agentes"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-26</strong>. PDF en inglés en <em>pdf/module-11-en/</em>; en español en <em>pdf/module-11-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Repaso de RAG: recuperar, aumentar, generar",
+          "Almacenes vectoriales en el laboratorio: MongoDB Atlas y embeddings",
+          "Pasos de implementación agentic y el Agent SDK"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Módulo 12: Herramientas integradas, IA responsable y preparación del examen"
+      },
+      {
+        "type": "p",
+        "html": "Fecha de la sesión: <strong>2026-08-27</strong>. PDF en inglés en <em>pdf/module-12-en/</em>; en español en <em>pdf/module-12-es/</em>."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Herramientas integradas dentro de los agentes",
+          "Permisos, seguridad y guardrails",
+          "IA responsable para aplicaciones Claude en empresa",
+          "Guía de preparación y simulacros"
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Referencia canónica de producto y API."
+          },
+          {
+            "title": "Anthropic Academy",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Cursos e inscripción al examen."
+          },
+          {
+            "title": "Documentación de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Agente de terminal e IDE."
+          }
+        ]
+      }
+    ]
+  }
+]

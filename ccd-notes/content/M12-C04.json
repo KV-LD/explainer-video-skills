@@ -1,0 +1,318 @@
+[
+  {
+    "lang": "en",
+    "module_id": "12",
+    "chapter_id": "04",
+    "eyebrow": "Module 12 · Chapter 04 · 27 August 2026",
+    "chapter_title": "Exam prep guide and mock practice",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 12 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M12 · C04 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "The last block of the Foundation masterclass was <strong>how to sit</strong>. Vijay had promised this in session 10; on 27 August he walked Skilljar, unofficial mocks, timing, and first-attempt psychology. Treat Skilljar and docs.claude.com as canonical. Treat third-party quiz sites as stamina trainers whose items are <em>not</em> the real bank."
+      },
+      {
+        "type": "h2",
+        "text": "Where official content lives"
+      },
+      {
+        "type": "p",
+        "html": "He said most of his teaching was drawn from <strong>Anthropic Academy on Skilljar</strong>. One Foundation-oriented course plus targeted extras beat watching every “AI Fluency” video. He warned: not all Fluency tracks are for this exam — <strong>AI Fluency for builders</strong> was the prompting slice he cared about."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Blueprint percentages move",
+        "html": "Figures below are what he read from Skilljar on 27 August 2026. Re-read the live exam page before you sit. UI labels (AI Fluency vs prompt engineering) had already been renamed once in the recording."
+      },
+      {
+        "type": "h2",
+        "text": "Weightings he quoted (verify live)"
+      },
+      {
+        "type": "table",
+        "headers": ["Skilljar / topic cluster (his labels)", "Share he quoted", "What to practise from this masterclass"],
+        "rows": [
+          ["Building with the Claude API", "~33%", "Messages, roles, streaming vs not, models, cost, tools handshake"],
+          ["Tools and MCP (dedicated course if you are weak)", "~10% (plus related API items)", "Schemas, tool_result, MCP client/server, Cowork connectors"],
+          ["Prompt / AI Fluency for builders", "~11% (he summed fluency+tools+context toward ~40% with other slices)", "Stop sequences, JSON, templates, extended thinking, cache"],
+          ["Remainder", "Applications, agents, RAG, RAI as they appear in the live outline", "Modules 10–12 plus product sessions 1–6"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "His arithmetic was a coaching heuristic (“cover the big course first, then tools, then builder fluency”), not a substitute for the official domain list on exam day."
+      },
+      {
+        "type": "h2",
+        "text": "Mocks: useful, unofficial, repeatable"
+      },
+      {
+        "type": "p",
+        "html": "He dropped two website links in chat (also promised in the repo). He had <em>not</em> sat those products himself; he trusted reviews that the <strong>first</strong> was closer to real scenario style. Caveats he actually said:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Free account; take them more than once; multiple papers (he mentioned four to five sets).",
+          "Each timed sitting can take <strong>120 minutes</strong> — budget a week if you work through several sets properly.",
+          "He mentioned practising “53 or 23” questions in that window depending on the paper. Confirm the live Foundation format (earlier modules: MCQ plus written scenarios). Do not freeze those two numbers as law.",
+          "About <strong>60–80%</strong> similar in feel; straightforward items get twisted; <strong>concepts ~95% the same, questions not the same</strong>.",
+          "High mock scores do not guarantee a pass; they train pace and scenario reading."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Proctor tactics"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Build a personal pace: how fast you read, analyse, click.",
+          "Answer immediately when you are sure; <strong>mark for review</strong> when you are not. The proctor lets you skip and return.",
+          "English of the stem matters more than a keyword hunt — scenario meaning, not a single buzzword.",
+          "First-attempt pressure: he observed people lose motivation after a fail. Prepare as if this sitting is the one."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Validity and why recertify"
+      },
+      {
+        "type": "p",
+        "html": "Asked about expiry, he said <strong>two years</strong>, then retake. He compared GitHub Copilot credentials going stale in a year of product change. The certification is a snapshot; tools will have moved. Recheck Anthropic’s current credential policy when you register — do not rely on a classroom sentence alone."
+      },
+      {
+        "type": "h2",
+        "text": "A revision map for the last 72 hours"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "API: user/assistant/system, stop reasons, streaming vs non-streaming, model families on the live models page.",
+          "Tools: description quality, parallel vs sequential tool_use, tool_result on a user turn, Agent SDK hides the loop.",
+          "MCP: N×N problem, client built into Claude Code, vendor vs your server, mcp.json is location not business logic.",
+          "RAG: retrieve-augment-generate; MongoDB Atlas + Voyage was a <strong>demo</strong>; Bedrock/Chroma/FAISS/Postgres still count.",
+          "Agents: Claude thinks, Claude Code does, SDK loops; built-ins Bash/Monitor/Glob/Grep/WebSearch/WebFetch/AskUser.",
+          "RAI: deny list beats allow list; don’t-ask continues after a blocked step; usage policy; input/output scanners.",
+          "Products: Chat vs Cowork vs Claude Code from weeks 1–3 — still in the Foundation story."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "If you only do five things",
+        "html": "1) Skilljar Foundation/API course. 2) Official tool-use and MCP docs. 3) One timed mock for pace. 4) Narrate RAG without naming Atlas as mandatory. 5) Know plan vs accept-edits vs don’t-ask."
+      },
+      {
+        "type": "h2",
+        "text": "After class logistics"
+      },
+      {
+        "type": "p",
+        "html": "PDFs (including Agent SDK and guardrails README/PPT) were being copied into the cohort repo’s PDF folder. If a file is missing, ask the facilitator rather than scraping a random GitHub. Ping questions in the class chat; he offered personal chat then realised privacy settings blocked it — use the shared channel or the repo."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Official courses and exam registration."
+          },
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Start here the morning of the exam if a UI has moved."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "High-yield API domain."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "High-yield connector domain."
+          },
+          {
+            "title": "Usage policy",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "RAI / allowed-use questions."
+          },
+          {
+            "title": "Strengthen guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "How Anthropic talks about testing agents."
+          },
+          {
+            "title": "Help: where is the API documentation",
+            "url": "https://support.claude.com/en/articles/8114490-where-can-i-find-your-api-documentation",
+            "note": "If you get lost between console and docs."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "12",
+    "chapter_id": "04",
+    "eyebrow": "Módulo 12 · Capítulo 04 · 27 de agosto de 2026",
+    "chapter_title": "Guía de preparación y simulacros",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 12 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M12 · C04 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El último bloque de la masterclass Foundation fue <strong>cómo presentarse</strong>. Vijay lo había prometido en la sesión 10; el 27 de agosto recorrió Skilljar, mocks extraoficiales, tiempos y la psicología del primer intento. Tomad Skilljar y docs.claude.com como canónicos. Tomad los cuestionarios de terceros como entrenadores de ritmo cuyos ítems <em>no</em> son el banco real."
+      },
+      {
+        "type": "h2",
+        "text": "Dónde vive el contenido oficial"
+      },
+      {
+        "type": "p",
+        "html": "Dijo que gran parte de su docencia salía de <strong>Anthropic Academy en Skilljar</strong>. Un curso orientado a Foundation más extras puntuales gana a ver todos los vídeos de «AI Fluency». Advirtió: no todas las pistas Fluency sirven para este examen — <strong>AI Fluency for builders</strong> era el trozo de prompting que le importaba."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Los porcentajes del temario se mueven",
+        "html": "Las cifras de abajo son las que leyó en Skilljar el 27 de agosto de 2026. Releed la página vigente del examen antes de presentaros. Las etiquetas (AI Fluency frente a ingeniería de prompts) ya se habían renombrado una vez en la grabación."
+      },
+      {
+        "type": "h2",
+        "text": "Ponderaciones que citó (verificad en vivo)"
+      },
+      {
+        "type": "table",
+        "headers": ["Cluster Skilljar / tema (sus etiquetas)", "Cuota que citó", "Qué practicar de esta masterclass"],
+        "rows": [
+          ["Building with the Claude API", "~33%", "Messages, roles, streaming o no, modelos, coste, apretón de herramientas"],
+          ["Herramientas y MCP (curso dedicado si flaqueáis)", "~10% (más ítems de API relacionados)", "Esquemas, tool_result, cliente/servidor MCP, conectores de Cowork"],
+          ["Prompt / AI Fluency for builders", "~11% (sumó fluency+tools+contexto hacia ~40% con otros trozos)", "Secuencias de parada, JSON, plantillas, pensamiento extendido, caché"],
+          ["Resto", "Aplicaciones, agentes, RAG, RAI según el temario vigente", "Módulos 10–12 más las sesiones de producto 1–6"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Su aritmética era una heurística de coaching («cubrid primero el curso grande, luego herramientas, luego fluency de builders»), no un sustituto de la lista oficial de dominios el día del examen."
+      },
+      {
+        "type": "h2",
+        "text": "Simulacros: útiles, extraoficiales, repetibles"
+      },
+      {
+        "type": "p",
+        "html": "Soltó dos enlaces web en el chat (también prometidos en el repo). <em>Él</em> no había hecho esos productos; se fiaba de reseñas de que el <strong>primero</strong> se acercaba más al estilo de escenario real. Matices que sí dijo:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Cuenta gratuita; hacedlos más de una vez; varios exámenes (mencionó cuatro o cinco juegos).",
+          "Cada convocatoria cronometrada puede llevar <strong>120 minutos</strong>: reservad una semana si recorréis varios juegos en serio.",
+          "Mencionó practicar «53 o 23» preguntas en esa ventana según el papel. Confirmad el formato Foundation vigente (módulos anteriores: tipo test más escenarios escritos). No congeléis esas dos cifras como ley.",
+          "Un <strong>60–80%</strong> similar en sensación; los ítems directos salen retorcidos; <strong>conceptos ~95% iguales, preguntas no iguales</strong>.",
+          "Notas altas en el mock no garantizan el aprobado; entrenan ritmo y lectura de escenarios."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Táctica de proctor"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Construid un ritmo personal: qué tan rápido leéis, analizáis, hacéis clic.",
+          "Responed enseguida si estáis seguros; <strong>marcad para revisar</strong> si no. El proctor deja saltar y volver.",
+          "El inglés del enunciado importa más que cazar una palabra clave: el significado del escenario, no un solo buzzword.",
+          "Presión del primer intento: observó que la gente pierde motivación tras un suspenso. Preparad como si esta convocatoria fuera la buena."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Validez y por qué recertificar"
+      },
+      {
+        "type": "p",
+        "html": "Ante la caducidad, dijo <strong>dos años</strong> y luego repetir. Comparó credenciales de GitHub Copilot que envejecían en un año de cambio de producto. La certificación es una instantánea; las herramientas se habrán movido. Recheckead la política vigente de credenciales de Anthropic al inscribiros: no os fiéis solo de una frase de aula."
+      },
+      {
+        "type": "h2",
+        "text": "Mapa de repaso para las últimas 72 horas"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "API: user/assistant/system, motivos de parada, streaming o no, familias de modelos en la página vigente.",
+          "Herramientas: calidad de la descripción, tool_use paralelo frente a secuencial, tool_result en un turno de usuario, el Agent SDK oculta el bucle.",
+          "MCP: problema N×N, cliente integrado en Claude Code, servidor del proveedor frente al vuestro, mcp.json es ubicación no lógica de negocio.",
+          "RAG: recuperar-aumentar-generar; MongoDB Atlas + Voyage fue una <strong>demo</strong>; Bedrock/Chroma/FAISS/Postgres siguen contando.",
+          "Agentes: Claude piensa, Claude Code hace, el SDK itera; integradas Bash/Monitor/Glob/Grep/WebSearch/WebFetch/AskUser.",
+          "RAI: la lista de denegación gana a la de permiso; don’t-ask sigue tras un paso bloqueado; política de uso; escáneres de entrada/salida.",
+          "Productos: Chat frente a Cowork frente a Claude Code de las semanas 1–3 — siguen en el relato Foundation."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Si solo hacéis cinco cosas",
+        "html": "1) Curso Foundation/API de Skilljar. 2) Docs oficiales de tool use y MCP. 3) Un mock cronometrado para el ritmo. 4) Narrar RAG sin nombrar Atlas como obligatorio. 5) Distinguir plan, accept-edits y don’t-ask."
+      },
+      {
+        "type": "h2",
+        "text": "Logística posterior a clase"
+      },
+      {
+        "type": "p",
+        "html": "Los PDF (incluido Agent SDK y el README/PPT de guardrails) se estaban copiando a la carpeta PDF del repo del grupo. Si falta un archivo, pedidlo a la facilitación en lugar de rastrear un GitHub aleatorio. Las preguntas van al chat de clase; ofreció chat personal y luego vio que la privacidad lo bloqueaba: usad el canal compartido o el repo."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Cursos oficiales e inscripción al examen."
+          },
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Empezad aquí la mañana del examen si se ha movido una interfaz."
+          },
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Dominio de API de alto rendimiento."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Dominio de conectores de alto rendimiento."
+          },
+          {
+            "title": "Política de uso",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "Preguntas de RAI / usos permitidos."
+          },
+          {
+            "title": "Reforzar guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Cómo habla Anthropic de probar agentes."
+          },
+          {
+            "title": "Ayuda: dónde está la documentación de la API",
+            "url": "https://support.claude.com/en/articles/8114490-where-can-i-find-your-api-documentation",
+            "note": "Si os perdéis entre consola y docs."
+          }
+        ]
+      }
+    ]
+  }
+]

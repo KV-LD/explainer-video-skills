@@ -1,0 +1,224 @@
+[
+  {
+    "lang": "en",
+    "module_id": "05",
+    "chapter_id": "04",
+    "eyebrow": "Module 05 · Chapter 04 · 12 August 2026",
+    "chapter_title": "End-to-end generation without writing the app by hand",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 5 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M05 · C04 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 5 finished the task-management stack that session 4 had paused mid-frontend: resume the same conversation so the orchestrator continues the to-do list, run backend and frontend, exercise Swagger and the Kanban UI, then extend the repo with Docker/CI-shaped skills — still without the trainer typing application code. “Without writing the app by hand” does not mean “without engineering judgement.” It means the <em>source of the handlers and components is the agent loop</em>, steered by CLAUDE.md, skills, OpenAPI, Figma/MCP, and permission/plan modes."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Your generated UI will not match the recording",
+        "html": "Ports (3000 / 5173), Vite, Tailwind, Playwright, and Docker Desktop prompts are demo-time. If Claude opens Docker Desktop uninvited, tighten the skill. Prefer current <a href=\"https://code.claude.com/docs/en/overview\">Claude Code</a> behaviour over this walkthrough’s exact clicks."
+      },
+      {
+        "type": "h2",
+        "text": "Resume is a feature, not a new prompt"
+      },
+      {
+        "type": "p",
+        "html": "Because the previous session stopped during verification, the trainer stayed in the <em>same conversation</em> and asked to continue code generation. The agentic loop already had a to-do list; remaining items (pages, routers, wiring) picked up. That only works if context is still there — a new session would need you to re-state artefacts (OpenAPI path, Figma URL, skills). Permission mode still applies to each remaining tool call."
+      },
+      {
+        "type": "h2",
+        "text": "Run what was generated"
+      },
+      {
+        "type": "p",
+        "html": "A short prompt — “run my backend and frontend application” — is enough if <code>package.json</code> scripts exist; the agent reads them instead of you pasting npm incantations. Document start/stop in README so Claude does not invent commands. In the lab: API docs on localhost:3000, SPA on 5173. Register/login, create a task (“learn Claude”), move columns. Missing drag-and-drop was a missing requirement, not a model failure — you can add it in a follow-up with a screenshot plus the route name to save tokens."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Swagger: set the server to local, obtain a bearer, call locked routes such as current user and tasks.",
+          "Hot reload: if the frontend is in a Vite-style dev server, CLAUDE.md-guided edits (filters from three rows to one) appear without a full rebuild.",
+          "Ignore or skip verification steps when they dominate a small project (auth rate-limit theatre); say so explicitly.",
+          "Humanizer words (“cooking,” “marinating”) in the UI are loaders, not extra billed vocabulary and not a separate model."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Homework before generation beats giant prompts"
+      },
+      {
+        "type": "p",
+        "html": "Pedro asked whether per-folder instructions fight each other in multi-layer solutions. Vijay: keep a global clarify-on-conflict rule; put naming conventions and design patterns in the layer that owns them (Java camelCase in backend CLAUDE.md, CSS rules under a static <code>public/</code> note). Templates for controllers (inject ILogger, mediator, …) are good if you are precise. Over-specifying every GoF pattern explodes iterations and cost — the cohort’s files were intentionally not that deep."
+      },
+      {
+        "type": "h2",
+        "text": "Container and pipeline skills: still no hand-written app"
+      },
+      {
+        "type": "p",
+        "html": "Once the app ran, the trainer generated Dockerfiles via skills (nginx-style frontend image, backend image with env/db notes), talked about a <strong>mono repo</strong> holding frontend, backend, Terraform, Kubernetes, Jenkins or GitHub Actions — each with its own skill. Ask Claude to write the skill file if you want, then slash it with a tight task (“frontend container only”). Verify <code>.gitignore</code> so <code>node_modules</code> never lands on GitHub. That is still end-to-end delivery work done by agents, not by you authoring JavaScript."
+      },
+      {
+        "type": "h2",
+        "text": "What “production-ready” meant in the room"
+      },
+      {
+        "type": "p",
+        "html": "The slogan from earlier sessions — production-ready apps without a line of code — is a classroom claim about <em>who types the implementation</em>. You still review diffs, secrets, OpenAPI drift, accessibility, and whether Playwright versus Selenium belongs on the plan. Tests the agent runs during verify may not even be files you keep; the trainer caught validation without a test module and noted you should capture those cases as real tests so you do not pay to regenerate them later."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Do not confuse exam coding with this lab",
+        "html": "Foundation written scenarios are not “open the IDE and generate the app.” They ask you to reason about plan vs execute, CLAUDE.md vs skills, MCP vs attachments, and token-aware attachments. This lab is how those pieces feel when assembled."
+      },
+      {
+        "type": "h2",
+        "text": "Bridge to hooks (next module)"
+      },
+      {
+        "type": "p",
+        "html": "The session closed by naming the next Claude Code concepts: <strong>sub-agents</strong> (already introduced), <strong>hooks</strong>, and <strong>plugins</strong>. End-to-end generation that formats code by asking the model to “follow Prettier in CLAUDE.md” is the expensive path. Module 06 moves that work to local post-tool hooks so the same greenfield app costs hundreds to thousands fewer tokens on reprocessing."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Running, resuming, and skill-driven generation in the coding client."
+          },
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Product behaviour if the IDE browser preview or Docker integration moved."
+          },
+          {
+            "title": "Rate limits",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Long verify loops and usage meters are why you skip redundant checks."
+          },
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Official courses; this lab is UST practice, not a Skilljar exercise file."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "05",
+    "chapter_id": "04",
+    "eyebrow": "Módulo 05 · Capítulo 04 · 12 de agosto de 2026",
+    "chapter_title": "Generación de extremo a extremo sin escribir la app a mano",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 5 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M05 · C04 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 5 terminó el stack de gestión de tareas que la 4 había pausado a mitad de frontend: reanudar la misma conversación para que el orquestador siga la lista de to-dos, arrancar backend y frontend, ejercitar Swagger y la UI Kanban, y extender el repo con skills con forma de Docker/CI — todavía sin que el formador teclee código de aplicación. «Sin escribir la app a mano» no significa «sin criterio de ingeniería». Significa que <em>el origen de handlers y componentes es el bucle del agente</em>, dirigido por CLAUDE.md, skills, OpenAPI, Figma/MCP y los modos de permiso/plan."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Vuestra UI generada no coincidirá con la grabación",
+        "html": "Puertos (3000 / 5173), Vite, Tailwind, Playwright y los prompts de Docker Desktop son del momento del demo. Si Claude abre Docker Desktop sin que se lo pidáis, apretad la skill. Preferid el comportamiento vigente de <a href=\"https://code.claude.com/docs/en/overview\">Claude Code</a> frente a los clics exactos de este recorrido."
+      },
+      {
+        "type": "h2",
+        "text": "Reanudar es una función, no un prompt nuevo"
+      },
+      {
+        "type": "p",
+        "html": "Como la sesión anterior se detuvo en la verificación, el formador se quedó en la <em>misma conversación</em> y pidió continuar la generación. El bucle agentic ya tenía la lista de to-dos; los ítems restantes (páginas, routers, cableado) siguieron. Solo funciona si el contexto sigue ahí: una sesión nueva exigiría reafirmar artefactos (ruta OpenAPI, URL de Figma, skills). El modo de permiso sigue aplicando a cada llamada a tool restante."
+      },
+      {
+        "type": "h2",
+        "text": "Ejecutar lo generado"
+      },
+      {
+        "type": "p",
+        "html": "Un prompt corto — «run my backend and frontend application» — basta si existen scripts en <code>package.json</code>; el agente los lee en vez de que peguéis conjuros npm. Documentad arranque/parada en el README para que Claude no invente comandos. En el laboratorio: docs de API en localhost:3000, SPA en 5173. Registro/login, crear una tarea («learn Claude»), mover columnas. Faltar drag-and-drop era un requisito ausente, no un fallo del modelo: podéis añadirlo después con una captura más el nombre de la ruta para ahorrar tokens."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Swagger: servidor en local, obtener un bearer, llamar rutas con candado (usuario actual, tareas).",
+          "Hot reload: si el frontend es un dev server estilo Vite, las ediciones guiadas por CLAUDE.md (filtros de tres filas a una) aparecen sin rebuild completo.",
+          "Ignorad u omitid pasos de verificación cuando se coman un proyecto pequeño (teatro de rate-limit de auth); decidlo explícitamente.",
+          "Las palabras humanizer («cooking», «marinating») en la UI son loaders, no vocabulario extra facturable ni otro modelo."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Los deberes antes de generar ganan a los prompts gigantes"
+      },
+      {
+        "type": "p",
+        "html": "Pedro preguntó si las instrucciones por carpeta se pelean en soluciones de varias capas. Vijay: mantened una regla global de aclarar en conflicto; poned convenciones de nombres y patrones de diseño en la capa que los posee (camelCase Java en el CLAUDE.md de backend, reglas CSS bajo una nota en <code>public/</code>). Las plantillas de controladores (inyectar ILogger, mediator, …) valen si sois precisos. Sobreespecificar cada patrón GoF dispara iteraciones y coste: los ficheros de la cohorte no iban tan al fondo a propósito."
+      },
+      {
+        "type": "h2",
+        "text": "Skills de contenedor y pipeline: seguís sin escribir la app a mano"
+      },
+      {
+        "type": "p",
+        "html": "Cuando la app corrió, el formador generó Dockerfiles vía skills (imagen frontend estilo nginx, imagen backend con notas de env/db) y habló de un <strong>mono repo</strong> con frontend, backend, Terraform, Kubernetes, Jenkins o GitHub Actions — cada uno con su skill. Pedid a Claude que escriba el SKILL.md si queréis, y luego haced slash con una tarea estrecha («solo el contenedor frontend»). Verificad <code>.gitignore</code> para que <code>node_modules</code> no llegue a GitHub. Sigue siendo entrega de extremo a extremo hecha por agentes, no por vosotros autorando JavaScript."
+      },
+      {
+        "type": "h2",
+        "text": "Qué significaba «production-ready» en la sala"
+      },
+      {
+        "type": "p",
+        "html": "El eslogan de sesiones anteriores — apps listas para producción sin una línea de código — es una afirmación de aula sobre <em>quién teclea la implementación</em>. Seguís revisando diffs, secretos, deriva de OpenAPI, accesibilidad y si Playwright o Selenium deben estar en el plan. Los tests que el agente corre en verify pueden ni siquiera ser ficheros que conservéis; el formador cazó validación sin módulo de test y señaló que conviene capturar esos casos como tests reales para no pagar a regenerarlos después."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "No confundáis el código del examen con este laboratorio",
+        "html": "Los escenarios escritos de Foundation no son «abrid el IDE y generad la app». Piden razonar sobre plan frente a execute, CLAUDE.md frente a skills, MCP frente a adjuntos, y adjuntos conscientes de tokens. Este laboratorio es cómo se sienten esas piezas montadas."
+      },
+      {
+        "type": "h2",
+        "text": "Puente hacia hooks (módulo siguiente)"
+      },
+      {
+        "type": "p",
+        "html": "La sesión cerró nombrando los siguientes conceptos de Claude Code: <strong>subagentes</strong> (ya presentados), <strong>hooks</strong> y <strong>plugins</strong>. La generación de extremo a extremo que formatea código pidiendo al modelo «sigue Prettier en CLAUDE.md» es el camino caro. El módulo 06 mueve ese trabajo a hooks locales posteriores a la tool para que la misma app greenfield cueste cientos o miles de tokens menos en el reprocesado."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Ejecutar, reanudar y generación dirigida por skills en el cliente de código."
+          },
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Comportamiento de producto si se ha movido la vista previa del navegador en el IDE o Docker."
+          },
+          {
+            "title": "Límites de tasa",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Los bucles largos de verify y los medidores de uso explican por qué se saltan comprobaciones redundantes."
+          },
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Cursos oficiales; este laboratorio es práctica UST, no un ejercicio de Skilljar."
+          }
+        ]
+      }
+    ]
+  }
+]

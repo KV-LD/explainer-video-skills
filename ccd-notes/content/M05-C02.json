@@ -1,0 +1,242 @@
+[
+  {
+    "lang": "en",
+    "module_id": "05",
+    "chapter_id": "02",
+    "eyebrow": "Module 05 · Chapter 02 · 12 August 2026",
+    "chapter_title": "Slash commands and model selection",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 5 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M05 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "The same recap that covered permission modes covered <strong>slash commands</strong>: built-in Claude Code commands (<code>/model</code>, compact, and the rest of the in-product list) versus <strong>custom skills</strong> that appear as slash entries once you add a <code>SKILL.md</code>. Model selection is not a separate product — it is a slash (or a “switch model” control) that binds the current session, and later each sub-agent, to a Haiku / Sonnet / Opus-class model your org can actually use."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Command palette drift",
+        "html": "The live UI showed a default around “Sonnet 5” and a <code>/model</code> picker of whatever the org had. Built-in names (<code>/compact</code>, <code>/clear</code>, agents, mcp, hooks) move between releases. Read the in-session <code>/</code> menu and <a href=\"https://code.claude.com/docs/en/overview\">Claude Code docs</a> rather than memorising a 12 August screenshot."
+      },
+      {
+        "type": "h2",
+        "text": "/model — set or list, do not guess SKUs"
+      },
+      {
+        "type": "p",
+        "html": "Type <code>/model</code> (the trainer also said <code>/models</code>) to list models available to the workspace, or <code>/model</code> plus a name to switch. There is often a switch-model control showing the current default. Teaching points:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Availability is organisational: you cannot select a model the workspace is not entitled to.",
+          "Use a stronger model (Opus-class in the lecture) for planning / architecture-style sub-agents; Sonnet-class for routine generation; Haiku-class when the task is cheap classification or boilerplate — always re-check the live ladder.",
+          "Sub-agents can <em>inherit</em> the parent model or pin their own in the agent markdown (M05-C03). A Docker-file agent does not need the same model as a principal-architect skill.",
+          "Switching model does not flush CLAUDE.md; it does change cost and latency of the next turns."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Built-in slashes versus skill slashes"
+      },
+      {
+        "type": "table",
+        "headers": ["Kind", "Examples from class", "Who defines it", "When it runs"],
+        "rows": [
+          ["Built-in Claude Code", "/model, compact (and other session utilities the / menu lists)", "The product", "Whenever you type them; they configure the client."],
+          ["Skill slash", "/business-analyst, /architect, /backend, /frontend, later /docker-style skills", "Your repo’s skill folders (SKILL.md)", "On explicit slash, or auto if model invocation is not disabled."],
+          ["Agent mention / delegate", "Review the code → code-reviewer agent; generate Dockerfile → docker agent", "`.claude/agents` (or user/plugin scope)", "Orchestrator matches description, or you invoke the agent."]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Skills are “custom slash commands” in the trainer’s vocabulary. They are not MCP. They inject a role packet for one turn (or until the skill’s instructions are in context). Compact is the opposite kind of command: it shrinks session context so you can keep working without starting from a blank chat — related to context-window management from Module 03, not to picking Opus."
+      },
+      {
+        "type": "h2",
+        "text": "Configuration surfaces the / menu sits on"
+      },
+      {
+        "type": "p",
+        "html": "Slash commands are how you <em>drive</em> Claude Code; configuration still lives in files: project <code>CLAUDE.md</code>, nested CLAUDE.md, <code>settings.json</code> (hooks in Module 06), skill trees, agent markdown. The trainer also pointed at Claude Code configuration generally: path-specific memory, permission mode, model. Treat the slash bar as the interactive API of those files, not as a second source of truth."
+      },
+      {
+        "type": "h2",
+        "text": "Asking Claude to write the slash for you"
+      },
+      {
+        "type": "p",
+        "html": "Later in the same session the trainer asked Claude to <em>create a skill</em> (e.g. Docker/container work) rather than hand-writing every SKILL.md. That is allowed: the generated skill then shows up as a slash like the handmade ones. Constrain the prompt (“only the frontend container, do not start Docker Desktop and boil the ocean”) or the new skill will inherit the same over-eager agent loop you were trying to package. Disable model invocation on a skill if you need it never to fire unless slashed."
+      },
+      {
+        "type": "h2",
+        "text": "Prompt context is not only the slash"
+      },
+      {
+        "type": "p",
+        "html": "When you slash frontend and paste a screenshot of filters, the model still loads frontend CLAUDE.md. Better prompts name the route or component (<code>/tasks</code>) so search tokens are not spent grepping the whole SPA. README start/stop commands can be a slash-time instruction: “refer to README and start the app” instead of dumping every npm script into the skill."
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Exam-ready one-liner",
+        "html": "<code>/model</code> chooses the brain; skill slashes choose the role; permission mode chooses how often the brain must ask before using tools. Mixing those three up is a common written-answer failure."
+      },
+      {
+        "type": "h2",
+        "text": "What not to put in a slash"
+      },
+      {
+        "type": "p",
+        "html": "Do not paste client data. Do not rely on a slash to enforce Prettier or company format — that is a local hook (Module 06) so it does not bill tokens. Do not create a skill that is actually an MCP server; if you need Figma or an internal API, that is tools/MCP, optionally <em>allowed</em> on an agent, not a SKILL.md pretending to log in."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Slash menu, skills, and session commands including model."
+          },
+          {
+            "title": "Models",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Which IDs /model may list this week."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Why two UST users can see different model lists."
+          },
+          {
+            "title": "Prompting overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Skills are packaged prompts; compact is context hygiene."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "05",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 05 · Capítulo 02 · 12 de agosto de 2026",
+    "chapter_title": "Comandos slash y selección de modelo",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 5 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M05 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El mismo repaso que cubrió los modos de permiso cubrió los <strong>comandos slash</strong>: los integrados de Claude Code (<code>/model</code>, compact y el resto de la lista del producto) frente a las <strong>skills personalizadas</strong> que aparecen como entradas slash cuando añadís un <code>SKILL.md</code>. La selección de modelo no es otro producto: es un slash (o un control «switch model») que ata la sesión actual, y más adelante cada subagente, a un modelo de clase Haiku / Sonnet / Opus que vuestra org puede usar de verdad."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "La paleta de comandos se mueve",
+        "html": "La UI en directo mostró un valor por defecto en torno a «Sonnet 5» y un selector <code>/model</code> de lo que tuviera la org. Los nombres integrados (<code>/compact</code>, <code>/clear</code>, agents, mcp, hooks) cambian entre versiones. Leed el menú <code>/</code> de la sesión y la <a href=\"https://code.claude.com/docs/en/overview\">documentación de Claude Code</a> en vez de memorizar una captura del 12 de agosto."
+      },
+      {
+        "type": "h2",
+        "text": "/model — listar o fijar, no adivinar SKUs"
+      },
+      {
+        "type": "p",
+        "html": "Escribís <code>/model</code> (el formador también dijo <code>/models</code>) para listar los modelos del espacio de trabajo, o <code>/model</code> más un nombre para cambiar. A menudo hay un control switch-model con el valor actual. Puntos didácticos:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "La disponibilidad es organizativa: no podéis elegir un modelo al que el workspace no tenga derecho.",
+          "Usad un modelo más fuerte (clase Opus en la clase) para planificación / subagentes de arquitectura; clase Sonnet para generación rutinaria; clase Haiku cuando la tarea es clasificación barata o boilerplate — comprobad siempre la escalera vigente.",
+          "Los subagentes pueden <em>heredar</em> el modelo del padre o fijar el suyo en el markdown del agente (M05-C03). Un agente de Dockerfile no necesita el mismo modelo que una skill de arquitecto principal.",
+          "Cambiar de modelo no vacía CLAUDE.md; sí cambia coste y latencia de los turnos siguientes."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Slashes integrados frente a slashes de skill"
+      },
+      {
+        "type": "table",
+        "headers": ["Tipo", "Ejemplos de clase", "Quién lo define", "Cuándo corre"],
+        "rows": [
+          ["Integrado en Claude Code", "/model, compact (y otras utilidades de sesión que liste el menú /)", "El producto", "Cuando los escribís; configuran el cliente."],
+          ["Slash de skill", "/business-analyst, /architect, /backend, /frontend, skills tipo Docker más adelante", "Carpetas de skill del repo (SKILL.md)", "Con el slash explícito, o en automático si no se desactivó la invocación por el modelo."],
+          ["Mención / delegación de agente", "Review the code → agente code-reviewer; generate Dockerfile → agente docker", "`.claude/agents` (o ámbito de usuario/plugin)", "El orquestador encaja la descripción, o invocáis el agente."]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Las skills son «comandos slash personalizados» en el vocabulario del formador. No son MCP. Inyectan un paquete de rol para un turno (o mientras las instrucciones de la skill estén en contexto). Compact es el tipo contrario de comando: reduce el contexto de sesión para seguir sin partir de un chat en blanco — ligado a la ventana de contexto del módulo 03, no a elegir Opus."
+      },
+      {
+        "type": "h2",
+        "text": "Las superficies de configuración sobre las que se sienta el menú /"
+      },
+      {
+        "type": "p",
+        "html": "Los slash son cómo <em>conducís</em> Claude Code; la configuración sigue en ficheros: <code>CLAUDE.md</code> de proyecto, CLAUDE.md anidados, <code>settings.json</code> (hooks en el módulo 06), árboles de skills, markdown de agentes. El formador apuntó también a la configuración general de Claude Code: memoria por ruta, modo de permiso, modelo. Tratad la barra slash como la API interactiva de esos ficheros, no como una segunda fuente de verdad."
+      },
+      {
+        "type": "h2",
+        "text": "Pedirle a Claude que escriba el slash"
+      },
+      {
+        "type": "p",
+        "html": "Más tarde en la misma sesión el formador pidió a Claude <em>crear una skill</em> (p. ej. Docker/contenedores) en vez de escribir a mano cada SKILL.md. Está permitido: la skill generada aparece como slash igual que las hechas a mano. Acotad el prompt («solo el contenedor frontend, no arranques Docker Desktop ni os comáis el mundo») o la skill nueva heredará el mismo bucle demasiado entusiasta que queríais empaquetar. Desactivad la invocación por el modelo si necesitáis que no dispare nunca salvo con slash."
+      },
+      {
+        "type": "h2",
+        "text": "El contexto del prompt no es solo el slash"
+      },
+      {
+        "type": "p",
+        "html": "Cuando hacéis slash de frontend y pegáis una captura de filtros, el modelo sigue cargando el CLAUDE.md de frontend. Los mejores prompts nombran la ruta o el componente (<code>/tasks</code>) para no gastar tokens buscando por toda la SPA. Los comandos de arranque del README pueden ser una instrucción en el momento del slash: «consulta el README y arranca la app» en vez de volcar cada script npm en la skill."
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Frase lista para el examen",
+        "html": "<code>/model</code> elige el cerebro; los slash de skill eligen el rol; el modo de permiso elige cada cuánto el cerebro debe pedir permiso antes de usar tools. Mezclar esas tres cosas es un fallo habitual en las respuestas escritas."
+      },
+      {
+        "type": "h2",
+        "text": "Qué no meter en un slash"
+      },
+      {
+        "type": "p",
+        "html": "No peguéis datos de cliente. No confiéis en un slash para imponer Prettier o el formato de empresa: eso es un hook local (módulo 06) para que no facture tokens. No creéis una skill que en realidad sea un servidor MCP; si necesitáis Figma o una API interna, son tools/MCP, opcionalmente <em>permitidas</em> en un agente, no un SKILL.md que finja iniciar sesión."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Menú slash, skills y comandos de sesión, incluido el modelo."
+          },
+          {
+            "title": "Modelos",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Qué IDs puede listar /model esta semana."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Por qué dos usuarios UST pueden ver listas de modelos distintas."
+          },
+          {
+            "title": "Visión general de prompting",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Las skills son prompts empaquetados; compact es higiene de contexto."
+          }
+        ]
+      }
+    ]
+  }
+]

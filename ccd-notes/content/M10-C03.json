@@ -1,0 +1,294 @@
+[
+  {
+    "lang": "en",
+    "module_id": "10",
+    "chapter_id": "03",
+    "eyebrow": "Module 10 · Chapter 03 · 24 August 2026",
+    "chapter_title": "MCP servers versus ad-hoc tools",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 10 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M10 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Ad-hoc tools live inside one AI app: you write <code>get_current_date_time</code>, register the schema, ship that notebook. <strong>Model Context Protocol (MCP)</strong> is the same idea moved to a <em>server</em> other clients can share. Vijay’s line: write the methods once, consume them from Claude Code, Cowork, GitHub Copilot, or your own Messages client."
+      },
+      {
+        "type": "h2",
+        "text": "The N×N integration problem"
+      },
+      {
+        "type": "p",
+        "html": "Picture three internal sources (a database, a document repo, a set of APIs) and three AI apps that all need them. Point-to-point wiring is nine integrations. Change a column in the database and you patch three apps. MCP inserts two roles so apps stop importing vendor SDKs directly:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>MCP server</strong> — connects to the data source and <em>exposes tools</em> (and related resources) over the protocol.",
+          "<strong>MCP client</strong> — lives in the AI application, lists those tools, and lets Claude choose among them like any other tool schema."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "When the database contract changes, you update the server. Clients keep the same connection configuration. Isolation is the point, not a new kind of LLM."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Open protocol",
+        "html": "MCP is not “Claude-only magic.” It is an open protocol for how applications provide context to models. Confirm current client/server docs at <a href=\"https://docs.claude.com/en/docs/agents-and-tools/mcp\">MCP on docs.claude.com</a> — marketplace UIs in the recording will have moved."
+      },
+      {
+        "type": "h2",
+        "text": "Where the client comes from"
+      },
+      {
+        "type": "p",
+        "html": "In Claude Code / Anthropic agent stacks, the trainer treated the <strong>MCP client as built in</strong>. You do not implement JSON-RPC by hand. You <em>configure</em> which servers to attach. The Anthropic SDK likewise ships client helpers. Your job as a platform team is usually to <strong>build or host servers</strong> for proprietary data."
+      },
+      {
+        "type": "h2",
+        "text": "Three server shapes in class"
+      },
+      {
+        "type": "table",
+        "headers": ["Shape", "Who hosts data", "Classroom example"],
+        "rows": [
+          ["Local proprietary server", "You, on the same machine as the client", "stdio / IO when client and server share a host"],
+          ["Your server wrapping third-party HTTP", "You call a public or internal API, then re-expose MCP tools", "Demo: get todos, get energy prices"],
+          ["Vendor-provided server", "Figma, Google, Playwright, ElevenLabs, …", "Figma MCP in Claude Cowork; Gmail connector also MCP"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Cowork “connectors” in this course are MCP (or MCP-shaped) attachments. Default <em>code</em> tools you wrote in the notebook are not; they are in-process functions. Third-party SaaS is where MCP is the default pattern today."
+      },
+      {
+        "type": "h2",
+        "text": "Marketplaces and registries"
+      },
+      {
+        "type": "p",
+        "html": "You do not have to invent every server. The session listed MCP marketplaces and registries (VS Code marketplace, GitHub MCP registry, Claude’s own server catalogue). Playwright’s listing, for example, advertised tools such as browser size, close, and console messages — an LLM then chooses among them."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Prefer the <strong>vendor’s own</strong> MCP server when you consume Figma (or similar), not a random third-party clone.",
+          "If <em>you</em> publish a server, any library that implements the protocol is valid (FastMCP, official SDKs, FastAPI wrappers). Anthropic’s libraries know the edge cases; protocol completeness matters more than brand.",
+          "A <strong>registry</strong> is closer to an npm/marketplace listing than to OpenAPI Swagger. MCP is not “just REST with extra steps”: discovery, tool list, and connect artefacts are protocol-specific. You might bundle a Docker image (server you run locally) or a “bundle as service” (remote URL plus connect config)."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Transports: IO, socket, HTTP"
+      },
+      {
+        "type": "p",
+        "html": "The demo FastAPI server exposed four tools: add two numbers, get energy prices, get todos, greeting. The same tool list can be reached over different channels:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>IO / stdio</strong> — client and server on one machine (typical local Claude Code MCP).",
+          "<strong>Socket</strong> — same network, remote process; the trainer compared it to a WebSocket-style wrapper but noted sockets can ride other application protocols (SMTP, FTP) if you are bridging those systems.",
+          "<strong>HTTP</strong> — server on the public internet; you still do not hand-write every body field the way a one-off REST client would. The MCP client fills the protocol envelope."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "GitHub Copilot’s <code>mcp.json</code> in that demo was “where is my server URL (or command)?” The Copilot MCP client then listed tools. After a window reload and with the process actually running, add / energy prices / todos appeared. Same server, multiple consumers."
+      },
+      {
+        "type": "h2",
+        "text": "Ad-hoc tool versus MCP tool — exam contrast"
+      },
+      {
+        "type": "table",
+        "headers": ["", "In-process tool", "MCP tool"],
+        "rows": [
+          ["Defined where", "Your AI app source", "An MCP server process"],
+          ["Reuse", "Copy/paste or a shared library", "Any MCP client that can reach the server"],
+          ["Change management", "Redeploy each app", "Redeploy the server; clients keep config"],
+          ["Claude’s view", "A schema in the tools array", "The same kind of schema, discovered via the client"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "MCP does not replace RAG or memory. It is a connector pattern so context (tools, and often resources) can be provided in a standard way. Session 10 then pivoted to RAG as the next context technique — continued in module 11."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Client/server model for Claude products and the API."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "The handshake MCP tools still participate in."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Where many engineers first attach MCP servers."
+          },
+          {
+            "title": "Cowork / Claude desktop support",
+            "url": "https://support.claude.com/",
+            "note": "Connectors (Figma, Gmail) as used in earlier Cowork sessions."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "10",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 10 · Capítulo 03 · 24 de agosto de 2026",
+    "chapter_title": "Servidores MCP frente a herramientas ad hoc",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 10 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M10 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Las herramientas ad hoc viven dentro de una sola app de IA: escribís <code>get_current_date_time</code>, registráis el esquema y entregáis ese cuaderno. El <strong>Model Context Protocol (MCP)</strong> es la misma idea desplazada a un <em>servidor</em> que otros clientes pueden compartir. La frase de Vijay: escribid los métodos una vez y consumidlos desde Claude Code, Cowork, GitHub Copilot o vuestro propio cliente Messages."
+      },
+      {
+        "type": "h2",
+        "text": "El problema de integración N×N"
+      },
+      {
+        "type": "p",
+        "html": "Imaginad tres fuentes internas (una base de datos, un repositorio de documentos, un conjunto de APIs) y tres apps de IA que las necesitan. El cableado punto a punto son nueve integraciones. Cambiáis una columna y parcheáis tres apps. MCP inserta dos roles para que las apps dejen de importar SDK de proveedor directamente:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Servidor MCP</strong> — se conecta a la fuente de datos y <em>expone herramientas</em> (y recursos relacionados) por el protocolo.",
+          "<strong>Cliente MCP</strong> — vive en la aplicación de IA, lista esas herramientas y deja que Claude elija entre ellas como con cualquier otro esquema."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Cuando cambia el contrato de la base de datos, actualizáis el servidor. Los clientes conservan la misma configuración de conexión. El aislamiento es el objetivo, no un LLM nuevo."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Protocolo abierto",
+        "html": "MCP no es magia solo de Claude. Es un protocolo abierto sobre cómo las aplicaciones dan contexto a los modelos. Confirmad la documentación vigente en <a href=\"https://docs.claude.com/en/docs/agents-and-tools/mcp\">MCP en docs.claude.com</a>: las interfaces de marketplace de la grabación se habrán movido."
+      },
+      {
+        "type": "h2",
+        "text": "De dónde sale el cliente"
+      },
+      {
+        "type": "p",
+        "html": "En los stacks de Claude Code / agentes Anthropic, el formador trató el <strong>cliente MCP como integrado</strong>. No implementáis JSON-RPC a mano. <em>Configuráis</em> a qué servidores engancharos. El SDK de Anthropic también trae ayudas de cliente. El trabajo de plataforma suele ser <strong>construir o alojar servidores</strong> para datos propietarios."
+      },
+      {
+        "type": "h2",
+        "text": "Tres formas de servidor en clase"
+      },
+      {
+        "type": "table",
+        "headers": ["Forma", "Quién aloja los datos", "Ejemplo de aula"],
+        "rows": [
+          ["Servidor propietario local", "Vosotros, en la misma máquina que el cliente", "stdio / IO cuando cliente y servidor comparten anfitrión"],
+          ["Vuestro servidor envolviendo HTTP de terceros", "Llamáis a una API pública o interna y reexponeis herramientas MCP", "Demo: get todos, get energy prices"],
+          ["Servidor del proveedor", "Figma, Google, Playwright, ElevenLabs, …", "MCP de Figma en Claude Cowork; el conector de Gmail también es MCP"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Los «conectores» de Cowork en este curso son adjuntos MCP (o de forma MCP). Las herramientas de <em>código</em> por defecto que escribisteis en el cuaderno no lo son; son funciones en proceso. El SaaS de terceros es donde MCP es el patrón por defecto hoy."
+      },
+      {
+        "type": "h2",
+        "text": "Marketplaces y registros"
+      },
+      {
+        "type": "p",
+        "html": "No tenéis que inventar cada servidor. La sesión citó marketplaces y registros MCP (marketplace de VS Code, registro MCP de GitHub, catálogo de servidores de Claude). El listado de Playwright, por ejemplo, anunciaba herramientas de tamaño de navegador, cierre y mensajes de consola: un LLM elige entre ellas."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Preferid el servidor MCP <strong>del propio proveedor</strong> cuando consumáis Figma (o similar), no un clon aleatorio de terceros.",
+          "Si <em>vosotros</em> publicáis un servidor, vale cualquier biblioteca que implemente el protocolo (FastMCP, SDK oficiales, envoltorios FastAPI). Las bibliotecas de Anthropic conocen los casos límite; importa más que el protocolo esté completo que la marca.",
+          "Un <strong>registro</strong> se parece más a un listado tipo npm/marketplace que a Swagger OpenAPI. MCP no es «REST con pasos extra»: el descubrimiento, la lista de herramientas y los artefactos de conexión son del protocolo. Podéis empaquetar una imagen Docker (servidor que corréis en local) o un «paquete como servicio» (URL remota más configuración de conexión)."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Transportes: IO, socket, HTTP"
+      },
+      {
+        "type": "p",
+        "html": "El servidor FastAPI de demostración expuso cuatro herramientas: sumar dos números, precios de energía, todos y saludo. La misma lista puede alcanzarse por canales distintos:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>IO / stdio</strong> — cliente y servidor en una máquina (MCP local típico de Claude Code).",
+          "<strong>Socket</strong> — misma red, proceso remoto; el formador lo comparó con un envoltorio tipo WebSocket, pero los sockets pueden montar otros protocolos de aplicación (SMTP, FTP) si estáis tendiendo un puente a esos sistemas.",
+          "<strong>HTTP</strong> — servidor en Internet; aun así no escribís a mano cada campo del cuerpo como en un cliente REST improvisado. El cliente MCP rellena el sobre del protocolo."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "El <code>mcp.json</code> de GitHub Copilot en esa demo era «¿dónde está la URL (o el comando) de mi servidor?». El cliente MCP de Copilot listaba entonces las herramientas. Tras recargar la ventana y con el proceso en marcha, aparecieron add / energy prices / todos. El mismo servidor, varios consumidores."
+      },
+      {
+        "type": "h2",
+        "text": "Herramienta ad hoc frente a herramienta MCP — contraste de examen"
+      },
+      {
+        "type": "table",
+        "headers": ["", "Herramienta en proceso", "Herramienta MCP"],
+        "rows": [
+          ["Dónde se define", "El código de vuestra app de IA", "Un proceso servidor MCP"],
+          ["Reutilización", "Copiar/pegar o una biblioteca compartida", "Cualquier cliente MCP que alcance el servidor"],
+          ["Gestión del cambio", "Redesplegar cada app", "Redesplegar el servidor; los clientes conservan la config"],
+          ["Vista de Claude", "Un esquema en el array tools", "El mismo tipo de esquema, descubierto vía el cliente"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "MCP no sustituye a RAG ni a la memoria. Es un patrón de conectores para dar contexto (herramientas y, a menudo, recursos) de forma estándar. La sesión 10 giró entonces hacia RAG como siguiente técnica de contexto — se continúa en el módulo 11."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Modelo cliente/servidor para productos Claude y la API."
+          },
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "El apretón de manos en el que también participan las herramientas MCP."
+          },
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Donde muchos ingenieros enganchan por primera vez servidores MCP."
+          },
+          {
+            "title": "Soporte de Cowork / Claude desktop",
+            "url": "https://support.claude.com/",
+            "note": "Conectores (Figma, Gmail) como en sesiones anteriores de Cowork."
+          }
+        ]
+      }
+    ]
+  }
+]

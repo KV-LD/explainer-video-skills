@@ -1,0 +1,272 @@
+[
+  {
+    "lang": "en",
+    "module_id": "11",
+    "chapter_id": "02",
+    "eyebrow": "Module 11 · Chapter 02 · 26 August 2026",
+    "chapter_title": "Vector stores in the lab: MongoDB Atlas / Voyage-style embeddings",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 11 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M11 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "The hands-on RAG service used a remote <strong>MongoDB Atlas</strong> vector capability and a <strong>Voyage</strong>-style embedding client (spoken in the room as “OH / OHEI”). That pairing is a <strong>class demo</strong>, not the only RAG architecture, and not an Anthropic-owned embedding model. Claude generates text; something else must turn chunks into vectors."
+      },
+      {
+        "type": "h2",
+        "text": "Why the lab is not “the Claude vector database”"
+      },
+      {
+        "type": "p",
+        "html": "Vijay was explicit: unlike some other model labs, <strong>Claude does not ship a first-party embedding model</strong> in this course’s telling. OpenAI- and Amazon-shaped stacks often do. For CCD Foundation you must be able to say: pick an embedding provider, pick a vector store, keep the retrieve-augment-generate loop. MongoDB+Voyage was what fitted a free cloud database and a client that could both embed and talk to that store."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Do not memorise one vendor as the exam answer",
+        "html": "If a scenario says “Postgres pgvector,” “Chroma,” “FAISS (Meta),” “OpenSearch,” or “Bedrock knowledge base,” that is still RAG. The lab keys and Atlas UI in the PDF folder are homework, not a unique architecture."
+      },
+      {
+        "type": "h2",
+        "text": "What was installed and configured"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Anthropic client for generation after retrieval.",
+          "A Voyage/Mongo vector client, authenticated with an API key stored as something like <code>VOYAGE_API_KEY</code> in <code>.env</code> (follow the cohort PDF; never commit keys).",
+          "<code>load_dotenv</code> so the notebook process can open a remote Atlas-style endpoint.",
+          "A wrapper class (spoken as “vector index”) that knew how to <strong>insert</strong> documents, store 1024-dimension vectors in the demo, and <strong>search</strong> with cosine distance / cosine similarity."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "MongoDB here is not “just a document store.” The course used the vendor’s <strong>vector</strong> product: same company brand, different access pattern (k-NN style search on embeddings)."
+      },
+      {
+        "type": "h2",
+        "text": "Embeddings in the demo"
+      },
+      {
+        "type": "p",
+        "html": "Sample text went into <code>embed</code>; the notebook printed the first five numbers of a <strong>1024-dimension</strong> array. Those numbers are not meaning you can read; they are coordinates. After all chunks of <code>report.md</code> were embedded, the store held on the order of <strong>15 records</strong> in that run — a toy corpus so you could see insert + query, not a production index."
+      },
+      {
+        "type": "h3",
+        "text": "Query path"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "User asks, for example, to explain Fourier series simply.",
+          "That query string is embedded with the <em>same</em> embedding model used at index time (mixing models breaks geometry).",
+          "Cosine search returns k chunk texts (the lab configured “how many records to fetch”).",
+          "Those strings are concatenated onto the user question and sent to Claude via the Anthropic API."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Other architectures the trainer named on purpose"
+      },
+      {
+        "type": "table",
+        "headers": ["Approach", "When he mentioned it", "What you still must do"],
+        "rows": [
+          ["MongoDB Atlas + Voyage embeddings", "Primary notebook", "Chunk, embed, cosine (or configured metric), augment"],
+          ["Amazon Bedrock knowledge base + S3", "No-code path: bucket, auto-sync, embedding and chunking in the console, then boto3", "Still retrieve then generate; auth via AWS CLI or keys"],
+          ["OpenSearch", "Enterprise vector retrieval alternative", "Same three letters"],
+          ["Chroma / FAISS, in-memory or local disk", "Local tests; LocalStack was suggested instead of paid AWS", "You still need an embedding model — Voyage was reused even locally in his answer"],
+          ["Postgres vector extensions", "Named in the 24 August RAG teaser", "SQL-shaped store, same math"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Operational notes from Q&amp;A"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Index-once versus search-on-the-fly: the vector DB is populated as a batch (or a sync pipeline); each user question is a search, not a full rescan of raw Markdown unless you designed it that way.",
+          "Cache embeddings or search results if latency and bill matter.",
+          "Filter with metadata when faculties or tenants must not share hits.",
+          "Similarity defaults belong to <code>similarity_search</code>-style APIs; pass parameters if you need a different k or threshold."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Security for UST delivery"
+      },
+      {
+        "type": "p",
+        "html": "A free Atlas cluster and a Voyage key are fine for the medical-research sample file. They are not fine for client PHI/PII. RAG concentrates exactly the documents you were not supposed to paste into Chat. Host the vector store in the approved cloud, encrypt, and keep keys in a secret manager — the notebook <code>.env</code> is a teaching crutch."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Where the augmented prompt is sent after search."
+          },
+          {
+            "title": "API overview",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Auth and clients used beside the vector vendor SDK."
+          },
+          {
+            "title": "PDF support",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "Alternative: send documents to Claude without your own vector DB when size allows."
+          },
+          {
+            "title": "Citations",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/citations",
+            "note": "Ground generation in retrieved or attached text."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Key hygiene when many people share an Anthropic org."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "11",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 11 · Capítulo 02 · 26 de agosto de 2026",
+    "chapter_title": "Almacenes vectoriales en el laboratorio: MongoDB Atlas y embeddings",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 11 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M11 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El servicio RAG práctico usó una capacidad vectorial remota de <strong>MongoDB Atlas</strong> y un cliente de embeddings al estilo <strong>Voyage</strong> (en el aula se oía «OH / OHEI»). Ese emparejamiento es una <strong>demostración de clase</strong>, no la única arquitectura RAG, y no un modelo de embeddings de Anthropic. Claude genera texto; otra cosa tiene que convertir los trozos en vectores."
+      },
+      {
+        "type": "h2",
+        "text": "Por qué el laboratorio no es «la base vectorial de Claude»"
+      },
+      {
+        "type": "p",
+        "html": "Vijay fue explícito: a diferencia de otros laboratorios de modelos, <strong>Claude no trae un modelo de embeddings de primera parte</strong> en el relato de este curso. Los stacks al estilo OpenAI o Amazon a menudo sí. Para CCD Foundation debéis poder decir: elegid un proveedor de embeddings, elegid un almacén vectorial, conservad el bucle recuperar-aumentar-generar. MongoDB+Voyage encajó con una base gratuita en la nube y un cliente que podía embeber y hablar con ese almacén."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "No memoricéis un solo proveedor como respuesta de examen",
+        "html": "Si un escenario dice «Postgres pgvector», «Chroma», «FAISS (Meta)», «OpenSearch» o «knowledge base de Bedrock», sigue siendo RAG. Las claves del laboratorio y la UI de Atlas en la carpeta PDF son deberes, no una arquitectura única."
+      },
+      {
+        "type": "h2",
+        "text": "Qué se instaló y configuró"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Cliente Anthropic para generar después de recuperar.",
+          "Un cliente vectorial Voyage/Mongo, autenticado con una clave API guardada como algo tipo <code>VOYAGE_API_KEY</code> en <code>.env</code> (seguid el PDF del grupo; nunca subáis claves).",
+          "<code>load_dotenv</code> para que el proceso del cuaderno abra un endpoint remoto tipo Atlas.",
+          "Una clase envoltorio (dicha como «vector index») que sabía <strong>insertar</strong> documentos, guardar vectores de 1024 dimensiones en la demo y <strong>buscar</strong> con distancia/similitud del coseno."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "MongoDB aquí no es «solo un almacén de documentos». El curso usó el producto <strong>vectorial</strong> del proveedor: misma marca, otro patrón de acceso (búsqueda tipo k-NN sobre embeddings)."
+      },
+      {
+        "type": "h2",
+        "text": "Embeddings en la demo"
+      },
+      {
+        "type": "p",
+        "html": "Un texto de muestra entró en <code>embed</code>; el cuaderno imprimió los cinco primeros números de un array de <strong>1024 dimensiones</strong>. Esos números no son un significado legible; son coordenadas. Tras embeber todos los trozos de <code>report.md</code>, el almacén tenía del orden de <strong>15 registros</strong> en esa ejecución: un corpus de juguete para ver insertar + consultar, no un índice de producción."
+      },
+      {
+        "type": "h3",
+        "text": "Ruta de consulta"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "El usuario pide, por ejemplo, explicar las series de Fourier con sencillez.",
+          "Esa cadena se embebe con el <em>mismo</em> modelo de embeddings que en la indexación (mezclar modelos rompe la geometría).",
+          "La búsqueda por coseno devuelve k textos de trozo (el laboratorio configuraba «cuántos registros traer»).",
+          "Esas cadenas se concatenan a la pregunta y se envían a Claude por la API de Anthropic."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Otras arquitecturas que el formador nombró a propósito"
+      },
+      {
+        "type": "table",
+        "headers": ["Enfoque", "Cuándo lo mencionó", "Qué seguís teniendo que hacer"],
+        "rows": [
+          ["MongoDB Atlas + embeddings Voyage", "Cuaderno principal", "Trocear, embeber, coseno (o métrica configurada), aumentar"],
+          ["Knowledge base de Amazon Bedrock + S3", "Vía no-code: cubo, auto-sync, embeddings y troceado en consola, luego boto3", "Seguir recuperando y generando; auth con AWS CLI o claves"],
+          ["OpenSearch", "Alternativa empresarial de recuperación vectorial", "Las mismas tres letras"],
+          ["Chroma / FAISS, en memoria o disco local", "Pruebas locales; se sugirió LocalStack en lugar de AWS de pago", "Seguís necesitando un modelo de embeddings — en su respuesta reutilizó Voyage incluso en local"],
+          ["Extensiones vectoriales de Postgres", "Nombradas en el avance RAG del 24 de agosto", "Almacén con forma SQL, la misma matemática"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Notas operativas de las preguntas"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Indexar una vez frente a buscar al vuelo: la base vectorial se llena en lote (o con un pipeline de sync); cada pregunta es una búsqueda, no un reescaneo completo del Markdown crudo salvo que lo hayáis diseñado así.",
+          "Cachead embeddings o resultados si importan la latencia y la factura.",
+          "Filtrad con metadatos cuando facultades o inquilinos no deban compartir aciertos.",
+          "Los valores por defecto de similitud pertenecen a APIs tipo <code>similarity_search</code>; pasad parámetros si necesitáis otro k o umbral."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Seguridad en la entrega UST"
+      },
+      {
+        "type": "p",
+        "html": "Un clúster Atlas gratuito y una clave Voyage valen para el fichero de muestra de investigación médica. No valen para PHI/PII de cliente. RAG concentra exactamente los documentos que no debíais pegar en Chat. Alojád el almacén en la nube aprobada, cifrad y guardad las claves en un gestor de secretos: el <code>.env</code> del cuaderno es un muleta didáctica."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "API Messages",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Dónde se envía el prompt aumentado tras la búsqueda."
+          },
+          {
+            "title": "Visión general de la API",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Auth y clientes usados junto al SDK del proveedor vectorial."
+          },
+          {
+            "title": "Soporte de PDF",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "Alternativa: enviar documentos a Claude sin vuestra propia base vectorial cuando el tamaño lo permite."
+          },
+          {
+            "title": "Citas",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/citations",
+            "note": "Fundamentar la generación en texto recuperado o adjunto."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Higiene de claves cuando mucha gente comparte una organización Anthropic."
+          }
+        ]
+      }
+    ]
+  }
+]

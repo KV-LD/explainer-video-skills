@@ -1,0 +1,250 @@
+[
+  {
+    "lang": "en",
+    "module_id": "02",
+    "chapter_id": "04",
+    "eyebrow": "Module 02 · Chapter 04 · 5 August 2026",
+    "chapter_title": "Cowork in practice: folders, connectors, sandbox, and usage meters",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 2 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M02 · C04 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Cowork is the local task manager Vijay had previewed on 3 August with the invoice pile. On 5 August he slowed down on <strong>consent, connectors, where files actually live, and the usage meter that is not a context window</strong>. If your tenant has disabled Cowork, still learn the model: the exam can ask what the product is for even if you cannot click it today."
+      },
+      {
+        "type": "h2",
+        "text": "Attach a folder like it can delete your work"
+      },
+      {
+        "type": "p",
+        "html": "When you grant a folder, the dialog warns that Claude may <strong>create, edit, delete, and share files with connected tools</strong>. If Gmail is connected, content can be pushed to email. In a locked-down UST tenant you should only see approved connectors; if a personal Gmail connector appears, do not use it on project data. Prefer a <strong>copy</strong> of the folder. Session 1 already showed skip-all-approvals versus manual approve per edit/delete."
+      },
+      {
+        "type": "h2",
+        "text": "Jobs that fit Cowork"
+      },
+      {
+        "type": "p",
+        "html": "Local data means whatever sits on disk: CSV, PPT, PDF, images. Natural language over a pile beats opening every file. Role-shaped examples he gave:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Architects:</strong> read SRS, BRD, SOW and draft HLD-style documentation.",
+          "<strong>UI/UX:</strong> from a logo, produce a brand board (colour, type, responsive asset sizes).",
+          "<strong>Developers:</strong> plans, learning notes, code-adjacent docs (heavy coding still belongs in Claude Code).",
+          "<strong>Analysts:</strong> pull stories/epics from Confluence/Jira/Notion (or Google Drive in the demo) and assemble a pre-dev brief.",
+          "<strong>Manual testers:</strong> repeat walkthroughs against a site (not a substitute for Playwright/Selenium—that is Code).",
+          "<strong>Personal:</strong> scheduled blog/LinkedIn drafts; email summaries triggered from the phone if the product still offers that."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Live prompt: read every document in the folder; emit a table (name, created date, key names, amounts, short description). The client showed a <strong>plan/progress rail</strong> (count files → extract → summarise → write spreadsheet). Output can be downloaded; a Google Drive button appeared because <em>his</em> demo identity was a Google workspace user—not because files had already left the laptop."
+      },
+      {
+        "type": "h2",
+        "text": "Sandbox: local, managed by Claude"
+      },
+      {
+        "type": "p",
+        "html": "Rajesh asked whether the generated spreadsheet lived in the cloud before download. Vijay: processing is on the local machine inside a <strong>sandbox</strong> Claude manages. You need disk headroom. The path is not a friendly user folder; you can ask Claude where it stored a file. This is the privacy pitch from session 1: proprietary files are rag’d locally and snippets go to the LLM; the folder is not copied to Anthropic as a file share. Still follow the SLA and never put client secrets in a demo account."
+      },
+      {
+        "type": "h2",
+        "text": "Connectors you actually saw"
+      },
+      {
+        "type": "p",
+        "html": "Customization → connectors. Catalogue items (weather, Apify scrapers, Gmail, Drive, …) often require <strong>admin allow-list</strong> before import. Connecting Gmail walked OAuth scopes: read mail, manage drafts/send. Be specific in the prompt (“from Gmail”) if several mail connectors exist. A later prompt combined Gmail + Drive: unread mail about Project XYZ + latest Drive doc → draft follow-up. Permissions can be allow once / always / deny per tool call. Connector tokens stay on the local client in his telling; compliance (PII, PCI, GDPR as applicable) is why you can trust the vendor’s “we do not train on this / we do not keep credentials on the server” claims <em>if</em> the product is certified for those regimes—verify for the customer’s country."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Outages and model fallback",
+        "html": "During the Gmail demo Sonnet appeared down; the room reported Haiku/4.6-class models still working. Switching model is a valid operational move. Docs will not screenshot that incident."
+      },
+      {
+        "type": "h2",
+        "text": "Usage meters versus tokens on a task"
+      },
+      {
+        "type": "p",
+        "html": "Cowork does not print “this table cost 12,432 tokens” on the canvas. Settings → Usage shows a <strong>percentage of a rolling window</strong>. Classroom sketch: a window on the order of <strong>five hours</strong> that resets so you cannot hammer the LLM on a cheap subscription, plus a <strong>weekly</strong> cap. He illustrated ~1M tokens / five hours and ~10M / week on <em>his</em> plan—then immediately said enterprise numbers are admin-configured and not published as a single public figure. End users may not see rupee cost; admins see billing. <strong>API billing is a different configuration.</strong> Heavy image jobs can burn 100% of a window in an hour; then you wait for reset unless the org raises quota."
+      },
+      {
+        "type": "h2",
+        "text": "When Cowork is the wrong spend"
+      },
+      {
+        "type": "p",
+        "html": "Session 1 already argued: a one-off mixed-format invoice sort is cheaper in human time on Cowork than writing a parser. A daily identical job should become a script or an SDK/RAG pipeline. Cowork may emit bash along the way—that is a hint to productise. Token KPI will be a management question; your answer is product choice, not “Claude is expensive.”"
+      },
+      {
+        "type": "h2",
+        "text": "Memory, schedule, Design beta"
+      },
+      {
+        "type": "p",
+        "html": "Projects can carry instructions, a memory toggle, and schedules. Claude Design (beta in class) sat as a skill-like generator for slides and wireframes. Beta will not pass most enterprise allow-lists—same story as the Chrome extension in the next chapter."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude desktop / Cowork support",
+            "url": "https://support.claude.com/",
+            "note": "Where desktop behaviour and availability are documented as they change."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "What “connectors” are under the hood."
+          },
+          {
+            "title": "Rate limits (API)",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Do not confuse with Cowork’s five-hour usage bar."
+          },
+          {
+            "title": "Usage policy",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "What you may send through connectors."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Project / workspace grouping in current docs."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "02",
+    "chapter_id": "04",
+    "eyebrow": "Módulo 02 · Capítulo 04 · 5 de agosto de 2026",
+    "chapter_title": "Cowork en la práctica: carpetas, conectores, sandbox y medidores de uso",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 2 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M02 · C04 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Cowork es el gestor de tareas local que Vijay había adelantado el 3 de agosto con el montón de facturas. El 5 de agosto se detuvo en <strong>consentimiento, conectores, dónde viven de verdad los archivos y el medidor de uso que no es una ventana de contexto</strong>. Si vuestro tenant ha desactivado Cowork, igual aprended el modelo: el examen puede preguntar para qué es el producto aunque hoy no podáis hacer clic."
+      },
+      {
+        "type": "h2",
+        "text": "Adjuntad una carpeta como si pudiera borraros el trabajo"
+      },
+      {
+        "type": "p",
+        "html": "Al conceder una carpeta, el diálogo avisa de que Claude puede <strong>crear, editar, borrar y compartir archivos con herramientas conectadas</strong>. Si Gmail está conectado, el contenido puede empujarse al correo. En un tenant UST cerrado solo deberíais ver conectores aprobados; si aparece un conector de Gmail personal, no lo uséis con datos de proyecto. Preferid una <strong>copia</strong> de la carpeta. La sesión 1 ya mostró saltar todas las aprobaciones frente a aprobar a mano cada edición/borrado."
+      },
+      {
+        "type": "h2",
+        "text": "Trabajos que encajan en Cowork"
+      },
+      {
+        "type": "p",
+        "html": "Datos locales significa lo que hay en disco: CSV, PPT, PDF, imágenes. El lenguaje natural sobre un montón gana a abrir cada archivo. Ejemplos por rol que dio:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Arquitectos:</strong> leer SRS, BRD, SOW y redactar documentación tipo HLD.",
+          "<strong>UI/UX:</strong> a partir de un logotipo, un tablero de marca (color, tipografía, tamaños de asset responsive).",
+          "<strong>Desarrolladores:</strong> planes, notas de aprendizaje, docs junto al código (la programación pesada sigue en Claude Code).",
+          "<strong>Analistas:</strong> sacar historias/épicas de Confluence/Jira/Notion (o Google Drive en la demo) y montar un brief previo al desarrollo.",
+          "<strong>Testers manuales:</strong> repetir recorridos contra un sitio (no sustituye Playwright/Selenium—eso es Code).",
+          "<strong>Personal:</strong> borradores programados de blog/LinkedIn; resúmenes de correo disparados desde el teléfono si el producto sigue ofreciéndolo."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Prompt en vivo: lee cada documento de la carpeta; emite una tabla (nombre, fecha de creación, nombres clave, importes, descripción breve). El cliente mostró un <strong>rail de plan/progreso</strong> (contar archivos → extraer → resumir → escribir hoja). La salida se puede descargar; un botón de Google Drive apareció porque <em>su</em> identidad de demo era un usuario de Google Workspace—no porque los archivos ya hubieran salido del portátil."
+      },
+      {
+        "type": "h2",
+        "text": "Sandbox: local, gestionado por Claude"
+      },
+      {
+        "type": "p",
+        "html": "Rajesh preguntó si la hoja generada vivía en la nube antes de descargar. Vijay: el procesamiento es en la máquina local dentro de un <strong>sandbox</strong> que gestiona Claude. Hace falta espacio en disco. La ruta no es una carpeta amigable de usuario; podéis preguntar a Claude dónde guardó un archivo. Este es el argumento de privacidad de la sesión 1: los archivos propietarios se hacen RAG en local y van fragmentos al LLM; la carpeta no se copia a Anthropic como un recurso compartido. Seguid el SLA y no pongáis secretos de cliente en una cuenta de demo."
+      },
+      {
+        "type": "h2",
+        "text": "Conectores que se vieron de verdad"
+      },
+      {
+        "type": "p",
+        "html": "Personalización → conectores. Los ítems del catálogo (tiempo, scrapers Apify, Gmail, Drive, …) a menudo requieren <strong>lista blanca de admin</strong> antes de importar. Conectar Gmail recorrió ámbitos OAuth: leer correo, gestionar borradores/enviar. Sed específicos en el prompt («from Gmail») si hay varios conectores de correo. Un prompt posterior combinó Gmail + Drive: correo no leído sobre Project XYZ + último doc de Drive → borrador de seguimiento. Los permisos pueden ser permitir una vez / siempre / denegar por llamada. Los tokens de conector se quedan en el cliente local según su relato; el cumplimiento (PII, PCI, GDPR según aplique) es por qué podéis fiaros de las afirmaciones del fabricante «no entrenamos con esto / no guardamos credenciales en el servidor» <em>si</em> el producto está certificado para esos regímenes—verificadlo para el país del cliente."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Caídas y reserva de modelo",
+        "html": "Durante la demo de Gmail Sonnet pareció caído; la sala reportó que seguían funcionando Haiku / modelos clase 4.6. Cambiar de modelo es un movimiento operativo válido. Los docs no harán captura de ese incidente."
+      },
+      {
+        "type": "h2",
+        "text": "Medidores de uso frente a tokens de una tarea"
+      },
+      {
+        "type": "p",
+        "html": "Cowork no imprime «esta tabla costó 12.432 tokens» en el lienzo. Ajustes → Uso muestra un <strong>porcentaje de una ventana móvil</strong>. Esquema de aula: una ventana del orden de <strong>cinco horas</strong> que se reinicia para que no machaquéis el LLM con una suscripción barata, más un tope <strong>semanal</strong>. Ilustró ~1M tokens / cinco horas y ~10M / semana en <em>su</em> plan—y dijo enseguida que las cifras enterprise las configura el admin y no hay un único número público. Los usuarios finales pueden no ver el coste; los admins ven facturación. <strong>La facturación de API es otra configuración.</strong> Los trabajos pesados de imagen pueden quemar el 100 % de una ventana en una hora; entonces esperáis el reinicio salvo que la org suba la cuota."
+      },
+      {
+        "type": "h2",
+        "text": "Cuándo Cowork es el gasto incorrecto"
+      },
+      {
+        "type": "p",
+        "html": "La sesión 1 ya argumentó: una ordenación puntual de facturas de formato mixto es más barata en tiempo humano en Cowork que escribir un parser. Un trabajo diario idéntico debería ser un script o un pipeline SDK/RAG. Cowork puede emitir bash por el camino—eso es una pista para productizar. El KPI de tokens será una pregunta de dirección; vuestra respuesta es la elección de producto, no «Claude es caro»."
+      },
+      {
+        "type": "h2",
+        "text": "Memoria, programación, Design beta"
+      },
+      {
+        "type": "p",
+        "html": "Los proyectos pueden llevar instrucciones, un interruptor de memoria y programaciones. Claude Design (beta en clase) estaba como generador tipo skill para diapositivas y wireframes. La beta no pasará la mayoría de listas blancas empresariales—la misma historia que la extensión de Chrome del capítulo siguiente."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Soporte de escritorio Claude / Cowork",
+            "url": "https://support.claude.com/",
+            "note": "Dónde se documenta el comportamiento de escritorio y la disponibilidad cuando cambian."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Qué son los «connectors» por debajo."
+          },
+          {
+            "title": "Límites de tasa (API)",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "No lo confundáis con la barra de uso de cinco horas de Cowork."
+          },
+          {
+            "title": "Política de uso",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "Qué podéis enviar por conectores."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Agrupación project / workspace en los docs vigentes."
+          }
+        ]
+      }
+    ]
+  }
+]
