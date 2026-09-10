@@ -1,0 +1,264 @@
+[
+  {
+    "lang": "en",
+    "module_id": "07",
+    "chapter_id": "04",
+    "eyebrow": "Module 07 · Chapter 04 · 17 August 2026",
+    "chapter_title": "Model choice, context window, and cost awareness from the API",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 7 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M07 · C04 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "After Hello Claude, Vijay listed models via the SDK (<code>client.models.list</code>), distinguished <strong>alias</strong> ids from <strong>dated snapshots</strong>, then walked pricing: input tokens, output tokens, and prompt-cache write/hit. He also spent a long stretch on <strong>temperature</strong> (and top-k / top-p where still exposed). The Foundation exam wants you to know what you are paying for and why pinning a snapshot matters."
+      },
+      {
+        "type": "h2",
+        "text": "Listing models and reading ids"
+      },
+      {
+        "type": "p",
+        "html": "The SDK can list models available to your key, with an id and a display name. What you put in <code>model:</code> is the <strong>id</strong>. Families in the August 2026 room were Opus / Sonnet / Haiku style names (including “4.5” dated strings such as a November 2025 snapshot in the spoken example). <strong>Always re-check the live model page before the exam</strong> — ids and windows move."
+      },
+      {
+        "type": "h2",
+        "text": "Alias versus dated snapshot"
+      },
+      {
+        "type": "p",
+        "html": "An alias (class: “generic” / latest in a line such as Haiku 4.5) tracks the newest compatible snapshot. A full id with a date pins behaviour. Vijay’s rule: if you evaluated prompts or tuned behaviour against one snapshot, <strong>do not silently ride the alias</strong> — a new snapshot can “break” an application overnight. Rajesh asked about expiry / SLA: enterprise catalogues publish supported models; migrating off a retired id is a normal software migration (you can automate an agent to bump ids; it is not magic auto-rewrite)."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Alias convenience versus production",
+        "html": "Alias = less ops toil, more surprise. Dated id = reproducibility for evals. Exams like that contrast."
+      },
+      {
+        "type": "h2",
+        "text": "Three “windows” in class language"
+      },
+      {
+        "type": "table",
+        "headers": ["Idea", "What Vijay said in class", "How to think about it"],
+        "rows": [
+          ["Input context", "On the order of 272K or 1M tokens depending on model; 1M ids often contain a 1M marker", "How much system + messages + files you can send"],
+          ["Output / max_tokens", "Cap on generated tokens; demos used 1024; hitting the cap truncates", "Not the same as the input window"],
+          ["Prompt cache", "Separate capacity and price to store a prefix on the server for minutes/hours", "Module 09; do not confuse with Chat Pro usage meters"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Classroom 272K / 1M figures were teaching numbers. Real models differ (some 200K, some larger). Scoring source: <a href=\"https://docs.claude.com/en/docs/about-claude/models\">models</a>."
+      },
+      {
+        "type": "h2",
+        "text": "max_tokens and stop_reason"
+      },
+      {
+        "type": "p",
+        "html": "You cannot know the exact output length in advance. Choose max_tokens from the job (short classification vs long report). If the model still has more to say, generation <strong>stops abruptly</strong> and stop details / stop_reason reflect the token limit. Input size is controlled by what you send; output size is controlled by max_tokens (and stop sequences). Vijay’s “base 1024” is a demo default, not a platform minimum — read current API defaults."
+      },
+      {
+        "type": "h2",
+        "text": "Pricing mental model (API, not Claude Pro)"
+      },
+      {
+        "type": "p",
+        "html": "API bills per million tokens, with <strong>different rates</strong> for input versus output (output was described as much more expensive, e.g. a slide pairing ~$10 input vs ~$50 output per million on some Opus-class row — <em>illustrative, not to memorise</em>). Cache write for ~5 minutes versus ~1 hour had higher write prices; cache hits were described as on the order of $1 per million on that slide. Chat with a 1M-token PDF on every turn re-pays input; caching the document prefix is the optimisation. <strong>Claude Pro at ~$20/month with 5-hour refresh is a different product</strong> — do not apply API token maths to that plan."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Input, output, cache write, and cache hit are separate meters.",
+          "Session in Chat ≠ API key lifetime. Billing is usage against the key, not “one chat window.”",
+          "Third-party tokenizer websites are not Anthropic; Vijay used one only to show that tokenisation is model-specific."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Temperature, top-k, top-p"
+      },
+      {
+        "type": "p",
+        "html": "Temperature in class: range <strong>0 to 1</strong> (he misspoke then corrected). <strong>0</strong> = more deterministic / “specific”; <strong>1</strong> (SDK default he quoted as 1.0) = more diverse / creative. Movie-idea demo: temperature 0 stayed in a similar orbit; 1.0 jumped genres. Use low temperature for extraction and lookup-in-context; higher for brainstorming. Higher temperature is <em>creativity</em>, not automatically “hallucination,” though sloppy prompts plus high temperature wander more."
+      },
+      {
+        "type": "p",
+        "html": "He sketched transformers: embeddings turn text into vectors; attention uses key/query/value; stacked blocks propose next-token distributions. <strong>Top-k</strong> keeps only k candidates; <strong>top-p</strong> (nucleus) further filters by cumulative probability. Important caveat from the room: <strong>newer Claude models often hide or ignore top-k/top-p</strong> and may only expose temperature. Haiku-class models in that week might still accept them. Confirm on the model’s API page."
+      },
+      {
+        "type": "h2",
+        "text": "What belongs in every request"
+      },
+      {
+        "type": "p",
+        "html": "Stateless REST: each call carries model id, messages, system (if used), temperature, max_tokens, etc. You cannot “set system once” on the server. Cache is the feature that makes a large prefix cheaper to reuse — not a hidden session."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Prices and windows go stale",
+        "html": "Any dollar figure or 272K window from 17 August 2026 is a snapshot. Exam and production: current pricing and model cards on docs.claude.com."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Models",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Ids, aliases, context windows, snapshot policy."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "model, max_tokens, temperature, stop_reason, usage."
+          },
+          {
+            "title": "Prompt caching",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "Cache TTLs and token accounting (full treatment in M09-C04)."
+          },
+          {
+            "title": "Rate limits",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Throughput caps separate from token price."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "07",
+    "chapter_id": "04",
+    "eyebrow": "Módulo 07 · Capítulo 04 · 17 de agosto de 2026",
+    "chapter_title": "Elección de modelo, ventana de contexto y coste desde la API",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 7 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M07 · C04 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Tras el Hello Claude, Vijay listó modelos con el SDK (<code>client.models.list</code>), distinguió ids <strong>alias</strong> de <strong>instantáneas con fecha</strong> y recorrió precios: tokens de entrada, de salida y escritura/acierto de caché. También dedicó un tramo largo a la <strong>temperature</strong> (y top-k / top-p donde aún se exponen). El examen Foundation quiere que sepáis qué pagáis y por qué fijar una instantánea importa."
+      },
+      {
+        "type": "h2",
+        "text": "Listar modelos y leer ids"
+      },
+      {
+        "type": "p",
+        "html": "El SDK puede listar los modelos de vuestra clave, con id y nombre visible. En <code>model:</code> va el <strong>id</strong>. En el aula de agosto de 2026 las familias eran estilo Opus / Sonnet / Haiku (incluido «4.5» y cadenas fechadas, p. ej. una instantánea de noviembre de 2025 en el ejemplo oral). <strong>Volved a comprobar la página viva de modelos antes del examen</strong>: los ids y las ventanas se mueven."
+      },
+      {
+        "type": "h2",
+        "text": "Alias frente a instantánea fechada"
+      },
+      {
+        "type": "p",
+        "html": "Un alias (en clase: «genérico» / el último de una línea como Haiku 4.5) sigue la instantánea compatible más nueva. Un id completo con fecha fija el comportamiento. Regla de Vijay: si evaluasteis prompts contra una instantánea, <strong>no os montéis en silencio en el alias</strong> — una instantánea nueva puede «romper» la aplicación de un día para otro. Rajesh preguntó por caducidad / SLA: los catálogos de empresa publican modelos soportados; salir de un id retirado es una migración de software normal (podéis automatizar un agente que suba ids; no es reescritura mágica)."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Comodidad del alias frente a producción",
+        "html": "Alias = menos toil, más sorpresa. Id fechado = reproducibilidad para evals. Al examen le gusta ese contraste."
+      },
+      {
+        "type": "h2",
+        "text": "Tres «ventanas» en lenguaje de clase"
+      },
+      {
+        "type": "table",
+        "headers": ["Idea", "Lo que dijo Vijay", "Cómo pensarlo"],
+        "rows": [
+          ["Contexto de entrada", "Del orden de 272K o 1M de tokens según modelo; los ids de 1M suelen llevar marca 1M", "Cuánto system + messages + archivos podéis enviar"],
+          ["Salida / max_tokens", "Techo de tokens generados; demos con 1024; llegar al techo trunca", "No es la misma cifra que la ventana de entrada"],
+          ["Caché de prompts", "Capacidad y precio aparte para guardar un prefijo en el servidor minutos/horas", "Módulo 09; no confundir con medidores de Chat Pro"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Las cifras 272K / 1M eran didácticas. Los modelos reales varían (algunos 200K, otros más). Fuente de corrección: <a href=\"https://docs.claude.com/en/docs/about-claude/models\">modelos</a>."
+      },
+      {
+        "type": "h2",
+        "text": "max_tokens y stop_reason"
+      },
+      {
+        "type": "p",
+        "html": "No podéis saber de antemano la longitud exacta de salida. Elegid max_tokens según el trabajo (clasificación corta frente a informe largo). Si el modelo aún tiene más que decir, la generación <strong>para en seco</strong> y stop_reason refleja el límite de tokens. El tamaño de entrada lo controláis vosotros; el de salida, max_tokens (y las secuencias de parada). El «1024 de base» es un valor de demo, no un mínimo de plataforma — leed los defaults actuales de la API."
+      },
+      {
+        "type": "h2",
+        "text": "Modelo mental de precio (API, no Claude Pro)"
+      },
+      {
+        "type": "p",
+        "html": "La API factura por millón de tokens, con <strong>tarifas distintas</strong> para entrada y salida (la salida se describió mucho más cara, p. ej. una diapositiva ~10 $ entrada frente a ~50 $ salida por millón en una fila tipo Opus — <em>ilustrativo, no para memorizar</em>). La escritura de caché a ~5 minutos frente a ~1 hora tenía precios de escritura más altos; los aciertos de caché se describieron del orden de 1 $ por millón en esa diapositiva. Chatear con un PDF de 1M de tokens en cada turno vuelve a pagar entrada; cachear el prefijo del documento es la optimización. <strong>Claude Pro a ~20 $/mes con refresco de 5 horas es otro producto</strong> — no apliquéis la aritmética de tokens de API a ese plan."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Entrada, salida, escritura de caché y acierto de caché son contadores separados.",
+          "Una sesión en Chat ≠ la vida de la clave de API. Se factura el uso contra la clave, no «una ventana de chat».",
+          "Los sitios de tokenizador de terceros no son Anthropic; Vijay usó uno solo para mostrar que la tokenización depende del modelo."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Temperature, top-k, top-p"
+      },
+      {
+        "type": "p",
+        "html": "Temperature en clase: rango <strong>0 a 1</strong> (se corrigió a sí mismo). <strong>0</strong> = más determinista / «específico»; <strong>1</strong> (default del SDK que citó como 1.0) = más diverso / creativo. Demo de ideas de película: a 0 se quedaba en una órbita similar; a 1.0 saltaba de género. Temperatura baja para extracción y búsqueda en contexto; alta para lluvia de ideas. Más temperature es <em>creatividad</em>, no automáticamente «alucinación», aunque un prompt flojo y temperature alta divagan más."
+      },
+      {
+        "type": "p",
+        "html": "Esbozó transformers: los embeddings convierten texto en vectores; la atención usa key/query/value; bloques apilados proponen distribuciones del siguiente token. <strong>Top-k</strong> deja solo k candidatos; <strong>top-p</strong> (núcleo) filtra por probabilidad acumulada. Matiz importante: <strong>los Claude más nuevos a menudo ocultan o ignoran top-k/top-p</strong> y pueden exponer solo temperature. Los Haiku de aquella semana quizá aún los aceptaran. Confirmad en la ficha de API del modelo."
+      },
+      {
+        "type": "h2",
+        "text": "Qué va en cada petición"
+      },
+      {
+        "type": "p",
+        "html": "REST sin estado: cada llamada lleva id de modelo, messages, system (si se usa), temperature, max_tokens, etc. No podéis «fijar system una vez» en el servidor. La caché es la función que abarata reutilizar un prefijo grande — no una sesión oculta."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Precios y ventanas caducan",
+        "html": "Cualquier cifra en dólares o ventana 272K del 17 de agosto de 2026 es una instantánea. Examen y producción: precios y fichas de modelo actuales en docs.claude.com."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Modelos",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Ids, alias, ventanas de contexto, política de instantáneas."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "model, max_tokens, temperature, stop_reason, usage."
+          },
+          {
+            "title": "Caché de prompts",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "TTL de caché y contabilidad de tokens (tratamiento completo en M09-C04)."
+          },
+          {
+            "title": "Límites de tasa",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Techos de caudal distintos del precio por token."
+          }
+        ]
+      }
+    ]
+  }
+]

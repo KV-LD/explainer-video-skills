@@ -1,0 +1,226 @@
+[
+  {
+    "lang": "en",
+    "module_id": "08",
+    "chapter_id": "02",
+    "eyebrow": "Module 08 · Chapter 02 · 19 August 2026",
+    "chapter_title": "Forcing structured output such as JSON",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 8 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M08 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "If you only say “give me JSON,” Claude often returns JSON <em>plus</em> a helpful paragraph (“Here is the JSON, want anything else?”). Downstream <code>json.loads</code> then dies. The 19 August pattern was <strong>prompt engineering specific to Claude</strong>: a user instruction that names the schema, an <strong>assistant prefill</strong> that opens a fenced JSON block, and a <strong>stop sequence</strong> on the closing fence so generation stays inside the object."
+      },
+      {
+        "type": "h2",
+        "text": "The failure mode"
+      },
+      {
+        "type": "p",
+        "html": "Natural-language models like to be polite. Leading and trailing prose is fatal if a service expects a single object with quoted strings (Vijay’s “name: Vijay” example). Structured consumers — agents writing files, AWS config generators, APIs — need <strong>only</strong> the payload."
+      },
+      {
+        "type": "h2",
+        "text": "Prefill as a seed, not a second pass"
+      },
+      {
+        "type": "p",
+        "html": "Classroom prefill looked like an extra message: <code>role: assistant</code>, content starting with a markdown JSON fence (spoken as ticks + <code>json</code>). The user message was e.g. “List 5 popular programming languages and their main use cases in JSON format.” The model continues from the fence, so the next characters are expected to be <code>{</code> … The stop sequence is the closing fence. Mritunjay asked whether the server generates everything and then “translates” or truncates: <strong>no</strong> — it is how the prompt is assembled so decoding starts at the seed. Tokens billed are the continuation, not a discarded preamble."
+      },
+      {
+        "type": "h2",
+        "text": "Multiple fenced languages in one answer"
+      },
+      {
+        "type": "p",
+        "html": "A harder demo asked for one user-config sample in <strong>bash</strong>, <strong>XML</strong>, and <strong>JSON</strong>, each in its own fenced block, with <strong>no explanations between blocks</strong>, ending at a marker such as <code>END</code> that also sat in <code>stop_sequences</code>. That is few-shot / example-shaped instruction: show the exact fence labels you want. Agents that must write files love this contract."
+      },
+      {
+        "type": "table",
+        "headers": ["Technique", "Strength", "Weakness"],
+        "rows": [
+          ["Instruction only (“reply with JSON”)", "Simple", "Preamble/prose leaks"],
+          ["Prefill + stop on fences", "Works on models without schema mode; taught in class", "Fragile if the model emits a different fence or extra keys"],
+          ["Official structured outputs / JSON schema", "Constrained decode when your model supports it", "Must match current API; still validate"],
+          ["Pydantic / JSON Schema in your code", "Validates types after the fact", "Does not by itself stop prose unless combined with the above"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Validate structure in code, not always with another LLM"
+      },
+      {
+        "type": "p",
+        "html": "Later the same day, evals: if the contract is “JSON object with name: string and age: number,” a <strong>Pydantic</strong> (or similar) model is enough for shape. An LLM-as-judge is overkill and expensive. Tools or retrieval judge <em>values</em> (is this age correct in the HR system?). Keep those layers distinct."
+      },
+      {
+        "type": "h2",
+        "text": "What to put in the user content"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Name the format and the keys.",
+          "Forbid extra keys / markdown if you are not using fences.",
+          "Give one compact example (few-shot) if the shape is nested.",
+          "Keep temperature low for extraction-style JSON."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Production 2026",
+        "html": "Class trick = prefill + stop. Current Anthropic guidance also documents <strong>structured outputs</strong>. For UST delivery, prefer schema-constrained APIs when the model supports them, and still parse-validate. Exam: be able to explain the prefill pattern Vijay coded."
+      },
+      {
+        "type": "h2",
+        "text": "XML as an alternative envelope"
+      },
+      {
+        "type": "p",
+        "html": "If the organisation already thinks in XML, fences can be XML tags instead of markdown. Claude prompting docs emphasise XML-style tags as delimiters (next chapter). JSON vs XML is a consumer choice; the control pattern (clear envelope + stop) is the same."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Docs over live class JSON mode",
+        "html": "Any “JSON mode” toggle in a console UI may have moved. Trust <a href=\"https://docs.claude.com/en/docs/build-with-claude/structured-outputs\">structured outputs</a> and the Messages API."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Structured outputs",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+            "note": "Schema-constrained JSON on supported models."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Assistant prefill and stop_sequences used in the lab."
+          },
+          {
+            "title": "Prompt engineering overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Output format instructions and examples."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "08",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 08 · Capítulo 02 · 19 de agosto de 2026",
+    "chapter_title": "Forzar una salida estructurada, por ejemplo JSON",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 8 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M08 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Si solo decís «dame JSON», Claude suele devolver JSON <em>más</em> un párrafo amable («Aquí está el JSON, ¿quieres algo más?»). Entonces <code>json.loads</code> peta. El patrón del 19 de agosto fue <strong>ingeniería de prompts específica de Claude</strong>: instrucción de usuario que nombra el esquema, un <strong>prefill de assistant</strong> que abre un bloque JSON vallado, y una <strong>secuencia de parada</strong> en la valla de cierre para que la generación se quede dentro del objeto."
+      },
+      {
+        "type": "h2",
+        "text": "El modo de fallo"
+      },
+      {
+        "type": "p",
+        "html": "Los modelos de lenguaje natural quieren ser corteses. La prosa al principio o al final es mortal si un servicio espera un solo objeto con cadenas entre comillas (ejemplo de Vijay: «name: Vijay»). Los consumidores estructurados — agentes que escriben archivos, generadores de config AWS, APIs — necesitan <strong>solo</strong> la carga."
+      },
+      {
+        "type": "h2",
+        "text": "El prefill es una semilla, no un segundo paso"
+      },
+      {
+        "type": "p",
+        "html": "El prefill de aula era un mensaje extra: <code>role: assistant</code>, contenido que empieza con una valla markdown JSON (en voz: ticks + <code>json</code>). El mensaje de usuario era p. ej. «Lista 5 lenguajes de programación populares y sus casos de uso en JSON». El modelo continúa desde la valla, así que lo siguiente esperado es <code>{</code> … La secuencia de parada es la valla de cierre. Mritunjay preguntó si el servidor genera todo y luego «traduce» o trunca: <strong>no</strong> — así se monta el prompt para que la decodificación empiece en la semilla. Los tokens facturados son la continuación, no un preámbulo descartado."
+      },
+      {
+        "type": "h2",
+        "text": "Varios lenguajes vallados en una respuesta"
+      },
+      {
+        "type": "p",
+        "html": "Un demo más duro pedía una muestra de configuración de usuario en <strong>bash</strong>, <strong>XML</strong> y <strong>JSON</strong>, cada uno en su bloque, <strong>sin explicaciones entre bloques</strong>, acabando en un marcador tipo <code>END</code> que también iba en <code>stop_sequences</code>. Es instrucción con forma de few-shot: mostrad las etiquetas de valla exactas. Los agentes que deben escribir archivos adoran este contrato."
+      },
+      {
+        "type": "table",
+        "headers": ["Técnica", "Fortaleza", "Debilidad"],
+        "rows": [
+          ["Solo instrucción («responde con JSON»)", "Simple", "Se cuela prosa"],
+          ["Prefill + stop en vallas", "Funciona sin modo esquema; se enseñó en clase", "Frágil si el modelo cambia de valla o añade claves"],
+          ["Structured outputs / JSON schema oficial", "Decodificación acotada si el modelo lo soporta", "Hay que cuadrar la API vigente; igualmente validar"],
+          ["Pydantic / JSON Schema en vuestro código", "Valida tipos a posteriori", "Por sí solo no corta la prosa salvo que lo combinéis"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Validad la forma en código, no siempre con otro LLM"
+      },
+      {
+        "type": "p",
+        "html": "Más tarde el mismo día, evals: si el contrato es «objeto JSON con name: string y age: number», un modelo <strong>Pydantic</strong> (o similar) basta para la forma. Un LLM-as-judge es exceso y caro. Tools o recuperación juzgan <em>valores</em> (¿esta edad es correcta en RR. HH.?). Mantened esas capas distintas."
+      },
+      {
+        "type": "h2",
+        "text": "Qué poner en el contenido de usuario"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Nombrad el formato y las claves.",
+          "Prohibid claves extra / markdown si no usáis vallas.",
+          "Dad un ejemplo compacto (few-shot) si la forma está anidada.",
+          "Dejad temperature baja para JSON de extracción."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Producción 2026",
+        "html": "Truco de clase = prefill + stop. La guía actual de Anthropic documenta también <strong>structured outputs</strong>. En entrega UST, preferid APIs acotadas por esquema cuando el modelo las soporte, y seguid parseando. Examen: sabed explicar el patrón de prefill que programó Vijay."
+      },
+      {
+        "type": "h2",
+        "text": "XML como sobre alternativo"
+      },
+      {
+        "type": "p",
+        "html": "Si la organización ya piensa en XML, las vallas pueden ser etiquetas XML en vez de markdown. La documentación de prompting de Claude insiste en etiquetas estilo XML como delimitadores (capítulo siguiente). JSON frente a XML es elección del consumidor; el patrón de control (sobre claro + stop) es el mismo."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Docs por encima del JSON mode del aula",
+        "html": "Cualquier interruptor «JSON mode» de una consola puede haberse movido. Priman las <a href=\"https://docs.claude.com/en/docs/build-with-claude/structured-outputs\">salidas estructuradas</a> y la Messages API."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Salidas estructuradas",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+            "note": "JSON acotado por esquema en modelos soportados."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Prefill de assistant y stop_sequences del laboratorio."
+          },
+          {
+            "title": "Visión general de prompting",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Instrucciones de formato de salida y ejemplos."
+          }
+        ]
+      }
+    ]
+  }
+]

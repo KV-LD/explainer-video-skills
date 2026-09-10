@@ -1,0 +1,340 @@
+[
+  {
+    "lang": "en",
+    "module_id": "07",
+    "chapter_id": "01",
+    "eyebrow": "Module 07 · Chapter 01 · 17 August 2026",
+    "chapter_title": "Installing the Anthropic SDK and API keys",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 7 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M07 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 7 (17 August 2026) moved from GUI products into <strong>calling Claude from code</strong>. Vijay’s lab used Python notebooks: install the Anthropic SDK, load a secret from <code>.env</code>, construct a client, then call <code>messages.create</code>. The exam cares about terminology (SDK versus REST), where the key lives, and which method you invoke — not about memorising a notebook cell order."
+      },
+      {
+        "type": "h2",
+        "text": "Two ways onto the same Messages API"
+      },
+      {
+        "type": "p",
+        "html": "Anthropic exposes Claude as HTTP. You can POST to the REST Messages endpoint yourself (URL, headers, JSON body, bearer/API key). The <strong>Anthropic SDK</strong> is a language-specific wrapper around that REST surface. In Python it is the package you install; in Java it would be an SDK artefact. A cohort question put it plainly: in Python people say “library”; the exam wording is <strong>SDK (software development kit)</strong>. Same idea: typed helpers, retries, streaming helpers, and a client object so you do not hand-roll every request."
+      },
+      {
+        "type": "table",
+        "headers": ["Path", "What you own", "When you use it"],
+        "rows": [
+          ["REST", "HTTP client, auth header, JSON schema, error mapping", "Non-Python stacks, gateways, or when you must see the raw wire format"],
+          ["SDK", "Install package, create client, call methods", "Class default; production Python/TypeScript apps"],
+          ["Agent SDK (later)", "Orchestration on top of messages/tools", "Agents — not this chapter’s client"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Anthropic SDK is not Agent SDK",
+        "html": "Vijay distinguished <strong>Anthropic SDK</strong> (conversations / Messages API) from <strong>Agent SDK</strong> (orchestration). Tools, MCP, and agents return in later modules. Foundation questions in this week are about <code>client.messages.create</code>, not LangChain."
+      },
+      {
+        "type": "h2",
+        "text": "Install, environment, and the client object"
+      },
+      {
+        "type": "p",
+        "html": "The lab pattern was: install dependencies in the notebook (often with Jupyter <code>%%capture</code> so pip noise does not flood the cell), load environment variables, instantiate <code>anthropic.Anthropic()</code> (or the equivalent client constructor in the current SDK). That client holds nested resources. Under <strong>messages</strong> you saw at least <code>create</code> (one-shot / non-streaming by default), <code>stream</code>, and <strong>batches</strong>. Dot notation is how you reach them: <code>client.messages.create(...)</code>."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Treat the first cells of Vijay’s notebooks as boilerplate: SDK install, <code>load_dotenv()</code>, client, default model id.",
+          "The GitHub repo for the class holds notebooks; you still create your own <code>.env</code> with the key. Never commit that file.",
+          "First call after a cold start can feel slow; that is network + model warmup, not a broken install."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "API keys: console, .env, and what the SDK injects"
+      },
+      {
+        "type": "p",
+        "html": "Authentication is a <strong>secret API key</strong> issued on the Anthropic / Claude API platform (console), not the Chat or Claude Code Pro subscription. Vijay stored it in <code>.env</code> and loaded it with Python’s dotenv helper so the process environment contained the key. The SDK then attaches it on each request. You <em>can</em> pass the key explicitly into the client constructor; you should not paste it into every cell. That is the point of a development kit: keep secrets out of source."
+      },
+      {
+        "type": "card",
+        "title": "Classroom Q&amp;A that maps to the exam",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "You do not have to pass the key as a parameter of <code>create</code> if the client already loaded <code>ANTHROPIC_API_KEY</code> (name as in current SDK docs).",
+              "Claude Pro / Claude Code monthly plans are <strong>not</strong> the same billing model as API credits. API work is console keys and token pricing.",
+              "Enterprise trainers may not be able to screen-share key generation. Learn the console flow from official docs, not from a missing screenshot.",
+              "First-time API accounts were described as coming with a small free credit (Vijay said on the order of $5); treat amounts as perishable marketing, not exam gospel."
+            ]
+          }
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Confidentiality",
+        "html": "Do not put UST client secrets into a personal API key, a shared notebook, or a public GitHub repo. Rotate a key if it was pasted in chat or committed."
+      },
+      {
+        "type": "h2",
+        "text": "The create call: model, max_tokens, messages"
+      },
+      {
+        "type": "p",
+        "html": "A minimal invocation needs three ideas even if the SDK has defaults: <strong>which model</strong> (model id string), <strong>max_tokens</strong> (upper bound on <em>generated</em> tokens — Vijay’s demos used 1024 as the working default), and <strong>messages</strong> (a list of role/content objects). Content is not “just a string prompt”: each item has a <strong>role</strong> (user, later assistant) and content (text in the Hello Claude demo). In an application, user content is the live user input substituted into that structure."
+      },
+      {
+        "type": "p",
+        "html": "The return value is a <strong>Message</strong> object (dict-like in Python). You typically walk <code>message.content</code>, take the first block, and read <code>.text</code> on a text block. Printing the whole object is useful in class because you also see <code>id</code>, <code>model</code>, <code>role</code> (assistant), <code>stop_reason</code>, <code>usage</code>, and later fields such as <code>container</code> (cache / routing — module 09)."
+      },
+      {
+        "type": "h2",
+        "text": "What a successful Message looks like"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>id</strong> — unique message id from the API.",
+          "<strong>content</strong> — list of blocks. Text answers arrive as a <strong>text</strong> block with a <code>text</code> property. Citations arrays appear when you enable citations (module 09 / RAG).",
+          "<strong>role</strong> — assistant for model output.",
+          "<strong>stop_reason / stop_details</strong> — why generation ended. If you did not hit the output cap, you often see a clean end-of-turn (class language: completed / end turn). If <code>max_tokens</code> cuts the answer, stop details explain the abrupt stop.",
+          "<strong>usage</strong> — input vs output (and later cache) token counts for that request."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "REST body versus SDK parameters"
+      },
+      {
+        "type": "p",
+        "html": "Because the platform is still REST, every SDK call is still: Anthropic URL + JSON body. The body includes model, messages, system (if any), temperature, max_tokens, stream flag, tools, thinking, cache control, and so on. <strong>The API is stateless.</strong> Repeating a system prompt on every request is not a bug; it is how HTTP APIs work. Prompt caching (module 09) is the supported way to avoid re-paying for a huge stable prefix."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Docs over the live notebook UI",
+        "html": "Package names, constructor signatures, and Jupyter magic can change. Trust <a href=\"https://docs.claude.com/en/api/messages\">Messages API</a> and the current Python SDK README if a class screenshot disagrees."
+      },
+      {
+        "type": "h2",
+        "text": "Study checklist"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Name the two access paths: REST and SDK; SDK wraps REST.",
+          "State where the key is created (API console) and how the class loaded it (<code>.env</code> + dotenv).",
+          "List messages methods mentioned in class: create, stream, batches.",
+          "Name the three core create inputs: model, max_tokens, messages.",
+          "Extract assistant text from <code>content[0].text</code> (or equivalent) without dumping the whole object in production."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Canonical request and response fields for create."
+          },
+          {
+            "title": "API overview",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Auth, clients, and how the HTTP API is organised."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Where organisation keys and projects are grouped in console."
+          },
+          {
+            "title": "Rate limits",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Why a first demo can fail even with a valid key."
+          },
+          {
+            "title": "Where to find API documentation",
+            "url": "https://support.claude.com/en/articles/8114490-where-can-i-find-your-api-documentation",
+            "note": "Support article pointing at docs.claude.com."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "07",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 07 · Capítulo 01 · 17 de agosto de 2026",
+    "chapter_title": "Instalar el SDK de Anthropic y las claves de API",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 7 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M07 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 7 (17 de agosto de 2026) pasó de los productos con interfaz a <strong>llamar a Claude desde código</strong>. El laboratorio de Vijay usó notebooks de Python: instalar el SDK de Anthropic, cargar un secreto desde <code>.env</code>, crear un cliente y llamar a <code>messages.create</code>. El examen cuida la terminología (SDK frente a REST), dónde vive la clave y qué método invocáis — no el orden de las celdas del notebook."
+      },
+      {
+        "type": "h2",
+        "text": "Dos caminos hacia la misma Messages API"
+      },
+      {
+        "type": "p",
+        "html": "Anthropic expone Claude por HTTP. Podéis hacer POST al endpoint REST de Messages vosotros (URL, cabeceras, cuerpo JSON, clave). El <strong>SDK de Anthropic</strong> es un envoltorio por lenguaje sobre esa superficie REST. En Python es el paquete que instaláis; en Java sería un artefacto SDK. Una pregunta del grupo lo dejó claro: en Python se dice «librería»; el examen dice <strong>SDK (software development kit)</strong>. Misma idea: ayudas tipadas, reintentos, streaming y un objeto cliente para no montar cada petición a mano."
+      },
+      {
+        "type": "table",
+        "headers": ["Camino", "Qué controláis", "Cuándo usarlo"],
+        "rows": [
+          ["REST", "Cliente HTTP, autenticación, esquema JSON, errores", "Stacks sin Python, pasarelas, o cuando hay que ver el cable en bruto"],
+          ["SDK", "Instalar el paquete, crear el cliente, llamar métodos", "Por defecto en clase; apps Python/TypeScript"],
+          ["Agent SDK (más adelante)", "Orquestación sobre mensajes y tools", "Agentes — no es el cliente de este capítulo"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "El SDK de Anthropic no es el Agent SDK",
+        "html": "Vijay distinguió el <strong>SDK de Anthropic</strong> (conversaciones / Messages API) del <strong>Agent SDK</strong> (orquestación). Tools, MCP y agentes vuelven en módulos posteriores. Las preguntas Foundation de esta semana giran en torno a <code>client.messages.create</code>, no LangChain."
+      },
+      {
+        "type": "h2",
+        "text": "Instalación, entorno y el objeto cliente"
+      },
+      {
+        "type": "p",
+        "html": "El patrón del laboratorio: instalar dependencias en el notebook (a menudo con <code>%%capture</code> de Jupyter para no inundar la celda), cargar variables de entorno, instanciar <code>anthropic.Anthropic()</code> (o el constructor vigente). Ese cliente agrupa recursos. Bajo <strong>messages</strong> vimos al menos <code>create</code> (una llamada, sin streaming por defecto), <code>stream</code> y <strong>batches</strong>. Se accede con notación de punto: <code>client.messages.create(...)</code>."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Las primeras celdas de los notebooks de Vijay son el andamiaje: SDK, <code>load_dotenv()</code>, cliente, id de modelo por defecto.",
+          "El repositorio GitHub de la clase trae notebooks; vosotros creáis el <code>.env</code> con la clave. No lo subáis al control de versiones.",
+          "La primera llamada en frío puede tardar: red y arranque del modelo, no un fallo de instalación."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Claves de API: consola, .env y lo que inyecta el SDK"
+      },
+      {
+        "type": "p",
+        "html": "La autenticación es una <strong>clave secreta de API</strong> emitida en la plataforma / consola de Anthropic, no la suscripción Claude Pro ni Claude Code. Vijay la guardó en <code>.env</code> y la cargó con dotenv para que el proceso tuviera la variable. El SDK la adjunta en cada petición. Podéis pasar la clave al constructor; no la pegéis en cada celda. Eso es precisamente un kit de desarrollo: secretos fuera del código fuente."
+      },
+      {
+        "type": "card",
+        "title": "Preguntas de aula que salen en examen",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "No hace falta pasar la clave como parámetro de <code>create</code> si el cliente ya cargó <code>ANTHROPIC_API_KEY</code> (nombre según la documentación actual del SDK).",
+              "Claude Pro / Claude Code no son el mismo modelo de facturación que los créditos de API.",
+              "En cuentas de empresa el formador puede no poder compartir la generación de claves. Aprended el flujo en la documentación oficial.",
+              "Las cuentas nuevas se describieron con un crédito inicial pequeño (Vijay habló del orden de 5 $); las cantidades caducan: no las memoricéis como dogma de examen."
+            ]
+          }
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Confidencialidad",
+        "html": "No pongáis secretos de clientes UST en una clave personal, un notebook compartido o un GitHub público. Rotad la clave si se pegó en el chat o se subió al repositorio."
+      },
+      {
+        "type": "h2",
+        "text": "La llamada create: modelo, max_tokens, messages"
+      },
+      {
+        "type": "p",
+        "html": "Una invocación mínima necesita tres ideas aunque el SDK tenga valores por defecto: <strong>qué modelo</strong> (cadena de id), <strong>max_tokens</strong> (techo de tokens <em>generados</em> — en clase 1024 como valor de trabajo) y <strong>messages</strong> (lista de objetos rol/contenido). El contenido no es «un prompt suelto»: cada elemento tiene <strong>role</strong> (user, luego assistant) y content (texto en el demo Hello Claude). En una aplicación, el contenido de usuario es la entrada real sustituida en esa estructura."
+      },
+      {
+        "type": "p",
+        "html": "El valor de retorno es un objeto <strong>Message</strong> (como un diccionario en Python). Lo habitual es recorrer <code>message.content</code>, tomar el primer bloque y leer <code>.text</code> en un bloque de texto. Imprimir el objeto entero sirve en clase porque también ves <code>id</code>, <code>model</code>, <code>role</code> (assistant), <code>stop_reason</code>, <code>usage</code> y más adelante <code>container</code> (caché / enrutado — módulo 09)."
+      },
+      {
+        "type": "h2",
+        "text": "Aspecto de un Message correcto"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>id</strong> — identificador único del mensaje en la API.",
+          "<strong>content</strong> — lista de bloques. Las respuestas de texto llegan como bloque <strong>text</strong> con propiedad <code>text</code>. Los arrays de citas aparecen al activar citations (módulo 09 / RAG).",
+          "<strong>role</strong> — assistant para la salida del modelo.",
+          "<strong>stop_reason / stop_details</strong> — por qué paró la generación. Si no tocáis el techo de salida, suele haber un fin de turno limpio. Si <code>max_tokens</code> corta la respuesta, los detalles explican el corte brusco.",
+          "<strong>usage</strong> — recuento de tokens de entrada frente a salida (y luego caché) de esa petición."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Cuerpo REST frente a parámetros del SDK"
+      },
+      {
+        "type": "p",
+        "html": "La plataforma sigue siendo REST: cada llamada del SDK es URL de Anthropic + cuerpo JSON. El cuerpo incluye model, messages, system (si hay), temperature, max_tokens, stream, tools, thinking, cache control, etc. <strong>La API es sin estado.</strong> Repetir el system prompt en cada petición no es un error; así funcionan las APIs HTTP. La caché de prompts (módulo 09) es la vía soportada para no volver a pagar un prefijo enorme y estable."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Documentación por encima de la UI del notebook",
+        "html": "Nombres de paquetes, firmas del constructor y magia de Jupyter cambian. Priman la <a href=\"https://docs.claude.com/en/api/messages\">Messages API</a> y el README actual del SDK de Python si una captura de clase discrepa."
+      },
+      {
+        "type": "h2",
+        "text": "Lista de estudio"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Nombrad los dos caminos: REST y SDK; el SDK envuelve REST.",
+          "Decid dónde se crea la clave (consola de API) y cómo la cargó la clase (<code>.env</code> + dotenv).",
+          "Listad métodos de messages citados: create, stream, batches.",
+          "Nombrad las tres entradas centrales de create: model, max_tokens, messages.",
+          "Extraed el texto del asistente de <code>content[0].text</code> (o equivalente) sin volcar el objeto entero en producción."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Campos canónicos de petición y respuesta de create."
+          },
+          {
+            "title": "Visión general de la API",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Autenticación, clientes y organización de la API HTTP."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Dónde se agrupan claves y proyectos en la consola."
+          },
+          {
+            "title": "Límites de tasa",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Por qué un primer demo puede fallar con una clave válida."
+          },
+          {
+            "title": "Dónde está la documentación de la API",
+            "url": "https://support.claude.com/en/articles/8114490-where-can-i-find-your-api-documentation",
+            "note": "Artículo de soporte que apunta a docs.claude.com."
+          }
+        ]
+      }
+    ]
+  }
+]

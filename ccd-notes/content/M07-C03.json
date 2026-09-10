@@ -1,0 +1,284 @@
+[
+  {
+    "lang": "en",
+    "module_id": "07",
+    "chapter_id": "03",
+    "eyebrow": "Module 07 · Chapter 03 · 17 August 2026",
+    "chapter_title": "Streaming versus non-streaming calls",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 7 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M07 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Until mid-session, every demo used <code>messages.create</code> and waited for a finished <strong>Message</strong>. Lalit asked how Claude Chat shows tokens as they appear. Vijay’s answer: use the SDK <code>stream</code> helper <em>or</em> set <code>stream=true</code> on create. Same model, different delivery: one JSON blob versus a sequence of <strong>server-sent events</strong>."
+      },
+      {
+        "type": "h2",
+        "text": "Non-streaming: one Message when generation ends"
+      },
+      {
+        "type": "p",
+        "html": "With default create, the HTTP response body is the full assistant message. If generation took “a minute” (Vijay’s exaggerated example), the client UI would stay blank for that minute. You then parse <code>content</code> as complete text blocks (<code>type: text</code>). This is simpler for batch jobs, tests, and any caller that cannot render partial text. It is a <strong>synchronous</strong> wait from the application’s point of view: the call returns only when the model is done (or hits max_tokens / stop)."
+      },
+      {
+        "type": "h2",
+        "text": "Why stream at all"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Perceived latency: show tokens as soon as they exist so users stay engaged.",
+          "Long answers: do not buffer the entire essay in the SDK before painting the first sentence.",
+          "Chat-like products: Claude Chat and IDE agents feel fast because they stream; your API app will feel “stuck” if you only use blocking create."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Streaming does not make the model smarter or cheaper by itself. You still pay for output tokens. You <em>do</em> take on event-handling complexity."
+      },
+      {
+        "type": "h2",
+        "text": "Two SDK entry points"
+      },
+      {
+        "type": "table",
+        "headers": ["Mechanism (class language)", "Idea", "Typical use"],
+        "rows": [
+          ["<code>messages.create</code> without stream", "Full Message object", "Scripts, evals, simple backends"],
+          ["<code>stream=true</code> on create", "Same method, streamed HTTP", "When you want create but incremental bytes"],
+          ["<code>messages.stream</code> / stream helper", "Dedicated streaming API in the SDK", "Event callbacks, context managers"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Vijay said each path has benefits; pick based on whether your runtime wants a finished object or an iterator of events. Confirm the exact method names on the current Python/TS SDK — they have been renamed more than once."
+      },
+      {
+        "type": "h2",
+        "text": "Events you were shown"
+      },
+      {
+        "type": "p",
+        "html": "On the wire, streaming is a series of events. The notebook printed them all, then filtered to text. Remember the names in class terms and map them to docs:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>message_start</strong> — a message id exists; content is still empty. “I am about to send data.”",
+          "<strong>content_block_start</strong> — a new block (usually text) begins.",
+          "<strong>content_block_delta</strong> — incremental payload. Deltas accumulate. Text arrives as <strong>text_delta</strong> pieces, not a finished <code>type: text</code> block yet.",
+          "<strong>content_block_stop</strong> — that block is complete.",
+          "<strong>message_stop</strong> (class: raw message stop) — the stream for this message is finished."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "End users should not see event names. Your UI concatenates <code>text_delta</code> values. If you ignore events other than text, you will miss errors, usage, and (later) tool or thinking blocks."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "“Thinking…” in VS Code is not this stream",
+        "html": "Mritunjay asked which block holds the humanised “thinking / working” chrome in VS Code. Vijay: that UX is <strong>Agent SDK</strong> / product layer, not the raw Messages stream. Agent SDK still sits on these deltas for the actual tokens."
+      },
+      {
+        "type": "h2",
+        "text": "Stop reasons still apply"
+      },
+      {
+        "type": "p",
+        "html": "Whether streamed or not, generation can end because of end-of-turn, a <strong>stop sequence</strong> (next chapter), or <strong>max_tokens</strong>. Streaming simply delivers the same tokens earlier. If max_tokens fires, the last deltas may be a truncated sentence — handle incomplete JSON yourself."
+      },
+      {
+        "type": "h2",
+        "text": "Batches (awareness only)"
+      },
+      {
+        "type": "p",
+        "html": "The messages resource also exposes <strong>batches</strong> for offline / bulk jobs. Foundation focus in this hour was interactive create versus stream, not designing a batch pipeline. Know that batch exists so you do not confuse it with streaming."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Docs over notebook event dumps",
+        "html": "Event type strings in August 2026 cells may already differ. Use <a href=\"https://docs.claude.com/en/docs/build-with-claude/streaming\">streaming docs</a> as the scoring key."
+      },
+      {
+        "type": "h2",
+        "text": "Implementation checklist"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Blocking create: parse <code>content[].text</code>.",
+          "Streaming: subscribe to deltas; join text; still read final usage/stop from the terminal event or a follow-up Message.",
+          "Do not assume streaming reduces billed tokens.",
+          "Time-to-first-token is the UX metric streaming improves."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Streaming",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/streaming",
+            "note": "Event types, SDKs, and SSE behaviour."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "The <code>stream</code> field on create."
+          },
+          {
+            "title": "API overview",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "How clients wrap HTTP including streamed responses."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "07",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 07 · Capítulo 03 · 17 de agosto de 2026",
+    "chapter_title": "Llamadas con streaming y sin streaming",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 7 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M07 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Hasta mediada la sesión, cada demo usaba <code>messages.create</code> y esperaba un <strong>Message</strong> terminado. Lalit preguntó cómo Claude Chat muestra tokens según aparecen. Respuesta de Vijay: usar el helper <code>stream</code> del SDK <em>o</em> <code>stream=true</code> en create. Mismo modelo, distinta entrega: un JSON completo frente a una secuencia de <strong>eventos enviados por el servidor</strong>."
+      },
+      {
+        "type": "h2",
+        "text": "Sin streaming: un Message cuando acaba la generación"
+      },
+      {
+        "type": "p",
+        "html": "Con create por defecto, el cuerpo HTTP es el mensaje de asistente entero. Si la generación tardara «un minuto» (ejemplo exagerado de Vijay), la UI se quedaría en blanco ese minuto. Luego parseáis <code>content</code> como bloques de texto completos (<code>type: text</code>). Es más simple para lotes, tests y cualquier cliente que no pueda pintar texto parcial. Es una espera <strong>síncrona</strong>: la llamada vuelve cuando el modelo termina (o choca con max_tokens / stop)."
+      },
+      {
+        "type": "h2",
+        "text": "Para qué sirve el streaming"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Latencia percibida: mostrar tokens en cuanto existen para no perder al usuario.",
+          "Respuestas largas: no bufferizar todo el ensayo en el SDK antes de pintar la primera frase.",
+          "Productos tipo chat: Claude Chat y los agentes de IDE se sienten rápidos porque hacen streaming; vuestra app de API se sentirá «colgada» si solo usáis create bloqueante."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "El streaming no hace el modelo más listo ni más barato por sí solo. Seguis pagando tokens de salida. Sí asumís complejidad de eventos."
+      },
+      {
+        "type": "h2",
+        "text": "Dos entradas en el SDK"
+      },
+      {
+        "type": "table",
+        "headers": ["Mecanismo (lenguaje de clase)", "Idea", "Uso típico"],
+        "rows": [
+          ["<code>messages.create</code> sin stream", "Objeto Message completo", "Scripts, evals, backends simples"],
+          ["<code>stream=true</code> en create", "El mismo método, HTTP en flujo", "Cuando queréis create pero bytes incrementales"],
+          ["<code>messages.stream</code> / helper", "API de streaming dedicada en el SDK", "Callbacks, context managers"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Vijay dijo que cada vía tiene ventajas: ¿queréis un objeto cerrado o un iterador de eventos? Confirmad los nombres exactos en el SDK Python/TS vigente — se han renombrado más de una vez."
+      },
+      {
+        "type": "h2",
+        "text": "Eventos que se mostraron"
+      },
+      {
+        "type": "p",
+        "html": "En el cable, el streaming es una serie de eventos. El notebook los imprimía todos y luego filtraba el texto. Recordad los nombres de clase y mapeadlos a la documentación:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>message_start</strong> — ya hay un id de mensaje; el contenido aún está vacío. «Voy a enviaros datos».",
+          "<strong>content_block_start</strong> — empieza un bloque nuevo (casi siempre texto).",
+          "<strong>content_block_delta</strong> — carga incremental. Los deltas se acumulan. El texto llega como piezas <strong>text_delta</strong>, aún no como bloque <code>type: text</code> cerrado.",
+          "<strong>content_block_stop</strong> — ese bloque está completo.",
+          "<strong>message_stop</strong> (en clase: parada del mensaje en bruto) — el flujo de este mensaje ha terminado."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "El usuario final no debe ver nombres de eventos. Vuestra UI concatena valores <code>text_delta</code>. Si ignoráis todo lo que no sea texto, perderéis errores, usage y (luego) bloques de tools o thinking."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "El «pensando…» de VS Code no es este stream",
+        "html": "Mritunjay preguntó en qué bloque está el cromado humanizado de «thinking / working» en VS Code. Vijay: esa UX es <strong>Agent SDK</strong> / capa de producto, no el stream crudo de Messages. El Agent SDK sigue apoyándose en estos deltas para los tokens reales."
+      },
+      {
+        "type": "h2",
+        "text": "Los stop reason siguen aplicando"
+      },
+      {
+        "type": "p",
+        "html": "Con o sin streaming, la generación puede acabar por fin de turno, una <strong>secuencia de parada</strong> (capítulo siguiente) o <strong>max_tokens</strong>. El streaming solo entrega antes los mismos tokens. Si salta max_tokens, los últimos deltas pueden ser una frase cortada — el JSON incompleto lo gestionáis vosotros."
+      },
+      {
+        "type": "h2",
+        "text": "Batches (solo de oídas)"
+      },
+      {
+        "type": "p",
+        "html": "El recurso messages también expone <strong>batches</strong> para trabajos fuera de línea. El foco de esta hora era create interactivo frente a stream, no diseñar un pipeline por lotes. Sabed que batch existe para no confundirlo con streaming."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Documentación por encima del volcado de eventos",
+        "html": "Las cadenas de tipo de evento de agosto de 2026 pueden haber cambiado. Usad la <a href=\"https://docs.claude.com/en/docs/build-with-claude/streaming\">documentación de streaming</a> como clave de corrección."
+      },
+      {
+        "type": "h2",
+        "text": "Lista de implementación"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Create bloqueante: parsead <code>content[].text</code>.",
+          "Streaming: suscribíos a deltas; uníd texto; leed usage/stop finales en el evento terminal o en un Message de cierre.",
+          "No asumáis que el streaming reduce tokens facturados.",
+          "El tiempo hasta el primer token es la métrica de UX que mejora el streaming."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Streaming",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/streaming",
+            "note": "Tipos de evento, SDKs y comportamiento SSE."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "El campo <code>stream</code> en create."
+          },
+          {
+            "title": "Visión general de la API",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Cómo los clientes envuelven HTTP, también en streaming."
+          }
+        ]
+      }
+    ]
+  }
+]

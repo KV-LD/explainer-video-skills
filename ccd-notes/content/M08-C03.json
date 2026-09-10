@@ -1,0 +1,230 @@
+[
+  {
+    "lang": "en",
+    "module_id": "08",
+    "chapter_id": "03",
+    "eyebrow": "Module 08 · Chapter 03 · 19 August 2026",
+    "chapter_title": "Prompt templates and reusable patterns",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 8 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M08 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "After stop sequences and JSON fences, Vijay treated prompts as <strong>templates</strong>: a stable instruction string with holes, filled by application variables (interpolation). The running example was bilingual leave mail — French employee, British manager — without wiring real SMTP. The same template rendered two directions of translation by swapping <code>style</code> and <code>text</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Interpolation is just substitution"
+      },
+      {
+        "type": "p",
+        "html": "Python triple-quoted strings held multi-line prompts. Placeholders such as <code>{style}</code> and <code>{text}</code> (or a custom <code>render(template, **vars)</code>) injected values at runtime. That is not a Claude-only miracle; it is software. Claude-specific advice was <strong>how you mark the injected blob</strong> so the model does not mix data with instructions."
+      },
+      {
+        "type": "h2",
+        "text": "Separate data from instructions"
+      },
+      {
+        "type": "p",
+        "html": "Anti-pattern: “Write a one-page decision report… here are 20 pages of sales records: {sales} … then follow these steps…” with the records dumped mid-sentence. Better: wrap the records in <strong>XML-style tags you invent</strong> (<code>&lt;sales_records&gt;…&lt;/sales_records&gt;</code>) or in triple backticks, and say explicitly that only that region is data. Tags are not a reserved Anthropic vocabulary — you name them. The point is bifurcation: this is evidence, this is the task."
+      },
+      {
+        "type": "h2",
+        "text": "The leave-mail template"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Reusable skeleton: “Translate the text delimited by triple backticks into the style {style}.”",
+          "Employee path: style = British English, calm and respectful; text = French leave request. Output is English the manager can act on.",
+          "Manager path: same skeleton; style = polite French; text = English approval/rejection.",
+          "SMTP, if you ever add it, only fills <code>text</code>; it does not rewrite the skeleton."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Helpers from module 07 (<code>add_user_message</code>, <code>chat</code> with max_tokens and stop sequences) wrapped the rendered string. Templates can also inject few-shot examples or chain-of-thought sketches when those slots are part of the skeleton."
+      },
+      {
+        "type": "h2",
+        "text": "Classic prompting patterns as injectable content"
+      },
+      {
+        "type": "table",
+        "headers": ["Pattern", "What you inject", "Watch-out"],
+        "rows": [
+          ["Zero-shot", "Task only", "Fine when the task is familiar to the model"],
+          ["Few-shot", "Worked input/output pairs", "Examples steal context window; keep them short"],
+          ["Chain of thought", "“Show steps” or worked maths", "Leaks reasoning to the user; extended thinking (M09) is the productised alternative"],
+          ["XML / fences", "Named regions", "Be consistent or the model ignores the contract"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Why templates exist in applications"
+      },
+      {
+        "type": "p",
+        "html": "Prompts change with every email body. If you hard-code French in the instruction, you cannot reuse the skill for German. Templates turn prompting into configuration. They also make evaluation possible: you store (template + variables) → output as a dataset (next chapter)."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Do not confuse interpolation with prompt cache",
+        "html": "Substituting variables creates a <em>new</em> prompt string. Cache hits require a stable prefix (module 09). Put the huge invariant instructions first; put the tiny <code>text</code> after the cache breakpoint if you use caching."
+      },
+      {
+        "type": "h2",
+        "text": "Lab plumbing (skip in the exam essay, know in the MCQ)"
+      },
+      {
+        "type": "p",
+        "html": "Install, dotenv, client, add_user / add_assistant, chat() — same first cells as 17 August. The new idea is <code>render</code>, not a new SDK verb. Triple backticks in the instruction must match whatever you actually concatenate around <code>text</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Study drill"
+      },
+      {
+        "type": "p",
+        "html": "Given a sales-drop report prompt, rewrite it so records sit in <code>&lt;data&gt;</code> and numbered steps sit outside. That single move is what Vijay wanted you to remember."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Prompt engineering overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "XML tags, examples, and clear instructions."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Where the rendered user string actually goes."
+          },
+          {
+            "title": "Prompt caching",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "Keep static template heads cacheable."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "08",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 08 · Capítulo 03 · 19 de agosto de 2026",
+    "chapter_title": "Plantillas de prompt y patrones reutilizables",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 8 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M08 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Tras las secuencias de parada y las vallas JSON, Vijay trató los prompts como <strong>plantillas</strong>: una cadena de instrucciones estable con huecos, rellenados por variables de aplicación (interpolación). El ejemplo continuo fue el correo de vacaciones bilingüe — empleado francés, manager británico — sin enchufar SMTP real. La misma plantilla renderizaba las dos direcciones de traducción cambiando <code>style</code> y <code>text</code>."
+      },
+      {
+        "type": "h2",
+        "text": "La interpolación es solo sustitución"
+      },
+      {
+        "type": "p",
+        "html": "Cadenas Python entre triples comillas guardaban prompts multilínea. Marcadores como <code>{style}</code> y <code>{text}</code> (o un <code>render(template, **vars)</code> propio) inyectaban valores en tiempo de ejecución. No es un milagro solo de Claude; es software. El consejo específico de Claude fue <strong>cómo marcáis el bloque inyectado</strong> para que el modelo no mezcle datos con instrucciones."
+      },
+      {
+        "type": "h2",
+        "text": "Separad datos de instrucciones"
+      },
+      {
+        "type": "p",
+        "html": "Anti-patrón: «Escribe un informe de decisión de una página… aquí van 20 páginas de ventas: {sales} … luego sigue estos pasos…» con los registros en mitad de la frase. Mejor: envolved los registros en <strong>etiquetas estilo XML que inventéis</strong> (<code>&lt;sales_records&gt;…&lt;/sales_records&gt;</code>) o en triples backticks, y decid con claridad que solo esa región es dato. Las etiquetas no son un vocabulario reservado de Anthropic — las nombráis vosotros. El punto es bifurcar: esto es evidencia, esto es la tarea."
+      },
+      {
+        "type": "h2",
+        "text": "La plantilla del correo de vacaciones"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Esqueleto reutilizable: «Traduce el texto delimitado por triples backticks al estilo {style}.»",
+          "Vía empleado: style = inglés británico, tono calmado y respetuoso; text = solicitud de vacaciones en francés. La salida es inglés para que el manager actúe.",
+          "Vía manager: el mismo esqueleto; style = francés educado; text = aprobación/rechazo en inglés.",
+          "SMTP, si algún día lo añadís, solo rellena <code>text</code>; no reescribe el esqueleto."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Los auxiliares del módulo 07 (<code>add_user_message</code>, <code>chat</code> con max_tokens y stop sequences) envolvían la cadena ya renderizada. Las plantillas también pueden inyectar ejemplos few-shot o esbozos de chain-of-thought cuando esos huecos forman parte del esqueleto."
+      },
+      {
+        "type": "h2",
+        "text": "Patrones clásicos de prompting como contenido inyectable"
+      },
+      {
+        "type": "table",
+        "headers": ["Patrón", "Qué inyectáis", "Cuidado"],
+        "rows": [
+          ["Zero-shot", "Solo la tarea", "Vale cuando el modelo ya conoce la tarea"],
+          ["Few-shot", "Pares entrada/salida resueltos", "Los ejemplos comen ventana de contexto; que sean cortos"],
+          ["Chain of thought", "«Muestra pasos» o mates resueltas", "Filtra el razonamiento al usuario; el pensamiento extendido (M09) es la alternativa de producto"],
+          ["XML / vallas", "Regiones con nombre", "Sed coherentes o el modelo ignora el contrato"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Por qué existen las plantillas en las aplicaciones"
+      },
+      {
+        "type": "p",
+        "html": "Los prompts cambian con cada cuerpo de correo. Si claváis el francés en la instrucción, no reutilizáis la habilidad para alemán. Las plantillas convierten el prompting en configuración. También hacen posible la evaluación: guardáis (plantilla + variables) → salida como conjunto de datos (capítulo siguiente)."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "No confundáis interpolación con caché de prompts",
+        "html": "Sustituir variables crea una cadena de prompt <em>nueva</em>. Los aciertos de caché exigen un prefijo estable (módulo 09). Poned primero las instrucciones invariantes enormes; el <code>text</code> diminuto, después del punto de ruptura de caché si la usáis."
+      },
+      {
+        "type": "h2",
+        "text": "Fontanería del laboratorio (saltadlo en el ensayo, conocedlo en el tipo test)"
+      },
+      {
+        "type": "p",
+        "html": "Install, dotenv, cliente, add_user / add_assistant, chat() — las mismas primeras celdas que el 17 de agosto. La idea nueva es <code>render</code>, no un verbo nuevo del SDK. Los triples backticks de la instrucción deben coincidir con lo que concatenáis alrededor de <code>text</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Ejercicio de estudio"
+      },
+      {
+        "type": "p",
+        "html": "Dado un prompt de caída de ventas, reescribidlo para que los registros vivan en <code>&lt;data&gt;</code> y los pasos numerados queden fuera. Ese único gesto es lo que Vijay quería que recordaseis."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de prompting",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Etiquetas XML, ejemplos e instrucciones claras."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Dónde va realmente la cadena de usuario ya renderizada."
+          },
+          {
+            "title": "Caché de prompts",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "Mantened cacheable la cabeza estática de la plantilla."
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,280 @@
+[
+  {
+    "lang": "en",
+    "module_id": "08",
+    "chapter_id": "04",
+    "eyebrow": "Module 08 · Chapter 04 · 19 August 2026",
+    "chapter_title": "What good Claude prompting looks like for the exam",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 8 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M08 · C04 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "The second half of 19 August was a prompting lecture: be <strong>clear and specific</strong>, prefer <strong>instructions over rambling questions</strong>, use <strong>action verbs</strong>, add <strong>guidelines</strong> for length and constraints, mark data with <strong>XML-style tags</strong>, and then <strong>evaluate</strong> every template. Vijay framed evaluation as an AI developer’s job, with a five-step Claude-oriented loop and three graders: human, code, or LLM-as-judge."
+      },
+      {
+        "type": "h2",
+        "text": "Clear beats long"
+      },
+      {
+        "type": "p",
+        "html": "More words are not more precision. Vague solar-panel rambling produced vague answers. Rewrite: “Write three paragraphs about how solar panels work.” Lead with the task. Verbs he liked: write, generate, produce, identify, create, plan. Prefer “Identify three countries that use geothermal energy; include generation stats for each” over a story about something sounding neat."
+      },
+      {
+        "type": "p",
+        "html": "A short-story prompt without constraints is also weak. Same task plus guidelines — under 1000 words, a revealing action, at least one supporting character — is the exam-ready version. Constraints are not optional flavour; they are the spec."
+      },
+      {
+        "type": "h2",
+        "text": "Claude-flavoured structure"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "XML tags (user-invented) to label documents, rules, and untrusted input.",
+          "Prefill + stop sequences when the consumer needs a tight envelope (JSON, fences).",
+          "Few-shot examples inside the prompt when the format is brittle.",
+          "System parameter for standing role / anti-hallucination (module 07), user content for the instance.",
+          "Low temperature when you are extracting; higher when you are drafting prose."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "The evaluation loop (five steps in class)"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Draft</strong> a prompt (even a naive “Please answer the user’s question: {q}”).",
+          "<strong>Build an eval set</strong> of realistic questions — including on-distribution AWS tasks in the lab story, plus off-distribution junk (“what is 2+2”, oatmeal) if you need to see refusal or tool-scope behaviour.",
+          "<strong>Run</strong> the set through the model; store prompt→response pairs.",
+          "<strong>Grade</strong> — not a boolean only: a score (e.g. out of 10) for completeness, format, faithfulness.",
+          "<strong>Revise</strong> the prompt (and maybe temperature / model) and repeat. Scores can go <em>down</em>; that is information."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "The AWS internal-tool scenario: engineers describe a resource in English; Claude returns Python, JSON, or regex. Eval questions should include correct, wrong, and middling asks so you see how the draft behaves before you add “answer with ample detail” and other elaborations."
+      },
+      {
+        "type": "h2",
+        "text": "Three ways to grade"
+      },
+      {
+        "type": "table",
+        "headers": ["Grader", "Good for", "Cost / bias notes"],
+        "rows": [
+          ["Human / SME", "Translation quality, brand voice", "Slow; needed when you cannot specify a metric"],
+          ["Code (Pydantic, regex, JSON schema, tests)", "Shape, types, “exactly one sentence”", "Cheap, repeatable; does not know if facts are true"],
+          ["LLM-as-judge", "Rubrics (faithfulness, reasoning quality) at scale", "Use a capable model; prompt it <em>not</em> to substitute its own world knowledge; still biased; nested judges are not required"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Judge models should behave like a “constitution”: apply your rubric, not rewrite the answer with their own French. Fine-tune the <em>judge prompt</em>; you do not train a new model for Foundation. Prefer Opus-class judges over a tiny generator if you must judge language — but Vijay’s cost warning: if everything is an LLM, the bill explodes. Implement code graders first. Anthropic’s platform has developer eval tooling; AWS Bedrock evaluations were shown as an analogue (Nova as judge, small model as generator, human eval as a paid service). Claude does not remove the need for your own loop."
+      },
+      {
+        "type": "h2",
+        "text": "Messages versus system — exam wording"
+      },
+      {
+        "type": "p",
+        "html": "Vijay said exams “mostly” ask how <strong>messages</strong> and the <strong>system prompt</strong> are configured on <code>create</code>. User and assistant live in the array; system is a sibling parameter. Do not invent a <code>role: system</code> inside messages unless the current docs say that form is accepted — class code used the top-level field."
+      },
+      {
+        "type": "h2",
+        "text": "Agent eval is bigger"
+      },
+      {
+        "type": "p",
+        "html": "The same draft→dataset→grade loop appears in agent testing, but agents add tools, RAG, and orchestration. Foundation written answers should keep prompt eval at developer scope unless the question names tools."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Platform eval UIs change",
+        "html": "Console “developer tests” URLs and Bedrock clicks from 19 August will rot. Concepts stay: dataset, generator model, judge rubric. Prefer <a href=\"https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails\">eval / guardrail docs</a> and prompting docs."
+      },
+      {
+        "type": "h2",
+        "text": "Pocket rubric for Foundation answers"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Task first, constraints next, data in tags.",
+          "Show the format you want (or prefill it).",
+          "Say how you would measure success with a grader.",
+          "Name stop_reason / max_tokens if the output can truncate.",
+          "Cite current Anthropic prompting docs, not a transcript anecdote, if a technique has a product name now (structured outputs, extended thinking)."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Prompt engineering overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Clarity, XML tags, examples — the scoring key for this chapter."
+          },
+          {
+            "title": "Structured outputs",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+            "note": "When the exam mentions guaranteed JSON."
+          },
+          {
+            "title": "Strengthen guardrails / eval",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Evaluation mindset beyond a single happy-path prompt."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "system versus messages configuration."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "08",
+    "chapter_id": "04",
+    "eyebrow": "Módulo 08 · Capítulo 04 · 19 de agosto de 2026",
+    "chapter_title": "Cómo se ve un buen prompting de Claude de cara al examen",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 8 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M08 · C04 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La segunda mitad del 19 de agosto fue una lección de prompting: sed <strong>claros y específicos</strong>, preferid <strong>instrucciones a preguntas divagantes</strong>, usad <strong>verbos de acción</strong>, añadid <strong>pautas</strong> de longitud y restricciones, marcad los datos con <strong>etiquetas estilo XML</strong> y luego <strong>evaluad</strong> cada plantilla. Vijay planteó la evaluación como trabajo de quien desarrolla IA, con un bucle de cinco pasos al estilo Claude y tres evaluadores: humano, código o LLM-as-judge."
+      },
+      {
+        "type": "h2",
+        "text": "Lo claro gana a lo largo"
+      },
+      {
+        "type": "p",
+        "html": "Más palabras no son más precisión. Una divagación vaga sobre paneles solares produce respuestas vagas. Reescribid: «Escribe tres párrafos sobre cómo funcionan los paneles solares». Empezad por la tarea. Verbos que le gustaban: write, generate, produce, identify, create, plan. Preferid «Identifica tres países que usen energía geotérmica; incluye estadísticas de generación de cada uno» a un relato de que algo «suena bien»."
+      },
+      {
+        "type": "p",
+        "html": "Un prompt de relato corto sin restricciones también es flojo. La misma tarea más pautas — menos de 1000 palabras, una acción que revele el talento, al menos un personaje secundario — es la versión lista para examen. Las restricciones no son adorno; son la especificación."
+      },
+      {
+        "type": "h2",
+        "text": "Estructura con sabor Claude"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Etiquetas XML (inventadas por vosotros) para documentos, normas y entrada no fiable.",
+          "Prefill + secuencias de parada cuando el consumidor necesita un sobre cerrado (JSON, vallas).",
+          "Ejemplos few-shot dentro del prompt si el formato es frágil.",
+          "Parámetro system para el rol permanente / anti-alucinación (módulo 07), contenido user para la instancia.",
+          "Temperature baja al extraer; más alta al redactar prosa."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "El bucle de evaluación (cinco pasos en clase)"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Borrador</strong> de prompt (incluso un ingenuo «Please answer the user’s question: {q}»).",
+          "<strong>Conjunto de eval</strong> de preguntas realistas — incluidas tareas AWS del relato de laboratorio, más basura fuera de distribución («qué es 2+2», gachas) si necesitáis ver rechazos o alcance.",
+          "<strong>Ejecutad</strong> el conjunto; guardad pares prompt→respuesta.",
+          "<strong>Puntad</strong> — no solo un booleano: una nota (p. ej. sobre 10) de completitud, formato, fidelidad.",
+          "<strong>Revisad</strong> el prompt (y quizá temperature / modelo) y repetid. Las notas pueden <em>bajar</em>; eso también informa."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "El escenario de herramienta interna AWS: ingeniería describe un recurso en inglés; Claude devuelve Python, JSON o regex. Las preguntas de eval deben incluir peticiones correctas, erróneas y regulares para ver cómo se comporta el borrador antes de añadir «answer with ample detail» y otras elaboraciones."
+      },
+      {
+        "type": "h2",
+        "text": "Tres formas de puntuar"
+      },
+      {
+        "type": "table",
+        "headers": ["Evaluador", "Sirve para", "Notas de coste / sesgo"],
+        "rows": [
+          ["Humano / SME", "Calidad de traducción, tono de marca", "Lento; necesario cuando no podéis fijar una métrica"],
+          ["Código (Pydantic, regex, JSON schema, tests)", "Forma, tipos, «exactamente una frase»", "Barato, repetible; no sabe si los hechos son ciertos"],
+          ["LLM-as-judge", "Rúbricas (fidelidad, calidad de razonamiento) a escala", "Usad un modelo capaz; pedidle que <em>no</em> sustituya su conocimiento del mundo; sigue habiendo sesgo; no hace falta un juez anidado"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "El modelo juez debe actuar como una «constitución»: aplicar vuestra rúbrica, no reescribir la respuesta con su propio francés. Afináis el <em>prompt del juez</em>; no entrenáis un modelo nuevo para Foundation. Preferid jueces de clase Opus frente a un generador minúsculo si hay que juzgar lengua — pero el aviso de coste de Vijay: si todo es un LLM, la factura explota. Implementad primero evaluadores de código. La plataforma de Anthropic tiene utillaje de eval para desarrolladores; las evaluaciones de AWS Bedrock se mostraron como análogo (Nova como juez, modelo pequeño como generador, eval humana como servicio de pago). Claude no os quita la necesidad de vuestro propio bucle."
+      },
+      {
+        "type": "h2",
+        "text": "Messages frente a system — redacción de examen"
+      },
+      {
+        "type": "p",
+        "html": "Vijay dijo que los exámenes preguntan «sobre todo» cómo se configuran <strong>messages</strong> y el <strong>system prompt</strong> en <code>create</code>. User y assistant viven en el array; system es un parámetro hermano. No inventéis un <code>role: system</code> dentro de messages salvo que la documentación vigente acepte esa forma — el código de clase usó el campo de primer nivel."
+      },
+      {
+        "type": "h2",
+        "text": "La eval de agentes es más grande"
+      },
+      {
+        "type": "p",
+        "html": "El mismo bucle borrador→dataset→nota aparece en tests de agentes, pero los agentes añaden tools, RAG y orquestación. En respuestas Foundation dejad la eval de prompts en el ámbito de desarrollo salvo que la pregunta nombre tools."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Las UI de eval de plataforma cambian",
+        "html": "Las URL de «developer tests» y los clics de Bedrock del 19 de agosto caducan. Los conceptos quedan: dataset, modelo generador, rúbrica de juez. Priman las <a href=\"https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails\">docs de eval / guardrails</a> y de prompting."
+      },
+      {
+        "type": "h2",
+        "text": "Rúbrica de bolsillo para respuestas Foundation"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Tarea primero, restricciones después, datos en etiquetas.",
+          "Mostrad el formato que queréis (o haced prefill).",
+          "Decid cómo mediríais el éxito con un evaluador.",
+          "Nombrad stop_reason / max_tokens si la salida puede truncarse.",
+          "Citad la documentación vigente de prompting de Anthropic, no una anécdota de transcripción, si la técnica ya tiene nombre de producto (structured outputs, extended thinking)."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de prompting",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Claridad, etiquetas XML, ejemplos — clave de corrección de este capítulo."
+          },
+          {
+            "title": "Salidas estructuradas",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+            "note": "Cuando el examen menciona JSON garantizado."
+          },
+          {
+            "title": "Guardrails / eval",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Mentalidad de evaluación más allá del camino feliz."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Configuración de system frente a messages."
+          }
+        ]
+      }
+    ]
+  }
+]
