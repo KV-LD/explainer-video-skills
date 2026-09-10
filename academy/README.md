@@ -12,14 +12,16 @@ npm run dev
 
 ## Add session videos
 
-Do **not** put large MP4s in git. On the **Videos** page the cards read `academy/data/videos.json`.
+Recordings are **English only** — **one URL per module**. Notes and quizzes stay bilingual.
+
+Do **not** put large MP4s in git. The **Videos** page reads `academy/data/videos.json`.
 
 1. Open `academy/data/videos.json`.
-2. For each module (`m01`–`m12`), set `"url"` to the LMS, Microsoft Stream, or Drive share link.
-3. Leave `"url": ""` until that session is published — the hub will show “link not added”.
+2. For each module (`m01`–`m12`), set `"url"` to the LMS, Microsoft Stream, or Drive share link for that English session.
+3. There is no Spanish video field. Leave `"url": ""` until the recording is published.
 4. Redeploy (Vercel root directory must be `academy`).
 
-Module pages also pick up the same file under “Videos for this module”.
+Module note pages show the same single English link under “English session recording”.
 
 ## Quizzes
 
@@ -56,4 +58,4 @@ Root directory on Vercel must be `academy` if the Git repo is the parent pack.
 
 ## i18n
 
-EN / ES toggle in the header (saved in `localStorage`). Notes, UI, quizzes, and video titles are bilingual.
+EN / ES toggle in the header (saved in `localStorage`). Notes, UI, and quizzes are bilingual. Session video titles and links are English only.

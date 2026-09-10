@@ -5,7 +5,7 @@ export const copy = {
     academy: "G.A.Menon Academy",
     hub: "Claude Certification Learning Hub",
     tagline:
-      "Foundation notes, exam-style practice, and session videos — in English and Spanish.",
+      "Notes and quizzes in English and Spanish. Session recordings are English only — one link per module.",
     navNotes: "Notes",
     navQuiz: "Quizzes",
     navVideos: "Videos",
@@ -15,10 +15,11 @@ export const copy = {
     startVideos: "Video links",
     modulesTitle: "Modules",
     modulesLead:
-      "Twelve live sessions, chapter by chapter. English and Spanish are separate views — use the language toggle.",
+      "Twelve live sessions, chapter by chapter. Notes are separate English and Spanish views — use the language toggle. Session recordings stay on the English video link.",
     chapters: "Chapters",
-    relatedVideos: "Videos for this module",
-    addLink: "No link yet — add a URL in data/videos.json",
+    relatedVideos: "English session recording",
+    addLink: "No link yet — add the English recording URL in data/videos.json",
+    videoLangBadge: "English recording · one link",
     quizTitle: "Exam-style quizzes",
     quizLead:
       "100 original practice items weighted like CCDV-F (applications, models, agents, prompting, tools/MCP, security, Claude Code, eval). Each attempt draws a fresh sample. Not official Anthropic or Pearson questions.",
@@ -39,14 +40,14 @@ export const copy = {
     retry: "New random set",
     reviewNotes: "Open matching notes",
     home: "Home",
-    videosTitle: "Session videos",
+    videosTitle: "Session videos (English)",
     videosLead:
-      "Session recordings are not stored in this repo (MP4s are too large). Put the LMS, Stream, or Drive URL in academy/data/videos.json on the url field of each module, then redeploy. Empty url leaves the card waiting — no login required.",
+      "Masterclass recordings are English only. Notes and quizzes are the bilingual materials. Store one LMS, Stream, or Drive URL per session in academy/data/videos.json (url). Empty url leaves the card waiting. Do not commit MP4s.",
     videosHowToTitle: "Where to add videos",
     videosHowTo:
-      "Edit academy/data/videos.json. Each module (m01–m12) has url: \"\". Paste a https link there. Do not commit large video files. After saving, redeploy the academy app (Vercel root directory: academy).",
-    openVideo: "Open video",
-    missingUrl: "Link not added yet",
+      "Edit academy/data/videos.json. Each module (m01–m12) has a single url. Paste the English session link. There is no second Spanish video field. After saving, redeploy (Vercel root directory: academy).",
+    openVideo: "Open English recording",
+    missingUrl: "English recording link not added yet",
     footer:
       "G.A.Menon Academy · study aid only · not official Anthropic exam material. Prefer docs.claude.com when recordings age.",
     disclaimer:
@@ -71,7 +72,7 @@ export const copy = {
     academy: "G.A.Menon Academy",
     hub: "Centro de aprendizaje · Certificación Claude",
     tagline:
-      "Apuntes Foundation, práctica tipo examen y vídeos de sesión — en inglés y en español.",
+      "Apuntes y cuestionarios en inglés y en español. Las grabaciones de sesión están solo en inglés: un enlace por módulo.",
     navNotes: "Apuntes",
     navQuiz: "Cuestionarios",
     navVideos: "Vídeos",
@@ -81,10 +82,11 @@ export const copy = {
     startVideos: "Enlaces de vídeo",
     modulesTitle: "Módulos",
     modulesLead:
-      "Doce sesiones en directo, capítulo a capítulo. Inglés y español van en vistas distintas: usad el conmutador de idioma.",
+      "Doce sesiones en directo, capítulo a capítulo. Los apuntes van en vistas distintas de inglés y español: usad el conmutador. Las grabaciones siguen el enlace en inglés.",
     chapters: "Capítulos",
-    relatedVideos: "Vídeos de este módulo",
-    addLink: "Aún no hay enlace — añadid una URL en data/videos.json",
+    relatedVideos: "Grabación de la sesión (inglés)",
+    addLink: "Aún no hay enlace — añadid la URL de la grabación en inglés en data/videos.json",
+    videoLangBadge: "Grabación en inglés · un enlace",
     quizTitle: "Cuestionarios tipo examen",
     quizLead:
       "100 ítems originales ponderados como CCDV-F (aplicaciones, modelos, agentes, prompting, tools/MCP, seguridad, Claude Code, eval). Cada intento sortea una muestra nueva. No son preguntas oficiales de Anthropic ni de Pearson.",
@@ -105,14 +107,14 @@ export const copy = {
     retry: "Otra muestra aleatoria",
     reviewNotes: "Abrir apuntes relacionados",
     home: "Inicio",
-    videosTitle: "Vídeos de las sesiones",
+    videosTitle: "Vídeos de las sesiones (inglés)",
     videosLead:
-      "Las grabaciones no viven en este repositorio (los MP4 pesan demasiado). Pegad la URL del LMS, Stream o Drive en academy/data/videos.json, campo url de cada módulo, y volved a desplegar. Si url está vacío, la tarjeta espera. No hace falta iniciar sesión.",
+      "Las grabaciones del masterclass están solo en inglés. Lo bilingüe son los apuntes y los cuestionarios. Un enlace LMS, Stream o Drive por sesión en academy/data/videos.json (url). Si url está vacío, la tarjeta espera. No subáis MP4.",
     videosHowToTitle: "Dónde añadir los vídeos",
     videosHowTo:
-      "Editad academy/data/videos.json. Cada módulo (m01–m12) tiene url: \"\". Pegad un enlace https. No subáis ficheros de vídeo grandes. Tras guardar, redesplegad la app (directorio raíz en Vercel: academy).",
-    openVideo: "Abrir vídeo",
-    missingUrl: "Enlace aún no añadido",
+      "Editad academy/data/videos.json. Cada módulo (m01–m12) tiene un solo url. Pegad el enlace de la sesión en inglés. No hay un segundo campo para un vídeo en español. Tras guardar, redesplegad (directorio raíz en Vercel: academy).",
+    openVideo: "Abrir grabación en inglés",
+    missingUrl: "Aún no hay enlace de la grabación en inglés",
     footer:
       "G.A.Menon Academy · material de estudio · no es el examen oficial de Anthropic. Primad docs.claude.com si la grabación queda antigua.",
     disclaimer:

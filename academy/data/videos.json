@@ -1,113 +1,89 @@
 {
-  "whereToAdd": "Set url on each item below (LMS / Stream / Drive https link). Leave \"\" until the recording is published. Do not commit MP4 binaries here. Redeploy the academy app after editing.",
+  "whereToAdd": "One English recording per session. Set url on each module (LMS / Stream / Drive). Leave \"\" until published. Do not commit MP4s. Notes and quizzes stay bilingual; recordings do not.",
   "videos": [
     {
       "id": "m01",
       "moduleId": "01",
-      "title_en": "Module 01 — session recording",
-      "title_es": "Módulo 01 — grabación de la sesión",
-      "url": "",
-      "note_en": "Paste the LMS, Drive, or Stream link for 3 August.",
-      "note_es": "Pegad el enlace del LMS, Drive o Stream del 3 de agosto."
+      "title": "Module 01 — 3 August (English)",
+      "note": "One link for the live session. Notes and quizzes for this module are separate EN/ES materials.",
+      "url": ""
     },
     {
       "id": "m02",
       "moduleId": "02",
-      "title_en": "Module 02 — session recording",
-      "title_es": "Módulo 02 — grabación de la sesión",
-      "url": "",
-      "note_en": "Paste the link for 5 August (Cowork, Academy, exam format).",
-      "note_es": "Pegad el enlace del 5 de agosto (Cowork, Academy, formato de examen)."
+      "title": "Module 02 — 5 August (English)",
+      "note": "Cowork, Academy, exam format. One recording URL.",
+      "url": ""
     },
     {
       "id": "m03",
       "moduleId": "03",
-      "title_en": "Module 03 — session recording",
-      "title_es": "Módulo 03 — grabación de la sesión",
-      "url": "",
-      "note_en": "Paste the link for 6 August (certs and Claude Code).",
-      "note_es": "Pegad el enlace del 6 de agosto (certificaciones y Claude Code)."
+      "title": "Module 03 — 6 August (English)",
+      "note": "Certifications and Claude Code. One recording URL.",
+      "url": ""
     },
     {
       "id": "m04",
       "moduleId": "04",
-      "title_en": "Module 04 — session recording",
-      "title_es": "Módulo 04 — grabación de la sesión",
-      "url": "",
-      "note_en": "10 August afternoon session (not the 11-minute stub).",
-      "note_es": "Sesión de la tarde del 10 de agosto (no el recorte de 11 minutos)."
+      "title": "Module 04 — 10 August afternoon (English)",
+      "note": "Full afternoon session (not the 11-minute stub). One recording URL.",
+      "url": ""
     },
     {
       "id": "m05",
       "moduleId": "05",
-      "title_en": "Module 05 — session recording",
-      "title_es": "Módulo 05 — grabación de la sesión",
-      "url": "",
-      "note_en": "12 August — permissions, models, agents.",
-      "note_es": "12 de agosto — permisos, modelos, agentes."
+      "title": "Module 05 — 12 August (English)",
+      "note": "Permissions, models, agents. One recording URL.",
+      "url": ""
     },
     {
       "id": "m06",
       "moduleId": "06",
-      "title_en": "Module 06 — session recording",
-      "title_es": "Módulo 06 — grabación de la sesión",
-      "url": "",
-      "note_en": "13 August — hooks and tokens.",
-      "note_es": "13 de agosto — hooks y tokens."
+      "title": "Module 06 — 13 August (English)",
+      "note": "Hooks and tokens. One recording URL.",
+      "url": ""
     },
     {
       "id": "m07",
       "moduleId": "07",
-      "title_en": "Module 07 — session recording",
-      "title_es": "Módulo 07 — grabación de la sesión",
-      "url": "",
-      "note_en": "17 August — Anthropic SDK.",
-      "note_es": "17 de agosto — SDK de Anthropic."
+      "title": "Module 07 — 17 August (English)",
+      "note": "Anthropic SDK. One recording URL.",
+      "url": ""
     },
     {
       "id": "m08",
       "moduleId": "08",
-      "title_en": "Module 08 — session recording",
-      "title_es": "Módulo 08 — grabación de la sesión",
-      "url": "",
-      "note_en": "19 August — prompt engineering.",
-      "note_es": "19 de agosto — ingeniería de prompts."
+      "title": "Module 08 — 19 August (English)",
+      "note": "Prompt engineering. One recording URL.",
+      "url": ""
     },
     {
       "id": "m09",
       "moduleId": "09",
-      "title_en": "Module 09 — session recording",
-      "title_es": "Módulo 09 — grabación de la sesión",
-      "url": "",
-      "note_en": "20 August — thinking, vision, PDFs, cache.",
-      "note_es": "20 de agosto — pensamiento, visión, PDF, caché."
+      "title": "Module 09 — 20 August (English)",
+      "note": "Thinking, vision, PDFs, cache. One recording URL.",
+      "url": ""
     },
     {
       "id": "m10",
       "moduleId": "10",
-      "title_en": "Module 10 — session recording",
-      "title_es": "Módulo 10 — grabación de la sesión",
-      "url": "",
-      "note_en": "24 August — tools and MCP.",
-      "note_es": "24 de agosto — herramientas y MCP."
+      "title": "Module 10 — 24 August (English)",
+      "note": "Tools and MCP. One recording URL.",
+      "url": ""
     },
     {
       "id": "m11",
       "moduleId": "11",
-      "title_en": "Module 11 — session recording",
-      "title_es": "Módulo 11 — grabación de la sesión",
-      "url": "",
-      "note_en": "26 August — RAG and agents.",
-      "note_es": "26 de agosto — RAG y agentes."
+      "title": "Module 11 — 26 August (English)",
+      "note": "RAG and agents. One recording URL.",
+      "url": ""
     },
     {
       "id": "m12",
       "moduleId": "12",
-      "title_en": "Module 12 — session recording",
-      "title_es": "Módulo 12 — grabación de la sesión",
-      "url": "",
-      "note_en": "27 August — built-in tools, RAI, exam prep.",
-      "note_es": "27 de agosto — herramientas integradas, IA responsable, examen."
+      "title": "Module 12 — 27 August (English)",
+      "note": "Built-in tools, RAI, exam prep. One recording URL.",
+      "url": ""
     }
   ]
 }

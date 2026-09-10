@@ -18,7 +18,7 @@ const display = Source_Serif_4({
 export const metadata: Metadata = {
   title: "G.A.Menon Academy · Claude Certification Learning Hub",
   description:
-    "CCDV-F notes, exam-style quizzes, and session videos in English and Spanish.",
+    "CCDV-F notes and quizzes in English and Spanish; session recordings in English (one link per module).",
 };
 
 export default function RootLayout({

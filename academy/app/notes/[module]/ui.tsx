@@ -39,13 +39,16 @@ export function ModuleView({ mod }: { mod: OutlineModule }) {
           <li key={v.id} className="rounded-lg bg-white px-4 py-3">
             {v.url ? (
               <a href={v.url} target="_blank" rel="noreferrer">
-                {lang === "es" ? v.title_es : v.title_en}
+                {v.title}
               </a>
             ) : (
               <span className="text-[var(--ust-muted)]">
-                {lang === "es" ? v.title_es : v.title_en} — {t.addLink}
+                {v.title} — {t.addLink}
               </span>
             )}
+            <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--ust-muted2)]">
+              {t.videoLangBadge}
+            </div>
           </li>
         ))}
       </ul>
