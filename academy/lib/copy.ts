@@ -31,7 +31,8 @@ export const copy = {
     submit: "Submit quiz",
     question: "Question",
     of: "of",
-    selectN: "Select {n}",
+    selectOne: "Choose one answer.",
+    selectN: "Select exactly {n} answers — {have} of {n} selected.",
     score: "Score",
     strong: "You did well on",
     weak: "Spend more time on",
@@ -40,7 +41,10 @@ export const copy = {
     home: "Home",
     videosTitle: "Session videos",
     videosLead:
-      "Add your recording URLs in data/videos.json (LMS, Stream, Drive). Empty cards wait for a link — no login required.",
+      "Session recordings are not stored in this repo (MP4s are too large). Put the LMS, Stream, or Drive URL in academy/data/videos.json on the url field of each module, then redeploy. Empty url leaves the card waiting — no login required.",
+    videosHowToTitle: "Where to add videos",
+    videosHowTo:
+      "Edit academy/data/videos.json. Each module (m01–m12) has url: \"\". Paste a https link there. Do not commit large video files. After saving, redeploy the academy app (Vercel root directory: academy).",
     openVideo: "Open video",
     missingUrl: "Link not added yet",
     footer:
@@ -50,7 +54,8 @@ export const copy = {
     wellDone: "Keep that approach for those domains.",
     studyHint: "Re-read the linked module, then retry a quiz.",
     progress: "Progress",
-    pickAnswer: "Choose an answer to continue.",
+    pickAnswer: "Choose one answer to continue.",
+    pickAnswers: "This item needs {n} answers ({have} selected) before Next unlocks.",
     domains: {
       applications: "Applications and integration",
       models: "Model selection and cost",
@@ -92,7 +97,8 @@ export const copy = {
     submit: "Enviar cuestionario",
     question: "Pregunta",
     of: "de",
-    selectN: "Elegid {n}",
+    selectOne: "Elegid una sola respuesta.",
+    selectN: "Elegid exactamente {n} respuestas — {have} de {n} marcadas.",
     score: "Puntuación",
     strong: "Lo habéis hecho bien en",
     weak: "Conviene reforzar",
@@ -101,7 +107,10 @@ export const copy = {
     home: "Inicio",
     videosTitle: "Vídeos de las sesiones",
     videosLead:
-      "Añadid las URLs en data/videos.json (LMS, Stream, Drive). Las tarjetas vacías esperan un enlace. No hace falta iniciar sesión.",
+      "Las grabaciones no viven en este repositorio (los MP4 pesan demasiado). Pegad la URL del LMS, Stream o Drive en academy/data/videos.json, campo url de cada módulo, y volved a desplegar. Si url está vacío, la tarjeta espera. No hace falta iniciar sesión.",
+    videosHowToTitle: "Dónde añadir los vídeos",
+    videosHowTo:
+      "Editad academy/data/videos.json. Cada módulo (m01–m12) tiene url: \"\". Pegad un enlace https. No subáis ficheros de vídeo grandes. Tras guardar, redesplegad la app (directorio raíz en Vercel: academy).",
     openVideo: "Abrir vídeo",
     missingUrl: "Enlace aún no añadido",
     footer:
@@ -112,6 +121,7 @@ export const copy = {
     studyHint: "Releed el módulo enlazado y repetid un cuestionario.",
     progress: "Progreso",
     pickAnswer: "Elegid una respuesta para seguir.",
+    pickAnswers: "Este ítem pide {n} respuestas ({have} marcadas) antes de desbloquear Siguiente.",
     domains: {
       applications: "Aplicaciones e integración",
       models: "Selección de modelo y coste",

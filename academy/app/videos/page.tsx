@@ -9,6 +9,19 @@ export default function VideosPage() {
     <div className="mx-auto max-w-5xl px-5 py-10">
       <h1 className="font-sans text-2xl font-semibold">{t.videosTitle}</h1>
       <p className="mt-2 max-w-2xl text-[var(--ust-muted)]">{t.videosLead}</p>
+      <div className="mt-6 max-w-2xl rounded-xl border border-[var(--border)] bg-white p-5">
+        <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--ust-muted2)]">
+          {t.videosHowToTitle}
+        </div>
+        <p className="mt-2 text-sm text-[var(--ust-muted)]">{t.videosHowTo}</p>
+        <pre className="mt-3 overflow-x-auto rounded bg-[var(--ust-off)] p-3 text-xs text-[var(--ust-teal-deep)]">
+{`{
+  "id": "m02",
+  "moduleId": "02",
+  "url": "https://your-lms.example/session-5-aug"
+}`}
+        </pre>
+      </div>
       <ul className="mt-8 space-y-3">
         {videosFile.videos.map((v) => (
           <li

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import {
-  BANK,
   isCorrect,
   sampleModule,
   samplePractice,
@@ -37,17 +36,29 @@ export function QuizClient({
 
   const q = questions[idx];
   const loc = q ? q[lang] : null;
+  const need = q ? q.select : 1;
 
   function toggle(i: number) {
     if (!q) return;
-    const cur = chosen[q.id] || [];
-    if (q.type === "single") {
-      setChosen({ ...chosen, [q.id]: [i] });
-      return;
-    }
-    const has = cur.includes(i);
-    const next = has ? cur.filter((x) => x !== i) : [...cur, i].slice(0, q.select);
-    setChosen({ ...chosen, [q.id]: next });
+    setChosen((prev) => {
+      const cur = prev[q.id] || [];
+      if (need === 1) {
+        return { ...prev, [q.id]: [i] };
+      }
+      const set = new Set(cur);
+      if (set.has(i)) {
+        set.delete(i);
+      } else if (set.size < need) {
+        set.add(i);
+      } else {
+        const rest = [...set].filter((x) => x !== i);
+        rest.shift();
+        set.clear();
+        rest.forEach((x) => set.add(x));
+        set.add(i);
+      }
+      return { ...prev, [q.id]: [...set].sort((a, b) => a - b) };
+    });
   }
 
   function results() {
@@ -148,8 +159,8 @@ export function QuizClient({
   }
 
   const selected = chosen[q.id] || [];
-  const canNext =
-    q.type === "single" ? selected.length === 1 : selected.length === q.select;
+  const canNext = selected.length === need;
+  const inputType = need === 1 ? "radio" : "checkbox";
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-10">
@@ -165,30 +176,47 @@ export function QuizClient({
       <h1 className="mt-6 text-xl font-semibold leading-snug">
         {t.question} {idx + 1}. {loc.stem}
       </h1>
-      {q.type === "multi" && (
-        <p className="mt-2 text-sm text-[var(--ust-muted2)]">
-          {t.selectN.replace("{n}", String(q.select))}
-        </p>
-      )}
-      <ul className="mt-6 space-y-2">
+      <p
+        className={`mt-3 rounded-md px-3 py-2 text-sm ${
+          need > 1
+            ? "bg-white text-[var(--ust-teal-deep)] ring-1 ring-[var(--ust-light-teal)]"
+            : "text-[var(--ust-muted2)]"
+        }`}
+      >
+        {need === 1
+          ? t.selectOne
+          : t.selectN
+              .replace("{n}", String(need))
+              .replace("{have}", String(selected.length))}
+      </p>
+      <ul className="mt-6 space-y-2" role={need === 1 ? "radiogroup" : "group"}>
         {loc.options.map((opt, i) => {
           const on = selected.includes(i);
+          const letter = String.fromCharCode(65 + i);
           return (
-            <li key={i}>
-              <button
-                type="button"
-                onClick={() => toggle(i)}
-                className={`w-full rounded-lg border px-4 py-3 text-left text-sm ${
+            <li key={`${q.id}-${i}`}>
+              <label
+                className={`flex cursor-pointer items-start gap-3 rounded-lg border px-4 py-3 text-left text-sm ${
                   on
                     ? "border-[var(--ust-dark-teal)] bg-white ring-2 ring-[var(--ust-light-teal)]"
                     : "border-[var(--border)] bg-white hover:border-[var(--ust-light-teal)]"
                 }`}
               >
-                <span className="mr-2 font-bold text-[var(--ust-dark-teal)]">
-                  {String.fromCharCode(65 + i)}.
+                <input
+                  className="mt-1 shrink-0"
+                  type={inputType}
+                  name={q.id}
+                  value={i}
+                  checked={on}
+                  onChange={() => toggle(i)}
+                />
+                <span>
+                  <span className="mr-2 font-bold text-[var(--ust-dark-teal)]">
+                    {letter}.
+                  </span>
+                  {opt}
                 </span>
-                {opt}
-              </button>
+              </label>
             </li>
           );
         })}
@@ -223,11 +251,14 @@ export function QuizClient({
         )}
       </div>
       {!canNext && (
-        <p className="mt-3 text-xs text-[var(--ust-muted2)]">{t.pickAnswer}</p>
+        <p className="mt-3 text-xs text-[var(--ust-muted2)]">
+          {need === 1
+            ? t.pickAnswer
+            : t.pickAnswers
+                .replace("{n}", String(need))
+                .replace("{have}", String(selected.length))}
+        </p>
       )}
-      <p className="mt-10 text-xs text-[var(--ust-muted2)]">
-        Bank {BANK.length} · seed {seed}
-      </p>
     </div>
   );
 }

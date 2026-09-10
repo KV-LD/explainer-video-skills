@@ -1,4 +1,5 @@
 {
+  "whereToAdd": "Set url on each item below (LMS / Stream / Drive https link). Leave \"\" until the recording is published. Do not commit MP4 binaries here. Redeploy the academy app after editing.",
   "videos": [
     {
       "id": "m01",

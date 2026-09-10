@@ -12,7 +12,14 @@ npm run dev
 
 ## Add session videos
 
-Edit `academy/data/videos.json` and set `url` on each module. Redeploy.
+Do **not** put large MP4s in git. On the **Videos** page the cards read `academy/data/videos.json`.
+
+1. Open `academy/data/videos.json`.
+2. For each module (`m01`–`m12`), set `"url"` to the LMS, Microsoft Stream, or Drive share link.
+3. Leave `"url": ""` until that session is published — the hub will show “link not added”.
+4. Redeploy (Vercel root directory must be `academy`).
+
+Module pages also pick up the same file under “Videos for this module”.
 
 ## Quizzes
 
