@@ -1,0 +1,248 @@
+[
+  {
+    "lang": "en",
+    "module_id": "02",
+    "chapter_id": "02",
+    "eyebrow": "Module 02 · Chapter 02 · 5 August 2026",
+    "chapter_title": "Anthropic Academy, Skilljar, and partner counting",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 2 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M02 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "When someone asked for Udemy practice tests, Vijay shared <strong>anthropic.skilljar.com</strong>—Anthropic Academy. That portal is the self-paced curriculum, the place you register for the exam, and (for the company) the system that counts completions toward partner status. Mixing it up with UST Percipio is the most expensive administrative mistake in this chapter."
+      },
+      {
+        "type": "h2",
+        "text": "What Skilljar is for you as a candidate"
+      },
+      {
+        "type": "p",
+        "html": "Register and log in. Prefer your <strong>org identity</strong> if UST is paying and wants the completion to count. If the org is not issuing credentials yet, personal IDs can still take the free learning content—but partner counting and “high-end partner” maths only work when people sit under the company. Vijay estimated on the order of <strong>19 courses</strong> in the catalogue in August 2026, with <strong>three to four</strong> self-paced courses typically lining up behind one exam path. Treat those counts as a snapshot."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Academy content is how you learn Anthropic’s own jargon (he later used “harness” as an example of a Claude-specific term).",
+          "You register for the exam <em>from this portal</em>; clearing it is what the partner programme cares about, not a Udemy badge.",
+          "Course-completion certificates inside Academy or Percipio are not the same as passing Pearson."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Name on the portal versus name on the ID"
+      },
+      {
+        "type": "p",
+        "html": "Simi’s issue is the one every large employer hits: UST’s directory expands a name one way; passport/Aadhaar another; Pearson requires a match. You cannot freely edit the Claude/Skilljar legal name yourself. The <strong>org account holder / partnership manager</strong> must fix it, or confirm in writing whether a personal-ID exam can later be affiliated to UST. Vijay’s technical preference: sit under the UST ID. His practical advice: escalate early; do not discover the mismatch at the webcam check."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Partner portal UI",
+        "html": "Vijay showed a partner console (he referred to an “Euler” / partner app). Tiers and numeric thresholds below are <em>his classroom sketch</em> of how Anthropic counted enablement in August 2026. Confirm with UST’s Anthropic account team and current partner docs—not this page—before you quote numbers to a customer."
+      },
+      {
+        "type": "h2",
+        "text": "How partner counting was taught"
+      },
+      {
+        "type": "p",
+        "html": "The commercial plot: a services firm climbs partner tiers by proving people learned Claude and customers used it. Vijay walked a ladder. Exact labels (Registered / Select / Preferred / Global Premier) and thresholds should be verified; the <em>shape</em> is what you need pedagogically."
+      },
+      {
+        "type": "table",
+        "headers": ["Stage (classroom language)", "Learning / cert bar he described", "Customer / story bar he described"],
+        "rows": [
+          ["Registered-style enablement", "First ~10 users complete a minimum of ~4 Academy courses", "Entry: people are actually studying under the org"],
+          ["Next tier (cert + customers)", "Those first ~10 pass certification exams", "Enable ~1–2 customers; public-ish customer stories"],
+          ["Preferred-scale", "On the order of 100+ certified users", "On the order of ~15 customers on Claude; more published stories"],
+          ["Global Premier-scale", "On the order of 1,000 certified individuals", "The “high-end partner” north star he quoted for UST-scale ambition"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "On 6 August he added an important correction: <strong>course-completion counting used to be the mandatory on-ramp to become a partner; if UST is already enrolled, individuals can go straight at certification.</strong> Skilljar remains the best glossary. You still want the courses; they are no longer the only gate he described for an already-onboarded partner."
+      },
+      {
+        "type": "h2",
+        "text": "Taking a cert with you"
+      },
+      {
+        "type": "p",
+        "html": "If you change employer, Vijay said there is provision to carry a personal certification and have an org enable it—talk to account holders. Do not assume a weekend personal Claude.ai login automatically credits UST’s 1,000-headcount goal."
+      },
+      {
+        "type": "h2",
+        "text": "Percipio is a different pile"
+      },
+      {
+        "type": "p",
+        "html": "HR L&amp;D (Gowthami, 6 August) and Vijay aligned: Percipio is UST’s e-learning journey. Uploading a completion there satisfies an internal path. It has <strong>nothing to do</strong> with the Anthropic credential. The exam itself is a practical/proctored sitting (Pearson in the stories people told)."
+      },
+      {
+        "type": "h2",
+        "text": "What to do this week on Academy"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Log into anthropic.skilljar.com with the identity UST intends to count.",
+          "Check the display name against your exam ID; ticket the account team if they differ.",
+          "Enrol in the developer-path courses (Claude Code, MCP intro, APIs)—even if partner maths no longer blocks you.",
+          "Ignore Udemy unless you are filling a gap the official glossary does not cover, and even then verify against docs.claude.com."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "The URL Vijay put on screen: learning + exam registration."
+          },
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Pairs with Academy: same vendor, reference depth."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Example of an Academy course topic whose jargon appears on the exam."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Developer-path reading that Skilljar will echo."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "02",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 02 · Capítulo 02 · 5 de agosto de 2026",
+    "chapter_title": "Anthropic Academy, Skilljar y el recuento de partners",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 2 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M02 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Cuando alguien pidió tests de práctica en Udemy, Vijay compartió <strong>anthropic.skilljar.com</strong>—Anthropic Academy. Ese portal es el currículo a vuestro ritmo, el sitio donde os inscribís al examen y (para la empresa) el sistema que cuenta finalizaciones de cara al estatus de partner. Confundirlo con Percipio de UST es el error administrativo más caro de este capítulo."
+      },
+      {
+        "type": "h2",
+        "text": "Para qué os sirve Skilljar como candidatos"
+      },
+      {
+        "type": "p",
+        "html": "Registraos e iniciad sesión. Preferid la <strong>identidad de la org</strong> si UST paga y quiere que cuente la finalización. Si la org aún no emite credenciales, los IDs personales pueden seguir el contenido gratuito—pero el recuento de partners y las cuentas de «partner de alto nivel» solo funcionan cuando la gente se presenta bajo la empresa. Vijay estimó del orden de <strong>19 cursos</strong> en el catálogo en agosto de 2026, con <strong>tres o cuatro</strong> cursos a vuestro ritmo alineados habitualmente detrás de una ruta de examen. Tratad esos recuentos como una foto."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "El contenido de Academy es cómo aprendéis la jerga propia de Anthropic (más adelante usó «harness» como ejemplo de término específico de Claude).",
+          "Os inscribís al examen <em>desde este portal</em>; aprobarlo es lo que le importa al programa de partners, no una insignia de Udemy.",
+          "Los certificados de fin de curso en Academy o Percipio no son lo mismo que aprobar Pearson."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Nombre en el portal frente a nombre en el documento"
+      },
+      {
+        "type": "p",
+        "html": "El problema de Simi es el de todo empleador grande: el directorio de UST expande el nombre de una forma; el pasaporte/Aadhaar de otra; Pearson exige coincidencia. No podéis editar libremente el nombre legal en Claude/Skilljar. El <strong>account holder / responsable de partnership de la org</strong> debe corregirlo, o confirmar por escrito si un examen con ID personal se puede afiliar después a UST. Preferencia técnica de Vijay: presentaros bajo el ID de UST. Consejo práctico: escalad pronto; no descubráis el desajuste en la comprobación de la cámara."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "UI del portal de partners",
+        "html": "Vijay mostró una consola de partner (habló de una app «Euler» / partner). Los niveles y umbrales numéricos de abajo son <em>su esquema de aula</em> de cómo Anthropic contaba la habilitación en agosto de 2026. Confirmadlo con el equipo de cuenta Anthropic de UST y los docs de partner vigentes—no con esta página—antes de citar cifras a un cliente."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo se enseñó el recuento de partners"
+      },
+      {
+        "type": "p",
+        "html": "La trama comercial: una firma de servicios sube de nivel demostrando que su gente aprendió Claude y que los clientes lo usaron. Vijay recorrió una escalera. Hay que verificar etiquetas exactas (Registered / Select / Preferred / Global Premier) y umbrales; la <em>forma</em> es lo que necesitáis pedagógicamente."
+      },
+      {
+        "type": "table",
+        "headers": ["Etapa (lenguaje de aula)", "Listón de aprendizaje / cert que describió", "Listón de clientes / historias que describió"],
+        "rows": [
+          ["Habilitación estilo Registered", "Los primeros ~10 usuarios completan un mínimo de ~4 cursos de Academy", "Entrada: la gente estudia de verdad bajo la org"],
+          ["Siguiente nivel (cert + clientes)", "Esos primeros ~10 aprueban los exámenes de certificación", "Habilitar ~1–2 clientes; historias de cliente más o menos públicas"],
+          ["Escala Preferred", "Del orden de 100+ usuarios certificados", "Del orden de ~15 clientes en Claude; más historias publicadas"],
+          ["Escala Global Premier", "Del orden de 1.000 personas certificadas", "El norte de «partner de alto nivel» que citó para una ambición a escala UST"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "El 6 de agosto añadió una corrección importante: <strong>el recuento de cursos completados solía ser la rampa obligatoria para ser partner; si UST ya está inscrita, las personas pueden ir directas a la certificación.</strong> Skilljar sigue siendo el mejor glosario. Seguís queriendo los cursos; ya no son la única puerta que describió para un partner ya dado de alta."
+      },
+      {
+        "type": "h2",
+        "text": "Llevaros la cert"
+      },
+      {
+        "type": "p",
+        "html": "Si cambiáis de empleador, Vijay dijo que hay previsión para llevar una certificación personal y que una org la habilite—hablad con los account holders. No asumáis que un inicio de sesión personal de fin de semana en Claude.ai acredita automáticamente el objetivo de 1.000 cabezas de UST."
+      },
+      {
+        "type": "h2",
+        "text": "Percipio es otro montón"
+      },
+      {
+        "type": "p",
+        "html": "HR L&amp;D (Gowthami, 6 de agosto) y Vijay coincidieron: Percipio es el itinerario de e-learning de UST. Subir una finalización allí satisface una ruta interna. <strong>No tiene nada que ver</strong> con la credencial de Anthropic. El examen en sí es una convocatoria práctica/supervisada (Pearson en las historias que contó la gente)."
+      },
+      {
+        "type": "h2",
+        "text": "Qué hacer esta semana en Academy"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Entrad en anthropic.skilljar.com con la identidad que UST pretende contar.",
+          "Comprobad el nombre mostrado frente a vuestro documento de examen; abrid ticket al equipo de cuenta si difieren.",
+          "Inscribíos en los cursos de la ruta developer (Claude Code, intro a MCP, APIs)—aunque las cuentas de partner ya no os bloqueen.",
+          "Ignorad Udemy salvo que cubráis un hueco que el glosario oficial no cubre, y aun así verificad contra docs.claude.com."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "La URL que Vijay puso en pantalla: aprendizaje + inscripción al examen."
+          },
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Va con Academy: mismo fabricante, más profundidad de referencia."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Ejemplo de tema de curso de Academy cuya jerga aparece en el examen."
+          },
+          {
+            "title": "Resumen de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Lectura de la ruta developer que Skilljar repetirá."
+          }
+        ]
+      }
+    ]
+  }
+]

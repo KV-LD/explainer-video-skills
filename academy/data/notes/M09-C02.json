@@ -1,0 +1,228 @@
+[
+  {
+    "lang": "en",
+    "module_id": "09",
+    "chapter_id": "02",
+    "eyebrow": "Module 09 · Chapter 02 · 20 August 2026",
+    "chapter_title": "Vision: sending images to Claude",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 9 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M09 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Claude is <strong>multimodal</strong> in this course: text, images, and (as named in passing) other media. Vision is not a separate HTTP API. You put an <strong>image content block</strong> next to a text block in the same user message so the model can ground the instruction on pixels."
+      },
+      {
+        "type": "h2",
+        "text": "Image block shape"
+      },
+      {
+        "type": "p",
+        "html": "Earlier labs sent only text blocks. Vision adds a JSON block with <code>type: image</code>. Two source styles in class:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Base64</strong> — Python reads the file as bytes, encodes, sets <code>media_type</code> such as <code>image/png</code>, and sends the data. This is what the fire-safety notebook did.",
+          "<strong>URL</strong> — point at an image the API can fetch (e.g. an object in S3 with a reachable URL). You do not embed bytes."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "The text block still carries the task (“count the marbles”, “rate fire risk 1–4”). Few-shot or chain-of-thought can live in that text to tell the model <em>how</em> to look."
+      },
+      {
+        "type": "h2",
+        "text": "Limits taught in class (verify on docs)"
+      },
+      {
+        "type": "table",
+        "headers": ["Constraint (20 August lecture)", "Figure given", "Why it matters"],
+        "rows": [
+          ["Images per request (across messages)", "Up to 100", "Insurance packs, contact sheets"],
+          ["File size", "5 MB per image", "Resize before encode"],
+          ["Max width/height, one image", "8000 px", "Huge scans"],
+          ["Max width/height, many images", "2000 px", "Batch photos"],
+          ["Token estimate", "width × height / 750 (he also said 250 once — treat as slip)", "Vision is not “free”; it consumes the context window"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Limits move",
+        "html": "Formats (JPEG, PNG, GIF, WebP), pixel caps, and token formulae are owned by <a href=\"https://docs.claude.com/en/docs/build-with-claude/vision\">vision docs</a>. If the exam and the transcript fight, the docs win."
+      },
+      {
+        "type": "h2",
+        "text": "You still need a good text prompt"
+      },
+      {
+        "type": "p",
+        "html": "Marble-counting without “they are round glass spheres in this dish” under-counts. The model does not magically segment the photo the way your SME would. Spell out objects, units, and the output schema (one-sentence summary plus a 1–4 rating in the house example)."
+      },
+      {
+        "type": "h2",
+        "text": "Worked theme: fire-safety insurance"
+      },
+      {
+        "type": "p",
+        "html": "Several house photos; the user text listed analysis steps (structure, tree-canopy overhang, then assign fire risk 1–4, then one-sentence summary). Changing the PNG changed the rating. Internally Vijay described: bytes → image understanding → embeddings / multimodal transformer path. Your job is media_type + honest pixels + a rubric in text."
+      },
+      {
+        "type": "h2",
+        "text": "Token and privacy hygiene"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Downscale to the smallest size that still shows the defect you care about.",
+          "Do not upload identifiable client property photos to a personal API key.",
+          "URLs must stay reachable for the duration of the request; private buckets need signed URLs or base64 instead."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Exam contrast"
+      },
+      {
+        "type": "p",
+        "html": "Vision = image blocks. PDFs = <strong>document</strong> blocks (next chapter). Do not send a PDF as <code>image/png</code>. Do not send a photo as <code>application/pdf</code>."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Vision",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/vision",
+            "note": "Image blocks, limits, prompting tips."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Content block union (text, image, document)."
+          },
+          {
+            "title": "PDF support",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "When the file is a document, not a bitmap."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "09",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 09 · Capítulo 02 · 20 de agosto de 2026",
+    "chapter_title": "Visión: enviar imágenes a Claude",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 9 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M09 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Claude es <strong>multimodal</strong> en este curso: texto, imágenes y (de pasada) otros medios. La visión no es otra API HTTP. Ponéis un <strong>bloque de contenido image</strong> junto a un bloque de texto en el mismo mensaje de usuario para anclar la instrucción en píxeles."
+      },
+      {
+        "type": "h2",
+        "text": "Forma del bloque image"
+      },
+      {
+        "type": "p",
+        "html": "Los laboratorios anteriores solo enviaban bloques de texto. La visión añade un bloque JSON con <code>type: image</code>. Dos estilos de origen en clase:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Base64</strong> — Python lee el archivo como bytes, codifica, pone <code>media_type</code> tipo <code>image/png</code> y envía los datos. Así iba el notebook de seguridad contra incendios.",
+          "<strong>URL</strong> — apuntáis a una imagen que la API pueda recuperar (p. ej. un objeto en S3 con URL alcanzable). No incrustáis bytes."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "El bloque de texto sigue llevando la tarea («cuenta las canicas», «puntúa el riesgo de incendio 1–4»). Few-shot o chain-of-thought pueden vivir en ese texto para decir al modelo <em>cómo</em> mirar."
+      },
+      {
+        "type": "h2",
+        "text": "Límites enseñados en clase (verificad en las docs)"
+      },
+      {
+        "type": "table",
+        "headers": ["Restricción (clase 20 de agosto)", "Cifra dada", "Por qué importa"],
+        "rows": [
+          ["Imágenes por petición (entre mensajes)", "Hasta 100", "Lotes de seguros, contact sheets"],
+          ["Tamaño de archivo", "5 MB por imagen", "Redimensionad antes de codificar"],
+          ["Ancho/alto máx., una imagen", "8000 px", "Escaneos enormes"],
+          ["Ancho/alto máx., muchas imágenes", "2000 px", "Fotos en lote"],
+          ["Estimación de tokens", "ancho × alto / 750 (una vez dijo 250 — tomadlo por lapsus)", "La visión no es «gratis»; come ventana de contexto"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Los límites se mueven",
+        "html": "Formatos (JPEG, PNG, GIF, WebP), techos de píxeles y fórmulas de tokens los marca la <a href=\"https://docs.claude.com/en/docs/build-with-claude/vision\">documentación de visión</a>. Si el examen y la transcripción pelean, ganan las docs."
+      },
+      {
+        "type": "h2",
+        "text": "Sigue haciendo falta un buen prompt de texto"
+      },
+      {
+        "type": "p",
+        "html": "Contar canicas sin «son esferas de cristal redondas en este plato» se queda corto. El modelo no segmenta la foto como vuestro SME. Explicitad objetos, unidades y el esquema de salida (resumen de una frase más una nota 1–4 en el ejemplo de la casa)."
+      },
+      {
+        "type": "h2",
+        "text": "Tema trabajado: seguro de incendios"
+      },
+      {
+        "type": "p",
+        "html": "Varias fotos de casas; el texto de usuario listaba pasos (estructura, voladizo de copas de árboles, luego riesgo 1–4, luego un resumen de una frase). Cambiar el PNG cambiaba la nota. Vijay lo describió por dentro: bytes → comprensión de imagen → embeddings / camino transformer multimodal. Vuestro trabajo es media_type + píxeles honestos + una rúbrica en texto."
+      },
+      {
+        "type": "h2",
+        "text": "Higiene de tokens y privacidad"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Reducid al tamaño mínimo que aún muestre el defecto que os importa.",
+          "No subáis fotos identificables de inmuebles de cliente a una clave de API personal.",
+          "Las URL deben seguir alcanzables durante la petición; los buckets privados necesitan URL firmadas o base64."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Contraste de examen"
+      },
+      {
+        "type": "p",
+        "html": "Visión = bloques image. PDF = bloques <strong>document</strong> (capítulo siguiente). No enviéis un PDF como <code>image/png</code>. No enviéis una foto como <code>application/pdf</code>."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/vision",
+            "note": "Bloques de imagen, límites, consejos de prompting."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Unión de bloques de contenido (text, image, document)."
+          },
+          {
+            "title": "Soporte PDF",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "Cuando el archivo es un documento, no un mapa de bits."
+          }
+        ]
+      }
+    ]
+  }
+]

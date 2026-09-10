@@ -1,0 +1,222 @@
+[
+  {
+    "lang": "en",
+    "module_id": "09",
+    "chapter_id": "01",
+    "eyebrow": "Module 09 · Chapter 01 · 20 August 2026",
+    "chapter_title": "Extended / deep thinking",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 9 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M09 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "20 August opened the “advanced features” hour: everything is still <strong>context enhancement</strong> on a stateless Messages call. First feature: <strong>extended thinking</strong> (class: deep thinking). You do not have to few-shot a chain of thought in the user prompt. You set a request parameter so Claude allocates a <strong>thinking budget</strong>, produces a thinking block, then the visible answer."
+      },
+      {
+        "type": "h2",
+        "text": "What it is for"
+      },
+      {
+        "type": "p",
+        "html": "User message example: “Write a short guide on recursion.” With thinking enabled, the model first plans (what recursion is, how it works, structure of the guide) and only then writes the guide. Vijay called that plan an internal chain of thought. Output quality can rise on hard tasks; cost and latency rise with it."
+      },
+      {
+        "type": "h2",
+        "text": "How you enable it on create"
+      },
+      {
+        "type": "p",
+        "html": "Alongside model, max_tokens, temperature: a <strong>thinking</strong> object. Class notebook: if thinking is on, send <code>type: enabled</code> plus a <strong>budget</strong> in tokens. He taught a <strong>minimum of 1024</strong> thinking tokens. Raise the budget when the problem is harder. Those thinking tokens are generated content and were described as <strong>billed like output</strong> — “exponentially” more expensive than a plain short answer if you always leave thinking on."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "max_tokens versus thinking budget",
+        "html": "Official docs require max_tokens to be large enough for thinking budget <em>plus</em> the visible answer. If class code and docs disagree, follow <a href=\"https://docs.claude.com/en/docs/build-with-claude/extended-thinking\">extended thinking</a>. Do not set thinking budget above max_tokens."
+      },
+      {
+        "type": "h2",
+        "text": "Two blocks in the assistant message"
+      },
+      {
+        "type": "table",
+        "headers": ["Block", "What you see", "What it is for"],
+        "rows": [
+          ["thinking", "Plain-language plan (when not redacted)", "Inspect or replay in later turns"],
+          ["redacted_thinking", "Encrypted / opaque payload", "Safety: model withholds sensitive reasoning; you cannot decode it"],
+          ["text", "The user-visible answer", "What you show in the UI"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Without thinking, content was a single text block. With thinking, you iterate blocks by type. A “magic string” in the lab forced redacted thinking so students could see the encrypted shape; day-to-day you do not put that string in production prompts. Redaction is the model’s call when reasoning would leak something it treats as sensitive (Vijay analogised “business secrets” of the model / DMZ-like internals)."
+      },
+      {
+        "type": "h2",
+        "text": "You cannot decrypt redacted thinking"
+      },
+      {
+        "type": "p",
+        "html": "Mritunjay asked if clients can decode it. Vijay: no — only the server has the cipher. Purpose of sending it back: <strong>multi-turn</strong>. Next request should include the previous thinking (including redacted) so the model continues the same chain. If you need human-readable plans, do not trigger redaction, and/or write your own chain-of-thought examples in the prompt instead of relying on extended thinking."
+      },
+      {
+        "type": "h2",
+        "text": "Relationship to few-shot CoT"
+      },
+      {
+        "type": "p",
+        "html": "Classic CoT: you show “2+2=4 because…” then ask the real question. Extended thinking: the model writes its own plan. You can still add examples if you need a <em>particular</em> method; the built-in thinking may not match your domain rubric. If you are not confident, either raise budget, add examples, or skip thinking and specify steps yourself."
+      },
+      {
+        "type": "h2",
+        "text": "When not to use it"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Trivial lookups and short classifications (you pay for a 1024-token plan).",
+          "Tight latency SLAs.",
+          "When a schema / tool call already structures the work."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Product names drift",
+        "html": "Class said “deep thinking”; docs say <strong>extended thinking</strong>. Token budgets, interleaved thinking, and which models support it change. Trust current docs over the 20 August notebook flags."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Extended thinking",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/extended-thinking",
+            "note": "enabled + budget_tokens, redacted thinking, streaming."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "thinking parameter on create."
+          },
+          {
+            "title": "Models",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Which SKUs support thinking."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "09",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 09 · Capítulo 01 · 20 de agosto de 2026",
+    "chapter_title": "Pensamiento extendido o profundo",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 9 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M09 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El 20 de agosto abrió la hora de «funciones avanzadas»: todo sigue siendo <strong>mejora de contexto</strong> en una llamada Messages sin estado. Primera función: <strong>extended thinking</strong> (en clase: deep thinking). No hace falta few-shot de chain of thought en el prompt de usuario. Configuráis un parámetro de petición para que Claude reserve un <strong>presupuesto de pensamiento</strong>, produzca un bloque thinking y luego la respuesta visible."
+      },
+      {
+        "type": "h2",
+        "text": "Para qué sirve"
+      },
+      {
+        "type": "p",
+        "html": "Ejemplo de mensaje de usuario: «Escribe una guía breve sobre recursión». Con thinking activado, el modelo primero planifica (qué es la recursión, cómo funciona, estructura de la guía) y solo entonces escribe la guía. Vijay llamó a ese plan una chain of thought interna. La calidad puede subir en tareas difíciles; el coste y la latencia también."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo se activa en create"
+      },
+      {
+        "type": "p",
+        "html": "Junto a model, max_tokens, temperature: un objeto <strong>thinking</strong>. Notebook de clase: si thinking está on, enviad <code>type: enabled</code> más un <strong>presupuesto</strong> en tokens. Enseñó un <strong>mínimo de 1024</strong> tokens de pensamiento. Subid el presupuesto si el problema es más duro. Esos tokens se describieron como contenido generado y <strong>facturados como salida</strong> — «exponencialmente» más caro que una respuesta corta si dejáis thinking siempre encendido."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "max_tokens frente al presupuesto de thinking",
+        "html": "La documentación oficial exige que max_tokens cubra el presupuesto de thinking <em>más</em> la respuesta visible. Si el código de clase y las docs discrepan, seguid <a href=\"https://docs.claude.com/en/docs/build-with-claude/extended-thinking\">extended thinking</a>. No pongáis el presupuesto por encima de max_tokens."
+      },
+      {
+        "type": "h2",
+        "text": "Dos bloques en el mensaje assistant"
+      },
+      {
+        "type": "table",
+        "headers": ["Bloque", "Qué veis", "Para qué"],
+        "rows": [
+          ["thinking", "Plan en lenguaje natural (si no está redactado)", "Inspeccionar o reenviar en turnos posteriores"],
+          ["redacted_thinking", "Carga cifrada / opaca", "Seguridad: el modelo oculta razonamiento sensible; no podéis descifrarlo"],
+          ["text", "La respuesta visible", "Lo que mostráis en la UI"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Sin thinking, el contenido era un solo bloque de texto. Con thinking, iteráis bloques por tipo. Una «cadena mágica» en el laboratorio forzaba thinking redactado para ver la forma cifrada; en producción no pongáis esa cadena. La redacción es decisión del modelo cuando el razonamiento filtraría algo que trata como sensible (Vijay lo analogó a «secretos de negocio» del modelo / interiores tipo DMZ)."
+      },
+      {
+        "type": "h2",
+        "text": "No podéis descifrar el thinking redactado"
+      },
+      {
+        "type": "p",
+        "html": "Mritunjay preguntó si el cliente puede decodificarlo. Vijay: no — solo el servidor tiene la cifra. Motivo de devolverlo: <strong>varios turnos</strong>. La siguiente petición debe incluir el thinking previo (también el redactado) para que el modelo continúe la misma cadena. Si necesitáis planes legibles por humanos, no forcéis la redacción y/o escribid vuestros ejemplos de chain-of-thought en el prompt en vez de apoyaros en extended thinking."
+      },
+      {
+        "type": "h2",
+        "text": "Relación con el CoT few-shot"
+      },
+      {
+        "type": "p",
+        "html": "CoT clásico: mostráis «2+2=4 porque…» y luego la pregunta real. Extended thinking: el modelo escribe su propio plan. Aún podéis añadir ejemplos si necesitáis un método <em>concreto</em>; el thinking integrado puede no cuadrar con vuestra rúbrica de dominio. Si no os fiáis, subid presupuesto, añadid ejemplos, o desactivad thinking y especificad los pasos vosotros."
+      },
+      {
+        "type": "h2",
+        "text": "Cuándo no usarlo"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Consultas triviales y clasificaciones cortas (pagáis un plan de 1024 tokens).",
+          "SLAs de latencia muy justos.",
+          "Cuando un esquema / tool call ya estructura el trabajo."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Los nombres de producto se mueven",
+        "html": "En clase se dijo «deep thinking»; las docs dicen <strong>extended thinking</strong>. Presupuestos, thinking intercalado y qué modelos lo soportan cambian. Priman las docs actuales sobre los flags del notebook del 20 de agosto."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Pensamiento extendido",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/extended-thinking",
+            "note": "enabled + budget_tokens, thinking redactado, streaming."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Parámetro thinking en create."
+          },
+          {
+            "title": "Modelos",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Qué SKU soportan thinking."
+          }
+        ]
+      }
+    ]
+  }
+]

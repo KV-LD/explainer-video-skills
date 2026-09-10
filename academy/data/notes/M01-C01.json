@@ -1,0 +1,290 @@
+[
+  {
+    "lang": "en",
+    "module_id": "01",
+    "chapter_id": "01",
+    "eyebrow": "Module 01 · Chapter 01 · 3 August 2026",
+    "chapter_title": "Programme, trainer, and how the four weeks are structured",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 1 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M01 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "On 3 August 2026 Vijay opened the four-week <strong>Claude Certified Developer, Foundation (CCDV-F)</strong> masterclass for UST. Roughly 300 people were on the call. This is not a generic “intro to AI” day: the cohort is being prepared to <em>use Claude as developers</em>—both people who ship full-stack applications and people who build AI applications (chatbots, agents, autonomous workflows)."
+      },
+      {
+        "type": "h2",
+        "text": "Who is in the room and how to ask questions"
+      },
+      {
+        "type": "p",
+        "html": "Vijay is the trainer for the next four weeks. Facilitation (Shiny and later HR L&amp;D) owns logistics, mute, and recordings. Questions belong in chat; Vijay takes a dedicated block of about 15 minutes at the end. Raise a hand if something is blocking the live demo. Do not paste confidential UST or client data into any Claude surface, including demo accounts."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Classroom rule from day one",
+        "html": "Treat every prompt as if it could leave the organisation. Later sessions repeat do’s and don’ts (PII, PCI, GDPR, connectors). Session 1 already starts that rule: no client secrets in Chat, Cowork, or Claude Code."
+      },
+      {
+        "type": "h2",
+        "text": "Two developer roles this course serves"
+      },
+      {
+        "type": "p",
+        "html": "Vijay split the audience so the same product family maps onto two jobs. Keep both in mind when you study: the exam scenarios often ask <em>which surface and which pattern</em> you would pick for a given role."
+      },
+      {
+        "type": "table",
+        "headers": ["Role", "Typical work", "How Claude is meant to help"],
+        "rows": [
+          ["Application developer", "Full-stack, embedded, mobile, IoT, any conventional SDLC", "Faster, more consistent implementation: generate code, tests, Postman collections, debug, DevSecOps artefacts"],
+          ["AI application developer", "Chatbots, agents, autonomous systems", "SDKs, tool use, MCP, RAG, agent patterns and frameworks to <em>build</em> AI into the product"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Everything in the masterclass revolves around those two uses. You are not expected to train foundation models. You are expected to infer well: prompts, context, tools, and product choice."
+      },
+      {
+        "type": "h2",
+        "text": "Three workstreams across the four weeks"
+      },
+      {
+        "type": "p",
+        "html": "Vijay described the programme as three stacked workstreams, not twelve disconnected demos. Week 1 (this session and the next) stays on products and concepts. From day three the room moves into agents and then into coding."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Cowork and Chat first.</strong> General-purpose and local workspace use: what Anthropic ships as Claude Chat / Claude.ai and Claude Cowork, who they are for, and how they sit on top of the models.",
+          "<strong>Then application development with Claude Code.</strong> How developers apply the same concepts inside a repo, terminal, and IDE.",
+          "<strong>Then agents, workflows, and agentic architecture.</strong> Building agents, integrating them into existing full-stack apps, SDLC acceleration (requirements, design, configuration management), evaluation of generated code, tests, debugging, model selection, SDKs, prompt and context engineering, guardrails, Claude hooks, tools, and MCP for proprietary data."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "What “Foundation” actually covers in class"
+      },
+      {
+        "type": "p",
+        "html": "The live agenda is the <strong>developer Foundation</strong> track. Later weeks still mention architect topics (agentic architecture, production reliability) so you can see the map, but this cohort’s exam target is CCDV-F: APIs, prompting, structured output, Claude Code, MCP, and a light pass on Agent SDK and error handling."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Week 1 in the recordings: Claude as a product family, Chat, Cowork, certification landscape, exam format.",
+          "Following weeks: Claude Code, Anthropic APIs/SDK, prompt engineering, tools/MCP, RAG, agents, guardrails, exam prep.",
+          "Recordings and slide PDFs were promised via the cohort LMS / shared folder. Ask facilitation if a file is missing."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "How to use these notes"
+      },
+      {
+        "type": "p",
+        "html": "Each chapter is distilled from the trainer’s teaching, not a chat log. Hellos, mute, and screen-share troubleshooting are omitted. Product names stay in English: Claude, Cowork, Claude Code, MCP, RAG, Skilljar. When a UI label, model name, or partner-tier number from August 2026 is already stale, <strong>trust current Anthropic documentation</strong> over the recording."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Live class UI drifts",
+        "html": "Desktop version numbers, Cowork availability, model pickers (Haiku / Sonnet / Opus / and names that appeared in class such as Fable), and Skilljar course counts change. Prefer <a href=\"https://docs.claude.com/en/home\">docs.claude.com</a> and <a href=\"https://anthropic.skilljar.com\">anthropic.skilljar.com</a> on exam week."
+      },
+      {
+        "type": "h2",
+        "text": "Primary products you will keep hearing"
+      },
+      {
+        "type": "p",
+        "html": "Session 1 already named the family. Later chapters expand each surface. For orientation, Vijay’s training emphasis is Claude Code plus the Claude API; Chat and Cowork are the on-ramp."
+      },
+      {
+        "type": "table",
+        "headers": ["Product", "Trainer’s one-line purpose", "When it appears in this programme"],
+        "rows": [
+          ["Claude Chat (Claude.ai / web and desktop Chat)", "Conversational assistant for questions, writing, analysis", "Module 01 demo; still used for prompting practice"],
+          ["Claude Cowork", "Agentic local workspace: folders, multi-step tasks, schedule/trigger", "End of session 1 and all of session 2"],
+          ["Claude Code", "Agentic coding from terminal, IDE, and desktop", "From session 3 onward — exam core for developers"],
+          ["Claude API / platform", "Any of your applications calling models", "SDK weeks; Messages API on the exam"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "He also mentioned Claude in Chrome, Excel, PowerPoint / Microsoft 365, and Claude for Slack (“Claude Tag” in the transcript). Those are real product surfaces, but they are not the spine of CCDV-F."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Canonical start for API, prompting, tools, and product docs. Use this when the classroom UI has moved."
+          },
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Self-paced courses and the portal Vijay used for partner / exam enrolment discussion."
+          },
+          {
+            "title": "Claude Code documentation",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Terminal and IDE agent; primary developer surface from session 3."
+          },
+          {
+            "title": "Models overview",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Check live model names and context windows before the exam."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "01",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 01 · Capítulo 01 · 3 de agosto de 2026",
+    "chapter_title": "Programa, formador y estructura de las cuatro semanas",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 1 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M01 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El 3 de agosto de 2026 Vijay abrió la masterclass de cuatro semanas de <strong>Claude Certified Developer, Foundation (CCDV-F)</strong> para UST. Había del orden de 300 personas en la llamada. No es un día genérico de «introducción a la IA»: el grupo se prepara para <em>usar Claude como desarrolladores</em>, tanto quienes entregan aplicaciones full-stack como quienes construyen aplicaciones de IA (chatbots, agentes, flujos autónomos)."
+      },
+      {
+        "type": "h2",
+        "text": "Quién está en la sala y cómo preguntar"
+      },
+      {
+        "type": "p",
+        "html": "Vijay es el formador de las cuatro semanas. La facilitación (Shiny y más adelante HR L&amp;D) gestiona logística, silencio y grabaciones. Las preguntas van al chat; Vijay reserva unos 15 minutos al final. Levantad la mano si algo os bloquea en la demostración. No pegéis datos confidenciales de UST ni de clientes en ninguna superficie de Claude, incluidas las cuentas de demostración."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Norma de aula desde el primer día",
+        "html": "Tratad cada prompt como si pudiera salir de la organización. En sesiones posteriores se repiten las normas (PII, PCI, GDPR, conectores). La sesión 1 ya las inaugura: ningún secreto de cliente en Chat, Cowork o Claude Code."
+      },
+      {
+        "type": "h2",
+        "text": "Dos roles de desarrollo a los que sirve el curso"
+      },
+      {
+        "type": "p",
+        "html": "Vijay dividió al público para que la misma familia de productos encaje en dos trabajos. Tened ambos en mente al estudiar: los escenarios del examen suelen preguntar <em>qué superficie y qué patrón</em> elegiríais según el rol."
+      },
+      {
+        "type": "table",
+        "headers": ["Rol", "Trabajo típico", "Cómo se espera que ayude Claude"],
+        "rows": [
+          ["Desarrollador de aplicaciones", "Full-stack, embebido, móvil, IoT, cualquier SDLC convencional", "Implementación más rápida y coherente: generar código, pruebas, colecciones Postman, depurar, artefactos DevSecOps"],
+          ["Desarrollador de aplicaciones de IA", "Chatbots, agentes, sistemas autónomos", "SDK, uso de herramientas, MCP, RAG, patrones de agentes para <em>construir</em> IA dentro del producto"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Todo el masterclass gira en torno a esos dos usos. No se espera que entrenéis modelos fundacionales. Se espera que inferáis bien: prompts, contexto, herramientas y elección de producto."
+      },
+      {
+        "type": "h2",
+        "text": "Tres hilos de trabajo a lo largo de las cuatro semanas"
+      },
+      {
+        "type": "p",
+        "html": "Vijay describió el programa como tres hilos apilados, no doce demos sueltas. La semana 1 (esta sesión y la siguiente) se queda en productos y conceptos. Desde el tercer día la sala entra en agentes y después en programación."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Primero Cowork y Chat.</strong> Uso general y espacio de trabajo local: lo que Anthropic ofrece como Claude Chat / Claude.ai y Claude Cowork, para quién son y cómo se apoyan en los modelos.",
+          "<strong>Después desarrollo de aplicaciones con Claude Code.</strong> Cómo aplican los desarrolladores los mismos conceptos en un repositorio, terminal e IDE.",
+          "<strong>Después agentes, flujos y arquitectura agentic.</strong> Construir agentes, integrarlos en apps full-stack, acelerar el SDLC, evaluar código generado, pruebas, depuración, elección de modelo, SDK, ingeniería de prompts y contexto, guardrails, hooks de Claude, herramientas y MCP para datos propietarios."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Qué cubre realmente «Foundation» en clase"
+      },
+      {
+        "type": "p",
+        "html": "La agenda en vivo es la ruta <strong>Foundation de desarrollador</strong>. Las semanas siguientes mencionan temas de arquitecto (arquitectura agentic, fiabilidad en producción) para que veáis el mapa, pero el examen de esta cohorte es CCDV-F: APIs, prompting, salida estructurada, Claude Code, MCP y un pase ligero por Agent SDK y manejo de errores."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Semana 1 en las grabaciones: Claude como familia de productos, Chat, Cowork, mapa de certificaciones, formato del examen.",
+          "Semanas siguientes: Claude Code, APIs/SDK de Anthropic, ingeniería de prompts, tools/MCP, RAG, agentes, guardrails y preparación del examen.",
+          "Las grabaciones y los PDF de diapositivas se prometieron en el LMS / carpeta compartida: pedidlo a la facilitación si falta un archivo."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Cómo usar estas notas"
+      },
+      {
+        "type": "p",
+        "html": "Cada capítulo está destilado de la enseñanza del formador, no es un acta de chat. Se omiten saludos, silencio y problemas de compartir pantalla. Los nombres de producto se quedan en inglés: Claude, Cowork, Claude Code, MCP, RAG, Skilljar. Si una etiqueta de interfaz, un nombre de modelo o un número de partner de agosto de 2026 ya está desfasado, <strong>priman los documentos vigentes de Anthropic</strong> sobre la grabación."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "La interfaz de clase se mueve",
+        "html": "Cambian números de versión de escritorio, la disponibilidad de Cowork, el selector de modelos (Haiku / Sonnet / Opus y nombres que salieron en clase como Fable) y el recuento de cursos de Skilljar. Preferid <a href=\"https://docs.claude.com/en/home\">docs.claude.com</a> y <a href=\"https://anthropic.skilljar.com\">anthropic.skilljar.com</a> la semana del examen."
+      },
+      {
+        "type": "h2",
+        "text": "Productos principales que vais a oír una y otra vez"
+      },
+      {
+        "type": "p",
+        "html": "La sesión 1 ya nombró la familia. Los capítulos posteriores expanden cada superficie. Como orientación, el énfasis de Vijay es Claude Code más la API de Claude; Chat y Cowork son la rampa de entrada."
+      },
+      {
+        "type": "table",
+        "headers": ["Producto", "Propósito en una línea (formador)", "Cuándo aparece en este programa"],
+        "rows": [
+          ["Claude Chat (Claude.ai / web y Chat de escritorio)", "Asistente conversacional para preguntas, redacción y análisis", "Demo del módulo 01; se sigue usando para practicar prompting"],
+          ["Claude Cowork", "Espacio agentic local: carpetas, tareas en varios pasos, programación/disparo", "Final de la sesión 1 y toda la sesión 2"],
+          ["Claude Code", "Programación agentic desde terminal, IDE y escritorio", "Desde la sesión 3 — núcleo del examen para desarrolladores"],
+          ["Claude API / plataforma", "Cualquiera de vuestras aplicaciones llamando a los modelos", "Semanas de SDK; Messages API en el examen"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "También mencionó Claude en Chrome, Excel, PowerPoint / Microsoft 365 y Claude para Slack («Claude Tag» en la transcripción). Son superficies reales, pero no son la columna vertebral de CCDV-F."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Punto de partida canónico para API, prompting, herramientas y productos. Usadlo cuando la UI del aula se haya movido."
+          },
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Cursos a vuestro ritmo y el portal que Vijay usó para partners e inscripción al examen."
+          },
+          {
+            "title": "Documentación de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Agente de terminal e IDE; superficie principal de desarrollo desde la sesión 3."
+          },
+          {
+            "title": "Resumen de modelos",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Comprobad nombres de modelo y ventanas de contexto vigentes antes del examen."
+          }
+        ]
+      }
+    ]
+  }
+]

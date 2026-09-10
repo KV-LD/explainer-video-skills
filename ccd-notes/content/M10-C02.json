@@ -1,0 +1,318 @@
+[
+  {
+    "lang": "en",
+    "module_id": "10",
+    "chapter_id": "02",
+    "eyebrow": "Module 10 · Chapter 02 · 24 August 2026",
+    "chapter_title": "Defining and calling tools in the API",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 10 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M10 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "The live notebook walked a <strong>get-current-date-time</strong> function from definition to final sentence. Claude does not know wall-clock time. Your app does. The Messages API is the contract that lets the model <em>ask</em> for that clock without pretending it already has it."
+      },
+      {
+        "type": "h2",
+        "text": "Two artefacts you always write"
+      },
+      {
+        "type": "h3",
+        "text": "1. The function"
+      },
+      {
+        "type": "p",
+        "html": "A normal function in the host language. In the demo it formatted “now” according to a format string. If nobody calls it with valid arguments, it does nothing useful. If someone does, it returns data from the <em>application</em> environment, not from model weights."
+      },
+      {
+        "type": "h3",
+        "text": "2. The tool schema"
+      },
+      {
+        "type": "p",
+        "html": "The Anthropic client expects a schema the model can read. The trainer stressed two fields first:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>name</strong> — which method to invoke. Keep it stable and unique. Overloaded names confuse the model.",
+          "<strong>description</strong> — <em>when</em> to invoke it. This is the education layer. “Returns the current date and time formatted according to the specified format string” is enough for a clock; a vague “gets data” is not.",
+          "<strong>input schema</strong> — JSON Schema for parameters (format string, city, employee id). If the function takes no arguments, the schema still exists; it is simply empty or minimal."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "You then pass those schemas in the <code>tools</code> array on the Messages call, together with the user content. Binding tools is per request: you may attach one tool this turn and five the next."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Trust current docs",
+        "html": "Property names (<code>input_schema</code>, block types, beta flags) should be checked on <a href=\"https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview\">tool use</a>. Classroom screenshots of August 2026 are not a spec."
+      },
+      {
+        "type": "h2",
+        "text": "The handshake in one turn"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "User: “What is the exact time formatted as HH:MM:SS?”",
+          "Request includes that text plus the clock tool schema.",
+          "Claude <strong>stops</strong> with stop reason <code>tool_use</code>. It has not finished the user-facing answer.",
+          "The assistant message contains a <strong>tool_use</strong> block: tool id, name <code>get_current_date_time</code>, and model-chosen input (the format string).",
+          "Your code maps name → function, runs it, and obtains a result such as <code>7:29:31</code>.",
+          "You append a <strong>user</strong> message whose content is a <strong>tool_result</strong> block (same tool id, the result string, optional <code>is_error</code>).",
+          "A follow-up Messages call lets Claude write: “The exact time is 7:29:31.”"
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Conversation roles stay the same as earlier modules: system, user, assistant. Tool results travel as <em>user</em> content with a specialised block type so the model can bind them to the id it issued."
+      },
+      {
+        "type": "h2",
+        "text": "How Claude chooses among several tools"
+      },
+      {
+        "type": "p",
+        "html": "Lalit asked: if three tools sit in the array, who picks? <strong>The model</strong>, using names and descriptions (and the user text). You do not write a router in the first request. You write better descriptions. If Tool A returns errors that should trigger Tool B, put that policy in the <strong>system prompt</strong> and/or in B’s description so the next turn can see the error and continue."
+      },
+      {
+        "type": "p",
+        "html": "Arvind asked whether five tools must be attached every time. No. If you know the intent, attach the subset. Attaching all of them is legal; overlapping descriptions are the failure mode."
+      },
+      {
+        "type": "h2",
+        "text": "One tool many times, or many tools in sequence"
+      },
+      {
+        "type": "p",
+        "html": "The notebook showed a <code>while</code> loop: keep calling the API until stop reason is not <code>tool_use</code>. Inside the loop, collect every <code>tool_use</code> block, run functions, pack <code>tool_result</code>s, and continue."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Same tool twice in parallel:</strong> “Give me the time in HH:MM and also in seconds format.” Two tool_use blocks, two format strings, one round of execution, then one synthesis.",
+          "<strong>Dependent tools:</strong> “What time will it be 90 minutes from now?” First <code>get_current_date_time</code>, then <code>add_duration_to_date_time</code> with the returned clock plus 90 minutes. The second call needs the first result — sequential, not parallel.",
+          "<strong>Hard-coded dispatch:</strong> classroom <code>if/else</code> on tool name. Production frameworks often use reflection or a registry. Either way, <em>your</em> process runs the function."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "You can short-circuit in application code (inspect <code>is_error</code>, skip the model, call a fallback). Vijay’s exam-relevant default is: let Claude plan unless you have a known, cheap, deterministic branch. More LLM hops mean more hallucination surface when tool lists get large."
+      },
+      {
+        "type": "h2",
+        "text": "Schema design details that came up in Q&amp;A"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "If you want one call with many formats, describe an <strong>array</strong> of format strings instead of relying on two parallel calls.",
+          "Names can be <code>Class.method</code> if your dispatcher understands that. In Python demos, a flat function name was simpler; TypeScript class style is fine if the mapping is explicit.",
+          "<strong>tool_choice</strong> (including streaming/beta variants) can force or bias which tool is used. Vijay flagged the beta streaming path as useful for large tool payloads and said it was <em>not</em> an exam topic in August 2026. Confirm the live API page."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "What the Agent SDK changes"
+      },
+      {
+        "type": "p",
+        "html": "The manual loop is the concept the Foundation exam cares about. In delivery you will often call the Claude Agent SDK so you do not write <code>while True</code> yourself. The model still emits tool_use; something still executes; results still go back. The SDK is orchestration, not a different physics."
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Exam posture",
+        "html": "If a scenario describes stop reason <code>tool_use</code>, the correct next step is: run the tool locally (or via MCP), return <code>tool_result</code>, call the API again — not invent the clock in the assistant text."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Schemas, stop reasons, tool_result."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "tools parameter on each request."
+          },
+          {
+            "title": "Streaming",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/streaming",
+            "note": "If you combine tools with streamed tokens; check current tool_choice behaviour."
+          },
+          {
+            "title": "Structured outputs",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+            "note": "Related: JSON the model must emit versus JSON a tool returns."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "10",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 10 · Capítulo 02 · 24 de agosto de 2026",
+    "chapter_title": "Definir y llamar herramientas en la API",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 10 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M10 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El cuaderno en vivo recorrió una función <strong>get-current-date-time</strong> desde la definición hasta la frase final. Claude no conoce la hora de pared. Vuestra app sí. La API Messages es el contrato que permite al modelo <em>pedir</em> ese reloj sin fingir que ya lo tiene."
+      },
+      {
+        "type": "h2",
+        "text": "Dos artefactos que siempre escribís"
+      },
+      {
+        "type": "h3",
+        "text": "1. La función"
+      },
+      {
+        "type": "p",
+        "html": "Una función normal en el lenguaje anfitrión. En la demo formateaba el «ahora» según una cadena de formato. Si nadie la llama con argumentos válidos, no aporta nada. Si alguien lo hace, devuelve datos del entorno de la <em>aplicación</em>, no de los pesos del modelo."
+      },
+      {
+        "type": "h3",
+        "text": "2. El esquema de la herramienta"
+      },
+      {
+        "type": "p",
+        "html": "El cliente de Anthropic espera un esquema que el modelo pueda leer. El formador insistió primero en dos campos:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>name</strong> — qué método invocar. Mantenedlo estable y único. Los nombres sobrecargados confunden al modelo.",
+          "<strong>description</strong> — <em>cuándo</em> invocarla. Es la capa educativa. «Devuelve la fecha y hora actuales según la cadena de formato» basta para un reloj; un vago «obtiene datos» no.",
+          "<strong>esquema de entrada</strong> — JSON Schema de parámetros (formato, ciudad, id de empleado). Si la función no toma argumentos, el esquema sigue existiendo; es vacío o mínimo."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Luego pasáis esos esquemas en el array <code>tools</code> de la llamada Messages, junto con el contenido de usuario. El enlace es por petición: podéis adjuntar una herramienta en este turno y cinco en el siguiente."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Fiaros de la documentación vigente",
+        "html": "Los nombres de propiedades (<code>input_schema</code>, tipos de bloque, flags beta) hay que comprobarlos en <a href=\"https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview\">tool use</a>. Las capturas de agosto de 2026 no son una especificación."
+      },
+      {
+        "type": "h2",
+        "text": "El apretón de manos en un turno"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Usuario: «¿Cuál es la hora exacta con formato HH:MM:SS?»",
+          "La petición incluye ese texto más el esquema de la herramienta reloj.",
+          "Claude <strong>para</strong> con motivo <code>tool_use</code>. No ha terminado la respuesta para el usuario.",
+          "El mensaje del asistente contiene un bloque <strong>tool_use</strong>: id, nombre <code>get_current_date_time</code> y la entrada elegida por el modelo (la cadena de formato).",
+          "Vuestro código mapea nombre → función, la ejecuta y obtiene un resultado como <code>7:29:31</code>.",
+          "Añadís un mensaje de <strong>usuario</strong> cuyo contenido es un bloque <strong>tool_result</strong> (mismo id, la cadena resultado, <code>is_error</code> opcional).",
+          "Una llamada Messages de seguimiento deja que Claude escriba: «La hora exacta es 7:29:31»."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Los roles de conversación siguen igual: system, user, assistant. Los resultados de herramientas viajan como contenido de <em>usuario</em> con un tipo de bloque especializado para que el modelo los una al id que emitió."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo elige Claude entre varias herramientas"
+      },
+      {
+        "type": "p",
+        "html": "Lalit preguntó: si hay tres herramientas en el array, ¿quién elige? <strong>El modelo</strong>, usando nombres y descripciones (y el texto del usuario). No escribís un enrutador en la primera petición. Escribís mejores descripciones. Si la herramienta A devuelve errores que deben disparar la B, poned esa política en el <strong>prompt de sistema</strong> y/o en la descripción de B para que el siguiente turno vea el error y continúe."
+      },
+      {
+        "type": "p",
+        "html": "Arvind preguntó si hay que adjuntar cinco herramientas siempre. No. Si conocéis la intención, adjuntad el subconjunto. Adjuntarlas todas es legal; las descripciones solapadas son el modo de fallo."
+      },
+      {
+        "type": "h2",
+        "text": "Una herramienta muchas veces, o varias en secuencia"
+      },
+      {
+        "type": "p",
+        "html": "El cuaderno mostró un bucle <code>while</code>: seguir llamando a la API hasta que el motivo de parada no sea <code>tool_use</code>. Dentro, recogéis cada bloque <code>tool_use</code>, ejecutáis funciones, empaquetáis <code>tool_result</code> y continuáis."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>La misma herramienta dos veces en paralelo:</strong> «Dadme la hora en HH:MM y también en formato de segundos». Dos bloques tool_use, dos cadenas de formato, una ronda de ejecución y luego una síntesis.",
+          "<strong>Herramientas dependientes:</strong> «¿Qué hora será dentro de 90 minutos?» Primero <code>get_current_date_time</code>, luego <code>add_duration_to_date_time</code> con el reloj devuelto más 90 minutos. La segunda llamada necesita el primer resultado: secuencial, no paralela.",
+          "<strong>Despacho fijo:</strong> <code>if/else</code> de aula según el nombre. Los marcos de producción suelen usar reflexión o un registro. En cualquier caso, <em>vuestro</em> proceso ejecuta la función."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Podéis cortar en código de aplicación (inspeccionar <code>is_error</code>, saltaros el modelo, llamar a un respaldo). El valor por defecto relevante para el examen, según Vijay, es: dejad planificar a Claude salvo que tengáis una rama barata y determinista. Más saltos al LLM significan más superficie de alucinación cuando la lista de herramientas crece."
+      },
+      {
+        "type": "h2",
+        "text": "Detalles de esquema que salieron en las preguntas"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Si queréis una sola llamada con muchos formatos, describid un <strong>array</strong> de cadenas de formato en lugar de depender de dos llamadas paralelas.",
+          "Los nombres pueden ser <code>Clase.método</code> si vuestro despachador lo entiende. En las demos Python, un nombre de función plano era más simple; el estilo de clases en TypeScript vale si el mapeo es explícito.",
+          "<strong>tool_choice</strong> (incluidas variantes de streaming/beta) puede forzar o sesgar qué herramienta se usa. Vijay señaló la vía beta de streaming como útil para cargas grandes y dijo que <em>no</em> era tema de examen en agosto de 2026. Confirmad la página vigente de la API."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Qué cambia el Agent SDK"
+      },
+      {
+        "type": "p",
+        "html": "El bucle manual es el concepto que importa en Foundation. En entrega a menudo llamaréis al Claude Agent SDK para no escribir vosotros el <code>while True</code>. El modelo sigue emitiendo tool_use; algo sigue ejecutando; los resultados siguen volviendo. El SDK es orquestación, no otra física."
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Postura de examen",
+        "html": "Si un escenario describe el motivo de parada <code>tool_use</code>, el siguiente paso correcto es: ejecutar la herramienta en local (o vía MCP), devolver <code>tool_result</code>, volver a llamar a la API — no inventar el reloj en el texto del asistente."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Esquemas, motivos de parada, tool_result."
+          },
+          {
+            "title": "API Messages",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Parámetro tools en cada petición."
+          },
+          {
+            "title": "Streaming",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/streaming",
+            "note": "Si combináis herramientas con tokens en streaming; comprobad el tool_choice actual."
+          },
+          {
+            "title": "Salidas estructuradas",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+            "note": "Relacionado: JSON que el modelo debe emitir frente a JSON que devuelve una herramienta."
+          }
+        ]
+      }
+    ]
+  }
+]

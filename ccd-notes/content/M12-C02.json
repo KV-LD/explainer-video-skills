@@ -1,0 +1,254 @@
+[
+  {
+    "lang": "en",
+    "module_id": "12",
+    "chapter_id": "02",
+    "eyebrow": "Module 12 · Chapter 02 · 27 August 2026",
+    "chapter_title": "Permissions, safety, and guardrails",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 12 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M12 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "The scary story was simple: Claude might emit <code>rm -rf /</code> (or <code>/root</code>) and Bash might obey. Built-in tools are powerful; <strong>permission gates</strong> and <strong>hooks</strong> are how an enterprise agent stays on the right side of the disk. The trainer counted <strong>six permission gates</strong>, <strong>five permission modes</strong>, and a critical “do not loop forever” control — then showed combinations in a <code>run_agent</code> wrapper."
+      },
+      {
+        "type": "h2",
+        "text": "Six gates (classroom list)"
+      },
+      {
+        "type": "table",
+        "headers": ["Gate", "What it does", "Typical use"],
+        "rows": [
+          ["Pre-tool-use hooks", "Inspect the impending call; stop/deny with a reason", "Block dangerous bash patterns before they run"],
+          ["Disallowed tools", "Hard deny list — never execute, even if the model asks", "No Write/Edit on a read-only reviewer agent"],
+          ["Allowed tools", "Allow list of built-in, custom, or MCP tools", "Only Read, Glob, Grep for observe-only"],
+          ["Permission modes", "Whether to prompt a human, auto-approve, or deny by default", "See the five modes below"],
+          ["can_use_tool", "Callback when skip/interactive collection is needed", "Ask the user; gather extra input"],
+          ["No-callback / non-interactive", "Sessions without a human; avoid infinite tool ping-pong", "Logged-in batch jobs"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "<strong>Disallowed wins.</strong> If Bash is allowed but <code>rm *</code> is also disallowed (or a hook denies it), the deny path has priority. Allowed tools mean “eligible,” not “already approved for every argument.”"
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Check live enum names",
+        "html": "Slides listed default, acceptEdits, bypassPermissions, don’t ask, plan, and an “auto” the linter also knew. Match strings to current Agent SDK / Claude Code permission docs, not to a screenshot from 27 August 2026."
+      },
+      {
+        "type": "h2",
+        "text": "Five modes he wanted you to contrast"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Default</strong> — standard behaviour; prompt on dangerous operations; unmatched tools can hit <code>can_use_tool</code>. Most general interactive state.",
+          "<strong>Don’t ask</strong> — no permission UI; anything not pre-approved on the allow list is <em>denied</em>, but the agent <em>continues</em> with later steps (write fails, a later Read may still run).",
+          "<strong>Accept edits</strong> — auto-approve filesystem edits that are already on the allow list.",
+          "<strong>Bypass permissions</strong> — treat listed tools as approved at the gate. He called this dangerous; only with a tight allow list.",
+          "<strong>Plan</strong> — read-only planning; no file or system edits. Use while surveying; switch to accept-edits when you intend to write."
+        ]
+      },
+      {
+        "type": "h3",
+        "text": "Spectrum examples"
+      },
+      {
+        "type": "p",
+        "html": "<strong>Observe only:</strong> allow Read, Glob, Grep; mode don’t-ask. Even if the model emits Write, it cannot land. <strong>Read-write on a known set:</strong> allow Read/Write/Edit (and maybe Bash); don’t-ask or accept-edits. MCP tools not on the list stay off in don’t-ask. <strong>Plan then act:</strong> plan-mode agent to draft; second agent with accept-edits to apply."
+      },
+      {
+        "type": "h2",
+        "text": "What the notebook showed"
+      },
+      {
+        "type": "p",
+        "html": "Prompt: read <code>auth.py</code> and save a one-sentence summary to a demo folder. With Write <em>not</em> allowed and don’t-ask, the result was: write attempted, permission denied, files unchanged, sometimes an offer to enable Write. The same prompt with Write allowed created <code>summary_b.txt</code>. A later run showed don’t-ask skipping a blocked Write/Bash and still executing a following Read."
+      },
+      {
+        "type": "h2",
+        "text": "Surgical blocking with pre-tool hooks"
+      },
+      {
+        "type": "p",
+        "html": "Allowing Bash wholesale is blunt. Hooks (pre-tool-use, post-tool-use, failure, prompt submit, stop, subagent start/stop, pre-compact, permission request, notification) let you pattern-match. The repo listed dangerous bash patterns: if the tool is Bash and the command matches, return deny plus reason (<code>continue = false</code> in the matcher). That stopped <code>rm -rf</code> on a blocking-demo folder even though Bash was allowed."
+      },
+      {
+        "type": "p",
+        "html": "Second pattern: <strong>redirect writes</strong> away from a protected path into a temp directory so you do not throw away billed tokens. LLM output is expensive; if Write is denied on <code>/protected</code>, hook-rewrite to a safe folder and log it."
+      },
+      {
+        "type": "h2",
+        "text": "Guardrails as input/output validation"
+      },
+      {
+        "type": "p",
+        "html": "Permissions stop tools. <strong>Guardrails</strong> in this hour were mostly developer-owned checks around the prompt and the model/tool output: block “ignore previous instructions” / “reveal the system prompt,” cap prompt length, scan for secrets, redact. Apply <em>before</em> <code>query</code> (save tokens) and <em>after</em> (do not log API keys the model echoed). Vijay agreed these are general engineering, not a hidden Claude token-limiter. He pointed at open-source lists (Rulebricks, Claude Code guardrails-style repos) rather than claiming a single official Python import. Official evaluation guidance lives on Anthropic’s strengthen-guardrails page."
+      },
+      {
+        "type": "h2",
+        "text": "PII example that is not “encrypt at the gateway”"
+      },
+      {
+        "type": "p",
+        "html": "Rishabh asked whether HIPAA/PII meant Protegrity-style encryption into the gateway. Vijay’s agent answer: a customer-DB agent that builds a report and sends email <em>must</em> see a real address to send, but logs, MCP hops, and third-party tools must not leak that address. Permissions, hooks, and output scanners are the Claude-app layer; they do not replace your organisation’s encryption architecture."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Strengthen guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Anthropic’s evaluation and guardrail guidance."
+          },
+          {
+            "title": "Usage policy",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "What you may not build, regardless of hooks."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Permission modes in the product you already used in week 2–3."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Custom tools still pass through the same gates if the SDK wraps them."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "12",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 12 · Capítulo 02 · 27 de agosto de 2026",
+    "chapter_title": "Permisos, seguridad y guardrails",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 12 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M12 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La historia inquietante era simple: Claude podría emitir <code>rm -rf /</code> (o <code>/root</code>) y Bash podría obedecer. Las herramientas integradas son potentes; las <strong>compuertas de permiso</strong> y los <strong>hooks</strong> son cómo un agente de empresa se queda en el lado correcto del disco. El formador contó <strong>seis compuertas</strong>, <strong>cinco modos de permiso</strong> y un control crítico de «no bucles infinitos» — luego mostró combinaciones en un envoltorio <code>run_agent</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Seis compuertas (lista de aula)"
+      },
+      {
+        "type": "table",
+        "headers": ["Compuerta", "Qué hace", "Uso típico"],
+        "rows": [
+          ["Hooks previos al uso de herramienta", "Inspeccionar la llamada inminente; parar/denegar con motivo", "Bloquear patrones bash peligrosos antes de que corran"],
+          ["Herramientas no permitidas", "Lista de denegación dura: nunca ejecutar, aunque el modelo lo pida", "Sin Write/Edit en un agente revisor de solo lectura"],
+          ["Herramientas permitidas", "Lista de herramientas integradas, a medida o MCP", "Solo Read, Glob, Grep para observar"],
+          ["Modos de permiso", "Si hay que preguntar a un humano, autoaprobar o denegar por defecto", "Ved los cinco modos abajo"],
+          ["can_use_tool", "Retrollamada cuando hace falta recolección interactiva", "Preguntar al usuario; reunir datos extra"],
+          ["Sin retrollamada / no interactivo", "Sesiones sin humano; evitar el ping-pong infinito de herramientas", "Trabajos por lotes autenticados"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "<strong>Lo denegado gana.</strong> Si Bash está permitido pero <code>rm *</code> también está denegado (o un hook lo niega), prima la denegación. Las herramientas permitidas significan «elegibles», no «ya aprobadas para cualquier argumento»."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Comprobad los nombres vigentes del enumerado",
+        "html": "Las diapositivas listaban default, acceptEdits, bypassPermissions, don’t ask, plan y un «auto» que también conocía el linter. Emparejad las cadenas con la documentación vigente de permisos del Agent SDK / Claude Code, no con una captura del 27 de agosto de 2026."
+      },
+      {
+        "type": "h2",
+        "text": "Cinco modos que quería que contrastarais"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Default</strong> — comportamiento estándar; pregunta en operaciones peligrosas; las herramientas no emparejadas pueden ir a <code>can_use_tool</code>. El estado interactivo más general.",
+          "<strong>Don’t ask</strong> — sin UI de permiso; lo que no esté preaprobado en la lista se <em>deniega</em>, pero el agente <em>sigue</em> con pasos posteriores (falla el write, un Read posterior aún puede correr).",
+          "<strong>Accept edits</strong> — autoaprobar ediciones de sistema de ficheros que ya están en la lista.",
+          "<strong>Bypass permissions</strong> — tratar las herramientas listadas como aprobadas en la compuerta. Lo llamó peligroso; solo con una lista estrecha.",
+          "<strong>Plan</strong> — planificación de solo lectura; sin ediciones de fichero o sistema. Usadlo al inspeccionar; pasad a accept-edits cuando pretendáis escribir."
+        ]
+      },
+      {
+        "type": "h3",
+        "text": "Ejemplos de espectro"
+      },
+      {
+        "type": "p",
+        "html": "<strong>Solo observar:</strong> permitir Read, Glob, Grep; modo don’t-ask. Aunque el modelo emita Write, no aterriza. <strong>Lectura-escritura en un conjunto conocido:</strong> permitir Read/Write/Edit (y quizá Bash); don’t-ask o accept-edits. Las herramientas MCP que no estén en la lista se quedan fuera en don’t-ask. <strong>Planificar y luego actuar:</strong> agente en modo plan para redactar; segundo agente con accept-edits para aplicar."
+      },
+      {
+        "type": "h2",
+        "text": "Qué mostró el cuaderno"
+      },
+      {
+        "type": "p",
+        "html": "Prompt: leer <code>auth.py</code> y guardar un resumen de una frase en una carpeta de demo. Sin Write permitido y con don’t-ask, el resultado fue: se intentó escribir, permiso denegado, ficheros igual, a veces una oferta de habilitar Write. El mismo prompt con Write permitido creó <code>summary_b.txt</code>. Una ejecución posterior mostró don’t-ask saltándose un Write/Bash bloqueado y ejecutando aún un Read siguiente."
+      },
+      {
+        "type": "h2",
+        "text": "Bloqueo quirúrgico con hooks previos"
+      },
+      {
+        "type": "p",
+        "html": "Permitir Bash por completo es tosco. Los hooks (pre-tool-use, post-tool-use, fallo, envío de prompt, stop, inicio/fin de subagente, pre-compact, petición de permiso, notificación) dejan emparejar patrones. El repositorio listaba patrones bash peligrosos: si la herramienta es Bash y el comando coincide, devolver denegación más motivo (<code>continue = false</code> en el matcher). Eso detuvo <code>rm -rf</code> en una carpeta blocking-demo aunque Bash estuviera permitido."
+      },
+      {
+        "type": "p",
+        "html": "Segundo patrón: <strong>redirigir escrituras</strong> lejos de una ruta protegida hacia un directorio temporal para no tirar tokens facturados. La salida del LLM es cara; si Write se deniega en <code>/protected</code>, el hook reescribe a una carpeta segura y lo registra."
+      },
+      {
+        "type": "h2",
+        "text": "Guardrails como validación de entrada/salida"
+      },
+      {
+        "type": "p",
+        "html": "Los permisos detienen herramientas. Los <strong>guardrails</strong> en esta hora eran sobre todo comprobaciones del desarrollador alrededor del prompt y de la salida del modelo/herramienta: bloquear «ignora las instrucciones previas» / «revela el prompt de sistema», limitar longitud, buscar secretos, redactar. Aplicad <em>antes</em> de <code>query</code> (ahorráis tokens) y <em>después</em> (no registréis claves API que el modelo haya repetido). Vijay coincidió en que es ingeniería general, no un limitador oculto de tokens de Claude. Señaló listas de código abierto (Rulebricks, repos de guardrails al estilo Claude Code) en lugar de un único import oficial. La guía oficial de evaluación está en la página de strengthen-guardrails de Anthropic."
+      },
+      {
+        "type": "h2",
+        "text": "El ejemplo de PII que no es «cifrar en la pasarela»"
+      },
+      {
+        "type": "p",
+        "html": "Rishabh preguntó si HIPAA/PII significaba cifrado tipo Protegrity hacia la pasarela. La respuesta de agente de Vijay: un agente de BD de clientes que arma un informe y envía correo <em>debe</em> ver una dirección real para enviar, pero los registros, los saltos MCP y las herramientas de terceros no deben filtrar esa dirección. Permisos, hooks y escáneres de salida son la capa de la app Claude; no sustituyen la arquitectura de cifrado de vuestra organización."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Reforzar guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Guía de evaluación y guardrails de Anthropic."
+          },
+          {
+            "title": "Política de uso",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "Lo que no podéis construir, haya hooks o no."
+          },
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Modos de permiso en el producto que ya usasteis en las semanas 2–3."
+          },
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Las herramientas a medida siguen pasando por las mismas compuertas si el SDK las envuelve."
+          }
+        ]
+      }
+    ]
+  }
+]

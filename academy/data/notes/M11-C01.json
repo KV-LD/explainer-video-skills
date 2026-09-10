@@ -1,0 +1,264 @@
+[
+  {
+    "lang": "en",
+    "module_id": "11",
+    "chapter_id": "01",
+    "eyebrow": "Module 11 · Chapter 01 · 26 August 2026",
+    "chapter_title": "RAG recap: retrieve, augment, generate",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 11 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M11 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 11 (26 August 2026) opened in the cohort PDF folder and then recapped <strong>retrieval-augmented generation</strong>. Session 10 had already posed the 1,000-page PDF problem: finding one author email by stuffing the whole book into Claude wastes tokens and, past a size limit, is impossible in a single call. RAG is the pattern that fetches <em>only the useful slices</em>."
+      },
+      {
+        "type": "h2",
+        "text": "The three letters, without mysticism"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Retrieve</strong> — from a corpus (PDFs, sites, databases, even video transcripts) find the few chunks that match the user question.",
+          "<strong>Augment</strong> — append those chunk texts to the prompt (question + evidence).",
+          "<strong>Generate</strong> — Claude writes the answer from that smaller, relevant context — not from 10,000 silent pages."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "The LLM still generates. RAG does not replace Claude; it changes <em>which tokens you pay for on the way in</em>."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Docs move; the pattern does not",
+        "html": "Classroom vector vendors and notebook APIs change. Keep the pipeline (load → split → embed → store → search → augment → generate) and verify current Claude file/PDF behaviour on <a href=\"https://docs.claude.com/en/docs/build-with-claude/pdf-support\">PDF support</a> and citations if the exam asks about grounded answers."
+      },
+      {
+        "type": "h2",
+        "text": "Offline prep versus online query"
+      },
+      {
+        "type": "p",
+        "html": "You do not embed the library on every question. Prep happens first:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Load</strong> documents into text.",
+          "<strong>Split / chunk</strong> into pieces that still mean something for the business (size is a use-case choice, not a universal constant).",
+          "<strong>Overlap</strong> a little (characters or sentences) when you need continuity across a cut — typical for textbooks.",
+          "<strong>Embed</strong> each chunk with an <em>embedding model</em> (text in, vector out — not an LLM, which is text in, text out).",
+          "<strong>Store</strong> vectors <em>and</em> the original chunk text in a vector store so search can return prose, not only numbers."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "At question time: embed the <strong>prompt</strong>, run similarity search (cosine was the lab default; MMR and BM25 were named as other families depending on the database), take top-k chunks (two Fourier-series hits in the story instead of 175), augment, generate."
+      },
+      {
+        "type": "h2",
+        "text": "Chunking is a product decision"
+      },
+      {
+        "type": "p",
+        "html": "The demo Markdown file (a medical-research-style dataset, not an exam style guide) was split on heading patterns (<code>##</code>) with a regex. Lalit asked whether a Markdown parser library would do; yes — regex was pedagogy. Other splits: character count, sentences, document structure (headings vs code fences in <code>.md</code>). Chunk lengths in the demo ranged from tens of characters to nearly two thousand — evidence that “one true chunk size” is a trap."
+      },
+      {
+        "type": "h2",
+        "text": "Semantic search, not string equality"
+      },
+      {
+        "type": "p",
+        "html": "You will not find the user’s sentence verbatim in a chunk. Embeddings place related meanings nearby. Cosine similarity (or the vendor’s equivalent) scores that neighbourhood. Thresholds are <strong>vendor and method defaults</strong> you can override; Vijay refused a single magic number for every database. Tune recall versus noise for the corpus."
+      },
+      {
+        "type": "h2",
+        "text": "Metadata versus one big pool"
+      },
+      {
+        "type": "p",
+        "html": "University example: maths, science, and AI PDFs share concepts (Fourier series in more than one subject). You can tag every chunk with file metadata and filter at query time, or dump 100+50+25 chunks into one pool and search everything. Shared vector DBs across use cases are fine; hallucination risk goes up if you retrieve the wrong faculty’s policy. Intent can also be a <em>tool</em> that chooses which collection to query — RAG is often wrapped as a tool."
+      },
+      {
+        "type": "h2",
+        "text": "How RAG sits next to tools and MCP"
+      },
+      {
+        "type": "p",
+        "html": "A retrieval function is a perfectly ordinary tool: argument is the user question (or its embedding), result is chunk text. That function can live in-process or behind MCP. Agents (chapter 03) then orchestrate “when to retrieve.” No-code platforms (Bedrock knowledge bases + S3 auto-sync, OpenSearch) implement the same three letters with consoles instead of notebooks. Claude-centric delivery in this course stayed on the <strong>code path</strong>."
+      },
+      {
+        "type": "h2",
+        "text": "Cost and caching"
+      },
+      {
+        "type": "p",
+        "html": "Every hit that re-embeds and re-searches costs latency and money. Lalit asked about caching: yes, at app, database, or network layer (Redis was named). That is your service design, not a Claude-only feature. Prompt caching (module 09) can still apply to the <em>augmented</em> prompt if the prefix is stable — check current cache docs."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Prompt engineering overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "How the augmented prompt should be written after retrieval."
+          },
+          {
+            "title": "PDF support",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "When you send files directly versus retrieving chunks."
+          },
+          {
+            "title": "Citations",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/citations",
+            "note": "Grounded answers from provided documents."
+          },
+          {
+            "title": "Prompt caching",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "If the RAG prefix repeats across calls."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Retrieval wrapped as a tool."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "11",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 11 · Capítulo 01 · 26 de agosto de 2026",
+    "chapter_title": "Repaso de RAG: recuperar, aumentar, generar",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 11 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M11 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 11 (26 de agosto de 2026) empezó por la carpeta PDF del grupo y recapituló la <strong>generación aumentada por recuperación</strong>. La sesión 10 ya había planteado el PDF de 1.000 páginas: buscar un correo del autor metiendo el libro entero en Claude malgasta tokens y, pasado un tamaño, es imposible en una sola llamada. RAG es el patrón que trae <em>solo las rebanadas útiles</em>."
+      },
+      {
+        "type": "h2",
+        "text": "Las tres letras, sin misticismo"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Recuperar</strong> — de un corpus (PDF, sitios, bases de datos, incluso transcripciones) encontrar los pocos fragmentos que encajan con la pregunta.",
+          "<strong>Aumentar</strong> — añadir esos textos al prompt (pregunta + evidencia).",
+          "<strong>Generar</strong> — Claude escribe la respuesta a partir de ese contexto más pequeño y pertinente — no a partir de 10.000 páginas mudas."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "El LLM sigue generando. RAG no sustituye a Claude; cambia <em>por qué tokens pagáis a la entrada</em>."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "La documentación se mueve; el patrón no",
+        "html": "Los proveedores vectoriales de aula y las APIs de cuaderno cambian. Conservad la tubería (cargar → partir → embeber → guardar → buscar → aumentar → generar) y verificad el comportamiento vigente de PDF/archivos en <a href=\"https://docs.claude.com/en/docs/build-with-claude/pdf-support\">PDF support</a> y citas si el examen pregunta por respuestas fundamentadas."
+      },
+      {
+        "type": "h2",
+        "text": "Preparación fuera de línea frente a consulta en línea"
+      },
+      {
+        "type": "p",
+        "html": "No embebeis la biblioteca en cada pregunta. La preparación va primero:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Cargar</strong> documentos a texto.",
+          "<strong>Partir / trocear</strong> en piezas que aún signifiquen algo para el negocio (el tamaño es una decisión de caso de uso, no una constante universal).",
+          "<strong>Solapar</strong> un poco (caracteres o frases) cuando necesitáis continuidad al corte — típico en manuales.",
+          "<strong>Embeber</strong> cada trozo con un <em>modelo de embeddings</em> (texto entra, vector sale — no un LLM, que es texto entra, texto sale).",
+          "<strong>Guardar</strong> vectores <em>y</em> el texto original del trozo en un almacén vectorial para que la búsqueda devuelva prosa, no solo números."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "En el momento de la pregunta: embebed el <strong>prompt</strong>, ejecutad búsqueda por similitud (coseno era el valor por defecto del laboratorio; se nombraron MMR y BM25 según la base de datos), tomad los k mejores (dos aciertos de series de Fourier en el relato en lugar de 175), aumentad, generad."
+      },
+      {
+        "type": "h2",
+        "text": "El troceado es una decisión de producto"
+      },
+      {
+        "type": "p",
+        "html": "El Markdown de demostración (un conjunto de estilo investigación médica, no una guía de estilo del examen) se partió por patrones de encabezado (<code>##</code>) con una regex. Lalit preguntó si valía un parser Markdown; sí — la regex era pedagogía. Otros cortes: recuento de caracteres, frases, estructura del documento (encabezados frente a bloques de código en <code>.md</code>). Las longitudes iban de decenas de caracteres a casi dos mil: evidencia de que «un único tamaño de trozo» es una trampa."
+      },
+      {
+        "type": "h2",
+        "text": "Búsqueda semántica, no igualdad de cadenas"
+      },
+      {
+        "type": "p",
+        "html": "No encontraréis la frase del usuario literal en un trozo. Los embeddings colocan significados próximos. La similitud del coseno (o el equivalente del proveedor) puntúa ese vecindario. Los umbrales son <strong>valores por defecto del proveedor y del método</strong> que podéis anular; Vijay rechazó un número mágico para todas las bases. Ajustad recuerdo frente a ruido según el corpus."
+      },
+      {
+        "type": "h2",
+        "text": "Metadatos frente a un único pozo"
+      },
+      {
+        "type": "p",
+        "html": "Ejemplo universitario: los PDF de matemáticas, ciencias e IA comparten conceptos (series de Fourier en más de una asignatura). Podéis etiquetar cada trozo con metadatos de fichero y filtrar al consultar, o volcar 100+50+25 trozos en un pozo y buscarlo todo. Las bases vectoriales compartidas entre casos de uso valen; el riesgo de alucinación sube si recuperáis la política de otra facultad. La intención también puede ser una <em>herramienta</em> que elige qué colección consultar: RAG a menudo se envuelve como herramienta."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo se sienta RAG junto a herramientas y MCP"
+      },
+      {
+        "type": "p",
+        "html": "Una función de recuperación es una herramienta ordinaria: el argumento es la pregunta (o su embedding), el resultado es texto de trozos. Puede vivir en proceso o detrás de MCP. Los agentes (capítulo 03) orquestan «cuándo recuperar». Las plataformas no-code (knowledge bases de Bedrock + auto-sync de S3, OpenSearch) implementan las mismas tres letras con consolas en lugar de cuadernos. La entrega centrada en Claude de este curso se quedó en la <strong>vía de código</strong>."
+      },
+      {
+        "type": "h2",
+        "text": "Coste y caché"
+      },
+      {
+        "type": "p",
+        "html": "Cada golpe que vuelve a embeber y buscar cuesta latencia y dinero. Lalit preguntó por caché: sí, en aplicación, base de datos o red (se nombró Redis). Es diseño de servicio, no un rasgo solo de Claude. La caché de prompts (módulo 09) aún puede aplicar al prompt <em>aumentado</em> si el prefijo es estable: comprobad la documentación vigente."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de ingeniería de prompts",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Cómo escribir el prompt aumentado tras la recuperación."
+          },
+          {
+            "title": "Soporte de PDF",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "Cuándo enviáis archivos directamente frente a recuperar trozos."
+          },
+          {
+            "title": "Citas",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/citations",
+            "note": "Respuestas fundamentadas a partir de documentos aportados."
+          },
+          {
+            "title": "Caché de prompts",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "Si el prefijo RAG se repite entre llamadas."
+          },
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "La recuperación envuelta como herramienta."
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --ust-dark-teal: #006e74;
+  --ust-light-teal: #0097ac;
+  --ust-teal-deep: #004851;
+  --ust-soft-black: #231f20;
+  --ust-white: #ffffff;
+  --ust-off: #eef6f7;
+  --ust-green: #0a9b72;
+  --ust-coral: #e0604a;
+  --ust-warm: #c75b45;
+  --ust-muted: rgba(35, 31, 32, 0.72);
+  --ust-muted2: rgba(35, 31, 32, 0.55);
+  --border: rgba(0, 110, 116, 0.18);
+  --background: #eef6f7;
+  --foreground: #231f20;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-teal: var(--ust-dark-teal);
+  --color-teal-deep: var(--ust-teal-deep);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+}
+
+html,
+body {
+  background: var(--ust-off);
+  color: var(--ust-soft-black);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--ust-dark-teal);
+  font-weight: 600;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), Georgia, serif;
+  color: var(--ust-teal-deep);
+}
+
+.prose-notes table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  margin: 1rem 0;
+  background: white;
+}
+.prose-notes th {
+  background: var(--ust-dark-teal);
+  color: white;
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  font-weight: 600;
+}
+.prose-notes td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0.65rem;
+  color: var(--ust-muted);
+  vertical-align: top;
+}
+.prose-notes ul,
+.prose-notes ol {
+  padding-left: 1.2rem;
+  color: var(--ust-muted);
+}
+.prose-notes p {
+  color: var(--ust-muted);
+  line-height: 1.62;
+}

@@ -1,0 +1,278 @@
+[
+  {
+    "lang": "en",
+    "module_id": "03",
+    "chapter_id": "04",
+    "eyebrow": "Module 03 · Chapter 04 · 6 August 2026",
+    "chapter_title": "Permissions, models, and building with Claude Code",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 3 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M03 · C04 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "The last teaching block of 6 August was how you <strong>steer</strong> Claude Code before you let it write an app: permission modes, <code>/model</code>, <code>/config</code>, where settings files live, and <code>/init</code> → <strong>CLAUDE.md</strong> as persistent project law. Later modules go deeper on modes and agents; this chapter is the Foundation control panel."
+      },
+      {
+        "type": "h2",
+        "text": "Permission modes (as labelled in class)"
+      },
+      {
+        "type": "p",
+        "html": "The Code UI grouped how freely the agent may use tools:"
+      },
+      {
+        "type": "table",
+        "headers": ["Mode (classroom language)", "What you are choosing", "When Vijay would use it"],
+        "rows": [
+          ["Ask / manual permission per tool", "Each sensitive tool call waits for you", "Untrusted repo, first day on a client codebase"],
+          ["Auto-edit in the workspace", "Edits proceed without a click each time", "A folder you already trusted at CLI start"],
+          ["Plan first", "Emit a sequenced plan; you review/customise before execute", "Brownfield, expensive refactors, exam-style “don’t just run”"],
+          ["Bypass / don’t wait", "Skip permission prompts and run", "Only on throwaway sandboxes — not UST client trees"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "First CLI launch already asked “do you trust this git folder?” That consent is the root of auto-edit. Allow/deny lists also persist in settings JSON (deny reading secrets/API keys was Lalit’s example). You can ask Claude to rewrite its own settings — it still needs permission to touch those files."
+      },
+      {
+        "type": "h2",
+        "text": "Effort and /model"
+      },
+      {
+        "type": "p",
+        "html": "Effort is how hard the selected model should think—not a separate product. <code>/model</code> listed what the org subscription enabled (in class: Sonnet, Opus, Haiku, plus names such as Fable). Typing <code>opus</code> took the latest Opus SKU he had (he cited a 4.8-class line); you may also pass a full model ID from the docs. Switching to a 1M Sonnet changes the <em>window</em>, not automatically the quality of a one-line answer. Hussain’s question: you do not have to memorise every dated ID if the short name resolves to current."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Picker versus documentation",
+        "html": "Sonnet “5”, Opus “4.8”, Fable, 272K vs 1M were 6 August 2026 UI. Exam written answers should use IDs and capabilities from <a href=\"https://docs.claude.com/en/docs/about-claude/models\">the models page</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Slash config and settings.json layers"
+      },
+      {
+        "type": "p",
+        "html": "<code>/config</code> shows key/value pairs (editor backend: Git Bash vs PowerShell vs vim; UI language; agent toggles; auto-compact). Values are stored under a <code>.claude</code> directory (ASR: “dot clod”) as <code>settings.json</code> at more than one layer:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>User level</strong> — under the OS profile; applies to all projects for that person. Creating auto-compact from <code>/config</code> often lands here first.",
+          "<strong>Project level</strong> — <code>.claude/settings.json</code> in the git repo (shareable conventions).",
+          "<strong>Folder / local override</strong> — <code>settings.local.json</code> to override project settings on this machine without committing secrets."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Precedence he taught: if all three exist, <strong>folder/local wins</strong>; else project; else user. Missing keys inherit from the layer above. This JSON is Claude Code’s own switches—not your ESLint rules. Clean-code standards, library pins, and “never read <code>.env</code>” as <em>behaviour</em> belong in <strong>CLAUDE.md</strong> (memory/instructions), which is a different file from settings.json."
+      },
+      {
+        "type": "h2",
+        "text": "CLAUDE.md via /init"
+      },
+      {
+        "type": "p",
+        "html": "<code>/init</code> tries to generate persistent project instructions. On an empty or unclear tree it may refuse until there is structure—you can create the markdown yourself. This is the same family of file Cowork auto-created in session 1. Ground rules (OpenAPI-only for frontend, no client PII in prompts, package manager) go here so every session does not re-explain the repo. Do not paste entire vendor manuals (session 1 token warning)."
+      },
+      {
+        "type": "h2",
+        "text": "Building: you still owe a prompt and a review"
+      },
+      {
+        "type": "p",
+        "html": "With permissions, model, and CLAUDE.md in place, you can ask for an end-to-end app. Vijay’s promise: Code will plan, use tools, and verify. Your job on CCDV-F is to know <em>which knobs you turned</em> and what still needs a human (secrets, production deploy, client data). Later sessions generate without typing the app by hand; the exam will still ask why you chose plan-mode, a smaller model, or a new session."
+      },
+      {
+        "type": "h2",
+        "text": "Checklist before you “just generate”"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Trust dialog and permission mode match the sensitivity of the tree.",
+          "<code>/model</code> matches cost vs window needs.",
+          "Auto-compact on if you expect a long agentic loop.",
+          "CLAUDE.md states stack and prohibitions; settings.json states product toggles.",
+          "New session for a new feature so yesterday’s failed experiment is not in context."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Permissions, CLI, IDE, CLAUDE.md as currently documented."
+          },
+          {
+            "title": "Models",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "IDs to pass to /model."
+          },
+          {
+            "title": "Extended thinking",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/extended-thinking",
+            "note": "What “effort / thinking” maps to in the API world."
+          },
+          {
+            "title": "Guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Enterprise counterpart to deny-lists in settings.json."
+          },
+          {
+            "title": "Usage policy",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "What must never land in a trusted workspace prompt."
+          },
+          {
+            "title": "Structured outputs",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+            "note": "On the developer Foundation skill list alongside Code."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "03",
+    "chapter_id": "04",
+    "eyebrow": "Módulo 03 · Capítulo 04 · 6 de agosto de 2026",
+    "chapter_title": "Permisos, modelos y construir con Claude Code",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 3 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M03 · C04 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El último bloque didáctico del 6 de agosto fue cómo <strong>gobernáis</strong> Claude Code antes de dejarle escribir una app: modos de permiso, <code>/model</code>, <code>/config</code>, dónde viven los archivos de ajustes y <code>/init</code> → <strong>CLAUDE.md</strong> como ley persistente del proyecto. Módulos posteriores profundizan en modos y agentes; este capítulo es el panel de control Foundation."
+      },
+      {
+        "type": "h2",
+        "text": "Modos de permiso (según se etiquetaron en clase)"
+      },
+      {
+        "type": "p",
+        "html": "La UI de Code agrupaba con qué libertad el agente puede usar herramientas:"
+      },
+      {
+        "type": "table",
+        "headers": ["Modo (lenguaje de aula)", "Qué estáis eligiendo", "Cuándo lo usaría Vijay"],
+        "rows": [
+          ["Preguntar / permiso manual por herramienta", "Cada llamada sensible espera", "Repo no fiable, primer día en código de cliente"],
+          ["Auto-editar en el espacio de trabajo", "Las ediciones siguen sin un clic cada vez", "Una carpeta que ya confiastéis al arrancar el CLI"],
+          ["Planificar primero", "Emitir un plan en secuencia; revisáis/personalizáis antes de ejecutar", "Brownfield, refactors caros, estilo examen «no ejecutes a ciegas»"],
+          ["Bypass / no esperar", "Saltar avisos de permiso y correr", "Solo en sandboxes de usar y tirar — no en árboles de cliente UST"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "El primer arranque del CLI ya preguntó «¿confiáis en esta carpeta git?». Ese consentimiento es la raíz del auto-edit. Las listas allow/deny también persisten en el JSON de ajustes (denegar la lectura de secretos/claves de API fue el ejemplo de Lalit). Podéis pedir a Claude que reescriba sus propios ajustes — igual necesita permiso para tocar esos archivos."
+      },
+      {
+        "type": "h2",
+        "text": "Esfuerzo y /model"
+      },
+      {
+        "type": "p",
+        "html": "El esfuerzo es cuánto debe pensar el modelo seleccionado—no un producto aparte. <code>/model</code> listó lo que habilitaba la suscripción de la org (en clase: Sonnet, Opus, Haiku, más nombres como Fable). Escribir <code>opus</code> tomaba el SKU Opus más reciente que tenía (citó una línea clase 4.8); también podéis pasar un ID completo de los docs. Pasar a un Sonnet de 1M cambia la <em>ventana</em>, no automáticamente la calidad de una respuesta de una línea. Pregunta de Hussain: no hace falta memorizar cada ID con fecha si el nombre corto resuelve al vigente."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Selector frente a documentación",
+        "html": "Sonnet «5», Opus «4.8», Fable, 272K frente a 1M eran UI del 6 de agosto de 2026. Las respuestas escritas del examen deben usar IDs y capacidades de <a href=\"https://docs.claude.com/en/docs/about-claude/models\">la página de modelos</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Slash config y capas de settings.json"
+      },
+      {
+        "type": "p",
+        "html": "<code>/config</code> muestra pares clave/valor (backend del editor: Git Bash frente a PowerShell frente a vim; idioma de la UI; interruptores de agente; auto-compact). Los valores se guardan bajo un directorio <code>.claude</code> (ASR: «dot clod») como <code>settings.json</code> en más de una capa:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Nivel de usuario</strong> — bajo el perfil del sistema operativo; aplica a todos los proyectos de esa persona. Crear auto-compact desde <code>/config</code> suele aterrizar aquí primero.",
+          "<strong>Nivel de proyecto</strong> — <code>.claude/settings.json</code> en el repo git (convenios compartibles).",
+          "<strong>Override de carpeta / local</strong> — <code>settings.local.json</code> para anular ajustes de proyecto en esta máquina sin commitear secretos."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Precedencia que enseñó: si existen los tres, <strong>gana carpeta/local</strong>; si no, proyecto; si no, usuario. Las claves que faltan se heredan de la capa de encima. Este JSON son los interruptores de Claude Code—no vuestras reglas ESLint. Los estándares de código limpio, pines de bibliotecas y «nunca leas <code>.env</code>» como <em>comportamiento</em> van en <strong>CLAUDE.md</strong> (memoria/instrucciones), que es un archivo distinto de settings.json."
+      },
+      {
+        "type": "h2",
+        "text": "CLAUDE.md vía /init"
+      },
+      {
+        "type": "p",
+        "html": "<code>/init</code> intenta generar instrucciones persistentes de proyecto. En un árbol vacío o poco claro puede negarse hasta que haya estructura—podéis crear el markdown vosotros. Es la misma familia de archivo que Cowork auto-creó en la sesión 1. Las reglas de base (solo OpenAPI para el frontend, nada de PII de cliente en prompts, gestor de paquetes) van aquí para que cada sesión no reexplique el repo. No pegéis manuales enteros del fabricante (aviso de tokens de la sesión 1)."
+      },
+      {
+        "type": "h2",
+        "text": "Construir: igual debéis un prompt y una revisión"
+      },
+      {
+        "type": "p",
+        "html": "Con permisos, modelo y CLAUDE.md en su sitio, podéis pedir una app de extremo a extremo. Promesa de Vijay: Code planificará, usará herramientas y verificará. Vuestro trabajo en CCDV-F es saber <em>qué mandos habéis girado</em> y qué sigue necesitando a un humano (secretos, despliegue a producción, datos de cliente). Sesiones posteriores generan sin teclear la app a mano; el examen igual preguntará por qué elegisteis modo plan, un modelo más pequeño o una sesión nueva."
+      },
+      {
+        "type": "h2",
+        "text": "Lista antes de «generar y ya»"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "El diálogo de confianza y el modo de permiso coinciden con la sensibilidad del árbol.",
+          "<code>/model</code> encaja coste frente a necesidad de ventana.",
+          "Auto-compact activado si esperáis un bucle agentic largo.",
+          "CLAUDE.md declara pila y prohibiciones; settings.json declara interruptores de producto.",
+          "Sesión nueva para una funcionalidad nueva para que el experimento fallido de ayer no esté en contexto."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Resumen de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Permisos, CLI, IDE, CLAUDE.md según se documentan ahora."
+          },
+          {
+            "title": "Modelos",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "IDs para pasar a /model."
+          },
+          {
+            "title": "Pensamiento extendido",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/extended-thinking",
+            "note": "A qué se mapea «esfuerzo / thinking» en el mundo API."
+          },
+          {
+            "title": "Guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Contraparte empresarial de las listas deny en settings.json."
+          },
+          {
+            "title": "Política de uso",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "Lo que nunca debe aterrizar en un prompt de un espacio de trabajo de confianza."
+          },
+          {
+            "title": "Salidas estructuradas",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+            "note": "En la lista de competencias de Developer Foundation junto a Code."
+          }
+        ]
+      }
+    ]
+  }
+]

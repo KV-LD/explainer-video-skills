@@ -1,0 +1,230 @@
+[
+  {
+    "lang": "en",
+    "module_id": "02",
+    "chapter_id": "03",
+    "eyebrow": "Module 02 · Chapter 03 · 5 August 2026",
+    "chapter_title": "Three clients: Chat, Cowork, and Code — and how you reach them",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 2 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M02 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Vijay restated the product set as <strong>three client applications</strong>—Chat, Cowork, and Code—plus, when you leave the GUI, the <strong>Claude API and SDK</strong> (a token from the console, not “the fourth tile”). Getting the access map wrong is how people fail both the exam and the UST laptop build: Cowork is not on the web the way Chat is; Code is not only an IDE plugin."
+      },
+      {
+        "type": "h2",
+        "text": "The three GUI clients"
+      },
+      {
+        "type": "table",
+        "headers": ["Client", "Job in one sentence", "Web", "Desktop app", "CLI", "IDE integration (VS Code, IntelliJ, Visual Studio, …)"],
+        "rows": [
+          ["<strong>Chat</strong>", "Conversational assistant; answers stay in the thread", "Yes — primary", "Yes (Chat pane)", "No", "Often Chat-like side panel together with Code"],
+          ["<strong>Cowork</strong>", "Agentic local workspace: folders, multi-step tasks, schedule / mobile trigger", "Not the access path he taught", "<strong>Yes — and only here in class</strong> (latest desktop)", "No", "No — he was explicit: you cannot use Cowork inside the IDE"],
+          ["<strong>Code</strong>", "Agentic coding over a repo: edit, terminal, tests, git", "Not the main path", "Yes (Code surface)", "<strong>Yes — Code only</strong>", "<strong>Yes — Code (and often Chat)</strong>"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Desktop, in a current enough build, is the only place he promised <em>all three</em>. He showed about <strong>desktop 1.24</strong> as the floor for Cowork in that week’s demo; anything like 1.10 needed an upgrade. If Cowork is still missing after upgrade, it is an <strong>org policy</strong> (Rajesh confirmed UST had blocked Cowork for some users; IT later said R&amp;D accounts inside allocated VDI/workspace could have it). Cowork had only been generally available on the order of a month; vulnerability review is a rational delay, not a product myth."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Version and policy drift",
+        "html": "Build numbers and which tiles your tenant shows will not match 5 August 2026. Confirm on <a href=\"https://support.claude.com/\">Claude support / desktop notes</a> and your admin, not this table’s version cell."
+      },
+      {
+        "type": "h2",
+        "text": "Fourth and fifth paths: API and “everywhere else”"
+      },
+      {
+        "type": "p",
+        "html": "To use the <strong>Claude SDK</strong> (Python, Node, …) you need a console account and an <strong>API key</strong>. That key is not Chat login. Billing and rate limits for API are a separate plane from the Chat five-hour usage bar (he said so explicitly when discussing meters). Integrations named in week 1—Chrome, Excel, PowerPoint, Microsoft 365, Slack—are additional clients, not replacements for the three."
+      },
+      {
+        "type": "h2",
+        "text": "Who each client is for in UST language"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Chat:</strong> everyone. Architects summarising an SRS still start here if they do not need disk writes.",
+          "<strong>Cowork:</strong> knowledge workers and anyone with local PDFs/CSV/PPT who needs the files <em>changed</em>. Also the place Vijay put scheduled jobs and “trigger from the phone.”",
+          "<strong>Code:</strong> CCDV-F centre of gravity. Full-stack, backend, AI engineers. Assistants used to complete a line; this agent can plan a repo, run tests, open PRs, talk to Jira/Figma via tools."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Why Chat versus Cowork still confuses people"
+      },
+      {
+        "type": "p",
+        "html": "You can upload a PPT to Chat and ask for a summary. Cowork’s difference is <strong>the attached folder is a workspace the agent may create, move, edit, and delete in</strong>, with a consent banner (edit / delete / share with connected tools). Chat will not silently tidy your Downloads folder. If the exam stem says “reorganise invoices on disk,” the answer is Cowork (or Code/SDK), not Chat."
+      },
+      {
+        "type": "h2",
+        "text": "Authentication plans"
+      },
+      {
+        "type": "p",
+        "html": "Claude Code install (next module) required Pro, Max, Team, or Enterprise—not a random free consumer leftover. UST is on Team/Enterprise. API keys still come from the console and may be denied by org policy even when Chat works. Download Claude Code from the company software portal / private npm if that is how UST pins versions; Vijay’s curl/npm demo is the upstream method, not a bypass of security."
+      },
+      {
+        "type": "h2",
+        "text": "Exam sentence to memorise"
+      },
+      {
+        "type": "p",
+        "html": "All three are <strong>clients</strong>. Haiku/Sonnet/Opus are <strong>servers</strong>. Only Cowork and Code were labelled <strong>agentic</strong> in the 5 August recap (Chat can still call tools; he reserved “agentic solution” language for the products that run multi-step plans against local tools). If two answers both say “use Claude,” pick the client that matches disk, IDE, or conversation."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Current product surfaces when desktop tiles change."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "CLI and IDE install paths."
+          },
+          {
+            "title": "Cowork / Claude desktop support",
+            "url": "https://support.claude.com/",
+            "note": "Desktop distribution and feature availability."
+          },
+          {
+            "title": "API overview",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "The non-GUI client: keys, Messages, separate limits."
+          },
+          {
+            "title": "Where is the API documentation?",
+            "url": "https://support.claude.com/en/articles/8114490-where-can-i-find-your-api-documentation",
+            "note": "If you only have claude.ai and need the console path."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "02",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 02 · Capítulo 03 · 5 de agosto de 2026",
+    "chapter_title": "Tres clientes: Chat, Cowork y Code, y cómo se accede",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 2 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M02 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Vijay reafirmó el conjunto de productos como <strong>tres aplicaciones cliente</strong>—Chat, Cowork y Code—y, al salir de la GUI, la <strong>API y el SDK de Claude</strong> (un token de la consola, no «la cuarta tesela»). Equivocar el mapa de acceso es cómo se falla el examen y el portátil de UST: Cowork no está en la web como Chat; Code no es solo un plugin de IDE."
+      },
+      {
+        "type": "h2",
+        "text": "Los tres clientes con interfaz"
+      },
+      {
+        "type": "table",
+        "headers": ["Cliente", "Trabajo en una frase", "Web", "App de escritorio", "CLI", "Integración IDE (VS Code, IntelliJ, Visual Studio, …)"],
+        "rows": [
+          ["<strong>Chat</strong>", "Asistente conversacional; las respuestas se quedan en el hilo", "Sí — principal", "Sí (panel Chat)", "No", "A menudo panel tipo Chat junto con Code"],
+          ["<strong>Cowork</strong>", "Espacio agentic local: carpetas, tareas en varios pasos, programación / disparo desde el móvil", "No es la vía que enseñó", "<strong>Sí — y solo aquí en clase</strong> (escritorio reciente)", "No", "No — fue explícito: no podéis usar Cowork dentro del IDE"],
+          ["<strong>Code</strong>", "Programación agentic sobre un repo: editar, terminal, pruebas, git", "No es la vía principal", "Sí (superficie Code)", "<strong>Sí — solo Code</strong>", "<strong>Sí — Code (y a menudo Chat)</strong>"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "El escritorio, en una build suficientemente actual, es el único sitio donde prometió <em>los tres</em>. Mostró alrededor de <strong>escritorio 1.24</strong> como suelo para Cowork en la demo de esa semana; algo como 1.10 necesitaba actualización. Si Cowork sigue faltando tras actualizar, es <strong>política de org</strong> (Rajesh confirmó que UST había bloqueado Cowork para algunos; IT dijo después que cuentas R&amp;D dentro del VDI/workspace asignado podían tenerlo). Cowork llevaba del orden de un mes de disponibilidad general; la revisión de vulnerabilidades es un retraso racional, no un mito de producto."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Deriva de versión y de política",
+        "html": "Los números de build y las teselas que muestre vuestro tenant no coincidirán con el 5 de agosto de 2026. Confirmad en <a href=\"https://support.claude.com/\">soporte Claude / notas de escritorio</a> y con vuestro admin, no en la celda de versión de esta tabla."
+      },
+      {
+        "type": "h2",
+        "text": "Cuarta y quinta vías: API y «el resto»"
+      },
+      {
+        "type": "p",
+        "html": "Para usar el <strong>SDK de Claude</strong> (Python, Node, …) necesitáis cuenta de consola y una <strong>clave de API</strong>. Esa clave no es el inicio de sesión de Chat. Facturación y límites de API son un plano aparte de la barra de uso de cinco horas de Chat (lo dijo con claridad al hablar de medidores). Las integraciones de la semana 1—Chrome, Excel, PowerPoint, Microsoft 365, Slack—son clientes adicionales, no sustitutos de los tres."
+      },
+      {
+        "type": "h2",
+        "text": "Para quién es cada cliente en lenguaje UST"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Chat:</strong> todo el mundo. Los arquitectos que resumen un SRS siguen empezando aquí si no necesitan escribir en disco.",
+          "<strong>Cowork:</strong> trabajadores del conocimiento y cualquiera con PDF/CSV/PPT locales que necesita que los archivos <em>cambien</em>. También el sitio donde Vijay puso trabajos programados y «disparar desde el teléfono».",
+          "<strong>Code:</strong> centro de gravedad de CCDV-F. Full-stack, backend, ingenieros de IA. Los asistentes completaban una línea; este agente puede planificar un repo, ejecutar pruebas, abrir PR y hablar con Jira/Figma vía herramientas."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Por qué Chat frente a Cowork sigue confundiendo"
+      },
+      {
+        "type": "p",
+        "html": "Podéis subir un PPT a Chat y pedir un resumen. La diferencia de Cowork es que <strong>la carpeta adjuntada es un espacio de trabajo en el que el agente puede crear, mover, editar y borrar</strong>, con un banner de consentimiento (editar / borrar / compartir con herramientas conectadas). Chat no os ordenará en silencio la carpeta Descargas. Si el enunciado dice «reorganizar facturas en disco», la respuesta es Cowork (o Code/SDK), no Chat."
+      },
+      {
+        "type": "h2",
+        "text": "Planes de autenticación"
+      },
+      {
+        "type": "p",
+        "html": "La instalación de Claude Code (módulo siguiente) exigía Pro, Max, Team o Enterprise—no un resto gratuito de consumidor. UST está en Team/Enterprise. Las claves de API siguen saliendo de la consola y la org puede denegarlas aunque Chat funcione. Descargad Claude Code del portal de software de la empresa / npm privado si así UST fija versiones; la demo curl/npm de Vijay es el método upstream, no un atajo de seguridad."
+      },
+      {
+        "type": "h2",
+        "text": "Frase de examen para memorizar"
+      },
+      {
+        "type": "p",
+        "html": "Los tres son <strong>clientes</strong>. Haiku/Sonnet/Opus son <strong>servidores</strong>. Solo Cowork y Code se etiquetaron como <strong>agentic</strong> en el repaso del 5 de agosto (Chat igual puede llamar herramientas; reservó el lenguaje de «solución agentic» para los productos que ejecutan planes de varios pasos contra herramientas locales). Si dos respuestas dicen «usar Claude», elegid el cliente que coincida con disco, IDE o conversación."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Superficies de producto vigentes cuando cambien las teselas de escritorio."
+          },
+          {
+            "title": "Resumen de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Vías de instalación CLI e IDE."
+          },
+          {
+            "title": "Soporte Cowork / escritorio Claude",
+            "url": "https://support.claude.com/",
+            "note": "Distribución de escritorio y disponibilidad de funciones."
+          },
+          {
+            "title": "Resumen de la API",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "El cliente sin GUI: claves, Messages, límites aparte."
+          },
+          {
+            "title": "¿Dónde está la documentación de la API?",
+            "url": "https://support.claude.com/en/articles/8114490-where-can-i-find-your-api-documentation",
+            "note": "Si solo tenéis claude.ai y necesitáis la vía de consola."
+          }
+        ]
+      }
+    ]
+  }
+]

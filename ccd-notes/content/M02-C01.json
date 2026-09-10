@@ -1,0 +1,252 @@
+[
+  {
+    "lang": "en",
+    "module_id": "02",
+    "chapter_id": "01",
+    "eyebrow": "Module 02 · Chapter 01 · 5 August 2026",
+    "chapter_title": "Exam format: MCQ plus written scenarios, not application coding",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 2 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M02 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 2 (5 August 2026) opened with the question the room had after session 1: <em>will we have to code an application in the exam?</em> Vijay’s answer was unambiguous. You will not implement the app under the exam clock. You will answer <strong>multiple-choice items</strong> and <strong>descriptive scenarios</strong>—what you would do, which API or product you would pick, how you would enable an agent in an enterprise with guardrails."
+      },
+      {
+        "type": "h2",
+        "text": "What “not coding the app” still requires"
+      },
+      {
+        "type": "p",
+        "html": "Anand asked whether application development would appear. Vijay: you will not “do anything” in the sense of a coding IDE. You <em>will</em> describe implementation paths. Lalit summarised it as prompting and decisions that change an agentic workflow. That is the right mental model: the exam tests whether you can <strong>select and justify</strong>, including responsible AI, security, and governance in an org."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Six use cases (Vijay: know them thoroughly; more detail promised the following day).",
+          "Use definitions from Anthropic documentation, then apply them to the scenario—not slang from another vendor’s course.",
+          "Written answers are “your thought”: approaches, not source files."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Shape of the sitting (as taught that week)"
+      },
+      {
+        "type": "p",
+        "html": "Full numbers for the four tracks landed on 6 August; they belong in your exam-format picture now so you do not study as if this were a three-hour hackathon."
+      },
+      {
+        "type": "table",
+        "headers": ["Aspect", "Classroom teaching (5–6 August 2026)", "How to practise"],
+        "rows": [
+          ["Question style", "MCQ + written / scenario items", "After every demo, write a 6–8 line “I would…” paragraph"],
+          ["Developer Foundation volume / time", "60 questions, 120 minutes", "Two-minute average; flag long stems"],
+          ["Scoring (programme guide)", "1000-point scale, pass ~750", "Weak scenario writing fails you even if MCQ is lucky"],
+          ["Proctoring / ID", "Pearson (and similar) name must match ID", "Fix Skilljar legal name via UST account holder <em>before</em> you book"],
+          ["Scheduling", "You pick the slot; org may have a preferred vendor", "Do not wait for a cohort “exam date”—there isn’t one"],
+          ["Sample item flavour (6 August)", "e.g. 10,000 overnight docs, cost-first, not urgent → Messages Batches vs naive parallel Messages", "Learn product names: Batches, MCP, Claude Code, Cowork"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Topics the scenarios will lean on"
+      },
+      {
+        "type": "p",
+        "html": "Vijay listed enterprise enablement of agents, responsible AI, guardrails, and “how you would do this in an org.” Prompt quality items look like: which prompt is cleaner, what is missing (role, constraints, output schema). SDK/API items are not “is this Java method spelled correctly?” so much as “which approach fits the constraints.” Prompt engineering is a large slice of <em>every</em> Anthropic cert in his later weighting (~18–20%)."
+      },
+      {
+        "type": "h2",
+        "text": "Capstone versus the credential"
+      },
+      {
+        "type": "p",
+        "html": "The masterclass may include a team capstone. Vijay was not yet sure how UST would assess it (screen-share was already restricted). That homework is <em>not</em> the Pearson exam. Conversely, Percipio course-completion certificates (HR clarified on 6 August) are also not the credential. Keep the three piles separate: UST LMS, Anthropic Academy learning, Pearson/Anthropic exam."
+      },
+      {
+        "type": "h2",
+        "text": "How to read an MCQ stem"
+      },
+      {
+        "type": "p",
+        "html": "The sample he put on screen trained a method: underline the constraints (cost, latency, overnight, PII, “results tomorrow”). Eliminate answers that optimise the wrong axis (synchronous fan-out when Batches exist). If two answers are technically possible, pick the one that matches Anthropic’s named product. Classroom UI (effort sliders, Cowork on or off) must not override the docs if they disagree."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Live class versus exam booklet",
+        "html": "Model names, Batches behaviour, and partner-tier maths change. Prefer <a href=\"https://docs.claude.com/en/home\">docs.claude.com</a> and the current Academy exam page over a screenshot from 5 August."
+      },
+      {
+        "type": "h2",
+        "text": "Study rhythm Vijay implied"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Learn the official term on Skilljar / docs (so you recognise it in a stem).",
+          "Rehearse the six use cases as stories: actors, data location, product, tools, risks.",
+          "Write the responsible-AI sentence every time: what you will not send, who approves connectors, what the model does not retain."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Exam registration and the courses whose vocabulary matches the items."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "The API named in sample “how would you process this workload?” items."
+          },
+          {
+            "title": "Prompt engineering overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "High weight across certifications."
+          },
+          {
+            "title": "Strengthen guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Enterprise / responsible-AI scenarios."
+          },
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Canonical names for products the stems will use."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "02",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 02 · Capítulo 01 · 5 de agosto de 2026",
+    "chapter_title": "Formato del examen: tipo test y escenarios escritos, no programar la app",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 2 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M02 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 2 (5 de agosto de 2026) abrió con la pregunta que quedaba de la sesión 1: <em>¿habrá que programar una aplicación en el examen?</em> La respuesta de Vijay fue inequívoca. No implementaréis la app con el reloj del examen. Responderéis <strong>ítems tipo test</strong> y <strong>escenarios descriptivos</strong>—qué haríais, qué API o producto elegiríais, cómo habilitaríais un agente en una empresa con guardrails."
+      },
+      {
+        "type": "h2",
+        "text": "Qué exige aún «no programar la app»"
+      },
+      {
+        "type": "p",
+        "html": "Anand preguntó si saldría el desarrollo de aplicaciones. Vijay: no «haréis nada» en el sentido de un IDE de examen. <em>Sí</em> describiréis vías de implementación. Lalit lo resumió como prompting y decisiones que cambian un flujo agentic. Ese es el modelo mental correcto: el examen comprueba si sabéis <strong>elegir y justificar</strong>, incluida la IA responsable, la seguridad y el gobierno en una organización."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Seis casos de uso (Vijay: hay que dominarlos; más detalle al día siguiente).",
+          "Usad definiciones de la documentación de Anthropic y aplicadlas al escenario—no la jerga de otro curso de fabricante.",
+          "Las respuestas escritas son «vuestro pensamiento»: enfoques, no archivos fuente."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Forma de la convocatoria (según se enseñó esa semana)"
+      },
+      {
+        "type": "p",
+        "html": "Las cifras completas de las cuatro rutas llegaron el 6 de agosto; entran ya en vuestra imagen del formato para que no estudiéis como si fuera un hackathon de tres horas."
+      },
+      {
+        "type": "table",
+        "headers": ["Aspecto", "Enseñanza de aula (5–6 de agosto de 2026)", "Cómo practicar"],
+        "rows": [
+          ["Estilo de pregunta", "Tipo test + ítems escritos / escenario", "Tras cada demo, escribid un párrafo de 6–8 líneas «yo haría…»"],
+          ["Volumen / tiempo Foundation developer", "60 preguntas, 120 minutos", "Dos minutos de media; marcad los enunciados largos"],
+          ["Puntuación (guía del programa)", "Escala de 1000, aprobado ~750", "Un escenario flojo os tumba aunque el test salga bien"],
+          ["Supervisión / identidad", "Pearson (y similares): el nombre debe coincidir con el DNI", "Arreglad el nombre legal en Skilljar con el account holder de UST <em>antes</em> de reservar"],
+          ["Agenda", "Elegís el hueco; la org puede tener un proveedor preferido", "No esperéis una «fecha de examen» de cohorte—no hay una"],
+          ["Sabor de ítem de ejemplo (6 de agosto)", "p. ej. 10.000 docs nocturnos, coste primero, no urgente → Messages Batches frente a Messages en paralelo ingenuos", "Aprended nombres de producto: Batches, MCP, Claude Code, Cowork"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Temas en los que se apoyarán los escenarios"
+      },
+      {
+        "type": "p",
+        "html": "Vijay enumeró la habilitación empresarial de agentes, IA responsable, guardrails y «cómo lo haríais en una org». Los ítems de calidad de prompt parecen: cuál está más limpio, qué falta (rol, restricciones, esquema de salida). Los de SDK/API no son tanto «¿está bien escrito este método Java?» como «qué enfoque encaja con las restricciones». La ingeniería de prompts es un trozo grande de <em>todas</em> las certs de Anthropic en su ponderación posterior (~18–20 %)."
+      },
+      {
+        "type": "h2",
+        "text": "Capstone frente a la credencial"
+      },
+      {
+        "type": "p",
+        "html": "El masterclass puede incluir un capstone de equipo. Vijay aún no sabía cómo lo evaluaría UST (ya estaba restringido compartir pantalla). Ese trabajo <em>no</em> es el examen Pearson. A la inversa, los certificados de fin de curso de Percipio (HR lo aclaró el 6 de agosto) tampoco son la credencial. Mantened tres montones: LMS de UST, aprendizaje de Anthropic Academy, examen Pearson/Anthropic."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo leer un enunciado tipo test"
+      },
+      {
+        "type": "p",
+        "html": "El ejemplo que puso en pantalla entrenó un método: subrayad las restricciones (coste, latencia, nocturno, PII, «resultados mañana»). Eliminad respuestas que optimizan el eje incorrecto (abanico síncrono cuando existen Batches). Si dos respuestas son técnicamente posibles, elegid la que coincida con el producto nombrado de Anthropic. La UI del aula (esfuerzo, Cowork sí o no) no debe imponerse a los docs si discrepan."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Clase en vivo frente al cuadernillo",
+        "html": "Cambian nombres de modelo, el comportamiento de Batches y las cuentas de partner. Preferid <a href=\"https://docs.claude.com/en/home\">docs.claude.com</a> y la página de examen vigente de Academy frente a una captura del 5 de agosto."
+      },
+      {
+        "type": "h2",
+        "text": "Ritmo de estudio que Vijay implicó"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Aprended el término oficial en Skilljar / docs (para reconocerlo en un enunciado).",
+          "Ensayad los seis casos de uso como historias: actores, dónde están los datos, producto, herramientas, riesgos.",
+          "Escribid la frase de IA responsable cada vez: qué no enviaréis, quién aprueba conectores, qué no retiene el modelo."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Inscripción al examen y cursos cuyo vocabulario coincide con los ítems."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "La API nombrada en ítems de ejemplo «¿cómo procesaríais esta carga?»."
+          },
+          {
+            "title": "Resumen de ingeniería de prompts",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Peso alto en todas las certificaciones."
+          },
+          {
+            "title": "Reforzar guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Escenarios empresariales / de IA responsable."
+          },
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Nombres canónicos de productos que usarán los enunciados."
+          }
+        ]
+      }
+    ]
+  }
+]

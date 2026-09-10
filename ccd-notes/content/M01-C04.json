@@ -1,0 +1,284 @@
+[
+  {
+    "lang": "en",
+    "module_id": "01",
+    "chapter_id": "04",
+    "eyebrow": "Module 01 · Chapter 04 · 3 August 2026",
+    "chapter_title": "Study posture for the Foundation exam from day one",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 1 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M01 · C04 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 1 did not walk the Pearson booklet, but Vijay already told the room how to <em>think</em> so the later exam format is not a surprise. Foundation is a <strong>developer certification</strong>: you will not open an IDE in the test centre and ship an app. You will choose products, name trade-offs, and write how you would implement a scenario. Start that posture now—while Chat and Cowork are still the only screens you have seen."
+      },
+      {
+        "type": "h2",
+        "text": "What you are actually being certified for"
+      },
+      {
+        "type": "p",
+        "html": "This masterclass is CCDV-F, not the business Associate track and not Architect Professional. Prompt engineering still shows up everywhere (Vijay later quoted ~18–20% of items across certs). From day one, practise <em>explaining</em> a workflow in Anthropic’s words: client versus model, tokens versus usage meters, Chat versus Cowork versus Code, tool versus MCP versus RAG."
+      },
+      {
+        "type": "table",
+        "headers": ["Exam element (as taught in week 1)", "What to expect", "Study implication from session 1"],
+        "rows": [
+          ["Item types", "MCQ plus written / descriptive scenarios — not application coding in the exam harness", "Practise writing “I would use X because…” not pasting a React app"],
+          ["Scenarios", "About six use cases you must know thoroughly (detailed on 5 August)", "Map each classroom demo (invoices, weather+image, Chat cutoff) to a named pattern"],
+          ["Duration / count (developer track, 6 August slides)", "60 questions, 120 minutes (associate quoted the same shape)", "Pace: two minutes average; leave time for the long written items"],
+          ["Score (programme guide, 6 August)", "Scale described as 1000 marks, pass around 750", "You cannot guess your way through the scenario block"],
+          ["Validity / price (classroom)", "12 months; associate quoted USD 99, developer USD 125 — confirm on Skilljar", "Budget and recertify; numbers move"],
+          ["Delivery", "Book your own slot; Pearson mentioned for ID check", "Legal name on Skilljar must match photo ID — raise with the org account holder early"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Numbers are classroom snapshots",
+        "html": "Prices, pass marks, and question counts came from Vijay’s slides and a July 2026 programme PDF he promised to share. On exam week, the booking page on <a href=\"https://anthropic.skilljar.com\">anthropic.skilljar.com</a> wins."
+      },
+      {
+        "type": "h2",
+        "text": "Where to study (and where not to)"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Do not default to Udemy.</strong> Vijay’s answer to “is there a Udemy practice set?” was no: use Anthropic Academy on Skilljar.",
+          "<strong>Percipio / internal LMS</strong> (clarified 6 August) is UST’s learning-journey tracker. Completing it is not the Anthropic credential.",
+          "<strong>docs.claude.com</strong> is the glossary the exam will use (including product jargon such as “harness” in a Claude sense, not only ML temperature).",
+          "Internal dumps and unofficial PDFs were mentioned in passing; treat them as unofficial. Prefer the programme guide Anthropic published and the Academy courses (on the order of three to four courses per exam path; ~19 courses visible in the portal in August 2026)."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Habits that already showed up in session 1 Q&amp;A"
+      },
+      {
+        "type": "p",
+        "html": "These are exam-shaped habits, not politeness tips."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>New chat when the task is done.</strong> Turn three of a thread resends Q1+A1+Q2+A2+Q3. That is tokens and extra hallucination surface.",
+          "<strong>Write definite prompts:</strong> role, task, input, output format, constraints (Lalit’s five-part list, which Vijay accepted).",
+          "<strong>Skills are not free.</strong> A short user prompt plus a 1,000-line skill is billed as the concatenation. Reuse locally; do not assume the skill is cached as a discounted prefix unless you are in an API prompt-cache design.",
+          "<strong>CLAUDE.md is a product feature</strong> Cowork/Code create it—not a one-off file Vijay typed. You will customise it; stuffing entire vendor docs into it is the wrong optimisation.",
+          "<strong>Estimate cost with evals</strong> when a client asks ROI: parameterise tokens in and out over N interactions. Session 1 already pointed at evaluation rather than a magic calculator in Chat.",
+          "<strong>QA path:</strong> connectors + generated Playwright (or similar) in CI, not “ignore the course because I am QA.”"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Confidentiality and connectors as exam topics"
+      },
+      {
+        "type": "p",
+        "html": "Responsible AI and enterprise governance are on the later syllabus and already appeared: do not enable personal Gmail connectors on org data; attached Cowork folders can be edited or deleted; credentials for connectors sit on the local client; Anthropic’s SLA/compliance story (PII, PCI, GDPR as relevant to the customer geography) is why the <em>model</em> can be described as non-retaining while the <em>chat history</em> still exists. If an exam stem says “overnight batch, cost-sensitive, not urgent,” you will later recognise Messages Batches versus naive parallel Messages—session 3 previewed that style of item. For now, practise reading stems for <em>constraint words</em>: cost, latency, PII, local disk, real-time."
+      },
+      {
+        "type": "h2",
+        "text": "Token literacy without panicking"
+      },
+      {
+        "type": "p",
+        "html": "Enterprise licences are pooled. Hitting a personal “empty tank” is uncommon on day one; wasting a 36-file Cowork sort that a script should own <em>will</em> show up in team usage. Session 1’s invoice demo was the right tool for mixed CSV/txt/images that a brittle script cannot parse; it is the wrong tool if you already have a stable schema and a cron job. That judgement—product versus SDK versus RAG—is the Foundation skill."
+      },
+      {
+        "type": "h2",
+        "text": "Your week-1 checklist"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Create or confirm Skilljar access with the name that matches your ID document.",
+          "Bookmark docs.claude.com and the models page; compare them to whatever the desktop picker shows.",
+          "Sit Chat: cutoff question, web search, new thread.",
+          "If Cowork is enabled, attach a <em>copy</em> of a folder only—never the only copy of important files.",
+          "Write five sentences: Chat vs Cowork vs Code; client vs LLM; cutoff vs tools; files vs Project RAG; tokens vs the five-hour usage meter (the last two get a full treatment in modules 02–03)."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Forward pointer",
+        "html": "Module 02 records exam format and Academy/partner counting in detail. Module 03 records the four post-13-July tracks. You do not need to memorise partner Gold/Premier numbers for CCDV-F, but you do need Anthropic’s product vocabulary."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Enrolment, self-paced paths, and exam registration as taught in class."
+          },
+          {
+            "title": "Prompt engineering overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Role, constraints, and output control — the day-one prompt habit, written properly."
+          },
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Glossary the exam will prefer over informal classroom ASR."
+          },
+          {
+            "title": "Rate limits",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "API-side limits are not the same as Chat’s five-hour usage bar — start noticing the difference."
+          },
+          {
+            "title": "Usage policy",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "What you may send; pairs with the classroom confidentiality rule."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "01",
+    "chapter_id": "04",
+    "eyebrow": "Módulo 01 · Capítulo 04 · 3 de agosto de 2026",
+    "chapter_title": "Cómo estudiar el examen Foundation desde el primer día",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 1 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M01 · C04 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 1 no recorrió el cuadernillo de Pearson, pero Vijay ya dijo a la sala cómo <em>pensar</em> para que el formato del examen no sorprenda. Foundation es una <strong>certificación de desarrollador</strong>: no vais a abrir un IDE en el centro de examen y entregar una app. Elegiréis productos, nombraréis compromisos y escribiréis cómo implementaríais un escenario. Empezad esa postura ahora—mientras Chat y Cowork son las únicas pantallas que habéis visto."
+      },
+      {
+        "type": "h2",
+        "text": "Para qué os certifican de verdad"
+      },
+      {
+        "type": "p",
+        "html": "Este masterclass es CCDV-F, no la ruta Associate de negocio ni Architect Professional. La ingeniería de prompts aparece en todas partes (más adelante Vijay citó ~18–20 % de ítems en las certs). Desde el primer día, practicad <em>explicar</em> un flujo con las palabras de Anthropic: cliente frente a modelo, tokens frente a medidores de uso, Chat frente a Cowork frente a Code, herramienta frente a MCP frente a RAG."
+      },
+      {
+        "type": "table",
+        "headers": ["Elemento del examen (según la semana 1)", "Qué esperar", "Implicación de estudio desde la sesión 1"],
+        "rows": [
+          ["Tipos de ítem", "Tipo test más escenarios escritos / descriptivos — no programar la app en el arnés del examen", "Practicad «usaría X porque…», no pegar una app React"],
+          ["Escenarios", "Unos seis casos de uso que hay que dominar (detalle el 5 de agosto)", "Asociad cada demo de aula (facturas, tiempo+imagen, corte de Chat) a un patrón con nombre"],
+          ["Duración / recuento (ruta developer, diapositivas del 6 de agosto)", "60 preguntas, 120 minutos (associate con la misma forma)", "Ritmo: dos minutos de media; dejad tiempo para los escritos largos"],
+          ["Puntuación (guía del programa, 6 de agosto)", "Escala descrita como 1000 puntos, aprobado hacia 750", "No se aprueba adivinando el bloque de escenarios"],
+          ["Validez / precio (aula)", "12 meses; associate citado a 99 USD, developer 125 USD — confirmad en Skilljar", "Presupuestad y recertificad; las cifras se mueven"],
+          ["Entrega", "Reserváis hueco; Pearson mencionado para el DNI", "El nombre legal en Skilljar debe coincidir con el documento — subidlo pronto al account holder de la org"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Las cifras son una foto de aula",
+        "html": "Precios, nota de corte y recuento de preguntas salieron de las diapositivas de Vijay y de un PDF de programa de julio de 2026 que prometió compartir. La semana del examen gana la página de reserva en <a href=\"https://anthropic.skilljar.com\">anthropic.skilljar.com</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Dónde estudiar (y dónde no)"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>No toméis Udemy por defecto.</strong> La respuesta de Vijay a «¿hay prácticas en Udemy?» fue no: usad Anthropic Academy en Skilljar.",
+          "<strong>Percipio / LMS interno</strong> (aclarado el 6 de agosto) es el seguimiento del itinerario de UST. Completarlo no es la credencial de Anthropic.",
+          "<strong>docs.claude.com</strong> es el glosario que usará el examen (incluido jerga de producto como «harness» en sentido Claude, no solo temperatura de ML).",
+          "Se mencionaron de pasada dumps internos y PDF no oficiales; tratadlos como no oficiales. Preferid la guía de programa de Anthropic y los cursos de Academy (del orden de tres o cuatro cursos por ruta de examen; ~19 cursos visibles en el portal en agosto de 2026)."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Hábitos que ya salieron en las preguntas de la sesión 1"
+      },
+      {
+        "type": "p",
+        "html": "Son hábitos con forma de examen, no consejos de cortesía."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Chat nuevo cuando la tarea está hecha.</strong> El turno tres de un hilo reenvía P1+R1+P2+R2+P3. Eso son tokens y más superficie de alucinación.",
+          "<strong>Escribid prompts definidos:</strong> rol, tarea, entrada, formato de salida, restricciones (la lista de cinco partes de Lalit, que Vijay aceptó).",
+          "<strong>Las skills no son gratis.</strong> Un prompt corto de usuario más una skill de 1.000 líneas se factura como la concatenación. Reutilizad en local; no asumáis que la skill está en caché como prefijo barato salvo que diseñéis prompt cache en la API.",
+          "<strong>CLAUDE.md es una característica de producto</strong> que Cowork/Code crean—no un archivo suelto que Vijay tecleó. Lo personalizaréis; meter toda la documentación del fabricante es la optimización incorrecta.",
+          "<strong>Estimad el coste con evaluaciones</strong> cuando un cliente pida ROI: parametrizad tokens de entrada y salida en N interacciones. La sesión 1 ya señaló la evaluación, no una calculadora mágica en Chat.",
+          "<strong>Vía QA:</strong> conectores + Playwright (o similar) generado en CI, no «ignoro el curso porque soy QA»."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Confidencialidad y conectores como temas de examen"
+      },
+      {
+        "type": "p",
+        "html": "La IA responsable y el gobierno empresarial están en el temario posterior y ya aparecieron: no habilitéis conectores de Gmail personal sobre datos de la org; las carpetas de Cowork adjuntas se pueden editar o borrar; las credenciales de conectores viven en el cliente local; la historia de SLA/cumplimiento de Anthropic (PII, PCI, GDPR según la geografía del cliente) es por qué el <em>modelo</em> se puede describir como no retenedor mientras el <em>historial de chat</em> sigue existiendo. Si un enunciado dice «lote nocturno, sensible al coste, no urgente», más adelante reconoceréis Messages Batches frente a Messages en paralelo ingenuos—la sesión 3 adelantó ese estilo. Por ahora, practicad leer enunciados buscando <em>palabras de restricción</em>: coste, latencia, PII, disco local, tiempo real."
+      },
+      {
+        "type": "h2",
+        "text": "Alfabetización de tokens sin pánico"
+      },
+      {
+        "type": "p",
+        "html": "Las licencias enterprise están agrupadas. Vaciar un «depósito» personal es raro el primer día; malgastar una ordenación Cowork de 36 archivos que debería hacer un script <em>sí</em> se verá en el uso del equipo. La demo de facturas de la sesión 1 era la herramienta correcta para CSV/txt/imágenes mezclados que un script frágil no parsea; es la incorrecta si ya tenéis un esquema estable y un cron. Ese juicio—producto frente a SDK frente a RAG—es la competencia Foundation."
+      },
+      {
+        "type": "h2",
+        "text": "Lista de la semana 1"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Cread o confirman el acceso a Skilljar con el nombre que coincide con vuestro documento de identidad.",
+          "Guardad docs.claude.com y la página de modelos; comparadlos con lo que muestre el selector de escritorio.",
+          "Sentaos en Chat: pregunta de corte, búsqueda web, hilo nuevo.",
+          "Si Cowork está habilitado, adjuntad solo una <em>copia</em> de una carpeta—nunca la única copia de archivos importantes.",
+          "Escribid cinco frases: Chat vs Cowork vs Code; cliente vs LLM; corte vs herramientas; archivos vs Project RAG; tokens vs el medidor de uso de cinco horas (los dos últimos se tratan a fondo en los módulos 02–03)."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Puntero hacia adelante",
+        "html": "El módulo 02 recoge con detalle el formato del examen y el recuento Academy/partners. El módulo 03 recoge las cuatro rutas posteriores al 13 de julio. No necesitáis memorizar los números Gold/Premier de partner para CCDV-F, pero sí el vocabulario de producto de Anthropic."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Inscripción, rutas a vuestro ritmo y registro del examen según se enseñó en clase."
+          },
+          {
+            "title": "Resumen de ingeniería de prompts",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Rol, restricciones y control de salida — el hábito de prompt del primer día, bien escrito."
+          },
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Glosario que el examen preferirá frente al ASR informal del aula."
+          },
+          {
+            "title": "Límites de tasa",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Los límites de API no son la barra de uso de cinco horas de Chat — empezaos a notar la diferencia."
+          },
+          {
+            "title": "Política de uso",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "Qué podéis enviar; va con la norma de confidencialidad del aula."
+          }
+        ]
+      }
+    ]
+  }
+]

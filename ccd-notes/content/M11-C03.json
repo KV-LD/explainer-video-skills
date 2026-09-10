@@ -1,0 +1,286 @@
+[
+  {
+    "lang": "en",
+    "module_id": "11",
+    "chapter_id": "03",
+    "eyebrow": "Module 11 · Chapter 03 · 26 August 2026",
+    "chapter_title": "Agent SDK / agentic implementation steps",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 11 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M11 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "After RAG, the session defined <strong>agents</strong> and <strong>agentic AI</strong>, then installed the <strong>Claude Agent SDK</strong> (renamed from what the trainer still called Claude Code SDK). GenAI is “prompt in, text (or image) out.” An agent is a packaged worker. Agentic AI is <strong>goal-shaped</strong>: plan, act with tools, reflect, loop until the goal is done or blocked."
+      },
+      {
+        "type": "h2",
+        "text": "Agent versus agentic application"
+      },
+      {
+        "type": "p",
+        "html": "An <strong>agent</strong> in this course is a configurable bundle: some combination of an LLM, tools (in-process or MCP), memory, prompting technique, and optionally RAG. You pick which features that worker needs. A retrieval agent might only fetch and format chunks. The LLM is optional in the trainer’s taxonomy — a worker could be a deterministic tool wrapper — but the interesting agents reason."
+      },
+      {
+        "type": "p",
+        "html": "<strong>Agentic AI</strong> orchestrates many such tasks toward a goal. Recruitment example: “Hire a senior Java full-stack engineer, issue an offer, and onboard them.” Subtasks include writing a JD, posting to Naukri and/or an internal portal, screening CVs, scheduling interviews, messaging candidates. Each step can be an agent; the orchestrator decides order, retries, and which integration to use when the goal says “internal only” versus “both boards.”"
+      },
+      {
+        "type": "h2",
+        "text": "Plan, act, reflect — not a rules engine"
+      },
+      {
+        "type": "p",
+        "html": "Power Automate-style flows fire on events you pre-wired. Agentic systems take a natural-language goal, produce a plan (reasoning models help), execute actions on integrations you registered up front, capture success / failure / partial results, store them in memory, and <strong>revisit the plan</strong>. Completion is scored against the <em>goal</em>, not a single tool call."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Short-term memory</strong> — daily blast of emails/WhatsApp, then forget.",
+          "<strong>Long-term memory</strong> — a hire that may take days to a year; configurable retention, not a magic number.",
+          "<strong>Human hand-off</strong> — agent OS should allow agent-to-human transfer when the goal requires it."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "“Agent OS” in this classroom"
+      },
+      {
+        "type": "p",
+        "html": "The orchestration layer was named <strong>agent OS</strong>: which agents exist, which system integrations (Naukri, WhatsApp, SMTP) are allowed, how memory works, privacy and guardrails on the incoming goal. In the Claude stack that OS is the <strong>Claude Agent SDK</strong> (Python or TypeScript). <code>pip install</code> the current package name from docs — recordings say “Cloud Agent SDK.”"
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Same API key",
+        "html": "A student asked whether the Agent SDK used a different key. Vijay: <strong>no</strong>, the Anthropic API key is the same. Confirm workspaces and rate limits on the live API pages."
+      },
+      {
+        "type": "h2",
+        "text": "Four components in the loop"
+      },
+      {
+        "type": "table",
+        "headers": ["Piece", "Role in Vijay’s diagram", "Does it touch the disk?"],
+        "rows": [
+          ["Your application", "Calls <code>query</code> with a goal and options; prints the result", "Only if you write extra code"],
+          ["Claude Agent SDK", "“Nervous system”: API calls, tool loop, session state, translating “create a file” into execution", "Coordinates; does not replace Claude Code"],
+          ["Claude (LLM)", "Thinks: context, plan, which tool, whether the goal is done. Never acts on the machine", "No"],
+          ["Claude Code (doer)", "Subprocess that reads/writes files, runs bash, executes requested tools, returns stdout to the SDK", "Yes"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Mnemonic he wanted: <strong>Claude decides, Claude Code does, the SDK loops, your code configures.</strong> Students who thought “three models at once” were corrected: the SDK is a library; the thinker is the Claude model you selected."
+      },
+      {
+        "type": "h2",
+        "text": "Implementation steps in the notebook"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Install Claude Agent SDK; load <code>ANTHROPIC_API_KEY</code>.",
+          "Choose a model id (check the live models page; classroom ids rot).",
+          "Build <strong>Claude Agent Options</strong>: allowed tools, model, later memory and permission mode.",
+          "Call <code>query(prompt, options)</code> as an async/sync iterator of messages (system, assistant, tool, result).",
+          "Enable built-in tools you actually need (Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch, AskUserQuestion were listed — module 12 drills them).",
+          "Optionally attach hooks (pre/post tool, prompt) and permission policies you already saw in Claude Code sessions."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "The first demo query was “what files are in the directory?” without a path: the agent used the working directory, listed a Jupyter notebook and a built-in-tools folder, and offered to dig further. One <code>query</code> hid the multi-step tool loop you wrote by hand in module 10."
+      },
+      {
+        "type": "h2",
+        "text": "Cowork as intuition"
+      },
+      {
+        "type": "p",
+        "html": "Cowork was recalled as an agentic product: attach a folder, ask for file names, ignore nested directories if that is the instruction. The SDK is how you build that shape in Python instead of only in the Cowork GUI."
+      },
+      {
+        "type": "h2",
+        "text": "RAG inside agents"
+      },
+      {
+        "type": "p",
+        "html": "Nothing stops an agent option list from including a custom retrieval tool or an MCP server in front of Atlas. Agentic RAG is “the orchestrator decides when the goal needs documents,” not a new acronym. Guardrails (module 12) wrap the same <code>query</code> so a recruitment goal cannot dump PII into logs."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "The doer process the Agent SDK drives."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "The loop the SDK automates."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Third-party tools on the same agent."
+          },
+          {
+            "title": "Managed Agents quickstart",
+            "url": "https://platform.claude.com/docs/en/managed-agents/quickstart",
+            "note": "Platform-hosted agents; confirm against current product names."
+          },
+          {
+            "title": "Models",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Which id you put in Agent Options."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "11",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 11 · Capítulo 03 · 26 de agosto de 2026",
+    "chapter_title": "Pasos de implementación agentic y el Agent SDK",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 11 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M11 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Tras RAG, la sesión definió <strong>agentes</strong> e <strong>IA agentic</strong> e instaló el <strong>Claude Agent SDK</strong> (renombrado respecto a lo que el formador aún llamaba Claude Code SDK). GenAI es «prompt entra, texto (o imagen) sale». Un agente es un trabajador empaquetado. La IA agentic tiene forma de <strong>objetivo</strong>: planificar, actuar con herramientas, reflexionar, repetir hasta cumplir o bloquearse."
+      },
+      {
+        "type": "h2",
+        "text": "Agente frente a aplicación agentic"
+      },
+      {
+        "type": "p",
+        "html": "Un <strong>agente</strong> en este curso es un paquete configurable: alguna combinación de LLM, herramientas (en proceso o MCP), memoria, técnica de prompting y, opcionalmente, RAG. Elegís qué rasgos necesita ese trabajador. Un agente de recuperación puede solo traer y formatear trozos. El LLM es opcional en la taxonomía del formador — un trabajador podría ser un envoltorio determinista — pero los agentes interesantes razonan."
+      },
+      {
+        "type": "p",
+        "html": "La <strong>IA agentic</strong> orquesta muchas de esas tareas hacia un objetivo. Ejemplo de reclutamiento: «Contratad a un ingeniero Java full-stack senior, emitid una oferta e incorporadlo». Las subtareas incluyen redactar una JD, publicar en Naukri y/o un portal interno, cribar CVs, citar entrevistas, escribir a candidatos. Cada paso puede ser un agente; el orquestador decide el orden, los reintentos y qué integración usar cuando el objetivo dice «solo interno» frente a «ambos tableros»."
+      },
+      {
+        "type": "h2",
+        "text": "Planificar, actuar, reflexionar — no un motor de reglas"
+      },
+      {
+        "type": "p",
+        "html": "Los flujos tipo Power Automate disparan eventos que precableasteis. Los sistemas agentic toman un objetivo en lenguaje natural, producen un plan (ayudan los modelos de razonamiento), ejecutan acciones en integraciones que registrasteis de antemano, capturan éxito / fallo / resultado parcial, lo guardan en memoria y <strong>revisitan el plan</strong>. El cierre se puntúa contra el <em>objetivo</em>, no contra una sola llamada a herramienta."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Memoria a corto plazo</strong> — una tanda diaria de correos/WhatsApp y luego olvidar.",
+          "<strong>Memoria a largo plazo</strong> — una contratación que puede durar días o un año; retención configurable, no un número mágico.",
+          "<strong>Traspaso a humano</strong> — el agent OS debe permitir el paso agente-a-humano cuando el objetivo lo exige."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "«Agent OS» en este aula"
+      },
+      {
+        "type": "p",
+        "html": "La capa de orquestación se llamó <strong>agent OS</strong>: qué agentes existen, qué integraciones de sistema (Naukri, WhatsApp, SMTP) están permitidas, cómo funciona la memoria, privacidad y guardrails sobre el objetivo entrante. En el stack Claude ese OS es el <strong>Claude Agent SDK</strong> (Python o TypeScript). Haced <code>pip install</code> del nombre de paquete vigente en la documentación: las grabaciones dicen «Cloud Agent SDK»."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "La misma clave de API",
+        "html": "Un alumno preguntó si el Agent SDK usaba otra clave. Vijay: <strong>no</strong>, la clave de la API de Anthropic es la misma. Confirmad workspaces y límites de tasa en las páginas vigentes."
+      },
+      {
+        "type": "h2",
+        "text": "Cuatro componentes en el bucle"
+      },
+      {
+        "type": "table",
+        "headers": ["Pieza", "Papel en el diagrama de Vijay", "¿Toca el disco?"],
+        "rows": [
+          ["Vuestra aplicación", "Llama a <code>query</code> con un objetivo y opciones; imprime el resultado", "Solo si escribís código extra"],
+          ["Claude Agent SDK", "«Sistema nervioso»: llamadas API, bucle de herramientas, estado de sesión, traducir «crea un fichero» en ejecución", "Coordina; no sustituye a Claude Code"],
+          ["Claude (LLM)", "Piensa: contexto, plan, qué herramienta, si el objetivo está hecho. Nunca actúa en la máquina", "No"],
+          ["Claude Code (hacedor)", "Subproceso que lee/escribe ficheros, ejecuta bash, corre las herramientas pedidas, devuelve stdout al SDK", "Sí"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "La mnemotecnia que quería: <strong>Claude decide, Claude Code hace, el SDK itera, vuestro código configura.</strong> A quienes pensaban en «tres modelos a la vez» se les corrigió: el SDK es una biblioteca; el pensador es el modelo Claude que seleccionasteis."
+      },
+      {
+        "type": "h2",
+        "text": "Pasos de implementación en el cuaderno"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Instalar Claude Agent SDK; cargar <code>ANTHROPIC_API_KEY</code>.",
+          "Elegir un id de modelo (comprobad la página vigente; los ids de aula caducan).",
+          "Construir <strong>Claude Agent Options</strong>: herramientas permitidas, modelo, más adelante memoria y modo de permiso.",
+          "Llamar a <code>query(prompt, options)</code> como iterador de mensajes (system, assistant, tool, result).",
+          "Habilitar las herramientas integradas que de verdad necesitáis (se listaron Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch, AskUserQuestion — el módulo 12 las practica).",
+          "Opcionalmente enganchar hooks (pre/post tool, prompt) y políticas de permiso que ya visteis en sesiones de Claude Code."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "La primera consulta de demostración fue «qué ficheros hay en el directorio» sin ruta: el agente usó el directorio de trabajo, listó un cuaderno Jupyter y una carpeta de herramientas integradas, y ofreció profundizar. Un <code>query</code> ocultó el bucle de varias herramientas que escribisteis a mano en el módulo 10."
+      },
+      {
+        "type": "h2",
+        "text": "Cowork como intuición"
+      },
+      {
+        "type": "p",
+        "html": "Se recordó Cowork como producto agentic: adjuntáis una carpeta, pedís nombres de fichero, ignoráis directorios anidados si esa es la instrucción. El SDK es cómo construís esa forma en Python en lugar de solo en la GUI de Cowork."
+      },
+      {
+        "type": "h2",
+        "text": "RAG dentro de los agentes"
+      },
+      {
+        "type": "p",
+        "html": "Nada impide que las opciones del agente incluyan una herramienta de recuperación propia o un servidor MCP delante de Atlas. El RAG agentic es «el orquestador decide cuándo el objetivo necesita documentos», no un acrónimo nuevo. Los guardrails (módulo 12) envuelven el mismo <code>query</code> para que un objetivo de reclutamiento no vuelque PII en los registros."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "El proceso hacedor que impulsa el Agent SDK."
+          },
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "El bucle que el SDK automatiza."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Herramientas de terceros en el mismo agente."
+          },
+          {
+            "title": "Inicio rápido de Managed Agents",
+            "url": "https://platform.claude.com/docs/en/managed-agents/quickstart",
+            "note": "Agentes alojados en la plataforma; confirmad los nombres de producto vigentes."
+          },
+          {
+            "title": "Modelos",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Qué id ponéis en Agent Options."
+          }
+        ]
+      }
+    ]
+  }
+]

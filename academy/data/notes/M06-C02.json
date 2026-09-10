@@ -1,0 +1,228 @@
+[
+  {
+    "lang": "en",
+    "module_id": "06",
+    "chapter_id": "02",
+    "eyebrow": "Module 06 · Chapter 02 · 13 August 2026",
+    "chapter_title": "Local execution, sandbox, and why hooks can save tokens",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 6 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M06 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "The token argument in session 6 is quantitative, not aesthetic. Asking Claude to re-emit a file already written so that quotes and line breaks match house style is a second generation pass. Running Prettier (or any formatter/linter) in the <strong>sandbox</strong> after Write is local CPU. The trainer’s order-of-magnitude for a full-fledged generation: on the order of <strong>500–2000 tokens saved</strong> by not making the model reprocess formatting. Hooks are the mechanism; the sandbox is where those commands actually run."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Sandbox is product-managed",
+        "html": "You do not bring your own sandbox. The trainer: Claude manages it; there is no custom sandbox. User-scoped plugin installs land in user space; project-scoped installs in project sandboxes. Paths differ on Mac vs Windows and were not fully resolved live — trust current <a href=\"https://code.claude.com/docs/en/overview\">Claude Code</a> rather than a remembered home directory."
+      },
+      {
+        "type": "h2",
+        "text": "What “local” means here"
+      },
+      {
+        "type": "p",
+        "html": "Echo, NPX, and shell scripts execute on the machine/workspace where Claude Code is running, inside the same isolated environment that already held MCP temp files and generated trees (session 4’s Docker-like analogy). That isolation is why formatters can touch the working copy without sending the whole file back through the model. It is also why a hook that works in the terminal session may not be visible in the IDE webview until you reload window / reload webviews (Ctrl+Shift+P style) or enable the preview hook setting."
+      },
+      {
+        "type": "h2",
+        "text": "Where tokens still get spent"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "CLAUDE.md and skills are still appended to model requests — that is billed context, even if you moved Prettier out.",
+          "Verify/clean-code loops (Module 04–05) are billed; disable in memory if you will test locally.",
+          "Attaching a whole backend folder instead of <code>openapi.yaml</code> is billed.",
+          "JPEG/SVG diagrams instead of Mermaid are billed (session 4).",
+          "MCP tool results occupy context while they sit in the window, even though the fetch itself is a tool call.",
+          "A hook that <em>prints a novel into the prompt</em> on every tool use would be a bad hook — keep hook output short."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Scripts as the body of local policy"
+      },
+      {
+        "type": "p",
+        "html": "Hooks are not limited to <code>npx prettier</code>. Anything a shell script can do is in scope: Python, other binaries, <code>protect-files.sh</code>, <code>block-dangerous-commands.sh</code>. The trainer kept scripts under a <code>hooks/</code> directory in the working tree and referenced them from <code>settings.json</code>. Classmates wanted the comment headers of those scripts so they could copy the intent without reverse-engineering — those files were pushed to the public demo repo. Comments in the script are for humans and for you; they do not need to live in the LLM prompt."
+      },
+      {
+        "type": "table",
+        "headers": ["Local command", "Typical hook event", "Token effect"],
+        "rows": [
+          ["npx prettier / eslint --fix", "post-tool-use on Edit/Write", "Avoids a format regeneration pass (~hundreds–thousands of tokens on a large write)."],
+          ["protect-files.sh (deny .env, package-lock.json, .git, Prisma secrets, …)", "pre-tool-use on Edit/Write", "Prevents secret-file rewrites; also avoids messy “undo this” generations."],
+          ["block-dangerous-commands.sh (rm, reckless git, …)", "pre-tool-use on Bash", "Stops auto-mode disasters; cheaper than repairing a deleted tree with the model."],
+          ["echo status line", "post-tool-use", "Negligible; observability only."]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Plugins still unpack into the sandbox"
+      },
+      {
+        "type": "p",
+        "html": "When you install a marketplace or custom plugin at project scope, settings.json gains a reference; Claude downloads the bundle and makes skills/agents/hooks available from the sandbox. You may not see new folders in the git working tree. User-level install goes to user space instead. Treat plugins as a library you consume, not as files you casually edit unless you are a collaborator on the source repo (GitHub)."
+      },
+      {
+        "type": "h2",
+        "text": "Exam percentages the trainer attached to this era of the course"
+      },
+      {
+        "type": "p",
+        "html": "Still on 13 August, after hooks, he mapped Foundation weights (confirm against Skilljar before you sit): agent architecture and operations ~27%, tool design and MCP ~18%, Claude Code configuration and workflows ~20%, prompt engineering and structured output ~20%, context management and reliability ~15%. Hooks, sandbox, and token-aware local tools sit in configuration/workflows and context/reliability. Do not quote the percentages as eternal; quote the idea that local deterministic work should be stripped out of the billed loop."
+      },
+      {
+        "type": "h2",
+        "text": "Study check"
+      },
+      {
+        "type": "p",
+        "html": "If a scenario asks how to cut cost on a greenfield Claude Code repo that already has a strict style guide, the high-scoring answer is: keep architectural rules in CLAUDE.md; move formatter and file-guard scripts to hooks running in the sandbox; do not send the formatter spec through the model on every Write."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Sandbox, hooks, and plugin install scopes."
+          },
+          {
+            "title": "Rate limits",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Usage meters make the 500–2000 token story operational, not academic."
+          },
+          {
+            "title": "Prompt caching",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "Later API feature; not a substitute for local hooks in Claude Code."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Org usage and model access still bound the remaining billed tokens."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "06",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 06 · Capítulo 02 · 13 de agosto de 2026",
+    "chapter_title": "Ejecución local, sandbox y por qué los hooks ahorran tokens",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 6 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M06 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El argumento de tokens de la sesión 6 es cuantitativo, no estético. Pedirle a Claude que vuelva a emitir un fichero ya escrito para que comillas y saltos de línea coincidan con la guía de estilo es un segundo pase de generación. Ejecutar Prettier (o cualquier formateador/linter) en el <strong>sandbox</strong> después de Write es CPU local. El orden de magnitud del formador para una generación completa: del orden de <strong>500–2000 tokens ahorrados</strong> al no hacer que el modelo reprocese el formato. Los hooks son el mecanismo; el sandbox es donde esos comandos corren de verdad."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "El sandbox lo gestiona el producto",
+        "html": "No traéis un sandbox propio. El formador: Claude lo gestiona; no hay sandbox a medida. Las instalaciones de plugin a nivel de usuario caen en el espacio de usuario; las de proyecto, en sandboxes de proyecto. Las rutas difieren en Mac y Windows y no se resolvieron del todo en directo: fiaros de <a href=\"https://code.claude.com/docs/en/overview\">Claude Code</a> vigente, no de un directorio home recordado."
+      },
+      {
+        "type": "h2",
+        "text": "Qué significa «local» aquí"
+      },
+      {
+        "type": "p",
+        "html": "Echo, NPX y los scripts de shell se ejecutan en la máquina/espacio de trabajo donde corre Claude Code, dentro del mismo entorno aislado que ya guardaba temporales MCP y árboles generados (la analogía tipo Docker de la sesión 4). Ese aislamiento es por lo que los formateadores pueden tocar la copia de trabajo sin reenviar el fichero entero al modelo. También es por lo que un hook que funciona en la sesión de terminal puede no verse en el webview del IDE hasta recargar la ventana / recargar webviews (estilo Ctrl+Shift+P) o activar el ajuste preview de hooks."
+      },
+      {
+        "type": "h2",
+        "text": "Dónde se siguen gastando tokens"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "CLAUDE.md y las skills siguen añadiéndose a las peticiones al modelo: es contexto de pago, aunque hayáis sacado Prettier.",
+          "Los bucles de verify/código limpio (módulos 04–05) se facturan; desactivadlos en memoria si vais a testear en local.",
+          "Adjuntar toda la carpeta backend en vez de <code>openapi.yaml</code> se factura.",
+          "Diagramas JPEG/SVG en vez de Mermaid se facturan (sesión 4).",
+          "Los resultados de tools MCP ocupan contexto mientras están en la ventana, aunque la obtención sea una llamada a tool.",
+          "Un hook que <em>imprima una novela en el prompt</em> en cada tool use sería un mal hook: dejad la salida corta."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Scripts como cuerpo de la política local"
+      },
+      {
+        "type": "p",
+        "html": "Los hooks no se limitan a <code>npx prettier</code>. Cabe todo lo que un script de shell pueda hacer: Python, otros binarios, <code>protect-files.sh</code>, <code>block-dangerous-commands.sh</code>. El formador guardó scripts bajo una carpeta <code>hooks/</code> del árbol de trabajo y los referenció desde <code>settings.json</code>. Los compañeros pidieron las cabeceras de comentarios de esos scripts para copiar la intención sin ingeniería inversa: esos ficheros se subieron al repo público de demo. Los comentarios del script son para personas y para vosotros; no necesitan vivir en el prompt del LLM."
+      },
+      {
+        "type": "table",
+        "headers": ["Comando local", "Evento de hook típico", "Efecto en tokens"],
+        "rows": [
+          ["npx prettier / eslint --fix", "post-tool-use en Edit/Write", "Evita un pase de regeneración de formato (cientos–miles de tokens en una escritura grande)."],
+          ["protect-files.sh (denegar .env, package-lock.json, .git, secretos Prisma, …)", "pre-tool-use en Edit/Write", "Evita reescrituras de ficheros secretos; también evita generaciones de «deshaz esto»."],
+          ["block-dangerous-commands.sh (rm, git imprudente, …)", "pre-tool-use en Bash", "Corta desastres en modo auto; más barato que reparar un árbol borrado con el modelo."],
+          ["echo de estado", "post-tool-use", "Negligible; solo observabilidad."]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Los plugins siguen desempaquetándose en el sandbox"
+      },
+      {
+        "type": "p",
+        "html": "Cuando instaláis un plugin de marketplace o propio a nivel de proyecto, settings.json gana una referencia; Claude descarga el paquete y deja skills/agentes/hooks disponibles desde el sandbox. Puede que no veáis carpetas nuevas en el árbol git. La instalación a nivel de usuario va al espacio de usuario. Tratad los plugins como una biblioteca que consumís, no como ficheros que editáis a la ligera salvo que seáis colaboradores del repo origen (GitHub)."
+      },
+      {
+        "type": "h2",
+        "text": "Porcentajes de examen que el formador ató a esta fase del curso"
+      },
+      {
+        "type": "p",
+        "html": "Aún el 13 de agosto, tras los hooks, mapeó pesos de Foundation (confirmad en Skilljar antes de presentaros): arquitectura y operaciones de agentes ~27 %, diseño de tools y MCP ~18 %, configuración y flujos de Claude Code ~20 %, ingeniería de prompts y salida estructurada ~20 %, gestión de contexto y fiabilidad ~15 %. Hooks, sandbox y tools locales conscientes de tokens caen en configuración/flujos y contexto/fiabilidad. No citéis los porcentajes como eternos; citad la idea de que el trabajo local determinista debe salir del bucle de pago."
+      },
+      {
+        "type": "h2",
+        "text": "Comprobación de estudio"
+      },
+      {
+        "type": "p",
+        "html": "Si un escenario pregunta cómo recortar coste en un repo Claude Code greenfield que ya tiene una guía de estilo estricta, la respuesta que puntúa: dejad las reglas de arquitectura en CLAUDE.md; moved formateador y scripts de guarda de ficheros a hooks en el sandbox; no enviéis la spec del formateador por el modelo en cada Write."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Sandbox, hooks y ámbitos de instalación de plugins."
+          },
+          {
+            "title": "Límites de tasa",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Los medidores de uso hacen operativa la historia de 500–2000 tokens, no académica."
+          },
+          {
+            "title": "Caché de prompts",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "Función de API posterior; no sustituye a los hooks locales en Claude Code."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "El uso de la org y el acceso a modelos siguen acotando los tokens de pago restantes."
+          }
+        ]
+      }
+    ]
+  }
+]

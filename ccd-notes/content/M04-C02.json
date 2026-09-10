@@ -1,0 +1,280 @@
+[
+  {
+    "lang": "en",
+    "module_id": "04",
+    "chapter_id": "02",
+    "eyebrow": "Module 04 · Chapter 02 · 10 August 2026",
+    "chapter_title": "From GUI products to Claude APIs",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 4 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M04 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "After the product recap, session 4 treated <em>APIs</em> in two layers that Foundation candidates mix up: (1) the <strong>OpenAPI contract</strong> of the app you are generating (REST, Swagger UI, design-first), and (2) the fact that Claude Code itself is a client that will later be rebuilt with <strong>Claude APIs / the Agent SDK</strong>. This chapter is the first layer, plus how GUI clients (Code, Cowork Design) produce that contract and a runnable backend without you typing handlers."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Docs move; contracts stay",
+        "html": "OpenAPI 3.1, Swagger UI paths, and Claude Code skill folder names in the demo may already look different. The exam cares that you can explain design-first APIs, how a skill injects an API architect role, and that attaching a YAML is cheaper than attaching a whole backend folder. Confirm current Claude API docs at <a href=\"https://docs.claude.com/en/api/overview\">the API overview</a> when you reach Modules 07+."
+      },
+      {
+        "type": "h2",
+        "text": "Design-first OpenAPI, not “code then document”"
+      },
+      {
+        "type": "p",
+        "html": "The trainer framed the first artefact a full-stack team should freeze as an <strong>OpenAPI specification</strong> (he mentioned W3C/CNCF in passing; the practical standard in the demo is OpenAPI, e.g. 3.1, with Swagger-style docs). The method is <strong>design-first</strong>: write the contract, circulate it to backend and frontend, then implement. That is the opposite of generating code and hoping the docs catch up."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Role: API architect / designer — not the same skill as “principal solution architect,” though both consume the SRS.",
+          "Contents: paths, request/response models, auth (the demo later needed a JWT secret in <code>.env</code>), GET vs POST vs PUT as the architect decides.",
+          "Output in the lab: <code>openapi.yaml</code> in the repo, then backends generated <em>from</em> that file rather than from a vague “build me an API” prompt.",
+          "Frontend later uses the same YAML (or generated types) so screens and fields do not invent columns the API does not have."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "An OpenAPI skill is a slash-invoked role"
+      },
+      {
+        "type": "p",
+        "html": "Like the analyst and architect skills, the OpenAPI skill lives as <code>SKILL.md</code> under a named folder (the trainer created something he referred to as an “open API” slash). The body says: act as API architect, follow OpenAPI 3.1, produce Swagger documentation, request and response models, microservice-shaped resources if that is the architecture. HTTP verbs are not trivia: if the architect wants PATCH instead of PUT, that belongs in the spec and in the skill, not as a surprise in generated Express/FastAPI code."
+      },
+      {
+        "type": "p",
+        "html": "You attach the existing BRD/SRS (or HLD) into the prompt, invoke the slash, and ask for YAML in a known folder (e.g. <code>docs/</code>). Refresh the skill list if the new slash does not appear. The YAML then becomes the attachment of choice for the next skills — cheaper than re-attaching the whole <code>backend/</code> tree."
+      },
+      {
+        "type": "h2",
+        "text": "Backend from the contract: FastAPI, Node, or whatever the memory says"
+      },
+      {
+        "type": "p",
+        "html": "A <strong>backend skill</strong> plus a backend-scoped <code>CLAUDE.md</code> tell Claude Code which runtime to use (the live demo used Node-style <code>package.json</code>, <code>npm run build</code> / <code>npm start</code>, port 3000). The instruction “implement the APIs only, from this OpenAPI file” keeps the agent from inventing a parallel schema. Nested memory matters: the orchestrator can load global CLAUDE.md plus <code>backend/CLAUDE.md</code> for that sub-task (Module 05 expands the agent split)."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "New session for a new activity so context does not blend architect docs with implementation noise.",
+          "Slash the backend skill; attach <code>openapi.yaml</code>; name the output folder.",
+          "Let the five-phase loop run: clarify, plan (folders, controllers, services), execute, verify (tests — 43 passing in the demo), deliver a summary.",
+          "Run it yourself or ask Claude to run it. Missing <code>.env</code> (JWT secret) is a typical first failure; that is configuration, not a model bug.",
+          "If Swagger UI was omitted from the skill, a second pass (“include Swagger UI”) works but roughly <em>doubles</em> tokens because the model must re-read the tree. Put it in CLAUDE.md or the skill the first time."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Verification tax",
+        "html": "Claude Code may try to prove clean-code compliance and re-run tests on every file. That is the “verify” phase. Disable or defer it in memory if you will smoke-test locally. The trainer still used tests as a quality bar once Swagger was added — 43 cases passing — so “skip verify” is a cost control, not a claim that tests do not matter."
+      },
+      {
+        "type": "h2",
+        "text": "What “Claude APIs” means for Foundation from this point"
+      },
+      {
+        "type": "p",
+        "html": "Two sentences from the session that you should not collapse into one: <em>we will implement MCP tools of our own when we implement APIs</em>, and <em>Claude Code is already an agentic client on top of Claude APIs</em>. Session 4 does not install the Python/TS SDK. It shows that the GUI products are not a dead end: they already call models with tools, store tool results in a sandbox, and can generate REST services you then hit from a browser. Modules 07+ make the Messages API explicit. Here, the exam-relevant move is: GUI client → artefacts (OpenAPI, code) → a real HTTP API you can curl or open in Swagger."
+      },
+      {
+        "type": "card",
+        "title": "Classroom proof that the backend is real",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "After <code>npm run build</code> and <code>npm start</code>, Swagger UI listed register / login / logout / refresh and lock-marked routes. Try-it-out created a user, login returned a bearer token, authorized <code>/me</code> (or equivalent) returned the user. No application code was typed. Failures (wrong host, missing secret, Swagger not in first generation) were ordinary engineering, not “the LLM refused.”"
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Cowork Design as another GUI path into the same APIs"
+      },
+      {
+        "type": "p",
+        "html": "To seed a frontend, the trainer switched to <strong>Cowork</strong> → Design (lower left in the then-current UI) and asked for wireframes of a task-management app. He attached the OpenAPI YAML rather than the whole backend folder specifically to save tokens. A branding/logo file would have been the other high-value attachment. Clarify-phase questions appeared (desktop vs responsive, personal vs company-wide, Kanban vs list) — answer narrowly if you are token-budgeting (desktop + personal in the demo)."
+      },
+      {
+        "type": "p",
+        "html": "A learner noted that industry often designs UI first, then schema. The trainer’s lab order is the reverse on purpose: the YAML already lists the fields; Design reads schemas and proposes screens (login, register, dashboard, CRUD). You can still import HTML into Figma (HTML-to-design plugins) if UX will polish there. Editing in Cowork Design is “a little expensive”; Figma is for humans who will iterate visually. That Figma file becomes the MCP input in the next chapter."
+      },
+      {
+        "type": "h2",
+        "text": "Exam posture"
+      },
+      {
+        "type": "p",
+        "html": "Foundation is not “write FastAPI by hand.” It is: know that design-first OpenAPI is the shared language between agents, that skills and CLAUDE.md steer generation, that a second generation pass is a token penalty, and that Chat/Cowork/Code are how you reach models until you call the Messages API yourself. Keep product names in English in your written answers."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "API overview",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Where GUI clients are heading: programmatic Claude, not just Chat."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "The request shape later modules implement; Code already wraps this."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Skills, memory, and running generated services from the agent."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Org-level model access that limits which APIs and models you can call."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "04",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 04 · Capítulo 02 · 10 de agosto de 2026",
+    "chapter_title": "De los productos con interfaz a las APIs de Claude",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 4 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M04 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Tras el repaso de productos, la sesión 4 trató las <em>APIs</em> en dos capas que en Foundation se mezclan: (1) el <strong>contrato OpenAPI</strong> de la app que generáis (REST, Swagger UI, design-first), y (2) el hecho de que Claude Code es un cliente que más adelante se reconstruye con las <strong>APIs de Claude / Agent SDK</strong>. Este capítulo es la primera capa, y cómo los clientes con GUI (Code, Cowork Design) producen ese contrato y un backend ejecutable sin que tecleéis los handlers."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Los docs se mueven; los contratos permanecen",
+        "html": "OpenAPI 3.1, las rutas de Swagger UI y los nombres de carpetas de skills del demo pueden haber cambiado. El examen pide que expliquéis APIs design-first, cómo una skill inyecta el rol de arquitecto de API, y que adjuntar un YAML es más barato que adjuntar todo el backend. Confirmad la <a href=\"https://docs.claude.com/en/api/overview\">visión general de la API</a> cuando lleguéis a los módulos 07+."
+      },
+      {
+        "type": "h2",
+        "text": "OpenAPI design-first, no «código y luego documentar»"
+      },
+      {
+        "type": "p",
+        "html": "El formador situó como primer artefacto que un equipo full-stack debe congelar una <strong>especificación OpenAPI</strong> (mencionó W3C/CNCF de pasada; en la práctica el demo usa OpenAPI, p. ej. 3.1, con documentación estilo Swagger). El método es <strong>design-first</strong>: escribir el contrato, circularlo a backend y frontend, e implementar. Es lo contrario de generar código y esperar que la documentación alcance."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Rol: arquitecto / diseñador de API — no es la misma skill que el «principal solution architect», aunque ambos consumen el SRS.",
+          "Contenido: rutas, modelos de petición/respuesta, autenticación (luego el demo necesitó un secreto JWT en <code>.env</code>), GET frente a POST frente a PUT según el arquitecto.",
+          "Salida en el laboratorio: <code>openapi.yaml</code> en el repo, y backends generados <em>a partir de</em> ese fichero, no de un prompt vago de «monta una API».",
+          "El frontend usa el mismo YAML (o tipos generados) para que las pantallas no inventen campos que la API no tiene."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Una skill OpenAPI es un rol invocado con slash"
+      },
+      {
+        "type": "p",
+        "html": "Como las skills de analista y arquitecto, la de OpenAPI vive como <code>SKILL.md</code> en una carpeta con nombre (el formador creó un slash de «open API»). El cuerpo dice: actúa como arquitecto de API, sigue OpenAPI 3.1, produce documentación Swagger, modelos de request/response, recursos con forma de microservicio si esa es la arquitectura. Los verbos HTTP no son trivia: si el arquitecto quiere PATCH en vez de PUT, eso va en el spec y en la skill, no como sorpresa en el Express/FastAPI generado."
+      },
+      {
+        "type": "p",
+        "html": "Adjuntáis el BRD/SRS (o HLD) al prompt, invocáis el slash y pedís YAML en una carpeta conocida (p. ej. <code>docs/</code>). Refrescad la lista de skills si no aparece el slash nuevo. Ese YAML pasa a ser el adjunto preferido de las skills siguientes — más barato que volver a adjuntar todo <code>backend/</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Backend desde el contrato: FastAPI, Node o lo que diga la memoria"
+      },
+      {
+        "type": "p",
+        "html": "Una <strong>skill de backend</strong> más un <code>CLAUDE.md</code> acotado al backend dicen a Claude Code qué runtime usar (el demo usó estilo Node: <code>package.json</code>, <code>npm run build</code> / <code>npm start</code>, puerto 3000). La instrucción «implementa solo las APIs, desde este OpenAPI» evita un esquema paralelo inventado. La memoria anidada importa: el orquestador puede cargar el CLAUDE.md global más <code>backend/CLAUDE.md</code> para esa subtarea (el módulo 05 profundiza en el reparto de agentes)."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Sesión nueva para una actividad nueva, para que el contexto no mezcle documentos de arquitectura con ruido de implementación.",
+          "Slash de backend; adjuntar <code>openapi.yaml</code>; nombrar la carpeta de salida.",
+          "Dejar correr el bucle de cinco fases: aclarar, planificar (carpetas, controladores, servicios), ejecutar, verificar (tests — 43 en verde en el demo), entregar un resumen.",
+          "Ejecutadlo vosotros o pedídselo a Claude. Faltar <code>.env</code> (secreto JWT) es un primer fallo típico: es configuración, no un bug del modelo.",
+          "Si Swagger UI no estaba en la skill, un segundo pase («incluye Swagger UI») funciona pero viene a <em>doblar</em> tokens porque el modelo relee el árbol. Metedlo en CLAUDE.md o en la skill a la primera."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Impuesto de verificación",
+        "html": "Claude Code puede intentar demostrar código limpio y relanzar tests en cada fichero. Esa es la fase «verify». Desactivadla o aplazadla en memoria si vais a hacer smoke test en local. El formador aun así usó los tests como listón de calidad al añadir Swagger — 43 casos — así que «saltar verify» es control de coste, no una afirmación de que los tests no importan."
+      },
+      {
+        "type": "h2",
+        "text": "Qué significa «APIs de Claude» en Foundation a partir de aquí"
+      },
+      {
+        "type": "p",
+        "html": "Dos frases de la sesión que no debéis fusionar: <em>implementaremos herramientas MCP propias cuando implementemos APIs</em>, y <em>Claude Code ya es un cliente agentic sobre las APIs de Claude</em>. La sesión 4 no instala el SDK de Python/TS. Muestra que los productos con GUI no son un callejón: ya llaman a modelos con tools, guardan resultados en un sandbox y pueden generar servicios REST que luego abrís en el navegador. Los módulos 07+ hacen explícita la Messages API. Aquí, el movimiento de examen es: cliente GUI → artefactos (OpenAPI, código) → una API HTTP real que podéis consultar con curl o Swagger."
+      },
+      {
+        "type": "card",
+        "title": "Prueba de aula de que el backend es real",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "Tras <code>npm run build</code> y <code>npm start</code>, Swagger UI listó register / login / logout / refresh y rutas con candado. Try-it-out creó un usuario, el login devolvió un bearer, <code>/me</code> (o equivalente) autorizado devolvió el usuario. No se tecleó código de aplicación. Los fallos (host incorrecto, secreto ausente, Swagger no generado a la primera) son ingeniería ordinaria, no «el LLM se negó»."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Cowork Design como otro camino GUI hacia las mismas APIs"
+      },
+      {
+        "type": "p",
+        "html": "Para sembrar el frontend, el formador pasó a <strong>Cowork</strong> → Design (abajo a la izquierda en la UI de entonces) y pidió wireframes de la app de tareas. Adjuntó el YAML OpenAPI en vez de toda la carpeta backend para ahorrar tokens. Un documento de marca/logo habría sido el otro adjunto de alto valor. Aparecieron preguntas de la fase aclarar (escritorio frente a responsive, personal frente a empresa, Kanban frente a lista): responded de forma estrecha si estáis racionando tokens (escritorio + personal en el demo)."
+      },
+      {
+        "type": "p",
+        "html": "Un alumno señaló que en la industria a menudo se diseña la UI primero y luego el esquema. El orden del laboratorio es el inverso a propósito: el YAML ya lista los campos; Design lee esquemas y propone pantallas (login, registro, dashboard, CRUD). Aun así podéis importar HTML a Figma (plugins HTML-to-design) si UX va a pulir ahí. Editar en Cowork Design es «un poco caro»; Figma es para personas que iteran en visual. Ese fichero de Figma será la entrada MCP del capítulo siguiente."
+      },
+      {
+        "type": "h2",
+        "text": "Postura de examen"
+      },
+      {
+        "type": "p",
+        "html": "Foundation no es «escribir FastAPI a mano». Es: saber que OpenAPI design-first es el lenguaje compartido entre agentes, que skills y CLAUDE.md dirigen la generación, que un segundo pase de generación es una penalización de tokens, y que Chat/Cowork/Code son cómo llegáis a los modelos hasta que llaméis vosotros a la Messages API. Dejad los nombres de producto en inglés en las respuestas escritas."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de la API",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Hacia dónde van los clientes GUI: Claude programático, no solo Chat."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "La forma de petición que implementan módulos posteriores; Code ya la envuelve."
+          },
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Skills, memoria y ejecución de servicios generados desde el agente."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Acceso a modelos a nivel de organización, que limita qué APIs y modelos podéis llamar."
+          }
+        ]
+      }
+    ]
+  }
+]

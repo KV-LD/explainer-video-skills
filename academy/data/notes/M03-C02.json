@@ -1,0 +1,254 @@
+[
+  {
+    "lang": "en",
+    "module_id": "03",
+    "chapter_id": "02",
+    "eyebrow": "Module 03 · Chapter 02 · 6 August 2026",
+    "chapter_title": "Claude Code: agentic coding versus Chat and Cowork",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 3 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M03 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "After the cert map, Vijay switched to the product this course exists for: <strong>Claude Code</strong>, Anthropic’s AI-powered coding tool. It started as an assistant and is now an <strong>agentic</strong> client: it reads a whole project (RAG over the workspace), edits many files, runs terminal commands, tests, git/PRs, and talks to Jira, Figma, and other tools. It is not “Chat with a folder.” It is not Cowork’s invoice sorter. It is the SDLC agent."
+      },
+      {
+        "type": "h2",
+        "text": "Assistant versus agent (the contrast he drew)"
+      },
+      {
+        "type": "table",
+        "headers": ["Old coding assistant", "Claude Code as agent"],
+        "rows": [
+          ["Suggests in the current file; waits for the next keystroke", "Understands the repo; reads/modifies multiple files"],
+          ["Limited context, easy to lose the plot", "Retrieves relevant chunks; can plan then execute"],
+          ["Recommends; you always paste", "Takes actions with your permission: shell, tests, PRs"],
+          ["GitHub Copilot’s early identity in his story", "Copilot has also moved toward agents — still not this product"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "A single prompt can now aim at backend, frontend, database scripts, Docker, Terraform, Jenkins — a deployable workspace. That is the productivity claim: less repeated toil, faster sprints, cleaner formatting if you encode standards. Existing brownfield repos still need good prompts (Lalit’s question); greenfield boilerplate is the easy demo."
+      },
+      {
+        "type": "h2",
+        "text": "How the loop runs"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "User prompt — intent might be “plan only” or “build the project.”",
+          "Selected model (Sonnet / Opus / Haiku / others your org enables) interprets intent.",
+          "Explore the project for context.",
+          "Create an execution plan.",
+          "Execute with built-in tools: read/edit files, shell, third-party MCP/connectors, git.",
+          "Verify (e.g. read terminal logs as I/O tools) and either finish or ask you."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Terminal logs are a <strong>tool</strong>: the agent reads success/failure and continues. That is the same plan-versus-execute split as Cowork, with the filesystem and compiler as hands."
+      },
+      {
+        "type": "h2",
+        "text": "Install paths he demonstrated"
+      },
+      {
+        "type": "p",
+        "html": "Prerequisites: Anthropic console login on Pro/Max/Team/Enterprise; <strong>Node.js 18+</strong>; a terminal. Optional: VS Code (he preferred it over Claude Desktop’s editor because extensions make the environment real). Two upstream installs: vendor <code>curl</code> script or <code>npm</code> global. After install, the CLI command is <code>claude</code> in the folder that should be the workspace. Login/authorize through the console. Security notes on first run: models make mistakes; prompt-injection risk — only use on code you trust. Beta bits are not in the default installer; UST will want portal/private-registry install, not random curl on a production laptop. Windows: people in chat had to put Claude on <code>PATH</code> / environment variables."
+      },
+      {
+        "type": "h2",
+        "text": "CLI then VS Code"
+      },
+      {
+        "type": "p",
+        "html": "First-run wizard: terminal theme, trust this git folder, show version / user / default model. Slash commands already appear: <code>/init</code> for CLAUDE.md, <code>/release-notes</code>, <code>/model</code>, <code>/exit</code>. Then he installed the <strong>Anthropic</strong> VS Code extension (not a clone publisher), authorised Claude.ai, and used the Code icon for sessions. Plus button = new session; attach open files, PDFs, web search; some features with a terminal glyph still drop you to the integrated terminal because the UI has not caught up."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "UI versus docs",
+        "html": "Extension IDs, default models (he had Sonnet 5 selected in class), and which slash commands live only in the TTY will change. Prefer <a href=\"https://code.claude.com/docs/en/overview\">Claude Code docs</a> the week you sit the exam."
+      },
+      {
+        "type": "h2",
+        "text": "When to pick Code instead of Chat or Cowork"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Chat:</strong> explain an algorithm, draft an email, no repo.",
+          "<strong>Cowork:</strong> shuffle local office files; non-dev multi-step jobs.",
+          "<strong>Code:</strong> the workspace is source control; you need tests, PRs, clean-code automation, or generation of the app itself."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Exam angle"
+      },
+      {
+        "type": "p",
+        "html": "If the stem is a developer who must implement, debug, or wire CI, the named product is Claude Code (or the API), not Cowork. If the stem is “organise PDFs on disk for a BA,” do not show off Code. Product fit is a Foundation skill."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Install, CLI, IDE — the source of truth."
+          },
+          {
+            "title": "Models",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "What /model can point at in your tenant."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Shell and file tools are this idea inside Code."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Jira, Figma, and custom servers from the agent."
+          },
+          {
+            "title": "API overview",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "When the answer is “don’t use the GUI agent; call Messages.”"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "03",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 03 · Capítulo 02 · 6 de agosto de 2026",
+    "chapter_title": "Claude Code: programación agentic frente a Chat y Cowork",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 3 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M03 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Tras el mapa de certs, Vijay pasó al producto por el que existe este curso: <strong>Claude Code</strong>, la herramienta de programación con IA de Anthropic. Empezó como asistente y ahora es un cliente <strong>agentic</strong>: lee un proyecto entero (RAG sobre el espacio de trabajo), edita muchos archivos, ejecuta comandos de terminal, pruebas, git/PR y habla con Jira, Figma y otras herramientas. No es «Chat con una carpeta». No es el ordenador de facturas de Cowork. Es el agente de SDLC."
+      },
+      {
+        "type": "h2",
+        "text": "Asistente frente a agente (el contraste que trazó)"
+      },
+      {
+        "type": "table",
+        "headers": ["Asistente de programación antiguo", "Claude Code como agente"],
+        "rows": [
+          ["Sugiere en el archivo actual; espera la siguiente tecla", "Entiende el repo; lee/modifica varios archivos"],
+          ["Contexto limitado, fácil perder el hilo", "Recupera trozos relevantes; puede planificar y luego ejecutar"],
+          ["Recomienda; vosotros siempre pegáis", "Actúa con vuestro permiso: shell, pruebas, PR"],
+          ["La identidad temprana de GitHub Copilot en su relato", "Copilot también ha ido hacia agentes — sigue sin ser este producto"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Un solo prompt puede apuntar ahora a backend, frontend, scripts de base de datos, Docker, Terraform, Jenkins — un espacio desplegable. Esa es la promesa de productividad: menos faena repetida, sprints más rápidos, formato más limpio si codificáis estándares. Los repos brownfield existentes igual necesitan buenos prompts (pregunta de Lalit); el boilerplate greenfield es la demo fácil."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo corre el bucle"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Prompt de usuario — la intención puede ser «solo el plan» o «construye el proyecto».",
+          "El modelo seleccionado (Sonnet / Opus / Haiku / otros que habilite la org) interpreta la intención.",
+          "Explorar el proyecto para contexto.",
+          "Crear un plan de ejecución.",
+          "Ejecutar con herramientas integradas: leer/editar archivos, shell, MCP/conectores de terceros, git.",
+          "Verificar (p. ej. leer logs del terminal como herramientas de E/S) y terminar o preguntaros."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Los logs del terminal son una <strong>herramienta</strong>: el agente lee éxito/fallo y continúa. Es la misma separación planificar/ejecutar que Cowork, con el sistema de archivos y el compilador como manos."
+      },
+      {
+        "type": "h2",
+        "text": "Vías de instalación que demostró"
+      },
+      {
+        "type": "p",
+        "html": "Prerrequisitos: inicio de sesión en la consola Anthropic con Pro/Max/Team/Enterprise; <strong>Node.js 18+</strong>; un terminal. Opcional: VS Code (lo prefirió al editor de Claude Desktop porque las extensiones hacen real el entorno). Dos instalaciones upstream: script <code>curl</code> del fabricante o <code>npm</code> global. Tras instalar, el comando CLI es <code>claude</code> en la carpeta que debe ser el espacio de trabajo. Inicio de sesión/autorización por la consola. Notas de seguridad al arrancar: los modelos se equivocan; riesgo de inyección de prompts — usadlo solo en código en el que confiéis. Lo beta no va en el instalador por defecto; UST querrá instalación por portal/registro privado, no un curl aleatorio en un portátil de producción. Windows: en el chat había que poner Claude en el <code>PATH</code> / variables de entorno."
+      },
+      {
+        "type": "h2",
+        "text": "CLI y luego VS Code"
+      },
+      {
+        "type": "p",
+        "html": "Asistente de primer arranque: tema del terminal, confiar en esta carpeta git, mostrar versión / usuario / modelo por defecto. Ya aparecen comandos slash: <code>/init</code> para CLAUDE.md, <code>/release-notes</code>, <code>/model</code>, <code>/exit</code>. Luego instaló la extensión de VS Code de <strong>Anthropic</strong> (no un editor clon), autorizó Claude.ai y usó el icono de Code para sesiones. El botón más = sesión nueva; adjuntar archivos abiertos, PDF, búsqueda web; algunas funciones con glifo de terminal os siguen bajando al terminal integrado porque la UI no ha llegado."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "UI frente a docs",
+        "html": "Los IDs de extensión, los modelos por defecto (en clase tenía Sonnet 5) y qué comandos slash viven solo en el TTY cambiarán. Preferid <a href=\"https://code.claude.com/docs/en/overview\">la documentación de Claude Code</a> la semana del examen."
+      },
+      {
+        "type": "h2",
+        "text": "Cuándo elegir Code en lugar de Chat o Cowork"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Chat:</strong> explicar un algoritmo, redactar un correo, sin repo.",
+          "<strong>Cowork:</strong> reordenar archivos de oficina locales; trabajos de varios pasos no de desarrollo.",
+          "<strong>Code:</strong> el espacio es control de código; necesitáis pruebas, PR, automatizar código limpio o generar la propia app."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Ángulo de examen"
+      },
+      {
+        "type": "p",
+        "html": "Si el enunciado es un desarrollador que debe implementar, depurar o cablear CI, el producto nombrado es Claude Code (o la API), no Cowork. Si el enunciado es «organizar PDF en disco para un BA», no presumáis de Code. El encaje de producto es una competencia Foundation."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Resumen de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Instalación, CLI, IDE — la fuente de verdad."
+          },
+          {
+            "title": "Modelos",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "A qué puede apuntar /model en vuestro tenant."
+          },
+          {
+            "title": "Resumen de uso de herramientas",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Las herramientas de shell y archivos son esta idea dentro de Code."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Jira, Figma y servidores a medida desde el agente."
+          },
+          {
+            "title": "Resumen de la API",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Cuando la respuesta es «no uses el agente GUI; llama a Messages»."
+          }
+        ]
+      }
+    ]
+  }
+]

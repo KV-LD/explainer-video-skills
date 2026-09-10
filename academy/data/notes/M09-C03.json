@@ -1,0 +1,230 @@
+[
+  {
+    "lang": "en",
+    "module_id": "09",
+    "chapter_id": "03",
+    "eyebrow": "Module 09 · Chapter 03 · 20 August 2026",
+    "chapter_title": "PDFs, document context, and citations",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 9 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M09 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "PDFs join the same Messages array as another content type: a <strong>document</strong> block with <code>media_type: application/pdf</code>, usually base64 of the file bytes (class also mentioned reading via PyPDF when you extract text yourself). You may send one or many documents. The hard part is <strong>context-window arithmetic</strong> and telling Claude to trust <em>only</em> those files — then turning on <strong>citations</strong> so the UI can show where a claim came from."
+      },
+      {
+        "type": "h2",
+        "text": "Document blocks versus DIY text extraction"
+      },
+      {
+        "type": "p",
+        "html": "Two legitimate patterns: (1) native PDF support — send the document so Claude’s file pipeline parses pages (text + layout/vision as the model allows); (2) extract text locally and send a text block. Native documents keep page structure for citations. Either way, measure tokens before you fire. Classroom windows were ~272K vs 1M; pick the model whose input window fits the pack. Token-count APIs / metadata help you fail fast."
+      },
+      {
+        "type": "h2",
+        "text": "Prompt: “work only on the documents you see”"
+      },
+      {
+        "type": "p",
+        "html": "The model already “knows” machine learning from pretraining. If the user uploaded a specific ML PDF, say so: answer from <strong>this</strong> knowledge, not general memory. Then ask for mistakes, a topic summary, etc. That instruction is how you reduce fluent but ungrounded answers."
+      },
+      {
+        "type": "h2",
+        "text": "Enabling citations"
+      },
+      {
+        "type": "p",
+        "html": "On the document (and in current APIs, related citation flags), set citations enabled and optionally a <strong>title</strong> so multiple files are distinguishable. The assistant text blocks then carry a <code>citations</code> array you can render as footnotes or highlights. Vijay’s machine was struggling that day; he walked the fields more than he ran them — still examinable."
+      },
+      {
+        "type": "table",
+        "headers": ["Source you grounded on", "Class name", "What it points at"],
+        "rows": [
+          ["A PDF / document block", "citation document location", "Where in that file (page / span as the API returns)"],
+          ["Plain text you put in messages", "citation char / chat location (spoken “share/char”)", "Character offsets in that text block"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "If the data source is a document, expect document locations. If you only stuffed a text blob into the prompt and enabled citations on it, expect character locations. Do not mix the names on the exam."
+      },
+      {
+        "type": "h2",
+        "text": "Why citations are not RAG by themselves"
+      },
+      {
+        "type": "p",
+        "html": "You still uploaded (or extracted) the whole file into <em>this</em> request’s context. RAG would retrieve chunks from a store first. Citations tell you which span supported a sentence <em>inside the context you already sent</em>. Cache (next chapter) is how you stop paying to re-send a fat PDF every turn."
+      },
+      {
+        "type": "h2",
+        "text": "Code execution aside (same session, not this chapter’s exam core)"
+      },
+      {
+        "type": "p",
+        "html": "Vijay listed <strong>code execution</strong> as another advanced feature: the model writes a Python script to build a PDF rather than emitting a binary PDF. That is a tool/sandbox story (later modules). Do not confuse “Claude created a PDF” with “we sent a PDF as context.”"
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Size before send",
+        "html": "A 1M-token PDF on every user click is an input bill, not a flex. Check token estimates, split files, or cache the document prefix."
+      },
+      {
+        "type": "h2",
+        "text": "UI use"
+      },
+      {
+        "type": "p",
+        "html": "Citation payloads exist so your application can jump to page and quote. Dumping raw citation JSON on a business user is not the feature; highlighting is."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Docs over the hung VS Code demo",
+        "html": "Field names for citation types evolve. Use <a href=\"https://docs.claude.com/en/docs/build-with-claude/citations\">citations</a> and <a href=\"https://docs.claude.com/en/docs/build-with-claude/pdf-support\">PDF support</a> as the key."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "PDF support",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "Document blocks, page limits, combining with prompts."
+          },
+          {
+            "title": "Citations",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/citations",
+            "note": "Enabling citations and location types."
+          },
+          {
+            "title": "Vision",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/vision",
+            "note": "When a page is better sent as images."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Content block types including document."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "09",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 09 · Capítulo 03 · 20 de agosto de 2026",
+    "chapter_title": "PDF, contexto documental y citas",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 9 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M09 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Los PDF entran en el mismo array Messages como otro tipo de contenido: un bloque <strong>document</strong> con <code>media_type: application/pdf</code>, casi siempre el archivo en base64 (en clase también se citó leer con PyPDF si extraéis texto vosotros). Podéis enviar uno o varios documentos. Lo difícil es la <strong>aritmética de la ventana de contexto</strong> y decirle a Claude que confíe <em>solo</em> en esos archivos — y luego activar <strong>citations</strong> para que la UI muestre de dónde sale cada afirmación."
+      },
+      {
+        "type": "h2",
+        "text": "Bloques document frente a extraer texto a mano"
+      },
+      {
+        "type": "p",
+        "html": "Dos patrones legítimos: (1) soporte PDF nativo — enviáis el documento para que el pipeline de archivos de Claude parsee páginas (texto + layout/visión según el modelo); (2) extraer texto en local y enviar un bloque text. Los documentos nativos conservan estructura de página para las citas. En ambos casos, medid tokens antes de disparar. Las ventanas de aula eran ~272K frente a 1M; elegid el modelo cuya entrada quepa el lote. APIs de recuento / metadatos os permiten fallar pronto."
+      },
+      {
+        "type": "h2",
+        "text": "Prompt: «trabaja solo con los documentos que ves»"
+      },
+      {
+        "type": "p",
+        "html": "El modelo ya «sabe» machine learning del preentrenamiento. Si el usuario subió un PDF concreto de ML, decídlo: responde desde <strong>este</strong> conocimiento, no de la memoria general. Luego pedid errores, un resumen de tema, etc. Esa instrucción reduce respuestas fluidas pero no ancladas."
+      },
+      {
+        "type": "h2",
+        "text": "Activar citations"
+      },
+      {
+        "type": "p",
+        "html": "En el documento (y, en las APIs actuales, flags de citas relacionados), activad citations y opcionalmente un <strong>title</strong> para distinguir varios archivos. Los bloques de texto del asistente llevan entonces un array <code>citations</code> que podéis pintar como notas al pie o resaltados. El ordenador de Vijay iba mal ese día; recorrió los campos más que ejecutarlos — sigue siendo examinable."
+      },
+      {
+        "type": "table",
+        "headers": ["Fuente en la que ancláis", "Nombre de clase", "A qué apunta"],
+        "rows": [
+          ["Un PDF / bloque document", "citation document location", "Dónde en ese archivo (página / span según la API)"],
+          ["Texto plano que metisteis en messages", "citation char / chat location (en voz «share/char»)", "Desplazamientos de carácter en ese bloque de texto"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Si la fuente es un documento, esperad localizaciones de documento. Si solo metisteis un blob de texto en el prompt y activasteis citas sobre él, esperad localizaciones de carácter. No mezcléis los nombres en el examen."
+      },
+      {
+        "type": "h2",
+        "text": "Por qué las citas no son RAG por sí solas"
+      },
+      {
+        "type": "p",
+        "html": "Seguís subiendo (o extrayendo) el archivo entero al contexto de <em>esta</em> petición. RAG recuperaría fragmentos de un almacén primero. Las citas os dicen qué span apoyó una frase <em>dentro del contexto que ya enviasteis</em>. La caché (capítulo siguiente) es cómo dejáis de pagar por reenviar un PDF gordo cada turno."
+      },
+      {
+        "type": "h2",
+        "text": "Inciso de ejecución de código (misma sesión, no el núcleo de este capítulo)"
+      },
+      {
+        "type": "p",
+        "html": "Vijay listó <strong>code execution</strong> como otra función avanzada: el modelo escribe un script Python para construir un PDF en vez de emitir un PDF binario. Eso es historia de tools/sandbox (módulos posteriores). No confundáis «Claude creó un PDF» con «enviamos un PDF como contexto»."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "El tamaño antes de enviar",
+        "html": "Un PDF de 1M de tokens en cada clic es una factura de entrada, no un alarde. Estimad tokens, partid archivos o cachead el prefijo del documento."
+      },
+      {
+        "type": "h2",
+        "text": "Uso en la UI"
+      },
+      {
+        "type": "p",
+        "html": "Las citas existen para que vuestra aplicación salte a la página y cite. Volcar el JSON crudo a un usuario de negocio no es la función; resaltar sí."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Docs por encima del VS Code colgado",
+        "html": "Los nombres de tipo de cita evolucionan. Usad <a href=\"https://docs.claude.com/en/docs/build-with-claude/citations\">citations</a> y <a href=\"https://docs.claude.com/en/docs/build-with-claude/pdf-support\">soporte PDF</a> como clave."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Soporte PDF",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "Bloques document, límites de página, combinación con prompts."
+          },
+          {
+            "title": "Citas",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/citations",
+            "note": "Activar citas y tipos de localización."
+          },
+          {
+            "title": "Visión",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/vision",
+            "note": "Cuando una página conviene más como imágenes."
+          },
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Tipos de bloque de contenido, incluido document."
+          }
+        ]
+      }
+    ]
+  }
+]

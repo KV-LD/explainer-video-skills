@@ -1,0 +1,262 @@
+[
+  {
+    "lang": "en",
+    "module_id": "05",
+    "chapter_id": "03",
+    "eyebrow": "Module 05 · Chapter 03 · 12 August 2026",
+    "chapter_title": "What an agent is in this course",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 5 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M05 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "A long context-window question (“this generation has been running forever — how is context managed?”) is what pushed session 5 into the course’s working definition of an <strong>agent</strong>. Code generation is not one LLM call. It is an <strong>agentic loop</strong>: a main agent (orchestrator) writes a to-do list; <strong>sub-agents</strong> execute slices with their own context windows, prompts, tools, memory, skills, and optionally their own model and permission mode. Claude Code itself is the reference agentic client; the Foundation exam later asks you to build similar systems with Claude APIs."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Docs and marketplace lists change",
+        "html": "Built-in sub-agents (Explore, Plan, status-line helpers) and the official tool list (Glob, Grep, Read, Write, …) are rearranged in documentation. The trainer had to hunt a vertical tool list live. Use <a href=\"https://code.claude.com/docs/en/overview\">Claude Code</a>, <a href=\"https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview\">tool use</a>, and <a href=\"https://platform.claude.com/docs/en/managed-agents/quickstart\">Managed Agents</a> for current names."
+      },
+      {
+        "type": "h2",
+        "text": "Main agent versus sub-agent"
+      },
+      {
+        "type": "p",
+        "html": "In Claude Code there is one <strong>main agent</strong>: the session where you type. It orchestrates and plans. A <strong>sub-agent</strong> executes a task. The trainer’s wording: “agent is nothing but a sub-agent in the case of Claude” once you are talking about the specialised markdown files you add. There is one main agent and many sub-agents. Sub-agents can auto-trigger when a prompt matches their <em>description</em>, or you invoke them. They each run in their own context window with a custom system prompt, their own tool access, and independent permissions."
+      },
+      {
+        "type": "table",
+        "headers": ["Piece", "Main agent (Claude Code session)", "Sub-agent"],
+        "rows": [
+          ["Job", "Orchestrate: memory + skills + context → to-do list", "Execute one slice (folders, backend, frontend, Docker, review)"],
+          ["Context", "The chat you see; can grow large", "Fresh window scoped to the slice"],
+          ["Memory files", "Global CLAUDE.md always in play", "Global plus the folder CLAUDE.md that matches the task (backend vs frontend)"],
+          ["Short-term scratch", "Sandbox; discarded when the slice finishes; you do not control it", "Same idea, local to that agent run"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Long-term memory is files, not the chat"
+      },
+      {
+        "type": "p",
+        "html": "Rajesh asked whether “memory” lived in the sandbox with a short TTL. The trainer split: <code>CLAUDE.md</code> files in the git repo are <strong>long-term</strong> and physical (global, <code>backend/CLAUDE.md</code>, <code>frontend/CLAUDE.md</code>). Sandbox state that stitches function-by-function generation is <strong>short-term</strong> and discarded. CLAUDE.md is “master configuration, not a master agent.” Nested files do not spawn extra orchestrators; they are which instruction packet a given agent loads."
+      },
+      {
+        "type": "p",
+        "html": "Three agents on a full-stack job can therefore run with three instruction mixes: (1) global only (create folders), (2) global + backend, (3) global + frontend. They are not one huge message. That is how a hours-long generation stays inside context limits: bits and pieces, planned, then sent."
+      },
+      {
+        "type": "h2",
+        "text": "Four configurations every agent has"
+      },
+      {
+        "type": "p",
+        "html": "Whether main or sub, the trainer listed four always-on ingredients, then extras you pin in the agent file:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Prompt (the agent’s system / role text).",
+          "Context (what is in the window for this run).",
+          "Tools (built-in and/or MCP — e.g. ECR instead of Docker Hub for base images).",
+          "Memory and skills (which CLAUDE.md and which SKILL.md packets).",
+          "Optional: model, permission mode, max turns, disallowed tools, hooks, isolation, colour, initial prompt, effort, background."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Required fields when you author a sub-agent: <strong>name</strong> and <strong>description</strong>. Description is how the orchestrator routes (“reviews code for quality… use immediately after writing or modifying code”). Tools can be a tight list (Read only → reviewer cannot Write) or a wildcard if you truly do not know. Custom tools are MCP tools, not a random local function pretending to be a tool (that clarification was explicit)."
+      },
+      {
+        "type": "h2",
+        "text": "Where agent files live"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Project: a <code>.claude/agents</code> (trainer: “dot cloud slash agents”) folder in the repo — cloned with the project.",
+          "User profile (Windows / macOS / Linux): available to all that user’s projects.",
+          "Plugins: bundled with hooks and skills (Module 06).",
+          "CLI flags if you launch agents from the command line.",
+          "Built-ins: Explore (filesystem-oriented tool use), Plan, status-line setup, and whatever the current docs list — used automatically."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Stateless models, stateful orchestration"
+      },
+      {
+        "type": "p",
+        "html": "A learner hoped CLAUDE.md and skills would be “cached” like repetitive prompt words. The trainer: LLMs are <strong>stateless</strong>; one request may hit a different instance (horizontal scaling). Prompt cache is a later, explicit API feature — not something you assume in Claude Code. Tool <em>results</em> can be cached in shared infrastructure (he mentioned Redis-like caches) and reused across instances. Chat history is held by the <em>client / orchestrator</em>, which is why you can resume a to-do list. Multiple sub-agents on one project still coordinate through that orchestrator, not by chatting with each other as peers unless the main agent passes artefacts (files, OpenAPI, types)."
+      },
+      {
+        "type": "h2",
+        "text": "Exam destination"
+      },
+      {
+        "type": "p",
+        "html": "“Implement something like Claude Code” using agent SDK / Claude APIs is the Foundation north star. In this module you only need the vocabulary: orchestrator, sub-agent, own context window, description-based delegation, tool allow/deny, inherit vs pin model, plan editable then frozen. Too many overlapping CLAUDE.md files can hallucinate — Pedro’s warning; the mitigation taught is to force a clarify step in global memory before generating."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Sub-agents, built-in agents, and project vs user scope."
+          },
+          {
+            "title": "Managed Agents quickstart",
+            "url": "https://platform.claude.com/docs/en/managed-agents/quickstart",
+            "note": "Platform-side agents you will meet when you leave the IDE client."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Read/Write/Grep-style tools and MCP tools on an agent."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "How an agent is limited to ECR vs Docker Hub in the Docker example."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "05",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 05 · Capítulo 03 · 12 de agosto de 2026",
+    "chapter_title": "Qué es un agente en este curso",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 5 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M05 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Una pregunta larga sobre la ventana de contexto («esta generación lleva eternidades: ¿cómo se gestiona el contexto?») empujó la sesión 5 a la definición de trabajo de <strong>agente</strong>. La generación de código no es una llamada al LLM. Es un <strong>bucle agentic</strong>: un agente principal (orquestador) escribe una lista de to-dos; los <strong>subagentes</strong> ejecutan trozos con su propia ventana de contexto, prompts, tools, memoria, skills y, opcionalmente, su propio modelo y modo de permiso. Claude Code es el cliente agentic de referencia; el examen Foundation más adelante pide sistemas parecidos con las APIs de Claude."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Los docs y las listas del marketplace cambian",
+        "html": "Los subagentes integrados (Explore, Plan, ayudantes de status-line) y la lista oficial de tools (Glob, Grep, Read, Write, …) se reordenan en la documentación. El formador tuvo que buscar en directo una lista vertical. Usad <a href=\"https://code.claude.com/docs/en/overview\">Claude Code</a>, <a href=\"https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview\">tool use</a> y <a href=\"https://platform.claude.com/docs/en/managed-agents/quickstart\">Managed Agents</a> para los nombres vigentes."
+      },
+      {
+        "type": "h2",
+        "text": "Agente principal frente a subagente"
+      },
+      {
+        "type": "p",
+        "html": "En Claude Code hay un <strong>agente principal</strong>: la sesión donde escribís. Orquesta y planifica. Un <strong>subagente</strong> ejecuta una tarea. Palabras del formador: «agent no es más que un sub-agent en el caso de Claude» cuando habláis de los markdown especializados que añadís. Hay un agente principal y muchos subagentes. Pueden dispararse solos cuando un prompt encaja con su <em>description</em>, o los invocáis. Cada uno corre en su propia ventana de contexto con system prompt a medida, acceso propio a tools y permisos independientes."
+      },
+      {
+        "type": "table",
+        "headers": ["Pieza", "Agente principal (sesión Claude Code)", "Subagente"],
+        "rows": [
+          ["Trabajo", "Orquestar: memoria + skills + contexto → lista de to-dos", "Ejecutar un trozo (carpetas, backend, frontend, Docker, revisión)"],
+          ["Contexto", "El chat que veis; puede crecer mucho", "Ventana nueva acotada al trozo"],
+          ["Ficheros de memoria", "El CLAUDE.md global siempre entra", "Global más el CLAUDE.md de carpeta que coincida (backend frente a frontend)"],
+          ["Borrador a corto plazo", "Sandbox; se descarta al terminar el trozo; no lo controláis", "La misma idea, local a esa ejecución"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "La memoria a largo plazo son ficheros, no el chat"
+      },
+      {
+        "type": "p",
+        "html": "Rajesh preguntó si la «memoria» vivía en el sandbox con un TTL corto. El formador separó: los <code>CLAUDE.md</code> del repo git son <strong>largo plazo</strong> y físicos (global, <code>backend/CLAUDE.md</code>, <code>frontend/CLAUDE.md</code>). El estado del sandbox que cose funciones una a una es <strong>corto plazo</strong> y se descarta. CLAUDE.md es «configuración maestra, no un agente maestro». Los ficheros anidados no crean orquestadores extra; son qué paquete de instrucciones carga un agente dado."
+      },
+      {
+        "type": "p",
+        "html": "Tres agentes en un trabajo full-stack pueden correr con tres mezclas: (1) solo global (crear carpetas), (2) global + backend, (3) global + frontend. No es un mensaje enorme. Así una generación de horas cabe en los límites de contexto: trozos, planificados, y luego enviados."
+      },
+      {
+        "type": "h2",
+        "text": "Cuatro configuraciones que todo agente tiene"
+      },
+      {
+        "type": "p",
+        "html": "Sea principal o sub, el formador listó cuatro ingredientes siempre presentes, y extras que fijáis en el fichero del agente:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Prompt (el texto de sistema / rol del agente).",
+          "Contexto (lo que hay en la ventana de esta ejecución).",
+          "Tools (integradas y/o MCP — p. ej. ECR en vez de Docker Hub para imágenes base).",
+          "Memoria y skills (qué CLAUDE.md y qué paquetes SKILL.md).",
+          "Opcional: modelo, modo de permiso, max turns, tools denegadas, hooks, aislamiento, color, prompt inicial, effort, background."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Campos obligatorios al escribir un subagente: <strong>name</strong> y <strong>description</strong>. La description es cómo enruta el orquestador («revisa el código por calidad… úsalo justo después de escribir o modificar código»). Las tools pueden ser una lista estrecha (solo Read → el revisor no puede Write) o un comodín si de verdad no lo sabéis. Las tools a medida son tools MCP, no una función local cualquiera haciéndose pasar por tool (la aclaración fue explícita)."
+      },
+      {
+        "type": "h2",
+        "text": "Dónde viven los ficheros de agente"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Proyecto: carpeta <code>.claude/agents</code> (el formador: «dot cloud slash agents») en el repo — se clona con el proyecto.",
+          "Perfil de usuario (Windows / macOS / Linux): disponible para todos los proyectos de ese usuario.",
+          "Plugins: empaquetados con hooks y skills (módulo 06).",
+          "Flags de CLI si lanzáis agentes desde la línea de comandos.",
+          "Integrados: Explore (tools orientadas al sistema de ficheros), Plan, status-line, y lo que listen los docs actuales — se usan automáticamente."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Modelos sin estado, orquestación con estado"
+      },
+      {
+        "type": "p",
+        "html": "Un alumno esperaba que CLAUDE.md y las skills se «cachearan» como palabras repetidas del prompt. El formador: los LLM son <strong>stateless</strong>; una petición puede caer en otra instancia (escalado horizontal). La caché de prompts es una función explícita de API posterior — no algo que se asuma en Claude Code. Los <em>resultados</em> de tools sí pueden cachearse en infraestructura compartida (mencionó cachés tipo Redis) y reutilizarse entre instancias. El historial del chat lo guarda el <em>cliente / orquestador</em>, por eso podéis reanudar una lista de to-dos. Varios subagentes de un proyecto se coordinan por ese orquestador, no charlando entre iguales, salvo que el agente principal pase artefactos (ficheros, OpenAPI, tipos)."
+      },
+      {
+        "type": "h2",
+        "text": "Destino de examen"
+      },
+      {
+        "type": "p",
+        "html": "«Implementar algo como Claude Code» con el agent SDK / APIs de Claude es el norte de Foundation. En este módulo basta el vocabulario: orquestador, subagente, ventana de contexto propia, delegación por description, allow/deny de tools, heredar o fijar modelo, plan editable y luego congelado. Demasiados CLAUDE.md solapados pueden alucinar — aviso de Pedro; la mitigación enseñada es forzar un paso de aclaración en la memoria global antes de generar."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Subagentes, agentes integrados y ámbito proyecto frente a usuario."
+          },
+          {
+            "title": "Inicio rápido de Managed Agents",
+            "url": "https://platform.claude.com/docs/en/managed-agents/quickstart",
+            "note": "Agentes de plataforma cuando salgáis del cliente IDE."
+          },
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Tools estilo Read/Write/Grep y tools MCP en un agente."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Cómo se limita un agente a ECR frente a Docker Hub en el ejemplo Docker."
+          }
+        ]
+      }
+    ]
+  }
+]

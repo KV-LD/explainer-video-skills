@@ -1,0 +1,246 @@
+[
+  {
+    "lang": "en",
+    "module_id": "10",
+    "chapter_id": "04",
+    "eyebrow": "Module 10 · Chapter 04 · 24 August 2026",
+    "chapter_title": "How the trainer framed sitting the certification exam",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 10 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M10 · C04 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Before lecture started, Arvind said his Foundation sitting was <strong>30 August 2026</strong> and asked when the cohort would cover <em>how to attempt</em> the exam — only three classes remained that week. Vijay answered: <strong>today, in the second part</strong>. The recording then filled with tool use, MCP, and a RAG teaser. Treat this chapter as the <em>framing</em> from 24 August, and module 12 as the sitting tactics and Skilljar map."
+      },
+      {
+        "type": "h2",
+        "text": "What was promised versus what fitted in the clock"
+      },
+      {
+        "type": "p",
+        "html": "The trainer did not walk a full proctor checklist on 24 August. He did keep repeating an exam filter while teaching tools: some API knobs are real in production and still <strong>out of scope for Foundation</strong>. The explicit example was streaming <strong>tool_choice</strong> / beta paths — useful later, “this doesn’t come up in our exams.” That is the sitting posture: you are tested on the stable handshake (schema, stop reason, tool_result, MCP roles), not every beta flag in a notebook."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Percentages and UI change",
+        "html": "Weightings Vijay quoted from Skilljar on 27 August (module 12) can move. Register and read the live exam guide on <a href=\"https://anthropic.skilljar.com\">Anthropic Academy</a> and current <a href=\"https://docs.claude.com/en/home\">docs.claude.com</a> pages."
+      },
+      {
+        "type": "h2",
+        "text": "How he wanted you to think while answering"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Foundation is a <strong>developer concepts</strong> exam: MCQ plus written scenarios (from earlier modules), not “open the IDE and ship an app.”",
+          "When a stem mentions live weather, HR data, or “the model stopped because it needs a function,” the next step is a <strong>tool or MCP server</strong>, not stuffing the fact into the system prompt.",
+          "When a stem mentions a thousand-page PDF and token cost, the next step is <strong>RAG</strong> (retrieve a few chunks), which he introduced at the end of this same session.",
+          "When a stem mentions Figma, Gmail, or Copilot connectors, think <strong>MCP client + vendor or first-party server</strong>, not a one-off Python function copied into three apps.",
+          "Prefer <strong>specific tool descriptions</strong> and <strong>selective attachment</strong> over dumping twenty overlapping tools — collision is the failure story he wanted you to recognise."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Calendar pressure the room actually had"
+      },
+      {
+        "type": "p",
+        "html": "People were already booked. The pedagogical implication: do not wait for a perfect “exam week.” Use session recordings and the Skilljar course that the trainer said his examples were drawn from. Module 12 later named <strong>Building with the Claude API</strong> as the large slice (~33% in his walkthrough), tools/MCP as a dedicated slice (~10%), and AI Fluency for builders for prompting. Recheck those numbers on Skilljar before you sit."
+      },
+      {
+        "type": "h2",
+        "text": "What “attempt” meant in his language"
+      },
+      {
+        "type": "p",
+        "html": "Even before the 27 August mock-exam chat, the 24 August Q&amp;A trained an attempt style:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Read whether the model is <em>deciding</em> or the app is <em>executing</em>. Mixing those up fails tool questions.",
+          "Ignore classroom library nicknames (“entropy”, “OHEI”) if the option names the official product (Anthropic SDK, Voyage, MongoDB Atlas, Agent SDK).",
+          "If two answers both “call a tool,” pick the one that returns a <code>tool_result</code> on a follow-up user message rather than inventing data in the first assistant turn.",
+          "Beta, leaderboards, and custom confusion-matrix tooling around tool routing were discussion, not the Foundation rubric."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Sitting logistics he deferred (preview)"
+      },
+      {
+        "type": "p",
+        "html": "On 27 August he added: timed practice (he mentioned on the order of <strong>120 minutes</strong> and a mix of question counts such as 53 or 23 depending on the paper you practise), mark-for-review in the proctor UI, scenario English, unofficial mock sites that are <em>conceptually</em> close but not identical items, certification validity he stated as <strong>two years</strong>, and first-attempt pressure. Those tactics belong in module 12 chapter 04. Do not treat a third-party mock as Anthropic’s item bank."
+      },
+      {
+        "type": "h2",
+        "text": "Study order if you sit immediately after this session"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Replay the date-time and two-tool notebooks until you can narrate stop reason → execute → tool_result without notes.",
+          "Draw the MCP client/server diagram and the N×N problem from memory.",
+          "Skim RAG (end of this recording + module 11) so “huge PDF” questions are not a surprise.",
+          "Open Skilljar and the official tool-use/MCP docs the night before — not only the cohort PDF folder."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Do not paste work secrets into mocks",
+        "html": "Practice prompts and third-party quiz sites are not a UST client sandbox. Keep proprietary text out of both Claude and unofficial exam coaches."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Registration, official prep courses, and the live blueprint."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Highest-yield API topic from this session."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Second high-yield topic if the blueprint still lists tools/MCP as a slice."
+          },
+          {
+            "title": "API overview",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Orientation for “building with the Claude API” questions."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "10",
+    "chapter_id": "04",
+    "eyebrow": "Módulo 10 · Capítulo 04 · 24 de agosto de 2026",
+    "chapter_title": "Cómo planteó el formador presentarse al examen",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 10 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M10 · C04 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Antes de la clase, Arvind dijo que su convocatoria Foundation era el <strong>30 de agosto de 2026</strong> y preguntó cuándo verían <em>cómo afrontar</em> el examen: esa semana quedaban solo tres clases. Vijay respondió: <strong>hoy, en la segunda parte</strong>. La grabación se llenó de tool use, MCP y un avance de RAG. Tomad este capítulo como el <em>enfoque</em> del 24 de agosto, y el módulo 12 como táctica de convocatoria y mapa de Skilljar."
+      },
+      {
+        "type": "h2",
+        "text": "Lo prometido frente a lo que cupo en el reloj"
+      },
+      {
+        "type": "p",
+        "html": "El formador no recorrió una lista completa de proctor el 24 de agosto. Sí aplicó un filtro de examen mientras enseñaba herramientas: algunos mandos de la API son reales en producción y siguen <strong>fuera de Foundation</strong>. El ejemplo explícito fueron las vías beta de <strong>tool_choice</strong> / streaming: útiles más adelante, «esto no sale en nuestros exámenes». Esa es la postura: os examinan del apretón de manos estable (esquema, motivo de parada, tool_result, roles MCP), no de cada flag beta de un cuaderno."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Los porcentajes y la interfaz cambian",
+        "html": "Las ponderaciones que Vijay leyó en Skilljar el 27 de agosto (módulo 12) pueden moverse. Inscribíos y leed la guía vigente en <a href=\"https://anthropic.skilljar.com\">Anthropic Academy</a> y las páginas actuales de <a href=\"https://docs.claude.com/en/home\">docs.claude.com</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo quería que pensarais al responder"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Foundation es un examen de <strong>conceptos de desarrollo</strong>: tipo test más escenarios escritos (módulos anteriores), no «abrid el IDE y entregad una app».",
+          "Si el enunciado habla de meteorología en vivo, datos de RR. HH. o «el modelo paró porque necesita una función», el siguiente paso es una <strong>herramienta o un servidor MCP</strong>, no meter el dato en el prompt de sistema.",
+          "Si habla de un PDF de mil páginas y coste de tokens, el siguiente paso es <strong>RAG</strong> (recuperar unos fragmentos), que introdujo al final de esta misma sesión.",
+          "Si habla de Figma, Gmail o conectores de Copilot, pensad <strong>cliente MCP + servidor del proveedor o propio</strong>, no una función Python copiada en tres apps.",
+          "Preferid <strong>descripciones específicas</strong> y <strong>adjunto selectivo</strong> frente a volcar veinte herramientas solapadas: la colisión es el fallo que quería que reconocerais."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "La presión de calendario que había en la sala"
+      },
+      {
+        "type": "p",
+        "html": "Ya había gente con fecha. La implicación pedagógica: no esperéis a una «semana de examen» perfecta. Usad las grabaciones y el curso Skilljar del que el formador dijo extraer sus ejemplos. El módulo 12 nombró <strong>Building with the Claude API</strong> como el trozo grande (~33% en su recorrido), tools/MCP como trozo dedicado (~10%) y AI Fluency for builders para prompting. Recalculad esos números en Skilljar antes de presentaros."
+      },
+      {
+        "type": "h2",
+        "text": "Qué significaba «intentar» en su lenguaje"
+      },
+      {
+        "type": "p",
+        "html": "Aun antes del chat de simulacros del 27 de agosto, las preguntas del 24 de agosto entrenaban un estilo de intento:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Leed si el modelo está <em>decidiendo</em> o la app está <em>ejecutando</em>. Mezclarlo suspende las preguntas de herramientas.",
+          "Ignorad apodos de biblioteca de aula («entropy», «OHEI») si la opción nombra el producto oficial (SDK de Anthropic, Voyage, MongoDB Atlas, Agent SDK).",
+          "Si dos respuestas «llaman a una herramienta», elegid la que devuelve un <code>tool_result</code> en un mensaje de usuario de seguimiento, no la que inventa datos en el primer turno del asistente.",
+          "Beta, clasificaciones y utillaje de matriz de confusión alrededor del enrutado de herramientas fueron debate, no la rúbrica Foundation."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Logística de convocatoria que aplazó (avance)"
+      },
+      {
+        "type": "p",
+        "html": "El 27 de agosto añadió: práctica cronometrada (habló del orden de <strong>120 minutos</strong> y recuentos como 53 o 23 según el simulacro), marcar para revisar en el proctor, inglés de escenarios, sitios extraoficiales de mock <em>cercanos en concepto</em> pero no idénticos, validez de la certificación que cifró en <strong>dos años</strong>, y presión del primer intento. Esa táctica pertenece al capítulo 04 del módulo 12. No trates un mock de terceros como el banco de ítems de Anthropic."
+      },
+      {
+        "type": "h2",
+        "text": "Orden de estudio si os presentáis justo después de esta sesión"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Repetid los cuadernos de fecha-hora y dos herramientas hasta narrar motivo de parada → ejecutar → tool_result sin notas.",
+          "Dibujad de memoria el diagrama cliente/servidor MCP y el problema N×N.",
+          "Ojead RAG (final de esta grabación + módulo 11) para que las preguntas de «PDF enorme» no sorprendan.",
+          "Abrid Skilljar y la documentación oficial de tool use/MCP la noche anterior — no solo la carpeta PDF del grupo."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "No pegéis secretos de trabajo en los simulacros",
+        "html": "Los prompts de práctica y los cuestionarios de terceros no son un entorno de cliente UST. Dejad el texto propietario fuera de Claude y de los «coaches» extraoficiales."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Anthropic Academy (Skilljar)",
+            "url": "https://anthropic.skilljar.com",
+            "note": "Inscripción, cursos oficiales de preparación y el temario vigente."
+          },
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Tema de API de mayor rendimiento de esta sesión."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Segundo tema de peso si el temario sigue listando tools/MCP."
+          },
+          {
+            "title": "Visión general de la API",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Orientación para preguntas de «construir con la API de Claude»."
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,268 @@
+[
+  {
+    "lang": "en",
+    "module_id": "04",
+    "chapter_id": "03",
+    "eyebrow": "Module 04 · Chapter 03 · 10 August 2026",
+    "chapter_title": "MCP as the connector pattern",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 4 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M04 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "The last third of session 4 introduced <strong>MCP (Model Context Protocol)</strong> as the way Claude clients attach third-party systems. The live example was not an abstract protocol lecture: enable the Figma MCP server, authenticate, inspect the tool list, pass a Figma URL into a frontend skill, and let Claude Code generate a React/Vite/TypeScript UI from design context. Building your own MCP servers is promised for API modules; here you need the connector pattern."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Protocol versus the Figma demo",
+        "html": "Marketplace server names, OAuth screens, and the exact tool list (get screenshot, get design context, get metadata…) will change. The durable ideas: MCP exposes <em>tools</em> the model can plan over; you consent per invocation; results land as temporary files in a sandbox; you still write skills and CLAUDE.md so generation follows your stack. Current docs: <a href=\"https://docs.claude.com/en/docs/agents-and-tools/mcp\">MCP</a> and <a href=\"https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview\">tool use</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Why MCP exists in this course"
+      },
+      {
+        "type": "p",
+        "html": "A model only sees what you put in the prompt, attach as files, or fetch via tools. Skills and CLAUDE.md cannot log into Figma. MCP is the standardised way to say: this server offers operations (tools); Claude may call them; the host (Claude Code / Claude.ai / Cowork) brokers auth and sandboxing. The trainer’s one-line version: <em>get third-party details using a protocol called MCP</em> — Figma today, internal data later when you implement servers yourselves."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Not mandatory for every frontend: you could paste HTML from Cowork Design straight into Code. The Figma hop was explicitly “I want to show MCP.”",
+          "Special permissions: MCP tools must be enabled/connected; a disconnected server will not appear in the plan.",
+          "Same Claude account and Figma account need to complete the OAuth/consent so a token can be issued to the client."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Connecting a server (Figma in the lab)"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "In Claude Code (or the Claude MCP settings the UI then showed), open MCP servers and install/connect the Figma server.",
+          "Authenticate: the client opens a browser URL; you approve access (email, token). Use the profile that actually owns the Figma file.",
+          "Confirm status: connected. Re-run “MCP servers” (or the equivalent panel) if the UI still shows disconnected.",
+          "Open the tool list. In the recording: get screenshot, get design context, get motion context, get metadata, get diagrams, export video, code-content mappings, and similar. You do not memorise the list; you understand that <em>the model plans which tools to call</em>.",
+          "Copy the <em>specific file URL</em> from Figma. A generic “use my Figma” prompt can scan an entire account and waste tokens."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Figma-side, you may also create a token if the connector asks for it; the demo mostly used the OAuth path after logging into the correct Google profile. Share the Figma file if the Claude identity is not already a collaborator."
+      },
+      {
+        "type": "h2",
+        "text": "Frontend skill + memory + MCP in one prompt"
+      },
+      {
+        "type": "p",
+        "html": "Before the generate command, the trainer added a <strong>frontend skill</strong> (senior frontend engineer; React, TypeScript, Vite; responsive, accessible, reusable components; error handling; routing; optional Next.js if that is the house stack) and a frontend <code>CLAUDE.md</code> (task assignment, priorities, “honour this OpenAPI,” UI principles). Then a <em>new session</em>, slash the frontend skill, and a prompt of the form: generate the frontend from the Figma design at this URL."
+      },
+      {
+        "type": "p",
+        "html": "Claude’s first moves are MCP, not JSX: “do I have a Figma server? which tools? get metadata, get design context…” Each call is a function call. You will see consent prompts (“do you want to proceed?”). Approve with the same seriousness you give shell commands."
+      },
+      {
+        "type": "h2",
+        "text": "Where tool results live: sandbox, not the chat forever"
+      },
+      {
+        "type": "p",
+        "html": "A learner asked whether the generated text dump of Figma metadata was a temporary file. Yes. MCP/tool results are stored as temp artefacts: metadata often as <code>.txt</code>, JSON APIs as JSON, in a <strong>sandbox</strong> on the local/Claude workspace. The previous session had already introduced that sandbox; this session reused it. Think of it as an isolated environment (the trainer compared it to a Docker-like OS where Node or Python can be installed — analogy, not “MCP runs Docker”). The LLM injects lists of files/folders; IO in the sandbox actually writes the tree (code-interpreter style). After the initial MCP burst, generation uses that cached design context rather than re-fetching every component."
+      },
+      {
+        "type": "table",
+        "headers": ["You see in the UI", "What it usually is", "What you should do"],
+        "rows": [
+          ["Consent to get_metadata / get_design_context", "Tool call to the MCP server", "Read the tool name; deny if the URL is wrong."],
+          ["Temporary txt/json in the sandbox", "Tool result payload", "Do not commit secrets; treat as ephemeral."],
+          ["Scaffold (Vite, React, Tailwind, src/, package.json)", "Local IO after planning", "Review gitignore; do not push node_modules."],
+          ["Mismatch warnings (UI screen vs missing API)", "Model comparing design to OpenAPI", "Skip, add an endpoint, or drop the screen — do not ignore silently in production."]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Token and usage notes from the live run"
+      },
+      {
+        "type": "p",
+        "html": "End-to-end frontend generation in the recording sat around 10–12% of the trainer’s usage meter for that app size. Large products should be chunked. Verification (opening a browser, checking UI) can add ten or more minutes — that is why the session stopped mid-generation and resumed on 12 August. Prefer Mermaid-like structured design context over shipping giant screenshots when you can; MCP “get design context” is already an attempt to give structure instead of pixels only."
+      },
+      {
+        "type": "h2",
+        "text": "What MCP is not (yet) in this chapter"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Not a replacement for CLAUDE.md or skills — those still constrain stack and quality after context arrives.",
+          "Not automatic write access to Figma; it is read/design-context for generation unless you enable other tools.",
+          "Not your custom UST data source. Internal MCP servers come when you define tools on the API side.",
+          "Not a reason to skip OpenAPI: the model still noticed missing user-management endpoints versus a user-list screen."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Connector pattern: servers, tools, and how Claude hosts them."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Function-calling shape that MCP tools sit on."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Where MCP servers are enabled in the coding client."
+          },
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Jump to current product pages if the Figma connector UI has moved."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "04",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 04 · Capítulo 03 · 10 de agosto de 2026",
+    "chapter_title": "MCP como patrón de conectores",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 4 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M04 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El último tercio de la sesión 4 presentó <strong>MCP (Model Context Protocol)</strong> como la forma en que los clientes Claude enganchan sistemas de terceros. El ejemplo en directo no fue una clase abstracta de protocolo: activar el servidor MCP de Figma, autenticar, inspeccionar la lista de tools, pasar una URL de Figma a una skill de frontend y dejar que Claude Code genere una UI React/Vite/TypeScript desde el contexto de diseño. Construir servidores MCP propios se deja para los módulos de API; aquí hace falta el patrón de conector."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Protocolo frente al demo de Figma",
+        "html": "Los nombres del marketplace, las pantallas OAuth y la lista exacta de tools (get screenshot, get design context, get metadata…) cambiarán. Las ideas que permanecen: MCP expone <em>herramientas</em> sobre las que el modelo puede planificar; dais consentimiento por invocación; los resultados caen como ficheros temporales en un sandbox; seguís escribiendo skills y CLAUDE.md para que la generación respete el stack. Docs vigentes: <a href=\"https://docs.claude.com/en/docs/agents-and-tools/mcp\">MCP</a> y <a href=\"https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview\">tool use</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Por qué existe MCP en este curso"
+      },
+      {
+        "type": "p",
+        "html": "Un modelo solo ve lo que ponéis en el prompt, adjuntáis como ficheros o recuperáis vía tools. Las skills y CLAUDE.md no pueden iniciar sesión en Figma. MCP es la vía normalizada para decir: este servidor ofrece operaciones (tools); Claude puede llamarlas; el host (Claude Code / Claude.ai / Cowork) media autenticación y sandbox. La versión en una frase del formador: <em>obtener detalles de terceros con un protocolo llamado MCP</em> — Figma hoy, datos internos más adelante cuando implementéis servidores vosotros."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "No es obligatorio para todo frontend: podríais pegar el HTML de Cowork Design en Code. El salto a Figma fue explícitamente «quiero mostrar MCP».",
+          "Permisos especiales: hay que activar/conectar las tools MCP; un servidor desconectado no aparece en el plan.",
+          "La misma cuenta Claude y la de Figma deben completar el OAuth/consentimiento para emitir un token al cliente."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Conectar un servidor (Figma en el laboratorio)"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "En Claude Code (o el panel MCP que mostraba la UI), abrid MCP servers e instalad/conectad el servidor Figma.",
+          "Autenticad: el cliente abre una URL en el navegador; aprobáis el acceso (correo, token). Usad el perfil que realmente posee el fichero de Figma.",
+          "Confirmad el estado: connected. Volved a «MCP servers» si la UI sigue en desconectado.",
+          "Abrid la lista de tools. En la grabación: get screenshot, get design context, get motion context, get metadata, get diagrams, exportar vídeo, mappings de código, y similares. No memoricéis la lista; entended que <em>el modelo planifica qué tools llamar</em>.",
+          "Copiad la <em>URL concreta del fichero</em> en Figma. Un prompt genérico «usa mi Figma» puede recorrer toda la cuenta y malgastar tokens."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "En Figma quizá tengáis que crear un token si el conector lo pide; el demo usó sobre todo OAuth tras entrar con el perfil de Google correcto. Compartid el fichero si la identidad de Claude no es ya colaboradora."
+      },
+      {
+        "type": "h2",
+        "text": "Skill de frontend + memoria + MCP en un solo prompt"
+      },
+      {
+        "type": "p",
+        "html": "Antes del comando de generar, el formador añadió una <strong>skill de frontend</strong> (ingeniero frontend senior; React, TypeScript, Vite; componentes responsivos, accesibles, reutilizables; manejo de errores; routing; Next.js opcional si ese es el stack de casa) y un <code>CLAUDE.md</code> de frontend (asignación de tareas, prioridades, «respeta este OpenAPI», principios de UI). Luego una <em>sesión nueva</em>, slash de frontend y un prompt del tipo: genera el frontend a partir del diseño de Figma en esta URL."
+      },
+      {
+        "type": "p",
+        "html": "Los primeros movimientos de Claude son MCP, no JSX: «¿tengo servidor Figma? ¿qué tools? get metadata, get design context…» Cada llamada es una function call. Veréis prompts de consentimiento («¿continuar?»). Aprobadlos con la misma seriedad que un comando de shell."
+      },
+      {
+        "type": "h2",
+        "text": "Dónde viven los resultados: sandbox, no el chat para siempre"
+      },
+      {
+        "type": "p",
+        "html": "Un alumno preguntó si el volcado de metadatos de Figma era un fichero temporal. Sí. Los resultados MCP/tool se guardan como artefactos temporales: metadatos a menudo como <code>.txt</code>, APIs JSON como JSON, en un <strong>sandbox</strong> del espacio de trabajo local/Claude. La sesión anterior ya había presentado ese sandbox; esta lo reutiliza. Pensad en un entorno aislado (el formador lo comparó con un SO tipo Docker donde se puede instalar Node o Python — analogía, no «MCP ejecuta Docker»). El LLM inyecta listas de ficheros/carpetas; el IO del sandbox escribe el árbol (estilo code interpreter). Tras el primer chorro de MCP, la generación usa ese contexto de diseño en caché en vez de volver a pedir cada componente."
+      },
+      {
+        "type": "table",
+        "headers": ["Lo que veis en la UI", "Qué suele ser", "Qué debéis hacer"],
+        "rows": [
+          ["Consentimiento a get_metadata / get_design_context", "Llamada a tool del servidor MCP", "Leed el nombre de la tool; denegad si la URL es incorrecta."],
+          ["txt/json temporal en el sandbox", "Payload del resultado", "No subáis secretos; tratadlo como efímero."],
+          ["Andamiaje (Vite, React, Tailwind, src/, package.json)", "IO local tras el plan", "Revisad gitignore; no subáis node_modules."],
+          ["Avisos de desajuste (pantalla UI vs API ausente)", "El modelo compara diseño y OpenAPI", "Omitid, añadid un endpoint o caed la pantalla — no lo ignoréis en silencio en producción."]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Notas de tokens y uso del arranque en directo"
+      },
+      {
+        "type": "p",
+        "html": "La generación frontend de extremo a extremo en la grabación se quedó en torno al 10–12 % del medidor de uso del formador para ese tamaño de app. Los productos grandes hay que trocearlos. La verificación (abrir el navegador, comprobar la UI) puede sumar diez minutos o más: por eso la sesión se detuvo a medias y se reanudó el 12 de agosto. Preferid contexto de diseño estructurado (estilo Mermaid) frente a capturas gigantes cuando podáis; el «get design context» de MCP ya intenta dar estructura, no solo píxeles."
+      },
+      {
+        "type": "h2",
+        "text": "Lo que MCP aún no es en este capítulo"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "No sustituye a CLAUDE.md ni a las skills: esas siguen acotando stack y calidad cuando llega el contexto.",
+          "No es escritura automática en Figma; es lectura/contexto de diseño para generar, salvo que activéis otras tools.",
+          "No es vuestro origen de datos interno UST. Los servidores MCP internos llegan cuando defináis tools en el lado API.",
+          "No es motivo para saltarse OpenAPI: el modelo siguió detectando endpoints de gestión de usuarios ausentes frente a una pantalla de listado."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Patrón de conectores: servidores, tools y cómo Claude los aloja."
+          },
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Forma de function calling sobre la que se sientan las tools MCP."
+          },
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Dónde se activan los servidores MCP en el cliente de código."
+          },
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Si la UI del conector Figma se ha movido."
+          }
+        ]
+      }
+    ]
+  }
+]
