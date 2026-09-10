@@ -186,8 +186,8 @@ export function QuizClient({
         {need === 1
           ? t.selectOne
           : t.selectN
-              .replace("{n}", String(need))
-              .replace("{have}", String(selected.length))}
+              .replaceAll("{n}", String(need))
+              .replaceAll("{have}", String(selected.length))}
       </p>
       <ul className="mt-6 space-y-2" role={need === 1 ? "radiogroup" : "group"}>
         {loc.options.map((opt, i) => {
@@ -255,8 +255,8 @@ export function QuizClient({
           {need === 1
             ? t.pickAnswer
             : t.pickAnswers
-                .replace("{n}", String(need))
-                .replace("{have}", String(selected.length))}
+                .replaceAll("{n}", String(need))
+                .replaceAll("{have}", String(selected.length))}
         </p>
       )}
     </div>
