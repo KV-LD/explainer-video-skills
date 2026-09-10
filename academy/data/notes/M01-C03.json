@@ -1,0 +1,268 @@
+[
+  {
+    "lang": "en",
+    "module_id": "01",
+    "chapter_id": "03",
+    "eyebrow": "Module 01 · Chapter 03 · 3 August 2026",
+    "chapter_title": "Claude Chat on the web: first product surface",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 1 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M01 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "After the theory block, Vijay opened the <strong>Claude desktop / Chat</strong> surface—the product he analogised to a ChatGPT-style conversational assistant. On desktop home he showed two tiles: <strong>Chat</strong> and <strong>Cowork</strong>. This chapter stays on Chat: how a web or desktop chat client talks to a stateless model, which controls matter for tokens, and how files, projects, skills, and connectors change the request."
+      },
+      {
+        "type": "h2",
+        "text": "What Chat is for (and what it will not do)"
+      },
+      {
+        "type": "p",
+        "html": "Chat is the everyday conversational client: questions, writing, analysis, uploaded images, and (with tools) web search. A later Q&amp;A made the product boundary sharp: <strong>Chat can answer in the same window; it does not reorganise files on your disk.</strong> That job is Cowork. If you only need a summary of a slide deck you uploaded, Chat is enough. If you need month-wise folders written next to the originals, you have left Chat."
+      },
+      {
+        "type": "table",
+        "headers": ["Surface", "Where you typically open it", "Local file create / move / delete", "Typical user"],
+        "rows": [
+          ["Claude Chat", "claude.ai web, desktop Chat pane", "No — replies stay in the thread (unless you download an artefact)", "Anyone: BA, sales, developer exploring an idea"],
+          ["Claude Cowork", "Desktop (org + version dependent)", "Yes — on an attached folder, with approval modes", "Knowledge work and local multi-step tasks"],
+          ["Claude Code", "CLI, VS Code / other IDEs, desktop Code", "Yes — in the repo / workspace via tools", "Developers on CCDV-F"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Your org Chat may not look like the demo",
+        "html": "On 5 August several UST attendees had Chat and Code on desktop but no Cowork: either an old desktop build or an org policy (IT later said some R&amp;D / VDI workspaces enable Cowork). Chat itself can still be gated. Trust what your admin enabled and what <a href=\"https://docs.claude.com/en/home\">docs.claude.com</a> describes today."
+      },
+      {
+        "type": "h2",
+        "text": "Model picker, effort, and extended thinking"
+      },
+      {
+        "type": "p",
+        "html": "In Chat you choose a model (Haiku / Sonnet / Opus family in class). Vijay deferred “when to pick which” to later sessions, but he already tied <strong>effort</strong> to token budget: low / medium / high / extra / max, with max described as opening a ~1 million token path. <strong>Thinking</strong> (deep / extended thinking) routes work to more expensive reasoning SKUs. Do not enable max effort and thinking “because it looks smarter” on a one-word lookup; you will burn quota that your team shares."
+      },
+      {
+        "type": "p",
+        "html": "He demonstrated asking the model its training cutoff. Chat answered with a date and then offered to look things up—the natural cue to turn on <strong>web search</strong> as a tool. For a live “weather in Bengaluru” style prompt, the model decides a tool is needed; the <em>client</em> performs the HTTP; JSON returns; a second model call writes prose. Planning tokens plus synthesis tokens both count. Pure HTTP to a weather API, once planned, is not billed as an LLM call."
+      },
+      {
+        "type": "h2",
+        "text": "Files versus Projects (RAG without saying RAG)"
+      },
+      {
+        "type": "p",
+        "html": "Attaching a file or photo to a Chat turn typically <strong>appends that content</strong> into the current request (subject to window limits). Creating a <strong>Project</strong> and dropping many files is different: Vijay described it as the product quietly treating the workspace as <strong>RAG</strong>—index, retrieve chunks, augment the prompt, generate. You do not pick the chunker or the vector store; that is proprietary to Claude. Cursor-class tools may expose those knobs; Claude Chat/Code in this course do not."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Educate the tool in <code>CLAUDE.md</code> / project instructions: e.g. “front end follows this OpenAPI spec” so retrieval does not haul the entire backend.",
+          "If Swagger lives in another repo, you may need the URL or the JSON file in context—not a live HTTP connector unless you add one.",
+          "Long chats accumulate prior Q&amp;A into every new turn. Start a <strong>new session</strong> when the task is done to limit tokens and hallucination hooks. Some clients offer <strong>summarize / compact</strong> so later turns send history + new question instead of the full transcript."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Skills, slash commands, and connectors in Chat"
+      },
+      {
+        "type": "p",
+        "html": "To fight the “where is the bank?” ambiguity, Chat can inject <strong>skills</strong> (reusable system instructions). The user prompt stays short (“where is the bank?”); the skill may be a thousand lines of banking policy. Those lines are tokens every time. Slash commands (e.g. a geolocation skill versus a banking skill) swap which instruction pack is attached. Connectors (Gmail, Drive, Jira, Confluence, Microsoft 365, Slack, weather, scrapers such as Apify in the later demo) are how Chat/Cowork reach proprietary or live systems—usually MCP under the product name “connectors.”"
+      },
+      {
+        "type": "h2",
+        "text": "Who decides to call a tool?"
+      },
+      {
+        "type": "p",
+        "html": "A precise classroom answer: the <strong>model produces a plan</strong> (todos). The <strong>client executes</strong> steps. Some steps are tool/HTTP with no extra LLM; some steps need another LLM pass (extract “rainy” from a fat JSON, then generate an image background). Anthropic does not fully document whether a given call is “model-native tools” or “client tools”; Vijay’s working assumption for Claude was client-side execution after the plan. Exam language: know that <em>planning is model; execution is the product</em>."
+      },
+      {
+        "type": "h2",
+        "text": "Usage you can see as an end user"
+      },
+      {
+        "type": "p",
+        "html": "Settings → Usage showed a percentage of a rolling window (classroom: on the order of a five-hour reset plus a weekly cap; exact numbers are plan- and admin-specific). Team accounts may hide per-user token counts unless you are admin. Enterprise UST licences were described as org-aggregated; token spend will become a KPI. If you exhaust quota mid-day, extra tokens are an org procurement issue, not a “refill button” on Chat."
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Study move",
+        "html": "Open Chat once this week: pick a model, ask the cutoff date, toggle web search, attach a harmless public PDF, then start a fresh thread. You are practising product literacy the Foundation exam assumes—not coding yet."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Docs home",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Product and API docs; use when Chat UI labels differ from class."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "How workspace / project grouping is described in current docs."
+          },
+          {
+            "title": "Vision",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/vision",
+            "note": "Images in Chat and in the API."
+          },
+          {
+            "title": "PDF support",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "Document context beyond a pasted paragraph."
+          },
+          {
+            "title": "Extended thinking",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/extended-thinking",
+            "note": "The ‘thinking’ toggle Vijay tied to more expensive models."
+          },
+          {
+            "title": "Help: where is the API documentation?",
+            "url": "https://support.claude.com/en/articles/8114490-where-can-i-find-your-api-documentation",
+            "note": "If you only have the consumer Chat UI and need the API path."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "01",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 01 · Capítulo 03 · 3 de agosto de 2026",
+    "chapter_title": "Claude Chat en la web: la primera superficie de producto",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 1 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M01 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Tras el bloque teórico, Vijay abrió la superficie de <strong>Claude de escritorio / Chat</strong>—el producto que analogó a un asistente conversacional estilo ChatGPT. En el inicio de escritorio mostró dos teselas: <strong>Chat</strong> y <strong>Cowork</strong>. Este capítulo se queda en Chat: cómo un cliente web o de escritorio habla con un modelo sin estado, qué controles importan para los tokens y cómo archivos, proyectos, skills y conectores cambian la petición."
+      },
+      {
+        "type": "h2",
+        "text": "Para qué sirve Chat (y qué no hará)"
+      },
+      {
+        "type": "p",
+        "html": "Chat es el cliente conversacional cotidiano: preguntas, redacción, análisis, imágenes subidas y (con herramientas) búsqueda web. Un debate posterior dejó nítido el límite de producto: <strong>Chat puede responder en la misma ventana; no reorganiza archivos en vuestro disco</strong>. Eso es Cowork. Si solo necesitáis el resumen de una presentación que habéis subido, Chat basta. Si necesitáis carpetas por mes escritas junto a los originales, habéis salido de Chat."
+      },
+      {
+        "type": "table",
+        "headers": ["Superficie", "Dónde se abre habitualmente", "Crear / mover / borrar archivos locales", "Usuario típico"],
+        "rows": [
+          ["Claude Chat", "Web claude.ai, panel Chat de escritorio", "No — las respuestas se quedan en el hilo (salvo que descarguéis un artefacto)", "Cualquiera: BA, ventas, desarrollador explorando una idea"],
+          ["Claude Cowork", "Escritorio (depende de org y versión)", "Sí — en una carpeta adjuntada, con modos de aprobación", "Trabajo de conocimiento y tareas locales en varios pasos"],
+          ["Claude Code", "CLI, VS Code / otros IDE, Code de escritorio", "Sí — en el repo / espacio de trabajo mediante herramientas", "Desarrolladores en CCDV-F"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Vuestro Chat de organización puede no parecerse a la demo",
+        "html": "El 5 de agosto varios asistentes de UST tenían Chat y Code en escritorio pero no Cowork: o un escritorio antiguo o una política de org (IT dijo después que algunos espacios R&amp;D / VDI habilitan Cowork). El propio Chat puede estar restringido. Confiad en lo que habilite vuestro admin y en lo que describa hoy <a href=\"https://docs.claude.com/en/home\">docs.claude.com</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Selector de modelo, esfuerzo y pensamiento extendido"
+      },
+      {
+        "type": "p",
+        "html": "En Chat elegís un modelo (familia Haiku / Sonnet / Opus en clase). Vijay dejó «cuándo elegir cuál» para más adelante, pero ya ligó el <strong>esfuerzo</strong> al presupuesto de tokens: bajo / medio / alto / extra / máximo, con el máximo descrito como una vía de ~1 millón de tokens. <strong>Thinking</strong> (pensamiento profundo / extendido) envía el trabajo a SKU de razonamiento más caros. No activéis máximo esfuerzo y thinking «porque parece más listo» en una consulta de una palabra; quemaréis cuota que comparte el equipo."
+      },
+      {
+        "type": "p",
+        "html": "Demostró preguntar al modelo su fecha de corte. Chat respondió con una fecha y ofreció buscar—la pista natural para activar <strong>búsqueda web</strong> como herramienta. En un prompt en vivo tipo «tiempo en Bengaluru», el modelo decide que hace falta una herramienta; el <em>cliente</em> hace el HTTP; vuelve JSON; una segunda llamada al modelo escribe prosa. Cuentan los tokens de planificación y los de síntesis. El HTTP puro a una API del tiempo, una vez planificado, no se factura como llamada al LLM."
+      },
+      {
+        "type": "h2",
+        "text": "Archivos frente a Projects (RAG sin decir RAG)"
+      },
+      {
+        "type": "p",
+        "html": "Adjuntar un archivo o una foto a un turno de Chat suele <strong>añadir ese contenido</strong> a la petición actual (con el límite de la ventana). Crear un <strong>Project</strong> y soltar muchos archivos es distinto: Vijay lo describió como el producto tratando en silencio el espacio de trabajo como <strong>RAG</strong>—indexar, recuperar trozos, aumentar el prompt, generar. No elegís el algoritmo de troceado ni el almacén vectorial; es propietario de Claude. Herramientas tipo Cursor pueden exponer esos mandos; Claude Chat/Code en este curso no."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Educad a la herramienta en <code>CLAUDE.md</code> / instrucciones de proyecto: p. ej. «el front sigue esta especificación OpenAPI» para que la recuperación no arrastre todo el backend.",
+          "Si Swagger vive en otro repo, puede hacer falta la URL o el JSON en contexto—no un conector HTTP en vivo salvo que lo añadáis.",
+          "Los chats largos acumulan Q&amp;A previo en cada turno nuevo. Abrid una <strong>sesión nueva</strong> cuando la tarea esté hecha para limitar tokens y ganchos de alucinación. Algunos clientes ofrecen <strong>resumir / compact</strong> para que los turnos posteriores envíen historial + pregunta nueva en lugar de la transcripción completa."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Skills, comandos slash y conectores en Chat"
+      },
+      {
+        "type": "p",
+        "html": "Para combatir la ambigüedad de «where is the bank?», Chat puede inyectar <strong>skills</strong> (instrucciones de sistema reutilizables). El prompt del usuario se queda corto («where is the bank?»); la skill puede ser mil líneas de política bancaria. Esas líneas son tokens cada vez. Los comandos slash (p. ej. una skill de geolocalización frente a una bancaria) cambian qué paquete de instrucciones se adjunta. Los conectores (Gmail, Drive, Jira, Confluence, Microsoft 365, Slack, tiempo, scrapers como Apify en la demo posterior) son cómo Chat/Cowork llegan a sistemas propietarios o en vivo—suele ser MCP bajo el nombre de producto «connectors»."
+      },
+      {
+        "type": "h2",
+        "text": "¿Quién decide llamar a una herramienta?"
+      },
+      {
+        "type": "p",
+        "html": "Respuesta precisa de aula: el <strong>modelo produce un plan</strong> (todos). El <strong>cliente ejecuta</strong> los pasos. Algunos pasos son herramienta/HTTP sin LLM extra; otros necesitan otro paso por el LLM (extraer «lluvioso» de un JSON enorme y luego generar un fondo). Anthropic no documenta del todo si una llamada es «herramientas nativas del modelo» o «herramientas del cliente»; la hipótesis de trabajo de Vijay para Claude era ejecución en el cliente tras el plan. Lenguaje de examen: <em>planificar es el modelo; ejecutar es el producto</em>."
+      },
+      {
+        "type": "h2",
+        "text": "Uso que podéis ver como usuario final"
+      },
+      {
+        "type": "p",
+        "html": "Ajustes → Uso mostró un porcentaje de una ventana móvil (en clase: del orden de un reinicio de cinco horas más un tope semanal; las cifras exactas dependen del plan y del admin). Las cuentas Team pueden ocultar el recuento de tokens por usuario si no sois admin. Las licencias enterprise de UST se describieron como agregadas a la organización; el gasto de tokens acabará siendo un KPI. Si agotáis la cuota a mitad del día, los tokens extra son un tema de compras de la org, no un «botón de recarga» en Chat."
+      },
+      {
+        "type": "callout",
+        "kind": "success",
+        "title": "Movimiento de estudio",
+        "html": "Abrid Chat una vez esta semana: elegid un modelo, preguntad la fecha de corte, activad búsqueda web, adjuntad un PDF público inofensivo y luego abrid un hilo nuevo. Estáis practicando la alfabetización de producto que el examen Foundation da por hecha—aún no programáis."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Inicio de Claude Docs",
+            "url": "https://docs.claude.com/en/home",
+            "note": "Docs de producto y API; usadlos cuando las etiquetas de Chat difieran de la clase."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Cómo describen hoy los docs el agrupado workspace / project."
+          },
+          {
+            "title": "Visión",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/vision",
+            "note": "Imágenes en Chat y en la API."
+          },
+          {
+            "title": "Soporte PDF",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/pdf-support",
+            "note": "Contexto documental más allá de un párrafo pegado."
+          },
+          {
+            "title": "Pensamiento extendido",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/extended-thinking",
+            "note": "El interruptor de «thinking» que Vijay ligó a modelos más caros."
+          },
+          {
+            "title": "Ayuda: ¿dónde está la documentación de la API?",
+            "url": "https://support.claude.com/en/articles/8114490-where-can-i-find-your-api-documentation",
+            "note": "Si solo tenéis la UI de Chat de consumidor y necesitáis la vía de API."
+          }
+        ]
+      }
+    ]
+  }
+]

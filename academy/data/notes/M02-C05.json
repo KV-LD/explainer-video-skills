@@ -1,0 +1,258 @@
+[
+  {
+    "lang": "en",
+    "module_id": "02",
+    "chapter_id": "05",
+    "eyebrow": "Module 02 · Chapter 05 · 5 August 2026",
+    "chapter_title": "Agentic clients: plan versus execute, MCP, and the Chrome extension",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 2 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M02 · C05 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "The deepest architecture point of 5 August: <strong>Cowork and Claude Code are agentic clients</strong>. You give a task that cannot finish in one LLM shot. The model returns a <em>plan</em>. The client walks the plan, mixing tool/HTTP steps (often no extra model call) with further LLM steps (extract, generate). Chat can use tools; Vijay still reserved “agentic solution” for the products that run that loop against local and connector tools."
+      },
+      {
+        "type": "h2",
+        "text": "Worked example: weather plus image background"
+      },
+      {
+        "type": "p",
+        "html": "Prompt: upload a photo; get Bengaluru weather; apply it as the background. One Messages call cannot honestly do all of that. Typical plan the model might emit:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Fetch current weather via a tool (default web search, a weather connector, or your own API).",
+          "Reduce a verbose JSON blob to a keyword (rainy / sunny) — usually another LLM pass.",
+          "Generate or composite the background — another generative call."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Who decided a tool was required? <strong>The LLM, in the planning turn.</strong> Who performs the HTTP? <strong>Cowork’s HTTP client</strong>, using URL/body already specified in the plan. That is why Vijay said “no LLM in this task” for step 1 <em>after</em> the plan exists. Students who heard “no LLM at all” were stuck; Anand’s question unstuck the room: the planner is always a model. Client-side tool calls are cheaper than models that invoke tools inside the provider. SDK weeks will contrast those two implementations."
+      },
+      {
+        "type": "h2",
+        "text": "Connectors, MCP, and custom tools"
+      },
+      {
+        "type": "p",
+        "html": "Vyomkesh: are connectors the same as MCP servers? Vijay: <strong>same approach</strong>. Cowork does not expose a developer “enable MCP” toggle; the catalogue <em>is</em> MCP. Custom MCP can be added via settings / an MCP file—he parked the how-to for SDK week because Cowork is aimed at non-developers clicking UI. If you have no public connector for a semiconductor parts database, wrap it in a Lambda (or any API) and attach that function as a tool. Scraping: enable a crawler connector (Apify was on screen), pass a URL, get extracted text. Switching Figma → Adobe XD is the textbook reason to prefer MCP over a hard-coded vendor SDK inside your agent."
+      },
+      {
+        "type": "table",
+        "headers": ["Pattern", "Realtime?", "Best when", "Drawback Vijay stressed"],
+        "rows": [
+          ["Tool / connector / MCP", "Yes, if the backend is live", "Third-party systems, vendor swaps, weather", "Must be allow-listed; OAuth consent"],
+          ["RAG", "No — pre-indexed corpus", "Stable internal docs after vuln review", "Stale the moment the wiki moves"],
+          ["Retrain / SLM fine-tune", "No", "Tiny domain models, not frontier LLMs", "Cost and time"],
+          ["Web search", "Yes", "Public internet after cutoff", "Tokens and messier provenance"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Chrome extension as another agentic client"
+      },
+      {
+        "type": "p",
+        "html": "For browser-native chores (LinkedIn scan, “manual” test of a web app, blogger workflows), Vijay installed the <strong>Claude Chrome extension</strong> from the Web Store (publisher claude.com). Authorise it; you get a Chat-like pane bound to the browser. If you are already logged into a site, the extension can drive that session—he called that <strong>dangerous</strong> and org-sensitive. In class it was <strong>beta</strong>: most enterprises will block it. It is not Copilot: Copilot (in his contrast) talks to an LLM; this extension can <em>execute</em> browser steps. He also warned not to mix Office-in-Chrome automation with a separate web flow as if they were one agent without checking product limits."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "UST install policy",
+        "html": "Whether R&amp;D VDI may load the extension is an IT question, not a trainer promise. Personal Pro can demo it. Do not put client credentials into a beta browser agent."
+      },
+      {
+        "type": "h2",
+        "text": "You cannot download Sonnet"
+      },
+      {
+        "type": "p",
+        "html": "A closing Q&amp;A tried to treat Claude like early GPT weights you copied to disk. Vijay: you <strong>access</strong> models; you do not take them home. That keeps the client–server story honest for the exam."
+      },
+      {
+        "type": "h2",
+        "text": "Exam phrasing"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Plan = model; execute = client (Cowork, Code, or Chrome agent).",
+          "HTTP tool step after a plan ≠ “the model is stateless so nothing happened locally.”",
+          "Connectors ≈ MCP in Claude products; custom APIs are still tools.",
+          "Beta browser agents are a capability question, not a default enterprise control."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Bridge into Claude Code"
+      },
+      {
+        "type": "p",
+        "html": "The same plan/execute loop is how Claude Code will run tests, read logs (terminal as a tool), and edit many files. Module 03 installs that client. If you only remember one sentence from 5 August: <strong>agentic means many model-and-tool turns orchestrated by a client that has hands on your world.</strong>"
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Planning versus acting with tools in the API."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "The protocol behind Cowork connectors."
+          },
+          {
+            "title": "Managed Agents quickstart",
+            "url": "https://platform.claude.com/docs/en/managed-agents/quickstart",
+            "note": "Platform-side agent narrative as products evolve."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "The agentic coding client this loop is heading toward."
+          },
+          {
+            "title": "Claude desktop support",
+            "url": "https://support.claude.com/",
+            "note": "Chrome / desktop extras as they leave beta."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "02",
+    "chapter_id": "05",
+    "eyebrow": "Módulo 02 · Capítulo 05 · 5 de agosto de 2026",
+    "chapter_title": "Clientes agentic: planificar frente a ejecutar, MCP y la extensión de Chrome",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 2 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M02 · C05 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "El punto de arquitectura más hondo del 5 de agosto: <strong>Cowork y Claude Code son clientes agentic</strong>. Dais una tarea que no puede terminar en un solo disparo de LLM. El modelo devuelve un <em>plan</em>. El cliente recorre el plan, mezclando pasos de herramienta/HTTP (a menudo sin otra llamada al modelo) con más pasos de LLM (extraer, generar). Chat puede usar herramientas; Vijay igual reservó «solución agentic» para los productos que ejecutan ese bucle contra herramientas locales y conectores."
+      },
+      {
+        "type": "h2",
+        "text": "Ejemplo trabajado: tiempo más fondo de imagen"
+      },
+      {
+        "type": "p",
+        "html": "Prompt: subir una foto; obtener el tiempo de Bengaluru; aplicarlo como fondo. Una sola llamada Messages no puede hacer todo eso con honestidad. Plan típico que el modelo podría emitir:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Obtener el tiempo actual vía una herramienta (búsqueda web por defecto, un conector del tiempo o vuestra API).",
+          "Reducir un JSON verboso a una palabra clave (lluvioso / soleado) — suele ser otro paso por el LLM.",
+          "Generar o componer el fondo — otra llamada generativa."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "¿Quién decidió que hacía falta una herramienta? <strong>El LLM, en el turno de planificación.</strong> ¿Quién hace el HTTP? <strong>El cliente HTTP de Cowork</strong>, usando URL/cuerpo ya especificados en el plan. Por eso Vijay dijo «no hay LLM en esta tarea» para el paso 1 <em>después</em> de que el plan exista. Quienes oyeron «no hay LLM en absoluto» se atascaban; la pregunta de Anand desatascó la sala: el planificador es siempre un modelo. Las llamadas a herramientas en el cliente son más baratas que los modelos que invocan herramientas dentro del proveedor. Las semanas de SDK contrastarán esas dos implementaciones."
+      },
+      {
+        "type": "h2",
+        "text": "Conectores, MCP y herramientas a medida"
+      },
+      {
+        "type": "p",
+        "html": "Vyomkesh: ¿los conectores son lo mismo que servidores MCP? Vijay: <strong>el mismo enfoque</strong>. Cowork no expone un interruptor de desarrollador «enable MCP»; el catálogo <em>es</em> MCP. Se puede añadir MCP a medida vía ajustes / un archivo MCP—aparó el cómo para la semana de SDK porque Cowork apunta a no desarrolladores que hacen clic en la UI. Si no hay conector público para una base de piezas de semiconductores, envuélvelo en una Lambda (o cualquier API) y adjuntad esa función como herramienta. Scraping: habilitad un conector crawler (Apify estaba en pantalla), pasad una URL, obtened texto extraído. Cambiar Figma → Adobe XD es la razón de libro para preferir MCP frente a un SDK de fabricante clavado dentro del agente."
+      },
+      {
+        "type": "table",
+        "headers": ["Patrón", "¿Tiempo real?", "Mejor cuando", "Inconveniente que subrayó Vijay"],
+        "rows": [
+          ["Herramienta / conector / MCP", "Sí, si el backend está vivo", "Sistemas de terceros, cambios de fabricante, tiempo", "Lista blanca; consentimiento OAuth"],
+          ["RAG", "No — corpus preindexado", "Docs internas estables tras revisión de vulnerabilidades", "Se queda viejo en cuanto se mueve el wiki"],
+          ["Reentrenar / ajuste de SLM", "No", "Modelos de dominio pequeños, no LLM de frontera", "Coste y tiempo"],
+          ["Búsqueda web", "Sí", "Internet público tras el corte", "Tokens y procedencia más sucia"]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "La extensión de Chrome como otro cliente agentic"
+      },
+      {
+        "type": "p",
+        "html": "Para faenas nativas del navegador (barrido de LinkedIn, test «manual» de una web, flujos de bloguero), Vijay instaló la <strong>extensión Claude de Chrome</strong> desde la Web Store (editor claude.com). Autorizadla; obtenéis un panel tipo Chat ligado al navegador. Si ya tenéis sesión en un sitio, la extensión puede conducir esa sesión—lo llamó <strong>peligroso</strong> y sensible para la org. En clase era <strong>beta</strong>: la mayoría de empresas la bloquearán. No es Copilot: Copilot (en su contraste) habla con un LLM; esta extensión puede <em>ejecutar</em> pasos de navegador. También advirtió no mezclar automatización de Office-en-Chrome con un flujo web aparte como si fueran un solo agente sin comprobar límites de producto."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Política de instalación de UST",
+        "html": "Si el VDI de R&amp;D puede cargar la extensión es pregunta de IT, no promesa del formador. Un Pro personal puede hacer la demo. No pongáis credenciales de cliente en un agente de navegador en beta."
+      },
+      {
+        "type": "h2",
+        "text": "No podéis descargar Sonnet"
+      },
+      {
+        "type": "p",
+        "html": "Un cierre de preguntas intentó tratar Claude como los pesos tempranos de GPT que se copiaban a disco. Vijay: <strong>accedéis</strong> a los modelos; no os los lleváis a casa. Eso mantiene honesta la historia cliente–servidor para el examen."
+      },
+      {
+        "type": "h2",
+        "text": "Fraseo de examen"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Plan = modelo; ejecutar = cliente (Cowork, Code o agente de Chrome).",
+          "Un paso de herramienta HTTP tras un plan ≠ «el modelo no tiene estado así que no pasó nada en local».",
+          "Conectores ≈ MCP en los productos Claude; las API a medida siguen siendo herramientas.",
+          "Los agentes de navegador en beta son una pregunta de capacidad, no un control empresarial por defecto."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Puente hacia Claude Code"
+      },
+      {
+        "type": "p",
+        "html": "El mismo bucle planificar/ejecutar es cómo Claude Code ejecutará pruebas, leerá logs (el terminal como herramienta) y editará muchos archivos. El módulo 03 instala ese cliente. Si solo recordáis una frase del 5 de agosto: <strong>agentic significa muchos turnos de modelo y herramienta orquestados por un cliente que tiene manos en vuestro mundo.</strong>"
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Resumen de uso de herramientas",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Planificar frente a actuar con herramientas en la API."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "El protocolo detrás de los conectores de Cowork."
+          },
+          {
+            "title": "Inicio rápido de Managed Agents",
+            "url": "https://platform.claude.com/docs/en/managed-agents/quickstart",
+            "note": "Narrativa de agentes en plataforma a medida que evolucionan los productos."
+          },
+          {
+            "title": "Resumen de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "El cliente de programación agentic hacia el que va este bucle."
+          },
+          {
+            "title": "Soporte de escritorio Claude",
+            "url": "https://support.claude.com/",
+            "note": "Extras de Chrome / escritorio cuando salgan de beta."
+          }
+        ]
+      }
+    ]
+  }
+]

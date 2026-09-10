@@ -1,0 +1,256 @@
+[
+  {
+    "lang": "en",
+    "module_id": "12",
+    "chapter_id": "01",
+    "eyebrow": "Module 12 · Chapter 01 · 27 August 2026",
+    "chapter_title": "Built-in tools inside agents",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 12 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M12 · C01 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Session 12 (27 August 2026) finished <strong>built-in tool use</strong> on the Claude Agent SDK. You do not write Read/Write/Edit/Bash yourselves. You <em>allow</em> them on the agent, give a goal, and let Claude Code execute while Claude decides. Materials were pushed to the cohort GitHub; yesterday’s PDF was still uploading at the start of the call."
+      },
+      {
+        "type": "h2",
+        "text": "Why built-ins exist"
+      },
+      {
+        "type": "p",
+        "html": "Module 10 custom tools were clocks and HTTP wrappers. Agents that work on a repo need filesystem and shell primitives the SDK already ships. Enabling a tool is a permission decision as much as a feature flag — module 12 chapter 02 treats that as safety. This chapter is capability."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Names drift",
+        "html": "Exact tool identifiers (Bash vs Shell, Monitor vs a streaming helper) must be checked on current <a href=\"https://code.claude.com/docs/en/overview\">Claude Code</a> and Agent SDK docs. The pedagogy below follows the 27 August notebook."
+      },
+      {
+        "type": "h2",
+        "text": "Bash versus Monitor"
+      },
+      {
+        "type": "p",
+        "html": "Allowing <strong>Bash</strong> lets the agent run scripts, OS commands, and Git. The demo prompt asked for a system report: Python version (the trainer’s machine showed 3.13-class), cwd, disk space, date — presented as a readable report. Claude chose the commands; Bash ran them."
+      },
+      {
+        "type": "p",
+        "html": "<strong>Monitor</strong> was taught as the partner for long or streaming work: a script in the background, each stdout line fed to Claude as it appears, instead of one blob when the process exits. Short one-or-two commands: Bash alone is enough. A series of steps where a permission error should be visible <em>mid-run</em>: enable Monitor with Bash. The build_script.py demo printed a line every three seconds; the agent was told to react in one sentence per line before the next arrived."
+      },
+      {
+        "type": "h3",
+        "text": "Who writes the retry loop?"
+      },
+      {
+        "type": "p",
+        "html": "Mritunjay wanted to see an explicit “if error then edit” loop in Python. Vijay’s answer: <strong>the model owns the loop</strong> inside <code>query</code>’s message iterator. You enable Monitor, Bash, Read, and Edit; you write a prompt that says “if it fails, read the file, explain the bug, edit, re-monitor.” The flaky_build.py demo deliberately divided by zero; after path confusion (relative vs absolute, wrong working directory) the lesson stood: prompts plus allowed tools, not a hand-coded state machine, drove the recover-and-rerun behaviour."
+      },
+      {
+        "type": "h2",
+        "text": "Glob versus Grep"
+      },
+      {
+        "type": "p",
+        "html": "These are the search tools Claude Code uses when it surveys a project before editing."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Glob</strong> — find files by name/extension over a tree (“all <code>.py</code> under search_demo, full paths, count them”).",
+          "<strong>Grep</strong> — find lines inside files (TODO comments, <code>^def </code> function headers). Regex is expected."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "A combined goal: Glob all Python files, Grep their function definitions, emit a clean report. That snapshot is context for later Write/Edit — the same reason you should not dump an entire monorepo into a prompt (RAG logic, filesystem edition)."
+      },
+      {
+        "type": "h2",
+        "text": "Web search versus Web fetch"
+      },
+      {
+        "type": "table",
+        "headers": ["Tool", "Trainer analogy", "What returns to Claude"],
+        "rows": [
+          ["Web search", "Google-like query", "A synthesised hunt over live web results (not the model’s training cutoff)"],
+          ["Web fetch", "Scrape a URL", "The page (or file) at a known address, downloaded for extraction"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Without search, Claude answers from parameters that may be months old. With search, the <em>client</em> tool acts as a browser, then the <em>server</em> (LLM) formats. Trade-off: search results become <strong>input tokens</strong>. Be specific or you buy a large download. Fetch is cheaper when you already have the URL. The demo searched for Claude Agent SDK Python examples and wrote notes toward Markdown."
+      },
+      {
+        "type": "h2",
+        "text": "Ask user question (human in the loop)"
+      },
+      {
+        "type": "p",
+        "html": "When the goal needs a human choice (output format, multi-select vs single), enable <strong>AskUserQuestion</strong> and a <code>can_use_tool</code> callback. The notebook stored questions as JSON (options, whether multi-select). The agent pauses, your callback collects the answer, the loop continues. That is the same family as permission prompts, but for product questions rather than “may I run rm?”"
+      },
+      {
+        "type": "h2",
+        "text": "Exam angle"
+      },
+      {
+        "type": "p",
+        "html": "If the scenario is “latest docs for the Agent SDK,” pick web search (or fetch a known docs URL). If it is “list every TODO in src/,” pick Grep (and maybe Glob first). If it is “run a long build and comment as logs appear,” pick Monitor+Bash. If it is “current Python version on this laptop,” pick Bash, not a custom clock tool."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Built-in tools the terminal agent uses."
+          },
+          {
+            "title": "Tool use overview",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Custom tools versus SDK built-ins — same handshake."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Third-party tools sit beside built-ins on the allow list."
+          },
+          {
+            "title": "Rate limits",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Web search loops can be expensive."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "12",
+    "chapter_id": "01",
+    "eyebrow": "Módulo 12 · Capítulo 01 · 27 de agosto de 2026",
+    "chapter_title": "Herramientas integradas dentro de los agentes",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 12 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M12 · C01 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "La sesión 12 (27 de agosto de 2026) cerró el <strong>uso de herramientas integradas</strong> en el Claude Agent SDK. No escribís Read/Write/Edit/Bash vosotros. Las <em>permitís</em> en el agente, dais un objetivo y dejáis que Claude Code ejecute mientras Claude decide. El material estaba en el GitHub del grupo; el PDF del día anterior aún se subía al empezar la llamada."
+      },
+      {
+        "type": "h2",
+        "text": "Por qué existen las integradas"
+      },
+      {
+        "type": "p",
+        "html": "Las herramientas a medida del módulo 10 eran relojes y envoltorios HTTP. Los agentes que trabajan un repositorio necesitan primitivas de sistema de ficheros y de shell que el SDK ya trae. Habilitar una herramienta es una decisión de permiso tanto como un flag de función: el capítulo 02 de este módulo lo trata como seguridad. Este capítulo es capacidad."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Los nombres se mueven",
+        "html": "Los identificadores exactos (Bash frente a Shell, Monitor frente a un ayudante de streaming) hay que comprobarlos en la documentación vigente de <a href=\"https://code.claude.com/docs/en/overview\">Claude Code</a> y del Agent SDK. La pedagogía sigue el cuaderno del 27 de agosto."
+      },
+      {
+        "type": "h2",
+        "text": "Bash frente a Monitor"
+      },
+      {
+        "type": "p",
+        "html": "Permitir <strong>Bash</strong> deja al agente ejecutar scripts, comandos del SO y Git. El prompt de demostración pedía un informe de sistema: versión de Python (la máquina del formador mostraba la familia 3.13), directorio de trabajo, disco, fecha, presentado de forma legible. Claude eligió los comandos; Bash los corrió."
+      },
+      {
+        "type": "p",
+        "html": "<strong>Monitor</strong> se enseñó como compañero para trabajo largo o en streaming: un script en segundo plano, cada línea de stdout alimentada a Claude según aparece, en lugar de un bloque al terminar. Uno o dos comandos cortos: basta Bash. Una serie de pasos donde un error de permiso debe verse <em>a mitad</em>: habilitad Monitor con Bash. La demo de build_script.py imprimía una línea cada tres segundos; se pidió al agente reaccionar en una frase por línea antes de la siguiente."
+      },
+      {
+        "type": "h3",
+        "text": "¿Quién escribe el bucle de reintento?"
+      },
+      {
+        "type": "p",
+        "html": "Mritunjay quería ver un bucle explícito «si hay error, edita» en Python. La respuesta de Vijay: <strong>el modelo posee el bucle</strong> dentro del iterador de mensajes de <code>query</code>. Habilitáis Monitor, Bash, Read y Edit; escribís un prompt que dice «si falla, lee el fichero, explica el error, edita, vuelve a monitorizar». La demo flaky_build.py dividía por cero a propósito; tras confusión de rutas (relativa frente a absoluta, mal directorio de trabajo) quedó la lección: el prompt más las herramientas permitidas, no una máquina de estados a mano, impulsaban el recuperar-y-repetir."
+      },
+      {
+        "type": "h2",
+        "text": "Glob frente a Grep"
+      },
+      {
+        "type": "p",
+        "html": "Son las herramientas de búsqueda que usa Claude Code cuando inspecciona un proyecto antes de editar."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "<strong>Glob</strong> — encontrar ficheros por nombre/extensión en un árbol («todos los <code>.py</code> bajo search_demo, rutas completas, contarlos»).",
+          "<strong>Grep</strong> — encontrar líneas dentro de ficheros (comentarios TODO, cabeceras <code>^def </code>). Se espera regex."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Un objetivo combinado: Glob de todos los Python, Grep de sus definiciones de función, informe limpio. Esa instantánea es contexto para Write/Edit posteriores: la misma razón por la que no debéis volcar un monorepositorio entero en un prompt (lógica RAG, edición sistema de ficheros)."
+      },
+      {
+        "type": "h2",
+        "text": "Búsqueda web frente a obtención web"
+      },
+      {
+        "type": "table",
+        "headers": ["Herramienta", "Analogía del formador", "Qué vuelve a Claude"],
+        "rows": [
+          ["Web search", "Consulta tipo Google", "Una caza sintetizada sobre resultados web en vivo (no el corte de entrenamiento del modelo)"],
+          ["Web fetch", "Rastrear una URL", "La página (o fichero) de una dirección conocida, descargada para extraer"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Sin búsqueda, Claude responde desde parámetros que pueden llevar meses. Con búsqueda, la herramienta del <em>cliente</em> actúa como navegador y el <em>servidor</em> (LLM) formatea. El trueque: los resultados se vuelven <strong>tokens de entrada</strong>. Sed específicos o compráis una descarga grande. Fetch es más barato cuando ya tenéis la URL. La demo buscó ejemplos Python del Claude Agent SDK y apuntó notas hacia Markdown."
+      },
+      {
+        "type": "h2",
+        "text": "Ask user question (humano en el bucle)"
+      },
+      {
+        "type": "p",
+        "html": "Cuando el objetivo necesita una elección humana (formato de salida, multi-selección o no), habilitad <strong>AskUserQuestion</strong> y una retrollamada <code>can_use_tool</code>. El cuaderno guardaba preguntas en JSON (opciones, si es multi-selección). El agente pausa, vuestra retrollamada recoge la respuesta, el bucle sigue. Es la misma familia que los avisos de permiso, pero para preguntas de producto en lugar de «¿puedo ejecutar rm?»."
+      },
+      {
+        "type": "h2",
+        "text": "Ángulo de examen"
+      },
+      {
+        "type": "p",
+        "html": "Si el escenario es «documentación última del Agent SDK», elegid búsqueda web (u obtención de una URL de docs conocida). Si es «listad cada TODO en src/», elegid Grep (y quizá Glob antes). Si es «ejecutad una build larga y comentad según aparecen los registros», elegid Monitor+Bash. Si es «versión actual de Python en este portátil», elegid Bash, no una herramienta reloj a medida."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Herramientas integradas que usa el agente de terminal."
+          },
+          {
+            "title": "Visión general de tool use",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+            "note": "Herramientas a medida frente a las integradas del SDK: el mismo apretón de manos."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Las herramientas de terceros se sientan junto a las integradas en la lista de permitidas."
+          },
+          {
+            "title": "Límites de tasa",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Los bucles de búsqueda web pueden ser caros."
+          }
+        ]
+      }
+    ]
+  }
+]

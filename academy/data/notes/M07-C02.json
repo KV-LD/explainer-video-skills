@@ -1,0 +1,262 @@
+[
+  {
+    "lang": "en",
+    "module_id": "07",
+    "chapter_id": "02",
+    "eyebrow": "Module 07 · Chapter 02 · 17 August 2026",
+    "chapter_title": "Messages, roles, and multi-turn context",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 7 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M07 · C02 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "A single <code>messages.create</code> call is one HTTP round trip. Claude does not remember the previous turn unless <strong>you send that history again</strong>. Vijay’s notebooks built a list of <code>{role, content}</code> objects, appended the assistant’s last text, then asked a follow-up. That list is the conversational <strong>context</strong> your application owns."
+      },
+      {
+        "type": "h2",
+        "text": "Roles: user, assistant, and system"
+      },
+      {
+        "type": "p",
+        "html": "Class language mapped <strong>user</strong> to the human message and <strong>assistant</strong> to model output you replay. Those two live in the <code>messages</code> array. <strong>System</strong> is not a third role inside that array in the pattern Vijay coded: it is a <strong>separate parameter</strong> on <code>create</code> (the <code>system</code> field). Exam wording he flagged: they will ask how messages and the system prompt are configured. System is instructions for how to behave; messages are the dialogue."
+      },
+      {
+        "type": "table",
+        "headers": ["Piece", "Where it goes", "Job"],
+        "rows": [
+          ["user", "<code>messages[]</code>", "Current question or app input"],
+          ["assistant", "<code>messages[]</code>", "Prior model replies you choose to keep"],
+          ["system", "<code>system</code> on create", "Standing instructions, role, anti-hallucination rules"],
+          ["tools / RAG (later)", "create params / retrieved text", "Also consume the input context window"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "System is the closest API analogue of an “instruction file” in Claude Code / VS Code, but you must pass it <strong>on every request</strong> because the server is stateless. Repeating it costs input tokens; prompt cache is how you stop paying full price for a stable prefix (module 09)."
+      },
+      {
+        "type": "h2",
+        "text": "Why “what is my name?” fails without history"
+      },
+      {
+        "type": "p",
+        "html": "Demo 1: user says “Hello, my name is Vijay.” Demo 2 (new create, only “what is 1+1?”): you get arithmetic, no name. Demo 3 (new create, only “what is my name?”): the model has no prior user line unless you included it. Demo 4: messages = [user name intro, assistant greeting, user 1+1, assistant “2”, user “what is my name?”] — now the name is in context and the model can recover it."
+      },
+      {
+        "type": "p",
+        "html": "ChatGPT, Claude Chat, and Claude Code feel stateful because <strong>those products</strong> store session history and resubmit it. Your notebook is an AI application: you decide store-in-RAM, store-in-DB, or discard. Hard-coded lists are for teaching; production uses a loop that <code>append</code>s."
+      },
+      {
+        "type": "h2",
+        "text": "Helper methods Vijay reused"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<code>add_user_message(messages, text)</code> — append <code>role: user</code>.",
+          "<code>add_assistant_message(messages, text)</code> — append the previous reply so the next call sees it.",
+          "<code>chat(messages, ...)</code> — call create with model, max_tokens, and the list; return <code>message.content[0].text</code> (or iterate blocks)."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "A later notebook wrapped that in a <code>while</code> loop (type until escape) as a console chatbot. Same helpers can sit behind FastAPI, Flask, Django, or Streamlit. The model does not know about your UI; it only sees the array you send."
+      },
+      {
+        "type": "h2",
+        "text": "Context versus “memory” versus RAG"
+      },
+      {
+        "type": "p",
+        "html": "In this session, <strong>context / context window</strong> means the tokens in this request: system + messages (+ tools later). Conversation “memory” is whatever <em>your app</em> persisted and put back into that window. Caching PDFs inside Claude is still not a vector database: Vijay told a questioner that querying a DB is <strong>RAG</strong> and is input you retrieve, not model-side long-term storage. Do not mix the three on the exam."
+      },
+      {
+        "type": "h2",
+        "text": "Prefill: assistant messages as a lead-in"
+      },
+      {
+        "type": "p",
+        "html": "You can place an assistant message <em>before</em> the model has answered, so generation continues from a seed (for example a markdown fence). That is <strong>prefill</strong>, taught in depth on 19 August. For this chapter: assistant role is both “history you replay” and “partial answer you want completed.”"
+      },
+      {
+        "type": "h2",
+        "text": "System prompt and hallucination"
+      },
+      {
+        "type": "p",
+        "html": "Vijay’s system-prompt notebook merged optional <code>system</code> into the params dict passed to create. The purpose he emphasised: set the role and processing rules so the model is less likely to wander. It does not replace grounding with documents, tools, or RAG; it is one slice of input context."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "Classroom UI",
+        "html": "How VS Code or Jupyter shows a chat widget is not in the API. Prefer <a href=\"https://docs.claude.com/en/api/messages\">Messages API</a> field names if the notebook helper signatures differ."
+      },
+      {
+        "type": "h2",
+        "text": "Exam drills"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "If the application does not resend prior turns, the model cannot use them.",
+          "System prompt is a create parameter, not stored server-side between calls.",
+          "User ≈ human message; assistant ≈ model (or prefilled) message in the array.",
+          "Managing the list is application work; Claude Chat already does that for you in the product."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Roles, system, and multi-turn examples."
+          },
+          {
+            "title": "Prompt engineering overview",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "How system versus user content should be written."
+          },
+          {
+            "title": "API overview",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Client construction and request shape."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "07",
+    "chapter_id": "02",
+    "eyebrow": "Módulo 07 · Capítulo 02 · 17 de agosto de 2026",
+    "chapter_title": "Mensajes, roles y contexto en varios turnos",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 7 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M07 · C02 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Una llamada a <code>messages.create</code> es un viaje HTTP. Claude no recuerda el turno anterior salvo que <strong>volváis a enviar esa historia</strong>. Los notebooks de Vijay construían una lista de objetos <code>{role, content}</code>, añadían el último texto del asistente y preguntaban de nuevo. Esa lista es el <strong>contexto</strong> conversacional que posee vuestra aplicación."
+      },
+      {
+        "type": "h2",
+        "text": "Roles: user, assistant y system"
+      },
+      {
+        "type": "p",
+        "html": "En clase, <strong>user</strong> es el mensaje humano y <strong>assistant</strong> la salida del modelo que reinyectáis. Esos dos viven en el array <code>messages</code>. <strong>System</strong> no iba como tercer rol dentro de ese array en el patrón de Vijay: es un <strong>parámetro aparte</strong> de <code>create</code> (campo <code>system</code>). Palabras que señaló para el examen: cómo se configuran messages y el system prompt. System son instrucciones de conducta; messages son el diálogo."
+      },
+      {
+        "type": "table",
+        "headers": ["Pieza", "Dónde va", "Función"],
+        "rows": [
+          ["user", "<code>messages[]</code>", "Pregunta actual o entrada de la app"],
+          ["assistant", "<code>messages[]</code>", "Respuestas previas que decidís conservar"],
+          ["system", "<code>system</code> en create", "Instrucciones permanentes, rol, normas anti-alucinación"],
+          ["tools / RAG (luego)", "parámetros de create / texto recuperado", "También ocupan la ventana de contexto de entrada"]
+        ]
+      },
+      {
+        "type": "p",
+        "html": "System es el análogo en API de un «archivo de instrucciones» en Claude Code / VS Code, pero hay que pasarlo <strong>en cada petición</strong> porque el servidor no guarda estado. Repetirlo cuesta tokens de entrada; la caché de prompts evita pagar el precio completo de un prefijo estable (módulo 09)."
+      },
+      {
+        "type": "h2",
+        "text": "Por qué «¿cómo me llamo?» falla sin historia"
+      },
+      {
+        "type": "p",
+        "html": "Demo 1: el usuario dice «Hola, me llamo Vijay». Demo 2 (nuevo create, solo «¿cuánto es 1+1?»): aritmética, sin nombre. Demo 3 (solo «¿cómo me llamo?»): el modelo no tiene la línea previa salvo que la incluyáis. Demo 4: messages = [presentación, saludo del asistente, 1+1, «2», «¿cómo me llamo?»] — el nombre está en contexto y puede recuperarse."
+      },
+      {
+        "type": "p",
+        "html": "ChatGPT, Claude Chat y Claude Code parecen con estado porque <strong>esos productos</strong> guardan la sesión y la reenvían. Vuestro notebook es una aplicación de IA: decidís RAM, base de datos o descartar. Las listas fijas son didácticas; en producción hay un bucle que hace <code>append</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Métodos auxiliares que reutilizó Vijay"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<code>add_user_message(messages, text)</code> — añade <code>role: user</code>.",
+          "<code>add_assistant_message(messages, text)</code> — añade la respuesta anterior para que la siguiente llamada la vea.",
+          "<code>chat(messages, ...)</code> — llama a create con modelo, max_tokens y la lista; devuelve <code>message.content[0].text</code> (o recorre bloques)."
+        ]
+      },
+      {
+        "type": "p",
+        "html": "Un notebook posterior lo envolvió en un <code>while</code> (escribir hasta escape) como chatbot de consola. Los mismos auxiliares pueden ir detrás de FastAPI, Flask, Django o Streamlit. El modelo no conoce vuestra UI; solo ve el array que enviáis."
+      },
+      {
+        "type": "h2",
+        "text": "Contexto frente a «memoria» frente a RAG"
+      },
+      {
+        "type": "p",
+        "html": "En esta sesión, <strong>contexto / ventana de contexto</strong> son los tokens de esta petición: system + messages (+ tools luego). La «memoria» de conversación es lo que <em>vuestra app</em> persistió y volvió a meter en esa ventana. Cachear PDF dentro de Claude no es una base vectorial: Vijay dijo a quien preguntó que consultar una BD es <strong>RAG</strong> y es entrada recuperada, no almacén a largo plazo del modelo. No mezcléis las tres en el examen."
+      },
+      {
+        "type": "h2",
+        "text": "Prefill: mensajes assistant como arranque"
+      },
+      {
+        "type": "p",
+        "html": "Podéis colocar un mensaje assistant <em>antes</em> de que el modelo haya contestado, para que la generación continúe desde una semilla (por ejemplo una valla markdown). Eso es <strong>prefill</strong>, visto en profundidad el 19 de agosto. En este capítulo: el rol assistant es tanto «historia que rejugáis» como «respuesta parcial que queréis completar»."
+      },
+      {
+        "type": "h2",
+        "text": "System prompt y alucinación"
+      },
+      {
+        "type": "p",
+        "html": "El notebook de system prompt fusionaba un <code>system</code> opcional en el diccionario de params de create. El propósito: fijar el rol y las reglas de proceso para que el modelo divague menos. No sustituye anclar con documentos, tools o RAG; es una loncha más del contexto de entrada."
+      },
+      {
+        "type": "callout",
+        "kind": "note",
+        "title": "UI del aula",
+        "html": "Cómo VS Code o Jupyter muestran un widget de chat no está en la API. Priman los nombres de campo de la <a href=\"https://docs.claude.com/en/api/messages\">Messages API</a> si las firmas del notebook discrepan."
+      },
+      {
+        "type": "h2",
+        "text": "Ejercicios de examen"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Si la aplicación no reenvía turnos previos, el modelo no puede usarlos.",
+          "El system prompt es un parámetro de create, no se guarda entre llamadas.",
+          "User ≈ mensaje humano; assistant ≈ mensaje del modelo (o prefijado) en el array.",
+          "Gestionar la lista es trabajo de aplicación; Claude Chat ya lo hace en el producto."
+        ]
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Messages API",
+            "url": "https://docs.claude.com/en/api/messages",
+            "note": "Roles, system y ejemplos multi-turno."
+          },
+          {
+            "title": "Visión general de prompting",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "note": "Cómo redactar system frente a contenido de usuario."
+          },
+          {
+            "title": "Visión general de la API",
+            "url": "https://docs.claude.com/en/api/overview",
+            "note": "Construcción del cliente y forma de la petición."
+          }
+        ]
+      }
+    ]
+  }
+]

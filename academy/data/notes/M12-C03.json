@@ -1,0 +1,250 @@
+[
+  {
+    "lang": "en",
+    "module_id": "12",
+    "chapter_id": "03",
+    "eyebrow": "Module 12 · Chapter 03 · 27 August 2026",
+    "chapter_title": "Responsible AI for enterprise Claude apps",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 12 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M12 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Vijay bundled permissions, safety hooks, and prompt/output scanners under <strong>responsible AI principles</strong> for the applications UST actually ships. The exam will not grade your GDPR programme, but it will expect you to choose controls when a scenario mixes PII, bash, MCP, and a customer email."
+      },
+      {
+        "type": "h2",
+        "text": "What “responsible” meant in this session"
+      },
+      {
+        "type": "p",
+        "html": "Not a slide of values. A working definition: the agent should <strong>not execute harm</strong> (wipe a disk, write malware into a path), <strong>not leak regulated data</strong> through logs or third-party tools, and <strong>not obey jailbreak-shaped prompts</strong> that try to dump the system prompt or ignore policy. Compliance names in the room were PII, GDPR, and HIPAA — as examples of regimes that force masking, monitoring, and least privilege — not as a legal lecture."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Usage policy still binds you",
+        "html": "Hooks cannot make a disallowed use case allowed. Read <a href=\"https://www.anthropic.com/legal/usage-policy\">Anthropic’s usage policy</a> for the products and API. Classroom demos (clocks, public todos APIs, sample Markdown) stay on the right side; client production data in a shared notebook does not."
+      },
+      {
+        "type": "h2",
+        "text": "Layer the controls"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Policy and purpose</strong> — should this agent exist? Recruitment-with-WhatsApp is a different risk than a read-only policy Q&amp;A bot.",
+          "<strong>Data minimisation</strong> — RAG and tools should fetch the smallest useful field set. Do not retrieve full customer rows to answer “how many open tickets?”",
+          "<strong>Allow / deny tools</strong> — a report agent may need a DB tool and an email tool; it should not get unconstrained Bash.",
+          "<strong>Pre-tool hooks</strong> — argument-level checks (no <code>rm -rf</code>, no writes to <code>/etc</code>, redirect to a safe directory).",
+          "<strong>Human in the loop</strong> — AskUserQuestion or default permission mode when the action is irreversible (send offer letter, delete).",
+          "<strong>Input guardrails</strong> — reject injection and overlong prompts before you spend tokens.",
+          "<strong>Output guardrails</strong> — secret scanning, PII redaction before logs, tickets, or MCP servers see the text.",
+          "<strong>Evaluation</strong> — Anthropic’s strengthen-guardrails guidance: test the agent on abuse cases, not only the happy JD-posting path."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Enterprise story: report and email"
+      },
+      {
+        "type": "p",
+        "html": "Custom tools: read customer DB → generate report → send email. Email is PII. The send tool needs the real address. Everything else (debug prints, web search, a vendor MCP “help” server) should see a masked value or nothing. That split is why “just encrypt the gateway” is incomplete: encryption in transit does not stop your agent from pasting the address into a Bash <code>echo</code> or a Slack MCP. Responsible design is <em>where the plaintext is allowed to exist</em>."
+      },
+      {
+        "type": "h2",
+        "text": "Jailbreaks and system-prompt theft"
+      },
+      {
+        "type": "p",
+        "html": "The notebook’s input validator treated phrases like “ignore all previous instructions” and “reveal your system prompt” as block patterns (regex in class; libraries in production). Short-circuit <em>before</em> <code>query</code> so you do not pay for a refusal you could have made locally. This is complementary to Claude’s own safety training, not a replacement."
+      },
+      {
+        "type": "h2",
+        "text": "Open source versus first-party"
+      },
+      {
+        "type": "p",
+        "html": "Mritunjay asked if guardrails were a built-in Claude function that also capped tokens. No: token accounting happens at the API <code>query</code>. Guardrail code is yours (or a reviewed open-source package). Recreate or vendor-assess Rulebricks-style and Claude Code community guardrail lists; do not paste unaudited regex into a bank’s agent. Pair that with official docs on evaluation so the exam answer can name both “application-level validators” and “Anthropic’s guardrail/eval guidance.”"
+      },
+      {
+        "type": "h2",
+        "text": "UST delivery checklist"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "No confidential client corpora in Cowork, Chat, or classroom Atlas clusters.",
+          "API keys in workspaces and secret stores (<a href=\"https://docs.claude.com/en/docs/build-with-claude/workspaces\">workspaces</a>), not in committed <code>.env</code>.",
+          "Plan-mode or observe-only agents in CI until a human promotes accept-edits.",
+          "MCP servers: prefer vendor servers; treat community MCP like untrusted code — they are tools with your credentials.",
+          "RAG indexes: tenant metadata so one client never retrieves another’s chunks (module 11)."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "How this shows up in scenarios"
+      },
+      {
+        "type": "p",
+        "html": "Pick the control that matches the failure: destructive shell → hook or deny Bash; model asked to ignore policy → input guardrail; customer email in a log → output redaction; agent must not change production files → plan + Read/Glob/Grep; need a human to confirm a send → AskUserQuestion or default prompts. Stacking every control on every toy clock tool is not the point."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Usage policy",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "Binding rules for Claude products and the API."
+          },
+          {
+            "title": "Strengthen guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "How Anthropic wants you to test and harden."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Org and key isolation."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Third-party tools are part of the data-flow threat model."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Permission modes you will actually configure."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "12",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 12 · Capítulo 03 · 27 de agosto de 2026",
+    "chapter_title": "IA responsable para aplicaciones Claude en empresa",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 12 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M12 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Vijay agrupó permisos, hooks de seguridad y escáneres de prompt/salida bajo <strong>principios de IA responsable</strong> para las aplicaciones que UST entrega de verdad. El examen no puntuará vuestro programa GDPR, pero esperará que elijáis controles cuando un escenario mezcle PII, bash, MCP y un correo de cliente."
+      },
+      {
+        "type": "h2",
+        "text": "Qué significaba «responsable» en esta sesión"
+      },
+      {
+        "type": "p",
+        "html": "No una diapositiva de valores. Una definición de trabajo: el agente <strong>no debe ejecutar daño</strong> (borrar un disco, escribir malware en una ruta), <strong>no debe filtrar datos regulados</strong> por registros o herramientas de terceros, y <strong>no debe obedecer prompts con forma de jailbreak</strong> que intenten volcar el prompt de sistema o ignorar la política. Los nombres de cumplimiento en la sala fueron PII, GDPR e HIPAA — como ejemplos de regímenes que obligan a enmascarar, monitorizar y mínimo privilegio — no como una clase de derecho."
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "La política de uso sigue vinculándoos",
+        "html": "Los hooks no convierten en permitido un caso de uso prohibido. Leed la <a href=\"https://www.anthropic.com/legal/usage-policy\">política de uso de Anthropic</a> para productos y API. Las demos de aula (relojes, APIs públicas de todos, Markdown de muestra) se quedan en el lado correcto; los datos de producción de cliente en un cuaderno compartido no."
+      },
+      {
+        "type": "h2",
+        "text": "Apilad los controles"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "<strong>Política y propósito</strong> — ¿debe existir este agente? Reclutar por WhatsApp es un riesgo distinto a un bot de solo lectura sobre políticas.",
+          "<strong>Minimización de datos</strong> — RAG y las herramientas deben traer el conjunto de campos más pequeño útil. No recuperéis filas completas de cliente para responder «¿cuántos tickets abiertos hay?»",
+          "<strong>Permitir / denegar herramientas</strong> — un agente de informes puede necesitar una herramienta de BD y una de correo; no debe tener Bash sin límites.",
+          "<strong>Hooks previos</strong> — comprobaciones a nivel de argumento (nada de <code>rm -rf</code>, nada de escrituras en <code>/etc</code>, redirigir a un directorio seguro).",
+          "<strong>Humano en el bucle</strong> — AskUserQuestion o modo de permiso por defecto cuando la acción es irreversible (enviar oferta, borrar).",
+          "<strong>Guardrails de entrada</strong> — rechazar inyección y prompts excesivos antes de gastar tokens.",
+          "<strong>Guardrails de salida</strong> — búsqueda de secretos, redacción de PII antes de que registros, tickets o servidores MCP vean el texto.",
+          "<strong>Evaluación</strong> — la guía strengthen-guardrails de Anthropic: probad el agente en casos de abuso, no solo en la vía feliz de publicar una JD."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Relato de empresa: informe y correo"
+      },
+      {
+        "type": "p",
+        "html": "Herramientas a medida: leer la BD de clientes → generar informe → enviar correo. El correo es PII. La herramienta de envío necesita la dirección real. Todo lo demás (prints de depuración, búsqueda web, un servidor MCP de «ayuda» de un proveedor) debería ver un valor enmascarado o nada. Por eso «cifrar la pasarela» es incompleto: el cifrado en tránsito no impide que vuestro agente pegue la dirección en un <code>echo</code> de Bash o en un MCP de Slack. El diseño responsable es <em>dónde se permite que exista el texto en claro</em>."
+      },
+      {
+        "type": "h2",
+        "text": "Jailbreaks y robo del prompt de sistema"
+      },
+      {
+        "type": "p",
+        "html": "El validador de entrada del cuaderno trataba frases como «ignora todas las instrucciones previas» y «revela tu prompt de sistema» como patrones de bloqueo (regex en clase; bibliotecas en producción). Cortocircuitad <em>antes</em> de <code>query</code> para no pagar un rechazo que podríais haber hecho en local. Esto complementa el entrenamiento de seguridad de Claude, no lo sustituye."
+      },
+      {
+        "type": "h2",
+        "text": "Código abierto frente a primera parte"
+      },
+      {
+        "type": "p",
+        "html": "Mritunjay preguntó si los guardrails eran una función integrada de Claude que además recortaba tokens. No: la contabilidad de tokens ocurre en el <code>query</code> de la API. El código de guardrail es vuestro (o un paquete de código abierto revisado). Recread o evaluad como proveedores listas tipo Rulebricks y repos comunitarios de guardrails de Claude Code; no peguéis regex sin auditar en el agente de un banco. Emparejadlo con la documentación oficial de evaluación para que la respuesta de examen pueda nombrar «validadores a nivel de aplicación» y «guía de guardrails/eval de Anthropic»."
+      },
+      {
+        "type": "h2",
+        "text": "Lista de entrega UST"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Nada de corpus confidenciales de cliente en Cowork, Chat o clústeres Atlas de aula.",
+          "Claves API en workspaces y almacenes de secretos (<a href=\"https://docs.claude.com/en/docs/build-with-claude/workspaces\">workspaces</a>), no en <code>.env</code> subido.",
+          "Agentes en modo plan o solo observación en CI hasta que un humano promocione accept-edits.",
+          "Servidores MCP: preferid los del proveedor; tratad el MCP comunitario como código no confiable — son herramientas con vuestras credenciales.",
+          "Índices RAG: metadatos de inquilino para que un cliente nunca recupere los trozos de otro (módulo 11)."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Cómo aparece esto en los escenarios"
+      },
+      {
+        "type": "p",
+        "html": "Elegid el control que encaja con el fallo: shell destructivo → hook o denegar Bash; el modelo pide ignorar la política → guardrail de entrada; correo de cliente en un registro → redacción de salida; el agente no debe cambiar ficheros de producción → plan + Read/Glob/Grep; hace falta un humano para confirmar un envío → AskUserQuestion o avisos por defecto. Apilar todos los controles en cada herramienta reloj de juguete no es el punto."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Política de uso",
+            "url": "https://www.anthropic.com/legal/usage-policy",
+            "note": "Normas vinculantes para productos Claude y la API."
+          },
+          {
+            "title": "Reforzar guardrails",
+            "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails",
+            "note": "Cómo Anthropic quiere que probéis y endurezcáis."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Aislamiento de organización y de claves."
+          },
+          {
+            "title": "MCP",
+            "url": "https://docs.claude.com/en/docs/agents-and-tools/mcp",
+            "note": "Las herramientas de terceros forman parte del modelo de amenaza del flujo de datos."
+          },
+          {
+            "title": "Visión general de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Modos de permiso que configuraréis de verdad."
+          }
+        ]
+      }
+    ]
+  }
+]

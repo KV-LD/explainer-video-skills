@@ -1,0 +1,230 @@
+[
+  {
+    "lang": "en",
+    "module_id": "03",
+    "chapter_id": "03",
+    "eyebrow": "Module 03 · Chapter 03 · 6 August 2026",
+    "chapter_title": "Context window, sessions, and why they are not the same as usage limits",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · UST masterclass",
+    "meta": "Session 3 of 12 · English notes",
+    "running_header": "UST CCD Foundation · M03 · C03 · EN",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Inside Claude Code, Vijay spent a long stretch on <code>/context</code> because students were adding the Chat <strong>usage percentage</strong> to the <strong>free space in the context window</strong> and panicking when the numbers did not sum. They are different meters. Confusing them will cost you both money and exam items."
+      },
+      {
+        "type": "h2",
+        "text": "Context window: what one request may carry"
+      },
+      {
+        "type": "p",
+        "html": "The context window is the cap on how much text (tokens) the <em>client can send to the model in a turn</em>, including system prompt, tools, skills, history, and your new message. In class, default models sat on a <strong>~200k-class</strong> window (he kept saying 272K); some Sonnet SKUs offered <strong>1M</strong> via <code>/model</code> (e.g. “Sonnet 1 million”). Always re-read the live models page. A 100 MB dump will not all fit; the product loads what it can."
+      },
+      {
+        "type": "p",
+        "html": "<code>/context</code> showed a 1M-capable session with ~967K still addressable, already partly eaten by system prompt, tools, skills, messages, and <strong>auto-compact buffer</strong>. Free space (~893K in the demo) is what you can still push. The 4% / 39.8K “usage” chip on the same UI was <em>not</em> meant to plus-equal that free space to 967K: some of the remainder is conversation already in the thread, rounding, and other buckets. Vyomkesh was right that naïve addition failed; Vijay’s correction was “those are not the same counter.”"
+      },
+      {
+        "type": "h2",
+        "text": "Sessions fill the window"
+      },
+      {
+        "type": "p",
+        "html": "Every user/assistant pair stays in the client and is resent (stateless server). Five slash commands already occupied space. Skills you pin occupy space every turn unless you configure them out. Long threads <strong>shrink free space</strong>. That is why session 1 said “open a new chat” and why Code offers <code>/compact</code>: summarise history into a shorter memory so later turns fit. If there is not enough dialogue, compact no-ops (“not enough messages”)."
+      },
+      {
+        "type": "h2",
+        "text": "Auto-compact"
+      },
+      {
+        "type": "p",
+        "html": "<code>/config auto compact = true</code> (classroom syntax) tells Code to compact when you hit the window, then keep going. The setting is written into Claude’s JSON config (see next chapter for user / project / local files). Auto-compact is a <em>context</em> strategy. It does not refill your Team usage bar."
+      },
+      {
+        "type": "h2",
+        "text": "Usage limits: the other meter"
+      },
+      {
+        "type": "p",
+        "html": "Cowork/Chat Settings → Usage is a <strong>rate/quota window</strong> (five-hour reset + weekly cap in the 5 August sketch; enterprise caps are admin-set). It measures how hard you have hit the service lately, not how many tokens remain in the current prompt. API rate limits are a third plane (<a href=\"https://docs.claude.com/en/api/rate-limits\">docs</a>). You cannot <code>/config</code> a hard “only spend 2k tokens per turn” in Code; you steer with prompting and by not stuffing CLAUDE.md with encyclopedias. <code>/context</code> is observability, not a budget governor."
+      },
+      {
+        "type": "table",
+        "headers": ["Meter", "What it answers", "Where you saw it", "If it hits the wall"],
+        "rows": [
+          ["Context window", "Can this turn’s payload fit?", "<code>/context</code>, model picker 272K vs 1M", "Compact, new session, smaller attachments, or a 1M SKU"],
+          ["Product usage bar", "Have I exhausted my plan’s rolling allowance?", "Desktop Settings → Usage", "Wait for reset or ask org for quota"],
+          ["API rate limits / billing", "May this key call Messages right now, and at what $?", "Console / API errors", "Backoff, Batches, or a different key/workspace"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Classroom token maths",
+        "html": "272K, 1M, 967K free, 5-hour 1M illustrations were live-UI numbers on 6 August 2026. Recheck <a href=\"https://docs.claude.com/en/docs/about-claude/models\">models</a> before you quote them in an exam written answer."
+      },
+      {
+        "type": "h2",
+        "text": "Prompt cache (name it, do not mix it)"
+      },
+      {
+        "type": "p",
+        "html": "Session 1 mentioned cached tokens on some stacks; Claude Chat enterprise was “input + output.” Prompt caching as an API feature is a later module. Compact is not cache. Usage reset is not cache. If a stem says “repeated system prompt across 10k jobs,” think cache/Batches, not <code>/compact</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Study drill"
+      },
+      {
+        "type": "p",
+        "html": "Write three sentences you can paste into a scenario: (1) I would start a new Claude Code session because the previous thread had consumed the window. (2) I would not expect Settings → Usage to drop after compact. (3) I would pick a 1M model only if the retrieved corpus truly needs it, because effort and window both cost."
+      },
+      {
+        "type": "links",
+        "heading": "Official documentation",
+        "items": [
+          {
+            "title": "Models (context windows)",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Live window sizes per ID."
+          },
+          {
+            "title": "Prompt caching",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "The API feature people confuse with compact and with usage bars."
+          },
+          {
+            "title": "Rate limits",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "API meter, not /context."
+          },
+          {
+            "title": "Claude Code overview",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Where slash commands and sessions are documented now."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Project grouping versus a single overflowing thread."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lang": "es",
+    "module_id": "03",
+    "chapter_id": "03",
+    "eyebrow": "Módulo 03 · Capítulo 03 · 6 de agosto de 2026",
+    "chapter_title": "Ventana de contexto, sesiones y por qué no son el límite de uso",
+    "subtitle": "Claude Certified Developer, Foundation (CCDV-F) · Masterclass UST",
+    "meta": "Sesión 3 de 12 · Notas en español (es-ES)",
+    "running_header": "UST CCD Foundation · M03 · C03 · ES",
+    "blocks": [
+      {
+        "type": "lead",
+        "html": "Dentro de Claude Code, Vijay dedicó un tramo largo a <code>/context</code> porque el alumnado sumaba el <strong>porcentaje de uso</strong> de Chat al <strong>espacio libre de la ventana de contexto</strong> y se asustaba cuando las cifras no cuadraban. Son medidores distintos. Confundirlos os costará dinero e ítems de examen."
+      },
+      {
+        "type": "h2",
+        "text": "Ventana de contexto: lo que puede llevar una petición"
+      },
+      {
+        "type": "p",
+        "html": "La ventana de contexto es el tope de cuánto texto (tokens) <em>puede enviar el cliente al modelo en un turno</em>, incluidas instrucciones de sistema, herramientas, skills, historial y vuestro mensaje nuevo. En clase, los modelos por defecto estaban en una ventana de <strong>clase ~200k</strong> (repetía 272K); algunos SKU de Sonnet ofrecían <strong>1M</strong> vía <code>/model</code> (p. ej. «Sonnet 1 million»). Releed siempre la página de modelos vigente. Un volcado de 100 MB no cabe entero; el producto carga lo que puede."
+      },
+      {
+        "type": "p",
+        "html": "<code>/context</code> mostró una sesión capaz de 1M con ~967K aún direccionables, ya parcialmente comidos por system prompt, tools, skills, messages y el <strong>búfer de auto-compact</strong>. El espacio libre (~893K en la demo) es lo que aún podéis empujar. El chip de «uso» 4 % / 39,8K en la misma UI <em>no</em> estaba pensado para sumar con ese libre hasta 967K: parte del resto es conversación ya en el hilo, redondeo y otros cubos. Vyomkesh tenía razón en que la suma ingenua fallaba; la corrección de Vijay fue «no es el mismo contador»."
+      },
+      {
+        "type": "h2",
+        "text": "Las sesiones llenan la ventana"
+      },
+      {
+        "type": "p",
+        "html": "Cada par usuario/asistente se queda en el cliente y se reenvía (servidor sin estado). Cinco comandos slash ya ocupaban sitio. Las skills que fijáis ocupan sitio cada turno salvo que las configuréis fuera. Los hilos largos <strong>encogen el espacio libre</strong>. Por eso la sesión 1 decía «abrid un chat nuevo» y por eso Code ofrece <code>/compact</code>: resumir el historial en una memoria más corta para que quepan los turnos siguientes. Si no hay diálogo suficiente, compact no hace nada («not enough messages»)."
+      },
+      {
+        "type": "h2",
+        "text": "Auto-compact"
+      },
+      {
+        "type": "p",
+        "html": "<code>/config auto compact = true</code> (sintaxis de aula) dice a Code que compacte al llegar a la ventana y siga. El ajuste se escribe en el JSON de configuración de Claude (el capítulo siguiente cubre archivos de usuario / proyecto / local). Auto-compact es una estrategia de <em>contexto</em>. No recarga la barra de uso de Team."
+      },
+      {
+        "type": "h2",
+        "text": "Límites de uso: el otro medidor"
+      },
+      {
+        "type": "p",
+        "html": "Ajustes → Uso de Cowork/Chat es una <strong>ventana de tasa/cuota</strong> (reinicio de cinco horas + tope semanal en el esquema del 5 de agosto; los topes enterprise los pone el admin). Mide cómo de duro habéis pegado al servicio últimamente, no cuántos tokens quedan en el prompt actual. Los límites de tasa de API son un tercer plano (<a href=\"https://docs.claude.com/en/api/rate-limits\">docs</a>). No podéis hacer <code>/config</code> de un «gasta solo 2k tokens por turno» duro en Code; se gobierna con prompting y sin meter enciclopedias en CLAUDE.md. <code>/context</code> es observabilidad, no un gobernador de presupuesto."
+      },
+      {
+        "type": "table",
+        "headers": ["Medidor", "Qué responde", "Dónde lo visteis", "Si da contra el muro"],
+        "rows": [
+          ["Ventana de contexto", "¿Cabe la carga de este turno?", "<code>/context</code>, selector 272K frente a 1M", "Compact, sesión nueva, adjuntos más pequeños o un SKU de 1M"],
+          ["Barra de uso del producto", "¿He agotado la asignación móvil de mi plan?", "Escritorio Ajustes → Uso", "Esperar el reinicio o pedir cuota a la org"],
+          ["Límites de tasa / facturación de API", "¿Puede esta clave llamar a Messages ahora, y a qué precio?", "Consola / errores de API", "Backoff, Batches u otra clave/workspace"]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warn",
+        "title": "Cuentas de tokens de aula",
+        "html": "272K, 1M, 967K libres, ilustraciones de 1M en cinco horas eran números de UI en vivo del 6 de agosto de 2026. Volved a <a href=\"https://docs.claude.com/en/docs/about-claude/models\">modelos</a> antes de citarlos en una respuesta escrita del examen."
+      },
+      {
+        "type": "h2",
+        "text": "Caché de prompts (nombradla, no la mezcléis)"
+      },
+      {
+        "type": "p",
+        "html": "La sesión 1 mencionó tokens en caché en algunas pilas; Claude Chat enterprise era «entrada + salida». La caché de prompts como función de API es un módulo posterior. Compact no es caché. El reinicio de uso no es caché. Si un enunciado dice «el mismo system prompt en 10k trabajos», pensad en cache/Batches, no en <code>/compact</code>."
+      },
+      {
+        "type": "h2",
+        "text": "Ejercicio de estudio"
+      },
+      {
+        "type": "p",
+        "html": "Escribid tres frases que podáis pegar en un escenario: (1) Empezaría una sesión nueva de Claude Code porque el hilo anterior había consumido la ventana. (2) No esperaría que Ajustes → Uso bajara tras compact. (3) Elegiría un modelo de 1M solo si el corpus recuperado lo necesita de verdad, porque esfuerzo y ventana cuestan."
+      },
+      {
+        "type": "links",
+        "heading": "Documentación oficial",
+        "items": [
+          {
+            "title": "Modelos (ventanas de contexto)",
+            "url": "https://docs.claude.com/en/docs/about-claude/models",
+            "note": "Tamaños de ventana vigentes por ID."
+          },
+          {
+            "title": "Caché de prompts",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+            "note": "La función de API que la gente confunde con compact y con las barras de uso."
+          },
+          {
+            "title": "Límites de tasa",
+            "url": "https://docs.claude.com/en/api/rate-limits",
+            "note": "Medidor de API, no /context."
+          },
+          {
+            "title": "Resumen de Claude Code",
+            "url": "https://code.claude.com/docs/en/overview",
+            "note": "Dónde se documentan ahora los comandos slash y las sesiones."
+          },
+          {
+            "title": "Workspaces",
+            "url": "https://docs.claude.com/en/docs/build-with-claude/workspaces",
+            "note": "Agrupar proyectos frente a un solo hilo que se desborda."
+          }
+        ]
+      }
+    ]
+  }
+]
